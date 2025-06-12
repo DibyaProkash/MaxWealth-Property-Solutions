@@ -1,5 +1,7 @@
+
 "use client";
 
+import Image from 'next/image'; // Added import
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -148,6 +150,20 @@ export default function ContactSection() {
                 <div className="flex items-center space-x-3">
                   <Mail className="h-6 w-6 text-accent" />
                   <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors">info@maxwealthps.com</a>
+                </div>
+                {/* Map image moved here */}
+                <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-6">
+                  <Image 
+                    src="https://placehold.co/800x450.png" 
+                    alt="Map showing office location" 
+                    width={800} 
+                    height={450} 
+                    className="object-cover"
+                    data-ai-hint="city map" 
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/30">
+                    <p className="text-white font-semibold text-lg p-4 bg-black/50 rounded">Interactive Map Coming Soon</p>
+                  </div>
                 </div>
               </CardContent>
             </Card>
