@@ -138,7 +138,8 @@ export default function ContentSection() {
         </div>
 
         <div className="mb-10"> 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 items-center">
+            <div className="flex flex-col items-center gap-6 md:flex-row md:justify-center md:gap-8">
+                {/* Filter Controls Div */}
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                     <Label htmlFor="filterType" className="text-md font-semibold text-primary flex items-center shrink-0">
                         <ListFilter className="mr-2 h-5 w-5" /> Filter by Type:
@@ -157,6 +158,7 @@ export default function ContentSection() {
                         ))}
                     </RadioGroup>
                 </div>
+                {/* Sort Controls Div */}
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                     <Label htmlFor="sortOption" className="text-md font-semibold text-primary flex items-center shrink-0">
                         <ArrowDownUp className="mr-2 h-5 w-5" /> Sort by:
@@ -245,4 +247,3 @@ export default function ContentSection() {
     </section>
   );
 }
-
