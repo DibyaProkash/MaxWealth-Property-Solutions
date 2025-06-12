@@ -2,11 +2,12 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import MortgageCalculator from "@/components/calculators/mortgage-calculator";
 import AffordabilityCalculator from "@/components/calculators/affordability-calculator";
 import ClosingCostEstimator from "@/components/calculators/closing-cost-estimator";
-import { Calculator } from "lucide-react";
+import { Calculator, FileText, BrainCircuit, TrendingUp, Lightbulb } from "lucide-react";
 
 export default function CalculatorsSection() {
   return (
@@ -14,58 +15,115 @@ export default function CalculatorsSection() {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
-            <Calculator className="h-10 w-10 text-primary" />
+            <Lightbulb className="h-10 w-10 text-primary" />
           </div>
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">
-            Financial Calculators
+            Financial Tools & AI Insights
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Empower your financial decisions with our easy-to-use calculators.
-            Estimate payments, understand affordability, and plan for closing costs.
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Empower your financial decisions with our suite of calculators and explore upcoming AI-powered tools designed to guide your home buying journey.
           </p>
         </div>
 
-        <Tabs defaultValue="mortgage" className="w-full max-w-2xl mx-auto">
-          <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-8 h-auto sm:h-10">
-            <TabsTrigger value="mortgage" className="py-2 sm:py-0">Mortgage Payment</TabsTrigger>
-            <TabsTrigger value="affordability" className="py-2 sm:py-0">Affordability</TabsTrigger>
-            <TabsTrigger value="closing" className="py-2 sm:py-0">Closing Costs</TabsTrigger>
-          </TabsList>
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Left Column: Calculators */}
+          <div className="w-full">
+            <Tabs defaultValue="mortgage" className="w-full">
+              <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-8 h-auto sm:h-10">
+                <TabsTrigger value="mortgage" className="py-2 sm:py-0">Mortgage Payment</TabsTrigger>
+                <TabsTrigger value="affordability" className="py-2 sm:py-0">Affordability</TabsTrigger>
+                <TabsTrigger value="closing" className="py-2 sm:py-0">Closing Costs</TabsTrigger>
+              </TabsList>
 
-          <TabsContent value="mortgage">
+              <TabsContent value="mortgage">
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="font-headline text-xl text-primary text-center">Mortgage Payment Calculator</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <MortgageCalculator />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="affordability">
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="font-headline text-xl text-primary text-center">Home Affordability Calculator</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <AffordabilityCalculator />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="closing">
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="font-headline text-xl text-primary text-center">Closing Cost Estimator</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ClosingCostEstimator />
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          {/* Right Column: AI Tools */}
+          <div className="space-y-8">
+            <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-6 text-center lg:text-left">
+              Explore Our AI-Powered Tools
+            </h3>
+
             <Card className="shadow-lg">
-              <CardHeader>
-                <CardTitle className="font-headline text-xl text-primary text-center">Mortgage Payment Calculator</CardTitle>
+              <CardHeader className="flex flex-row items-center gap-4 space-y-0">
+                <div className="p-2 bg-primary/10 rounded-md">
+                  <FileText className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle className="font-headline text-xl text-primary">AI Document Analyzer</CardTitle>
               </CardHeader>
-              <CardContent>
-                <MortgageCalculator />
+              <CardContent className="space-y-3">
+                <CardDescription>
+                  Securely upload a redacted loan estimate or other financial document to get an AI-powered summary and clear explanation of key terms. (Security and privacy are paramount for this feature).
+                </CardDescription>
+                <Button variant="outline" disabled className="w-full">Learn More (Coming Soon)</Button>
               </CardContent>
             </Card>
-          </TabsContent>
 
-          <TabsContent value="affordability">
             <Card className="shadow-lg">
-              <CardHeader>
-                <CardTitle className="font-headline text-xl text-primary text-center">Home Affordability Calculator</CardTitle>
+              <CardHeader className="flex flex-row items-center gap-4 space-y-0">
+                <div className="p-2 bg-primary/10 rounded-md">
+                 <BrainCircuit className="h-6 w-6 text-primary" />
+                </div>
+                <CardTitle className="font-headline text-xl text-primary">Personalized Financial Plan AI</CardTitle>
               </CardHeader>
-              <CardContent>
-                <AffordabilityCalculator />
+              <CardContent className="space-y-3">
+                <CardDescription>
+                  Answer a series of targeted questions and receive an AI-generated basic financial plan, along with actionable next steps tailored to your homeownership goals.
+                </CardDescription>
+                <Button variant="outline" disabled className="w-full">Try Now (Coming Soon)</Button>
               </CardContent>
             </Card>
-          </TabsContent>
 
-          <TabsContent value="closing">
             <Card className="shadow-lg">
-              <CardHeader>
-                <CardTitle className="font-headline text-xl text-primary text-center">Closing Cost Estimator</CardTitle>
+              <CardHeader className="flex flex-row items-center gap-4 space-y-0">
+                 <div className="p-2 bg-primary/10 rounded-md">
+                    <TrendingUp className="h-6 w-6 text-primary" />
+                 </div>
+                <CardTitle className="font-headline text-xl text-primary">AI Market Trend Summarizer</CardTitle>
               </CardHeader>
-              <CardContent>
-                <ClosingCostEstimator />
+              <CardContent className="space-y-3">
+                <CardDescription>
+                  Stay informed with AI-powered summaries of current local real estate market trends, helping you make timely and strategic decisions.
+                </CardDescription>
+                <Button variant="outline" disabled className="w-full">View Trends (Coming Soon)</Button>
               </CardContent>
             </Card>
-          </TabsContent>
-        </Tabs>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
