@@ -5,7 +5,8 @@ import * as React from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Newspaper, Video, ListFilter, ArrowDownUp } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { ArrowRight, Newspaper, Video, ListFilter, ArrowDownUp, Search as SearchIcon } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -14,19 +15,38 @@ import { Label } from "@/components/ui/label";
 import { articlesData, type Article } from '@/lib/data';
 
 type SortOption = 'date-desc' | 'date-asc' | 'type-asc';
-type FilterType = 'all' | 'Blog' | 'Vlog';
+type FilterType = string; // Now a generic string, 'all' is a special value
 
 export default function ContentSection() {
   const plugin = React.useRef(
     Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
-  const [currentArticles, setCurrentArticles] = React.useState<Article[]>(articlesData);
+  const [currentArticles] = React.useState<Article[]>(articlesData);
   const [sortOption, setSortOption] = React.useState<SortOption>('date-desc');
   const [filterType, setFilterType] = React.useState<FilterType>('all');
+  const [searchTerm, setSearchTerm] = React.useState<string>('');
+
+  const availableTypes = React.useMemo(() => {
+    const types = new Set<string>(['all']);
+    currentArticles.forEach(article => types.add(article.type));
+    return Array.from(types).sort((a, b) => {
+      if (a === 'all') return -1;
+      if (b === 'all') return 1;
+      return a.localeCompare(b);
+    });
+  }, [currentArticles]);
 
   const displayedArticles = React.useMemo(() => {
     let processedArticles = [...currentArticles];
+
+    if (searchTerm.trim() !== '') {
+      const lowerSearchTerm = searchTerm.toLowerCase();
+      processedArticles = processedArticles.filter(article =>
+        article.title.toLowerCase().includes(lowerSearchTerm) ||
+        article.description.toLowerCase().includes(lowerSearchTerm)
+      );
+    }
 
     if (filterType !== 'all') {
       processedArticles = processedArticles.filter(article => article.type === filterType);
@@ -44,7 +64,7 @@ export default function ContentSection() {
         break;
     }
     return processedArticles;
-  }, [currentArticles, sortOption, filterType]);
+  }, [currentArticles, sortOption, filterType, searchTerm]);
 
   return (
     <section id="content" className="py-16 md:py-24 bg-secondary">
@@ -56,32 +76,45 @@ export default function ContentSection() {
           </p>
         </div>
 
-        <div className="mb-10">
-            <div className="flex flex-col items-center gap-6 md:flex-row md:justify-center md:gap-8">
-                <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <Label htmlFor="filterType" className="text-md font-semibold text-primary flex items-center shrink-0">
+        <div className="mb-10 p-4 border rounded-lg bg-background/50 shadow">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 items-end">
+                <div className="space-y-2">
+                    <Label htmlFor="searchTerm" className="text-md font-semibold text-primary flex items-center">
+                        <SearchIcon className="mr-2 h-5 w-5" /> Search Content:
+                    </Label>
+                    <Input
+                        id="searchTerm"
+                        type="text"
+                        placeholder="e.g., mortgage rates, buyer tips..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="bg-background"
+                    />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="filterType" className="text-md font-semibold text-primary flex items-center">
                         <ListFilter className="mr-2 h-5 w-5" /> Filter by Type:
                     </Label>
                     <RadioGroup
                         id="filterType"
                         value={filterType}
                         onValueChange={(value: string) => setFilterType(value as FilterType)}
-                        className="flex flex-wrap gap-x-4 gap-y-2 justify-center"
+                        className="flex flex-wrap gap-x-4 gap-y-2 pt-2"
                     >
-                        {(['all', 'Blog', 'Vlog'] as FilterType[]).map((type) => (
+                        {availableTypes.map((type) => (
                         <div key={type} className="flex items-center space-x-2">
                             <RadioGroupItem value={type} id={`filter-${type}`} />
-                            <Label htmlFor={`filter-${type}`} className="font-normal cursor-pointer hover:text-primary">{type}</Label>
+                            <Label htmlFor={`filter-${type}`} className="font-normal cursor-pointer hover:text-primary capitalize">{type}</Label>
                         </div>
                         ))}
                     </RadioGroup>
                 </div>
-                <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <Label htmlFor="sortOption" className="text-md font-semibold text-primary flex items-center shrink-0">
+                <div className="space-y-2">
+                    <Label htmlFor="sortOption" className="text-md font-semibold text-primary flex items-center">
                         <ArrowDownUp className="mr-2 h-5 w-5" /> Sort by:
                     </Label>
                     <Select value={sortOption} onValueChange={(value: string) => setSortOption(value as SortOption)}>
-                        <SelectTrigger id="sortOption" className="w-full sm:w-[200px] bg-background">
+                        <SelectTrigger id="sortOption" className="w-full bg-background">
                         <SelectValue placeholder="Select sort order" />
                         </SelectTrigger>
                         <SelectContent>
@@ -98,13 +131,14 @@ export default function ContentSection() {
           <Carousel
             opts={{
               align: "start",
-              loop: true,
+              loop: displayedArticles.length > 1, // Adjust loop condition based on filtered results
             }}
             plugins={[plugin.current]}
             onMouseEnter={plugin.current.stop}
             onMouseLeave={plugin.current.reset}
             className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
-            key={displayedArticles.map(a => a.id).join('-') + '-' + sortOption + '-' + filterType} 
+            // Ensure carousel re-renders if the number of items changes significantly due to filtering
+            key={displayedArticles.map(a => a.id).join('-') + '-' + sortOption + '-' + filterType + '-' + searchTerm} 
           >
             <CarouselContent className="-ml-4">
               {displayedArticles.map((article) => (
@@ -121,7 +155,7 @@ export default function ContentSection() {
                             style={{ objectFit: 'cover' }}
                             data-ai-hint={article.dataAiHint}
                           />
-                          <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 text-xs rounded font-medium flex items-center">
+                          <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 text-xs rounded font-medium flex items-center capitalize">
                             <article.icon className="w-4 h-4 mr-1" />
                             {article.type}
                           </div>
@@ -144,19 +178,24 @@ export default function ContentSection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden sm:flex" />
-            <CarouselNext className="hidden sm:flex" />
+            {displayedArticles.length > 2 && <CarouselPrevious className="hidden sm:flex" />}
+            {displayedArticles.length > 2 && <CarouselNext className="hidden sm:flex" />}
           </Carousel>
         ) : (
           <div className="text-center py-10 text-muted-foreground">
             <Newspaper className="mx-auto h-12 w-12 mb-4 text-primary/50" />
-            <p className="text-lg">No articles match your current filter and sort criteria.</p>
+            <p className="text-lg">No articles match your current filter and search criteria.</p>
             <p>Try adjusting your selection or view all articles.</p>
           </div>
         )}
         
         <div className="text-center mt-12">
-            <Button size="lg" variant="outline" className="shadow-md hover:shadow-lg transition-shadow" onClick={() => { setFilterType('all'); setSortOption('date-desc'); }}>
+            <Button size="lg" variant="outline" className="shadow-md hover:shadow-lg transition-shadow" 
+                onClick={() => { 
+                    setFilterType('all'); 
+                    setSortOption('date-desc'); 
+                    setSearchTerm(''); 
+                }}>
                 View All Insights
             </Button>
         </div>
@@ -164,3 +203,4 @@ export default function ContentSection() {
     </section>
   );
 }
+
