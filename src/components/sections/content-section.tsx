@@ -97,7 +97,7 @@ type FilterType = 'all' | 'Blog' | 'Vlog';
 
 export default function ContentSection() {
   const plugin = React.useRef(
-    Autoplay({ delay: 4500, stopOnInteraction: true, stopOnMouseEnter: true })
+    Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
   const [articles, setArticles] = React.useState(initialArticles);
@@ -181,7 +181,7 @@ export default function ContentSection() {
           <Carousel
             opts={{
               align: "start",
-              loop: true, // Changed from displayedArticles.length > 2
+              loop: true,
             }}
             plugins={[plugin.current]}
             onMouseEnter={plugin.current.stop}
