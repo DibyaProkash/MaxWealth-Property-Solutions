@@ -1,12 +1,13 @@
+
 import Image from 'next/image';
 import { Handshake } from 'lucide-react';
 
 const partners = [
-  { name: 'SecureBank', logo: 'https://placehold.co/150x60.png?text=SecureBank', dataAiHint: 'bank logo' },
-  { name: 'RealtyPros', logo: 'https://placehold.co/150x60.png?text=RealtyPros', dataAiHint: 'realty logo' },
-  { name: 'LegalEase', logo: 'https://placehold.co/150x60.png?text=LegalEase', dataAiHint: 'legal firm logo' },
-  { name: 'InspectWell', logo: 'https://placehold.co/150x60.png?text=InspectWell', dataAiHint: 'inspection logo' },
-  { name: 'BuildRight Homes', logo: 'https://placehold.co/150x60.png?text=BuildRight', dataAiHint: 'builder logo' },
+  { name: 'SecureBank', logo: 'https://placehold.co/150x60.png', dataAiHint: 'bank logo' },
+  { name: 'RealtyPros', logo: 'https://placehold.co/150x60.png', dataAiHint: 'estate logo' },
+  { name: 'LegalEase', logo: 'https://placehold.co/150x60.png', dataAiHint: 'law logo' },
+  { name: 'InspectWell', logo: 'https://placehold.co/150x60.png', dataAiHint: 'inspection logo' },
+  { name: 'BuildRight Homes', logo: 'https://placehold.co/150x60.png', dataAiHint: 'builder logo' },
 ];
 
 export default function PartnersSection() {

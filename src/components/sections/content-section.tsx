@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,7 @@ const articles = [
     title: 'Understanding Mortgage Rates in 2024',
     description: 'A deep dive into current mortgage trends and how they affect your buying power.',
     image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'interest rates graph',
+    dataAiHint: 'finance graph',
     type: 'Blog',
     icon: Newspaper,
     link: '#',
@@ -17,7 +18,7 @@ const articles = [
     title: 'First-Time Home Buyer? Watch This First!',
     description: 'Our latest vlog covers essential tips for navigating your first home purchase.',
     image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'happy couple new home',
+    dataAiHint: 'home keys',
     type: 'Vlog',
     icon: Video,
     link: '#',
@@ -26,7 +27,7 @@ const articles = [
     title: 'Saving Strategies for Your Down Payment',
     description: 'Practical advice on building your down payment fund effectively.',
     image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'piggy bank coins',
+    dataAiHint: 'savings money',
     type: 'Blog',
     icon: Newspaper,
     link: '#',

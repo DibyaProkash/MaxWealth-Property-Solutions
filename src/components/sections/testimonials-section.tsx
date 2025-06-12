@@ -1,3 +1,4 @@
+
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Star, Quote } from 'lucide-react';
@@ -7,7 +8,7 @@ const testimonials = [
     name: 'Sarah L.',
     role: 'First-Time Homeowner',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'smiling woman',
+    dataAiHint: 'woman happy',
     quote: "MaxWealth PS made my dream of owning a home a reality! Their guidance was invaluable, and they explained everything so clearly. I felt supported every step of the way.",
     rating: 5,
   },
@@ -15,7 +16,7 @@ const testimonials = [
     name: 'John B.',
     role: 'Property Investor',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'confident man',
+    dataAiHint: 'man professional',
     quote: "As an investor, I need sharp, reliable financial advice. MaxWealth PS consistently delivers. Their expertise in complex financing is top-notch.",
     rating: 5,
   },
@@ -23,7 +24,7 @@ const testimonials = [
     name: 'The Garcia Family',
     role: 'Upgrading Their Home',
     image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'happy family',
+    dataAiHint: 'family portrait',
     quote: "We were nervous about selling our old home and buying a new one simultaneously. The team at MaxWealth PS streamlined the financial process and gave us peace of mind.",
     rating: 5,
   },

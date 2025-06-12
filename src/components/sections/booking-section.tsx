@@ -1,6 +1,8 @@
+
 import { Button } from '@/components/ui/button';
 import { CalendarDays, ArrowRight } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 
 export default function BookingSection() {
   return (
@@ -22,15 +24,16 @@ export default function BookingSection() {
                 </a>
               </Button>
             </div>
-            <div className="hidden md:block relative h-full min-h-[300px]">
-              <div className="absolute inset-0 bg-black/20"></div>
-              {/* Placeholder for a visual element, like an image or abstract design */}
-              <img 
-                src="https://placehold.co/600x400.png" 
+            <div className="hidden md:block relative h-full min-h-[300px] md:min-h-[400px]">
+              <Image 
+                src="https://placehold.co/800x600.png" 
                 alt="Financial planning session" 
-                className="w-full h-full object-cover"
-                data-ai-hint="calendar meeting" 
+                layout="fill"
+                objectFit="cover"
+                className="w-full h-full"
+                data-ai-hint="finance meeting" 
               />
+               <div className="absolute inset-0 bg-black/30"></div>
                <div className="absolute inset-0 flex items-center justify-center p-8">
                 <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-2xl text-center">
                   <p className="font-headline text-xl text-primary font-semibold">Live Calendar Coming Soon!</p>

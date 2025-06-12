@@ -1,11 +1,12 @@
+
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Users, Target, Eye, Award } from 'lucide-react';
 
 const teamMembers = [
-  { name: 'Alice Johnson', role: 'Lead Financial Advisor', image: 'https://placehold.co/300x300.png', dataAiHint: 'professional woman' },
-  { name: 'Bob Williams', role: 'Mortgage Specialist', image: 'https://placehold.co/300x300.png', dataAiHint: 'professional man' },
-  { name: 'Carol Davis', role: 'Client Relations Manager', image: 'https://placehold.co/300x300.png', dataAiHint: 'smiling person' },
+  { name: 'Alice Johnson', role: 'Lead Financial Advisor', image: 'https://placehold.co/300x300.png', dataAiHint: 'woman portrait' },
+  { name: 'Bob Williams', role: 'Mortgage Specialist', image: 'https://placehold.co/300x300.png', dataAiHint: 'man portrait' },
+  { name: 'Carol Davis', role: 'Client Relations Manager', image: 'https://placehold.co/300x300.png', dataAiHint: 'person smiling' },
 ];
 
 export default function AboutUsSection() {

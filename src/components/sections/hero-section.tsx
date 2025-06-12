@@ -1,11 +1,22 @@
+
 import { Button } from '@/components/ui/button';
 import AIChatbot from './ai-chatbot';
 import { ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 
 export default function HeroSection() {
   return (
     <section id="hero" className="relative py-20 md:py-32 bg-gradient-to-br from-background to-secondary">
-      <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "url('https://placehold.co/1920x1080.png?text=Subtle+Geometric+Pattern')", backgroundSize: 'cover', backgroundPosition: 'center' }} data-ai-hint="geometric pattern"></div>
+      <div className="absolute inset-0 opacity-10">
+        <Image 
+          src="https://placehold.co/1920x1080.png" 
+          alt="Subtle Geometric Pattern" 
+          layout="fill" 
+          objectFit="cover" 
+          data-ai-hint="abstract pattern"
+          priority
+        />
+      </div>
       <div className="container relative mx-auto px-6 text-center">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="md:text-left">
