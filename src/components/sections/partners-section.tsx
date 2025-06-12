@@ -6,18 +6,7 @@ import Image from 'next/image';
 import { Handshake } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
-
-const partners = [
-  { name: 'SecureBank', logo: 'https://placehold.co/150x60.png?text=SecureBank&font=sans-serif', dataAiHint: 'bank logo' },
-  { name: 'RealtyPros', logo: 'https://placehold.co/150x60.png?text=RealtyPros&font=sans-serif', dataAiHint: 'estate logo' },
-  { name: 'LegalEase', logo: 'https://placehold.co/150x60.png?text=LegalEase&font=sans-serif', dataAiHint: 'law logo' },
-  { name: 'InspectWell', logo: 'https://placehold.co/150x60.png?text=InspectWell&font=sans-serif', dataAiHint: 'inspection logo' },
-  { name: 'BuildRight Homes', logo: 'https://placehold.co/150x60.png?text=BuildRight&font=sans-serif', dataAiHint: 'builder logo' },
-  { name: 'FinanceGrowth', logo: 'https://placehold.co/150x60.png?text=FinanceGrowth&font=sans-serif', dataAiHint: 'finance logo' },
-  { name: 'CapitalTrust', logo: 'https://placehold.co/150x60.png?text=CapitalTrust&font=sans-serif', dataAiHint: 'investment logo' },
-  { name: 'HomeInsure Co.', logo: 'https://placehold.co/150x60.png?text=HomeInsure&font=sans-serif', dataAiHint: 'insurance logo' },
-  { name: 'MortgageMasters', logo: 'https://placehold.co/150x60.png?text=MortgagePro&font=sans-serif', dataAiHint: 'mortgage logo' },
-];
+import { partnersData } from '@/lib/data';
 
 export default function PartnersSection() {
   const plugin = React.useRef(
@@ -48,7 +37,7 @@ export default function PartnersSection() {
           className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl mx-auto"
         >
           <CarouselContent className="-ml-2 md:-ml-4">
-            {partners.map((partner) => (
+            {partnersData.map((partner) => (
               <CarouselItem key={partner.name} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 pl-2 md:pl-4">
                 <div className="p-1">
                   <div className="flex items-center justify-center h-24 p-2 bg-background rounded-lg shadow-md opacity-70 hover:opacity-100 transition-opacity duration-300">

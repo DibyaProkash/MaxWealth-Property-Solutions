@@ -4,60 +4,10 @@
 import * as React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, useCarousel } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import { Star, Quote } from 'lucide-react';
-
-const testimonials = [
-  {
-    name: 'Sarah L.',
-    role: 'First-Time Homeowner',
-    image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'woman happy',
-    quote: "MaxWealth PS made my dream of owning a home a reality! Their guidance was invaluable, and they explained everything so clearly. I felt supported every step of the way.",
-    rating: 5,
-  },
-  {
-    name: 'John B.',
-    role: 'Property Investor',
-    image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'man professional',
-    quote: "As an investor, I need sharp, reliable financial advice. MaxWealth PS consistently delivers. Their expertise in complex financing is top-notch.",
-    rating: 5,
-  },
-  {
-    name: 'The Garcia Family',
-    role: 'Upgrading Their Home',
-    image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'family portrait',
-    quote: "We were nervous about selling our old home and buying a new one simultaneously. The team at MaxWealth PS streamlined the financial process and gave us peace of mind.",
-    rating: 5,
-  },
-  {
-    name: 'Emily K.',
-    role: 'Refinancing Client',
-    image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'person thinking',
-    quote: "Refinancing seemed complicated, but MaxWealth PS made it simple and saved me a significant amount on my monthly payments. Highly recommend their services!",
-    rating: 5,
-  },
-  {
-    name: 'David W.',
-    role: 'Second Home Buyer',
-    image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'man smiling',
-    quote: "The MaxWealth team helped us secure financing for our vacation home. Their process was efficient and they found us a great rate.",
-    rating: 5,
-  },
-  {
-    name: 'Lisa P.',
-    role: 'Real Estate Developer',
-    image: 'https://placehold.co/100x100.png',
-    dataAiHint: 'woman business',
-    quote: "For larger projects, MaxWealth PS has been an indispensable partner in structuring our financing. Professional and knowledgeable.",
-    rating: 5,
-  }
-];
+import { testimonialsData } from '@/lib/data';
 
 export default function TestimonialsSection() {
   const plugin = React.useRef(
@@ -77,7 +27,7 @@ export default function TestimonialsSection() {
         <Carousel
           opts={{
             align: "start",
-            loop: true,
+            loop: testimonialsData.length > 2, // Only loop if there are enough items
           }}
           plugins={[plugin.current]}
           onMouseEnter={plugin.current.stop}
@@ -85,7 +35,7 @@ export default function TestimonialsSection() {
           className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
         >
           <CarouselContent className="-ml-4">
-            {testimonials.map((testimonial, index) => (
+            {testimonialsData.map((testimonial, index) => (
               <CarouselItem key={index} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
                   <Card className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">

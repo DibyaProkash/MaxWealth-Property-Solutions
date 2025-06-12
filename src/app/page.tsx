@@ -11,6 +11,7 @@ import PartnersSection from '@/components/sections/partners-section';
 import BookingSection from '@/components/sections/booking-section';
 import ContactSection from '@/components/sections/contact-section';
 import AnimatedSection from '@/components/layout/animated-section';
+import { articlesData, partnersData, testimonialsData } from '@/lib/data';
 
 export default function HomePage() {
   return (
@@ -23,21 +24,32 @@ export default function HomePage() {
         <AnimatedSection delay="delay-100">
           <AboutUsSection />
         </AnimatedSection>
-        <AnimatedSection delay="delay-100">
-          <ContentSection />
-        </AnimatedSection>
+        
+        {articlesData.length > 0 && (
+          <AnimatedSection delay="delay-100">
+            <ContentSection />
+          </AnimatedSection>
+        )}
+
         <AnimatedSection delay="delay-100">
           <CalculatorsSection />
         </AnimatedSection>
         <AnimatedSection delay="delay-100">
           <RoadmapSection />
         </AnimatedSection>
-        <AnimatedSection delay="delay-100">
-          <TestimonialsSection />
-        </AnimatedSection>
-        <AnimatedSection delay="delay-100">
-          <PartnersSection />
-        </AnimatedSection>
+
+        {testimonialsData.length > 0 && (
+          <AnimatedSection delay="delay-100">
+            <TestimonialsSection />
+          </AnimatedSection>
+        )}
+
+        {partnersData.length > 0 && (
+          <AnimatedSection delay="delay-100">
+            <PartnersSection />
+          </AnimatedSection>
+        )}
+        
         <AnimatedSection delay="delay-100">
           <BookingSection />
         </AnimatedSection>

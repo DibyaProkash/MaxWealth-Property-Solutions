@@ -11,86 +11,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-
-const initialArticles = [
-  {
-    id: '1',
-    title: 'Understanding Mortgage Rates in 2024',
-    description: 'A deep dive into current mortgage trends and how they affect your buying power.',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'finance graph',
-    type: 'Blog',
-    date: '2024-07-15',
-    icon: Newspaper,
-    link: '#',
-  },
-  {
-    id: '2',
-    title: 'First-Time Home Buyer? Watch This First!',
-    description: 'Our latest vlog covers essential tips for navigating your first home purchase.',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'home keys',
-    type: 'Vlog',
-    date: '2024-07-10',
-    icon: Video,
-    link: '#',
-  },
-  {
-    id: '3',
-    title: 'Saving Strategies for Your Down Payment',
-    description: 'Practical advice on building your down payment fund effectively.',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'savings money',
-    type: 'Blog',
-    date: '2024-06-25',
-    icon: Newspaper,
-    link: '#',
-  },
-  {
-    id: '4',
-    title: 'The Future of Real Estate Technology',
-    description: 'Exploring how tech is shaping the home buying and selling process.',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'technology real estate',
-    type: 'Blog',
-    date: '2024-06-12',
-    icon: Newspaper,
-    link: '#',
-  },
-  {
-    id: '5',
-    title: 'Navigating Closing Costs: A Complete Guide',
-    description: 'Understand all the fees involved when you close on your new home.',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'documents signature',
-    type: 'Vlog',
-    date: '2024-05-30',
-    icon: Video,
-    link: '#',
-  },
-  {
-    id: '6',
-    title: 'Market Update Q3: Trends to Watch',
-    description: 'An overview of the real estate market performance in the third quarter and predictions.',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'market chart',
-    type: 'Blog',
-    date: '2024-07-20',
-    icon: Newspaper,
-    link: '#',
-  },
-  {
-    id: '7',
-    title: 'Impact of Credit Score on Mortgages (Vlog)',
-    description: 'Learn how your credit score affects your mortgage options in this informative vlog.',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'credit score',
-    type: 'Vlog',
-    date: '2024-05-15',
-    icon: Video,
-    link: '#',
-  },
-];
+import { articlesData, type Article } from '@/lib/data';
 
 type SortOption = 'date-desc' | 'date-asc' | 'type-asc';
 type FilterType = 'all' | 'Blog' | 'Vlog';
@@ -100,19 +21,17 @@ export default function ContentSection() {
     Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
-  const [articles, setArticles] = React.useState(initialArticles);
+  const [currentArticles, setCurrentArticles] = React.useState<Article[]>(articlesData);
   const [sortOption, setSortOption] = React.useState<SortOption>('date-desc');
   const [filterType, setFilterType] = React.useState<FilterType>('all');
 
   const displayedArticles = React.useMemo(() => {
-    let processedArticles = [...articles];
+    let processedArticles = [...currentArticles];
 
-    // Filtering
     if (filterType !== 'all') {
       processedArticles = processedArticles.filter(article => article.type === filterType);
     }
 
-    // Sorting
     switch (sortOption) {
       case 'date-desc':
         processedArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -125,7 +44,7 @@ export default function ContentSection() {
         break;
     }
     return processedArticles;
-  }, [articles, sortOption, filterType]);
+  }, [currentArticles, sortOption, filterType]);
 
   return (
     <section id="content" className="py-16 md:py-24 bg-secondary">
@@ -139,7 +58,6 @@ export default function ContentSection() {
 
         <div className="mb-10">
             <div className="flex flex-col items-center gap-6 md:flex-row md:justify-center md:gap-8">
-                {/* Filter Controls Div */}
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                     <Label htmlFor="filterType" className="text-md font-semibold text-primary flex items-center shrink-0">
                         <ListFilter className="mr-2 h-5 w-5" /> Filter by Type:
@@ -158,7 +76,6 @@ export default function ContentSection() {
                         ))}
                     </RadioGroup>
                 </div>
-                {/* Sort Controls Div */}
                 <div className="flex flex-col sm:flex-row items-center gap-4">
                     <Label htmlFor="sortOption" className="text-md font-semibold text-primary flex items-center shrink-0">
                         <ArrowDownUp className="mr-2 h-5 w-5" /> Sort by:
