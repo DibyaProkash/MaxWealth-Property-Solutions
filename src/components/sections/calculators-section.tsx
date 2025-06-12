@@ -25,8 +25,8 @@ export default function CalculatorsSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Calculators */}
+        <div className="space-y-12">
+          {/* Calculators Section */}
           <div className="w-full">
             <Tabs defaultValue="mortgage" className="w-full">
               <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-8 h-auto sm:h-10">
@@ -36,7 +36,7 @@ export default function CalculatorsSection() {
               </TabsList>
 
               <TabsContent value="mortgage">
-                <Card className="shadow-lg">
+                <Card className="shadow-lg max-w-2xl mx-auto">
                   <CardHeader>
                     <CardTitle className="font-headline text-xl text-primary text-center">Mortgage Payment Calculator</CardTitle>
                   </CardHeader>
@@ -47,7 +47,7 @@ export default function CalculatorsSection() {
               </TabsContent>
 
               <TabsContent value="affordability">
-                <Card className="shadow-lg">
+                <Card className="shadow-lg max-w-2xl mx-auto">
                   <CardHeader>
                     <CardTitle className="font-headline text-xl text-primary text-center">Home Affordability Calculator</CardTitle>
                   </CardHeader>
@@ -58,7 +58,7 @@ export default function CalculatorsSection() {
               </TabsContent>
 
               <TabsContent value="closing">
-                <Card className="shadow-lg">
+                <Card className="shadow-lg max-w-2xl mx-auto">
                   <CardHeader>
                     <CardTitle className="font-headline text-xl text-primary text-center">Closing Cost Estimator</CardTitle>
                   </CardHeader>
@@ -70,9 +70,9 @@ export default function CalculatorsSection() {
             </Tabs>
           </div>
 
-          {/* Right Column: AI Tools */}
-          <div className="space-y-8">
-            <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-6 text-center lg:text-left">
+          {/* AI Tools Section */}
+          <div className="space-y-8 max-w-2xl mx-auto">
+            <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-6 text-center">
               Explore Our AI-Powered Tools
             </h3>
 
@@ -126,4 +126,3 @@ export default function CalculatorsSection() {
     </section>
   );
 }
-
