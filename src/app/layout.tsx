@@ -4,6 +4,7 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import ScrollToTopButton from '@/components/layout/scroll-to-top-button';
+import LoadingIndicator from '@/components/layout/loading-indicator';
 
 export const metadata: Metadata = {
   title: 'MaxWealth PS',
@@ -30,9 +31,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
         >
-          {children}
-          <Toaster />
-          <ScrollToTopButton />
+          <LoadingIndicator>
+            {children}
+            <Toaster />
+            <ScrollToTopButton />
+          </LoadingIndicator>
         </ThemeProvider>
       </body>
     </html>
