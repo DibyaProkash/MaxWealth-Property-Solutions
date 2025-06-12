@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ArrowRight, ListFilter, ArrowDownUp, Search as SearchIcon } from 'lucide-react';
+import { ArrowRight, ListFilter, ArrowDownUp, Search as SearchIcon, Newspaper } from 'lucide-react'; // Added Newspaper
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -67,6 +67,25 @@ export default function ContentSection() {
     return processedArticles;
   }, [sortOption, filterType, searchTerm]);
 
+  // Determine carousel item count based on screen size for responsive looping and button display
+  const [itemsPerView, setItemsPerView] = React.useState(3);
+
+  React.useEffect(() => {
+    const updateItemsPerView = () => {
+      if (window.innerWidth < 768) { // sm
+        setItemsPerView(1);
+      } else if (window.innerWidth < 1024) { // md
+        setItemsPerView(2);
+      } else { // lg and up
+        setItemsPerView(3);
+      }
+    };
+    window.addEventListener('resize', updateItemsPerView);
+    updateItemsPerView(); // Initial call
+    return () => window.removeEventListener('resize', updateItemsPerView);
+  }, []);
+
+
   return (
     <section id="content" className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto px-6">
@@ -78,7 +97,7 @@ export default function ContentSection() {
         </div>
 
         <div className="mb-10 p-4 border rounded-lg bg-background/50 shadow">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6 items-end">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
                 <div className="space-y-2">
                     <Label htmlFor="searchTerm" className="text-md font-semibold text-primary flex items-center">
                         <SearchIcon className="mr-2 h-5 w-5" /> Search Content:
@@ -132,13 +151,14 @@ export default function ContentSection() {
           <Carousel
             opts={{
               align: "start",
-              loop: displayedArticles.length > (typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : (window.innerWidth < 1024 ? 1: 2)), 
+              loop: displayedArticles.length > itemsPerView, 
             }}
-            plugins={[plugin.current]}
-            onMouseEnter={plugin.current.stop}
-            onMouseLeave={plugin.current.reset}
+            plugins={plugin.current ? [plugin.current] : []}
+            onMouseEnter={() => plugin.current?.stop()}
+            onMouseLeave={() => plugin.current?.reset()}
             className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
-            key={displayedArticles.map(a => a.id).join('-') + '-' + sortOption + '-' + filterType + '-' + searchTerm} 
+            // Adding a key to force re-render when itemsPerView changes for opts.loop to update
+            key={displayedArticles.map(a => a.id).join('-') + '-' + sortOption + '-' + filterType + '-' + searchTerm + '-' + itemsPerView} 
           >
             <CarouselContent className="-ml-4">
               {displayedArticles.map((article) => (
@@ -178,8 +198,8 @@ export default function ContentSection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            {displayedArticles.length > (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : (window.innerWidth < 1024 ? 2 : 3)) && <CarouselPrevious className="hidden sm:flex" />}
-            {displayedArticles.length > (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : (window.innerWidth < 1024 ? 2 : 3)) && <CarouselNext className="hidden sm:flex" />}
+            {displayedArticles.length > itemsPerView && <CarouselPrevious className="hidden sm:flex" />}
+            {displayedArticles.length > itemsPerView && <CarouselNext className="hidden sm:flex" />}
           </Carousel>
         ) : (
           <div className="text-center py-10 text-muted-foreground">
@@ -203,3 +223,4 @@ export default function ContentSection() {
     </section>
   );
 }
+
