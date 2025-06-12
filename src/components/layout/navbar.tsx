@@ -1,13 +1,15 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase } from 'lucide-react';
+import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 const navLinks = [
   { href: '#hero', label: 'Home', icon: Home },
   { href: '#about', label: 'About Us', icon: Users },
   { href: '#content', label: 'Insights', icon: Newspaper },
+  { href: '#calculators', label: 'Calculators', icon: CalculatorIcon },
   { href: '#testimonials', label: 'Testimonials', icon: Star },
   { href: '#contact', label: 'Contact', icon: MessageSquare },
 ];

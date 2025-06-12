@@ -4,6 +4,7 @@ import Footer from '@/components/layout/footer';
 import HeroSection from '@/components/sections/hero-section';
 import AboutUsSection from '@/components/sections/about-us-section';
 import ContentSection from '@/components/sections/content-section';
+import CalculatorsSection from '@/components/sections/calculators-section';
 import TestimonialsSection from '@/components/sections/testimonials-section';
 import PartnersSection from '@/components/sections/partners-section';
 import BookingSection from '@/components/sections/booking-section';
@@ -23,6 +24,9 @@ export default function HomePage() {
         </AnimatedSection>
         <AnimatedSection delay="delay-100">
           <ContentSection />
+        </AnimatedSection>
+        <AnimatedSection delay="delay-100">
+          <CalculatorsSection />
         </AnimatedSection>
         <AnimatedSection delay="delay-100">
           <TestimonialsSection />
