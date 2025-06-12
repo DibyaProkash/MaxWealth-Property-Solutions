@@ -1,7 +1,7 @@
 
 "use client";
 
-import Image from 'next/image'; // Added import
+import Image from 'next/image';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -55,9 +55,9 @@ export default function ContactSection() {
     <section id="contact" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Get in Touch</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have questions or ready to start your journey to homeownership? Contact us today!
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Get in Touch & Visit Us</h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Have questions or ready to start your journey to homeownership? Contact us today! We're conveniently located to serve you better. Drop by for a consultation or get in touch.
           </p>
         </div>
 
@@ -151,8 +151,7 @@ export default function ContactSection() {
                   <Mail className="h-6 w-6 text-accent" />
                   <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors">info@maxwealthps.com</a>
                 </div>
-                {/* Map image moved here */}
-                <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md mb-6">
+                <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md">
                   <Image 
                     src="https://placehold.co/800x450.png" 
                     alt="Map showing office location" 
@@ -175,6 +174,21 @@ export default function ContactSection() {
                 <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
                 <p><strong>Saturday:</strong> 10:00 AM - 2:00 PM (By Appointment)</p>
                 <p><strong>Sunday:</strong> Closed</p>
+              </CardContent>
+            </Card>
+            <Card className="shadow-lg">
+              <CardHeader>
+                <CardTitle className="font-headline text-xl text-primary">Getting to Our Office</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3 text-muted-foreground">
+                <div>
+                  <h4 className="font-semibold text-primary mb-1">Accessibility & Parking</h4>
+                  <p>Our office is easily accessible by public transport and has ample parking available. We are located in the heart of the financial district, near major landmarks.</p>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-primary mb-1">Appointments</h4>
+                  <p>We recommend booking an appointment in advance to ensure our advisors can dedicate ample time to your needs.</p>
+                </div>
               </CardContent>
             </Card>
           </div>
