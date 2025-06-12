@@ -34,7 +34,7 @@ export default function ClosingCostEstimator() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-lg mx-auto text-center">
       <div>
         <Label htmlFor="homePrice" className="text-sm font-medium">Home Purchase Price ($)</Label>
         <Input
@@ -57,7 +57,7 @@ export default function ClosingCostEstimator() {
       )}
 
       {estimatedCosts && (
-        <Card className="mt-6 bg-secondary border-primary/20">
+        <Card className="mt-6 bg-secondary border-primary/20 max-w-md mx-auto">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg text-primary text-center font-headline">Estimated Closing Costs Range</CardTitle>
           </CardHeader>

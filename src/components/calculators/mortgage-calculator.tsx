@@ -49,7 +49,7 @@ export default function MortgageCalculator() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-lg mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <Label htmlFor="loanAmount" className="text-sm font-medium">Loan Amount ($)</Label>
@@ -87,7 +87,7 @@ export default function MortgageCalculator() {
         </div>
       </div>
 
-      <Button onClick={calculateMortgage} className="w-full shadow-md hover:shadow-lg transition-shadow">
+      <Button onClick={calculateMortgage} className="w-full max-w-xs mx-auto flex justify-center shadow-md hover:shadow-lg transition-shadow">
         Calculate Monthly Payment
       </Button>
 
@@ -96,7 +96,7 @@ export default function MortgageCalculator() {
       )}
 
       {monthlyPayment && (
-        <Card className="mt-6 bg-secondary border-primary/20">
+        <Card className="mt-6 bg-secondary border-primary/20 max-w-md mx-auto">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg text-primary text-center font-headline">Estimated Monthly Payment</CardTitle>
           </CardHeader>

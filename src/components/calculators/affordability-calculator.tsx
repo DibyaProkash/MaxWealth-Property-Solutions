@@ -49,7 +49,7 @@ export default function AffordabilityCalculator() {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-lg mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <Label htmlFor="annualIncome" className="text-sm font-medium">Gross Annual Income ($)</Label>
@@ -75,7 +75,7 @@ export default function AffordabilityCalculator() {
         </div>
       </div>
       
-      <Button onClick={calculateAffordability} className="w-full shadow-md hover:shadow-lg transition-shadow">
+      <Button onClick={calculateAffordability} className="w-full max-w-xs mx-auto flex justify-center shadow-md hover:shadow-lg transition-shadow">
         Calculate Recommended PITI
       </Button>
 
@@ -85,7 +85,7 @@ export default function AffordabilityCalculator() {
 
 
       {recommendedPITI !== null && (
-        <Card className="mt-6 bg-secondary border-primary/20">
+        <Card className="mt-6 bg-secondary border-primary/20 max-w-md mx-auto">
           <CardHeader className="pb-2">
             <CardTitle className="text-lg text-primary text-center font-headline">Recommended Max Monthly Housing Payment (PITI)</CardTitle>
           </CardHeader>

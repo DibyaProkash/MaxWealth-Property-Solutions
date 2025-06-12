@@ -29,11 +29,13 @@ export default function CalculatorsSection() {
           {/* Calculators Section */}
           <div className="w-full">
             <Tabs defaultValue="mortgage" className="w-full">
-              <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-8 h-auto sm:h-10">
-                <TabsTrigger value="mortgage" className="py-2 sm:py-0">Mortgage Payment</TabsTrigger>
-                <TabsTrigger value="affordability" className="py-2 sm:py-0">Affordability</TabsTrigger>
-                <TabsTrigger value="closing" className="py-2 sm:py-0">Closing Costs</TabsTrigger>
-              </TabsList>
+              <div className="flex justify-center mb-8">
+                <TabsList className="grid grid-cols-1 sm:grid-cols-3 h-auto sm:h-10 w-full max-w-lg">
+                  <TabsTrigger value="mortgage" className="py-2 sm:py-0">Mortgage Payment</TabsTrigger>
+                  <TabsTrigger value="affordability" className="py-2 sm:py-0">Affordability</TabsTrigger>
+                  <TabsTrigger value="closing" className="py-2 sm:py-0">Closing Costs</TabsTrigger>
+                </TabsList>
+              </div>
 
               <TabsContent value="mortgage">
                 <Card className="shadow-lg max-w-2xl mx-auto">
