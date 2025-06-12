@@ -1,7 +1,11 @@
 
+"use client";
+
+import * as React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, useCarousel } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
 import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
@@ -36,10 +40,30 @@ const testimonials = [
     dataAiHint: 'person thinking',
     quote: "Refinancing seemed complicated, but MaxWealth PS made it simple and saved me a significant amount on my monthly payments. Highly recommend their services!",
     rating: 5,
+  },
+  {
+    name: 'David W.',
+    role: 'Second Home Buyer',
+    image: 'https://placehold.co/100x100.png',
+    dataAiHint: 'man smiling',
+    quote: "The MaxWealth team helped us secure financing for our vacation home. Their process was efficient and they found us a great rate.",
+    rating: 5,
+  },
+  {
+    name: 'Lisa P.',
+    role: 'Real Estate Developer',
+    image: 'https://placehold.co/100x100.png',
+    dataAiHint: 'woman business',
+    quote: "For larger projects, MaxWealth PS has been an indispensable partner in structuring our financing. Professional and knowledgeable.",
+    rating: 5,
   }
 ];
 
 export default function TestimonialsSection() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })
+  );
+
   return (
     <section id="testimonials" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
@@ -55,16 +79,19 @@ export default function TestimonialsSection() {
             align: "start",
             loop: true,
           }}
-          className="w-full max-w-xl mx-auto"
+          plugins={[plugin.current]}
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
+          className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
         >
-          <CarouselContent>
+          <CarouselContent className="-ml-4">
             {testimonials.map((testimonial, index) => (
-              <CarouselItem key={index} className="md:basis-1/1">
-                <div className="p-1">
+              <CarouselItem key={index} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                <div className="p-1 h-full">
                   <Card className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
                     <CardContent className="p-6 flex-grow flex flex-col items-center text-center">
                       <Quote className="w-10 h-10 text-accent mb-4 transform rotate-180" />
-                      <p className="text-muted-foreground font-body mb-6 italic flex-grow">"{testimonial.quote}"</p>
+                      <p className="text-muted-foreground font-body mb-6 italic flex-grow text-sm md:text-base">"{testimonial.quote}"</p>
                       <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
                         <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
                         <AvatarFallback>{testimonial.name.substring(0, 1)}</AvatarFallback>
@@ -85,8 +112,8 @@ export default function TestimonialsSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious className="hidden sm:flex" />
+          <CarouselNext className="hidden sm:flex" />
         </Carousel>
       </div>
     </section>

@@ -1,7 +1,11 @@
 
+"use client";
+
+import * as React from 'react';
 import Image from 'next/image';
 import { Handshake } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
 
 const partners = [
   { name: 'SecureBank', logo: 'https://placehold.co/150x60.png?text=SecureBank&font=sans-serif', dataAiHint: 'bank logo' },
@@ -11,9 +15,15 @@ const partners = [
   { name: 'BuildRight Homes', logo: 'https://placehold.co/150x60.png?text=BuildRight&font=sans-serif', dataAiHint: 'builder logo' },
   { name: 'FinanceGrowth', logo: 'https://placehold.co/150x60.png?text=FinanceGrowth&font=sans-serif', dataAiHint: 'finance logo' },
   { name: 'CapitalTrust', logo: 'https://placehold.co/150x60.png?text=CapitalTrust&font=sans-serif', dataAiHint: 'investment logo' },
+  { name: 'HomeInsure Co.', logo: 'https://placehold.co/150x60.png?text=HomeInsure&font=sans-serif', dataAiHint: 'insurance logo' },
+  { name: 'MortgageMasters', logo: 'https://placehold.co/150x60.png?text=MortgagePro&font=sans-serif', dataAiHint: 'mortgage logo' },
 ];
 
 export default function PartnersSection() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
+  );
+
   return (
     <section id="partners" className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto px-6">
@@ -32,7 +42,10 @@ export default function PartnersSection() {
             align: "start",
             loop: true,
           }}
-          className="w-full max-w-4xl mx-auto"
+          plugins={[plugin.current]}
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
+          className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl mx-auto"
         >
           <CarouselContent className="-ml-2 md:-ml-4">
             {partners.map((partner) => (
@@ -44,7 +57,7 @@ export default function PartnersSection() {
                       alt={partner.name} 
                       width={150} 
                       height={60} 
-                      objectFit="contain"
+                      style={{ objectFit: "contain" }}
                       data-ai-hint={partner.dataAiHint}
                     />
                   </div>
@@ -52,8 +65,8 @@ export default function PartnersSection() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="left-[-50px] sm:left-[-60px]" />
-          <CarouselNext className="right-[-50px] sm:right-[-60px]" />
+          <CarouselPrevious className="left-[-25px] sm:left-[-35px] md:left-[-50px]" />
+          <CarouselNext className="right-[-25px] sm:right-[-35px] md:right-[-50px]" />
         </Carousel>
       </div>
     </section>
