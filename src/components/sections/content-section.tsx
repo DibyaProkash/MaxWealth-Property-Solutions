@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from 'react';
@@ -136,10 +137,10 @@ export default function ContentSection() {
           </p>
         </div>
 
-        <div className="mb-8 p-4 border rounded-lg bg-background shadow">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div className="mb-10"> 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 items-center">
                 <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <Label htmlFor="filterType" className="text-md font-semibold text-primary flex items-center">
+                    <Label htmlFor="filterType" className="text-md font-semibold text-primary flex items-center shrink-0">
                         <ListFilter className="mr-2 h-5 w-5" /> Filter by Type:
                     </Label>
                     <RadioGroup
@@ -157,7 +158,7 @@ export default function ContentSection() {
                     </RadioGroup>
                 </div>
                 <div className="flex flex-col sm:flex-row items-center gap-4">
-                    <Label htmlFor="sortOption" className="text-md font-semibold text-primary flex items-center">
+                    <Label htmlFor="sortOption" className="text-md font-semibold text-primary flex items-center shrink-0">
                         <ArrowDownUp className="mr-2 h-5 w-5" /> Sort by:
                     </Label>
                     <Select value={sortOption} onValueChange={(value: string) => setSortOption(value as SortOption)}>
@@ -178,13 +179,13 @@ export default function ContentSection() {
           <Carousel
             opts={{
               align: "start",
-              loop: displayedArticles.length > 2, // Loop only if enough items for a full view
+              loop: displayedArticles.length > 2, 
             }}
             plugins={[plugin.current]}
             onMouseEnter={plugin.current.stop}
             onMouseLeave={plugin.current.reset}
             className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
-            key={displayedArticles.map(a => a.id).join('-')} // Re-initialize carousel when items change
+            key={displayedArticles.map(a => a.id).join('-') + '-' + sortOption + '-' + filterType} 
           >
             <CarouselContent className="-ml-4">
               {displayedArticles.map((article) => (
@@ -244,3 +245,4 @@ export default function ContentSection() {
     </section>
   );
 }
+
