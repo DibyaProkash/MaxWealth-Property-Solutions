@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, ListChecks } from 'lucide-react';
+import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, ListChecks, HelpCircle } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 
 const navLinks = [
@@ -12,6 +12,7 @@ const navLinks = [
   { href: '#calculators', label: 'Tools', icon: CalculatorIcon },
   { href: '#roadmap', label: 'Roadmap', icon: ListChecks },
   { href: '#testimonials', label: 'Testimonials', icon: Star },
+  { href: '#faq', label: 'FAQ', icon: HelpCircle },
   { href: '#contact', label: 'Contact', icon: MessageSquare },
 ];
 

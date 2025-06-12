@@ -3,10 +3,11 @@
 
 import * as React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ArrowRight, Newspaper, Video, ListFilter, ArrowDownUp, Search as SearchIcon } from 'lucide-react';
+import { ArrowRight, ListFilter, ArrowDownUp, Search as SearchIcon } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -15,36 +16,36 @@ import { Label } from "@/components/ui/label";
 import { articlesData, type Article } from '@/lib/data';
 
 type SortOption = 'date-desc' | 'date-asc' | 'type-asc';
-type FilterType = string; // Now a generic string, 'all' is a special value
+type FilterType = string; 
 
 export default function ContentSection() {
   const plugin = React.useRef(
     Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
-  const [currentArticles] = React.useState<Article[]>(articlesData);
   const [sortOption, setSortOption] = React.useState<SortOption>('date-desc');
   const [filterType, setFilterType] = React.useState<FilterType>('all');
   const [searchTerm, setSearchTerm] = React.useState<string>('');
 
   const availableTypes = React.useMemo(() => {
     const types = new Set<string>(['all']);
-    currentArticles.forEach(article => types.add(article.type));
+    articlesData.forEach(article => types.add(article.type));
     return Array.from(types).sort((a, b) => {
       if (a === 'all') return -1;
       if (b === 'all') return 1;
       return a.localeCompare(b);
     });
-  }, [currentArticles]);
+  }, []);
 
   const displayedArticles = React.useMemo(() => {
-    let processedArticles = [...currentArticles];
+    let processedArticles = [...articlesData];
 
     if (searchTerm.trim() !== '') {
       const lowerSearchTerm = searchTerm.toLowerCase();
       processedArticles = processedArticles.filter(article =>
         article.title.toLowerCase().includes(lowerSearchTerm) ||
-        article.description.toLowerCase().includes(lowerSearchTerm)
+        article.description.toLowerCase().includes(lowerSearchTerm) ||
+        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(lowerSearchTerm)))
       );
     }
 
@@ -64,7 +65,7 @@ export default function ContentSection() {
         break;
     }
     return processedArticles;
-  }, [currentArticles, sortOption, filterType, searchTerm]);
+  }, [sortOption, filterType, searchTerm]);
 
   return (
     <section id="content" className="py-16 md:py-24 bg-secondary">
@@ -131,13 +132,12 @@ export default function ContentSection() {
           <Carousel
             opts={{
               align: "start",
-              loop: displayedArticles.length > 1, // Adjust loop condition based on filtered results
+              loop: displayedArticles.length > (typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : (window.innerWidth < 1024 ? 1: 2)), 
             }}
             plugins={[plugin.current]}
             onMouseEnter={plugin.current.stop}
             onMouseLeave={plugin.current.reset}
             className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
-            // Ensure carousel re-renders if the number of items changes significantly due to filtering
             key={displayedArticles.map(a => a.id).join('-') + '-' + sortOption + '-' + filterType + '-' + searchTerm} 
           >
             <CarouselContent className="-ml-4">
@@ -168,9 +168,9 @@ export default function ContentSection() {
                       </CardContent>
                       <CardFooter className="p-6 pt-0">
                         <Button variant="link" className="text-accent p-0 h-auto" asChild>
-                          <a href={article.link}>
+                          <Link href={`/insights/${article.id}`}>
                             Read More <ArrowRight className="ml-1 h-4 w-4" />
-                          </a>
+                          </Link>
                         </Button>
                       </CardFooter>
                     </Card>
@@ -178,8 +178,8 @@ export default function ContentSection() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            {displayedArticles.length > 2 && <CarouselPrevious className="hidden sm:flex" />}
-            {displayedArticles.length > 2 && <CarouselNext className="hidden sm:flex" />}
+            {displayedArticles.length > (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : (window.innerWidth < 1024 ? 2 : 3)) && <CarouselPrevious className="hidden sm:flex" />}
+            {displayedArticles.length > (typeof window !== 'undefined' && window.innerWidth < 768 ? 1 : (window.innerWidth < 1024 ? 2 : 3)) && <CarouselNext className="hidden sm:flex" />}
           </Carousel>
         ) : (
           <div className="text-center py-10 text-muted-foreground">
@@ -203,4 +203,3 @@ export default function ContentSection() {
     </section>
   );
 }
-

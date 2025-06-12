@@ -10,8 +10,9 @@ import TestimonialsSection from '@/components/sections/testimonials-section';
 import PartnersSection from '@/components/sections/partners-section';
 import BookingSection from '@/components/sections/booking-section';
 import ContactSection from '@/components/sections/contact-section';
+import FaqSection from '@/components/sections/faq-section';
 import AnimatedSection from '@/components/layout/animated-section';
-import { articlesData, partnersData, testimonialsData } from '@/lib/data';
+import { articlesData, partnersData, testimonialsData, faqData } from '@/lib/data';
 
 export default function HomePage() {
   return (
@@ -47,6 +48,12 @@ export default function HomePage() {
         {partnersData.length > 0 && (
           <AnimatedSection delay="delay-100">
             <PartnersSection />
+          </AnimatedSection>
+        )}
+
+        {faqData.length > 0 && (
+          <AnimatedSection delay="delay-100">
+            <FaqSection />
           </AnimatedSection>
         )}
         
