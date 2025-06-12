@@ -1,13 +1,16 @@
 
 import Image from 'next/image';
 import { Handshake } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 const partners = [
-  { name: 'SecureBank', logo: 'https://placehold.co/150x60.png', dataAiHint: 'bank logo' },
-  { name: 'RealtyPros', logo: 'https://placehold.co/150x60.png', dataAiHint: 'estate logo' },
-  { name: 'LegalEase', logo: 'https://placehold.co/150x60.png', dataAiHint: 'law logo' },
-  { name: 'InspectWell', logo: 'https://placehold.co/150x60.png', dataAiHint: 'inspection logo' },
-  { name: 'BuildRight Homes', logo: 'https://placehold.co/150x60.png', dataAiHint: 'builder logo' },
+  { name: 'SecureBank', logo: 'https://placehold.co/150x60.png?text=SecureBank&font=sans-serif', dataAiHint: 'bank logo' },
+  { name: 'RealtyPros', logo: 'https://placehold.co/150x60.png?text=RealtyPros&font=sans-serif', dataAiHint: 'estate logo' },
+  { name: 'LegalEase', logo: 'https://placehold.co/150x60.png?text=LegalEase&font=sans-serif', dataAiHint: 'law logo' },
+  { name: 'InspectWell', logo: 'https://placehold.co/150x60.png?text=InspectWell&font=sans-serif', dataAiHint: 'inspection logo' },
+  { name: 'BuildRight Homes', logo: 'https://placehold.co/150x60.png?text=BuildRight&font=sans-serif', dataAiHint: 'builder logo' },
+  { name: 'FinanceGrowth', logo: 'https://placehold.co/150x60.png?text=FinanceGrowth&font=sans-serif', dataAiHint: 'finance logo' },
+  { name: 'CapitalTrust', logo: 'https://placehold.co/150x60.png?text=CapitalTrust&font=sans-serif', dataAiHint: 'investment logo' },
 ];
 
 export default function PartnersSection() {
@@ -24,20 +27,34 @@ export default function PartnersSection() {
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-8">
-          {partners.map((partner) => (
-            <div key={partner.name} className="opacity-70 hover:opacity-100 transition-opacity duration-300">
-              <Image 
-                src={partner.logo} 
-                alt={partner.name} 
-                width={150} 
-                height={60} 
-                objectFit="contain"
-                data-ai-hint={partner.dataAiHint}
-              />
-            </div>
-          ))}
-        </div>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full max-w-4xl mx-auto"
+        >
+          <CarouselContent className="-ml-2 md:-ml-4">
+            {partners.map((partner) => (
+              <CarouselItem key={partner.name} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 pl-2 md:pl-4">
+                <div className="p-1">
+                  <div className="flex items-center justify-center h-24 p-2 bg-background rounded-lg shadow-md opacity-70 hover:opacity-100 transition-opacity duration-300">
+                    <Image 
+                      src={partner.logo} 
+                      alt={partner.name} 
+                      width={150} 
+                      height={60} 
+                      objectFit="contain"
+                      data-ai-hint={partner.dataAiHint}
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="left-[-50px] sm:left-[-60px]" />
+          <CarouselNext className="right-[-50px] sm:right-[-60px]" />
+        </Carousel>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Star, Quote } from 'lucide-react';
 
 const testimonials = [
@@ -28,6 +29,14 @@ const testimonials = [
     quote: "We were nervous about selling our old home and buying a new one simultaneously. The team at MaxWealth PS streamlined the financial process and gave us peace of mind.",
     rating: 5,
   },
+  {
+    name: 'Emily K.',
+    role: 'Refinancing Client',
+    image: 'https://placehold.co/100x100.png',
+    dataAiHint: 'person thinking',
+    quote: "Refinancing seemed complicated, but MaxWealth PS made it simple and saved me a significant amount on my monthly payments. Highly recommend their services!",
+    rating: 5,
+  }
 ];
 
 export default function TestimonialsSection() {
@@ -41,30 +50,44 @@ export default function TestimonialsSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardContent className="p-6 flex-grow flex flex-col items-center text-center">
-                <Quote className="w-10 h-10 text-accent mb-4 transform rotate-180" />
-                <p className="text-muted-foreground font-body mb-6 italic flex-grow">"{testimonial.quote}"</p>
-                <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
-                  <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
-                  <AvatarFallback>{testimonial.name.substring(0, 1)}</AvatarFallback>
-                </Avatar>
-                <h4 className="font-headline text-lg font-semibold text-primary">{testimonial.name}</h4>
-                <p className="text-sm text-accent mb-2">{testimonial.role}</p>
-                <div className="flex justify-center">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                  {[...Array(5 - testimonial.rating)].map((_, i) => (
-                    <Star key={i + testimonial.rating} className="w-5 h-5 text-yellow-400" />
-                  ))}
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full max-w-xl mx-auto"
+        >
+          <CarouselContent>
+            {testimonials.map((testimonial, index) => (
+              <CarouselItem key={index} className="md:basis-1/1">
+                <div className="p-1">
+                  <Card className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+                    <CardContent className="p-6 flex-grow flex flex-col items-center text-center">
+                      <Quote className="w-10 h-10 text-accent mb-4 transform rotate-180" />
+                      <p className="text-muted-foreground font-body mb-6 italic flex-grow">"{testimonial.quote}"</p>
+                      <Avatar className="w-20 h-20 mb-4 border-2 border-primary">
+                        <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
+                        <AvatarFallback>{testimonial.name.substring(0, 1)}</AvatarFallback>
+                      </Avatar>
+                      <h4 className="font-headline text-lg font-semibold text-primary">{testimonial.name}</h4>
+                      <p className="text-sm text-accent mb-2">{testimonial.role}</p>
+                      <div className="flex justify-center">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                        ))}
+                        {[...Array(5 - testimonial.rating)].map((_, i) => (
+                          <Star key={i + testimonial.rating} className="w-5 h-5 text-yellow-400" />
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious />
+          <CarouselNext />
+        </Carousel>
       </div>
     </section>
   );
