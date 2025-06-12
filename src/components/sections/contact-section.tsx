@@ -163,14 +163,14 @@ export default function ContactSection() {
                   <Mail className="h-6 w-6 text-accent" />
                   <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors">info@maxwealthps.com</a>
                 </div>
-                <div className="relative aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md">
-                  <Image 
-                    src="https://placehold.co/800x450.png" 
-                    alt="Map showing office location" 
-                    width={800} 
-                    height={450} 
-                    className="object-cover"
-                    data-ai-hint="city map" 
+                <div className="relative rounded-lg overflow-hidden shadow-md">
+                  <Image
+                    src="https://placehold.co/800x600.png"
+                    alt="Map showing office location"
+                    width={800}
+                    height={600}
+                    className="w-full object-cover"
+                    data-ai-hint="city map"
                   />
                 </div>
               </CardContent>
