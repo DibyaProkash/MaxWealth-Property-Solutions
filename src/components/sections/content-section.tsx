@@ -137,7 +137,7 @@ export default function ContentSection() {
           </p>
         </div>
 
-        <div className="mb-10"> 
+        <div className="mb-10">
             <div className="flex flex-col items-center gap-6 md:flex-row md:justify-center md:gap-8">
                 {/* Filter Controls Div */}
                 <div className="flex flex-col sm:flex-row items-center gap-4">
@@ -148,7 +148,7 @@ export default function ContentSection() {
                         id="filterType"
                         value={filterType}
                         onValueChange={(value: string) => setFilterType(value as FilterType)}
-                        className="flex flex-wrap gap-x-4 gap-y-2"
+                        className="flex flex-wrap gap-x-4 gap-y-2 justify-center"
                     >
                         {(['all', 'Blog', 'Vlog'] as FilterType[]).map((type) => (
                         <div key={type} className="flex items-center space-x-2">
@@ -181,7 +181,7 @@ export default function ContentSection() {
           <Carousel
             opts={{
               align: "start",
-              loop: displayedArticles.length > 2, 
+              loop: true, // Changed from displayedArticles.length > 2
             }}
             plugins={[plugin.current]}
             onMouseEnter={plugin.current.stop}
