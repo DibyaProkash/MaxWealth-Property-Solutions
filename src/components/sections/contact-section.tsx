@@ -63,7 +63,7 @@ export default function ContactSection() {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Card 1: Send Us a Message */}
-          <Card className="shadow-lg">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="font-headline text-2xl text-primary">Send Us a Message</CardTitle>
               <CardDescription>Fill out the form below and we'll respond as soon as possible.</CardDescription>
@@ -152,13 +152,13 @@ export default function ContactSection() {
                 <Mail className="h-6 w-6 text-accent" />
                 <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors">info@maxwealthps.com</a>
               </div>
-              <div className="relative rounded-lg overflow-hidden shadow-md">
+              <div className="relative rounded-lg overflow-hidden shadow-md aspect-video">
                 <Image
                   src="https://placehold.co/800x600.png"
                   alt="Map showing office location"
-                  width={800}
-                  height={600}
-                  className="w-full object-cover"
+                  layout="fill"
+                  objectFit="cover"
+                  className="w-full h-full"
                   data-ai-hint="city map"
                 />
               </div>

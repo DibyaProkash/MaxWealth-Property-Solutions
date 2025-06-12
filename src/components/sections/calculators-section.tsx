@@ -78,7 +78,7 @@ export default function CalculatorsSection() {
               Explore Our AI-Powered Tools
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="shadow-lg flex flex-col">
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
                   <div className="p-2 bg-primary/10 rounded-md">
                     <FileText className="h-6 w-6 text-primary" />
@@ -95,7 +95,7 @@ export default function CalculatorsSection() {
                 </div>
               </Card>
 
-              <Card className="shadow-lg flex flex-col">
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
                   <div className="p-2 bg-primary/10 rounded-md">
                    <BrainCircuit className="h-6 w-6 text-primary" />
@@ -112,7 +112,7 @@ export default function CalculatorsSection() {
                 </div>
               </Card>
 
-              <Card className="shadow-lg flex flex-col">
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
                    <div className="p-2 bg-primary/10 rounded-md">
                       <TrendingUp className="h-6 w-6 text-primary" />

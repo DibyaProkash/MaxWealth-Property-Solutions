@@ -147,17 +147,17 @@ export default function RoadmapSection() {
               key={step.id} 
               className={cn(
                 "shadow-lg transition-all duration-300 flex flex-col group",
-                step.completed ? "bg-card/70 border-primary/40" : "bg-card hover:shadow-primary/20 hover:shadow-md"
+                step.completed ? "bg-card/70 border-primary/40" : "bg-card hover:shadow-xl"
               )}
             >
               <CardHeader className="flex flex-row items-start space-x-4 pb-3">
-                <div className={cn("p-2.5 rounded-lg", step.completed ? "bg-accent/70" : "bg-accent/20 group-hover:bg-accent/30")}>
+                <div className={cn("p-2.5 rounded-lg", step.completed ? "bg-accent/70" : "bg-accent/20 group-hover:bg-accent/30 transition-colors")}>
                   <step.icon className={cn("h-7 w-7", step.completed ? "text-accent-foreground/80" : "text-accent")} />
                 </div>
                 <div className="flex-1">
                   <CardTitle className={cn(
                     "font-headline text-xl", 
-                    step.completed ? "text-primary/70 line-through" : "text-primary group-hover:text-primary/90"
+                    step.completed ? "text-primary/70 line-through" : "text-primary group-hover:text-primary/90 transition-colors"
                   )}>
                     {index + 1}. {step.title}
                   </CardTitle>
@@ -178,7 +178,7 @@ export default function RoadmapSection() {
               <div className="px-6 pb-5 pt-0 mt-auto">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" size="sm" className="w-full text-xs hover:bg-primary/5 hover:border-primary/30">
+                      <Button variant="outline" size="sm" className="w-full text-xs hover:bg-primary/5 hover:border-primary/30 transition-colors">
                         <Lightbulb className="mr-2 h-4 w-4 text-primary/70" /> Get AI Tip (Concept)
                       </Button>
                     </DialogTrigger>
@@ -210,6 +210,3 @@ export default function RoadmapSection() {
     </section>
   );
 }
-    
-
-    

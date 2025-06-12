@@ -30,9 +30,9 @@ export default function BookingSection() {
                 <p className="text-muted-foreground mb-4 text-sm">
                   This is where you can embed your live scheduling tool (e.g., Calendly, SavvyCal). Simply paste the embed code provided by your calendar service here.
                 </p>
-                <div className="border-2 border-dashed border-border p-4 rounded-md bg-muted/20">
+                <div className="border-2 border-dashed border-border p-6 rounded-md bg-muted/20 min-h-[100px] flex items-center justify-center">
                     <p className="text-xs text-muted-foreground">
-                        Example: &lt;iframe src="your-calendly-embed-url"&gt;&lt;/iframe&gt;
+                        Example: &lt;iframe src="your-calendar-embed-url"&gt;&lt;/iframe&gt;
                     </p>
                 </div>
                 <p className="text-xs text-muted-foreground mt-4">
