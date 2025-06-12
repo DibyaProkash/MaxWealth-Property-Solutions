@@ -1,8 +1,7 @@
 
 import { Button } from '@/components/ui/button';
-import { CalendarDays, ArrowRight } from 'lucide-react';
+import { CalendarDays, ArrowRight, CalendarCheck2 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
 
 export default function BookingSection() {
   return (
@@ -24,23 +23,21 @@ export default function BookingSection() {
                 </a>
               </Button>
             </div>
-            <div className="hidden md:block relative h-full min-h-[300px] md:min-h-[400px]">
-              <Image 
-                src="https://placehold.co/800x600.png" 
-                alt="Financial planning session" 
-                layout="fill"
-                objectFit="cover"
-                className="w-full h-full"
-                data-ai-hint="finance meeting" 
-              />
-               <div className="absolute inset-0 bg-black/30"></div>
-               <div className="absolute inset-0 flex items-center justify-center p-8">
-                <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-2xl text-center">
-                  <p className="font-headline text-xl text-primary font-semibold">Live Calendar Coming Soon!</p>
-                  <p className="text-sm text-foreground/80 mt-2">
-                    For now, please use our contact form to schedule an appointment.
-                  </p>
+            <div className="hidden md:flex flex-col items-center justify-center bg-background/10 p-8 md:p-12 min-h-[300px] md:min-h-[450px]">
+              <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg shadow-2xl text-center text-foreground w-full max-w-md">
+                <CalendarCheck2 className="h-16 w-16 text-primary mx-auto mb-6" />
+                <h3 className="font-headline text-2xl text-primary font-semibold mb-3">Integrate Your Live Calendar</h3>
+                <p className="text-muted-foreground mb-4 text-sm">
+                  This is where you can embed your live scheduling tool (e.g., Calendly, SavvyCal). Simply paste the embed code provided by your calendar service here.
+                </p>
+                <div className="border-2 border-dashed border-border p-4 rounded-md bg-muted/20">
+                    <p className="text-xs text-muted-foreground">
+                        Example: &lt;iframe src="your-calendly-embed-url"&gt;&lt;/iframe&gt;
+                    </p>
                 </div>
+                <p className="text-xs text-muted-foreground mt-4">
+                  Until then, the "Book Your Appointment" button (on the left) directs users to the contact form.
+                </p>
               </div>
             </div>
           </div>
