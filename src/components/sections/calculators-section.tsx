@@ -295,12 +295,12 @@ export default function CalculatorsSection() {
                   </div>
                   <Badge variant="outline" className="border-destructive text-destructive">BETA</Badge>
                 </CardHeader>
-                <CardContent className="space-y-3 flex-grow">
-                  <CardDescription className="mb-3">
+                <CardContent className="space-y-3 flex-grow flex flex-col">
+                  <CardDescription className="mb-3 flex-shrink-0">
                     Upload a PDF document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.
                   </CardDescription>
                   
-                  <div className="space-y-1.5">
+                  <div className="space-y-1.5 flex-shrink-0">
                     <div className="flex items-center gap-2">
                       <Button asChild variant="outline" size="sm" className="flex-grow justify-start text-muted-foreground hover:text-primary">
                         <label htmlFor="pdf-upload" className="cursor-pointer flex items-center gap-2">
@@ -328,19 +328,22 @@ export default function CalculatorsSection() {
                     </div>
                   </div>
                   {selectedFile && !isProcessingPdf && !pdfProcessingError && !extractedPdfText && (
-                    <p className="text-xs text-primary/80">File selected. Click "Analyze" to process.</p>
+                    <p className="text-xs text-primary/80 flex-shrink-0">File selected. Click "Analyze" to process.</p>
                   )}
-                  {isProcessingPdf && <p className="text-xs text-primary flex items-center"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing PDF...</p>}
+                  {isProcessingPdf && <p className="text-xs text-primary flex items-center flex-shrink-0"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing PDF...</p>}
                   {pdfProcessingError && (
-                    <p className="text-xs text-destructive">{pdfProcessingError}</p>
+                    <p className="text-xs text-destructive flex-shrink-0">{pdfProcessingError}</p>
                   )}
-                  {analysisResult && (
-                    <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
-                      <pre className="whitespace-pre-wrap break-words font-body">{analysisResult}</pre>
-                    </ScrollArea>
-                  )}
+                  
+                  <div className="flex-grow mt-auto">
+                    {analysisResult && (
+                      <ScrollArea className="h-32 rounded-md border p-3 bg-muted/30 text-sm">
+                        <pre className="whitespace-pre-wrap break-words font-body">{analysisResult}</pre>
+                      </ScrollArea>
+                    )}
+                  </div>
                 </CardContent>
-                <div className="p-6 pt-0">
+                <div className="p-6 pt-0 mt-auto">
                   <Button 
                     onClick={handleAnalyzeDocument} 
                     disabled={isAnalyzing || isProcessingPdf || !extractedPdfText || !!pdfProcessingError} 
@@ -363,8 +366,8 @@ export default function CalculatorsSection() {
                   </div>
                   <Badge variant="outline" className="border-destructive text-destructive">BETA</Badge>
                 </CardHeader>
-                <CardContent className="space-y-3 flex-grow">
-                  <CardDescription className="mb-3">
+                <CardContent className="space-y-3 flex-grow flex flex-col">
+                  <CardDescription className="mb-3 flex-shrink-0">
                     Describe your financial situation and goals to receive an AI-generated basic financial plan with actionable next steps.
                   </CardDescription>
                   
@@ -373,16 +376,18 @@ export default function CalculatorsSection() {
                     value={financialSituation}
                     onChange={(e) => setFinancialSituation(e.target.value)}
                     rows={6}
-                    className="bg-background/70"
+                    className="bg-background/70 flex-shrink-0"
                     disabled={isGeneratingPlan}
                   />
-                  {financialPlan && (
-                    <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
-                      <pre className="whitespace-pre-wrap break-words font-body">{financialPlan}</pre>
-                    </ScrollArea>
-                  )}
+                  <div className="flex-grow mt-auto">
+                    {financialPlan && (
+                      <ScrollArea className="h-32 rounded-md border p-3 bg-muted/30 text-sm">
+                        <pre className="whitespace-pre-wrap break-words font-body">{financialPlan}</pre>
+                      </ScrollArea>
+                    )}
+                  </div>
                 </CardContent>
-                <div className="p-6 pt-0">
+                <div className="p-6 pt-0 mt-auto">
                   <Button onClick={handleGeneratePlan} disabled={isGeneratingPlan || !financialSituation.trim()} className="w-full">
                     {isGeneratingPlan ? <Loader2 className="animate-spin" /> : <UserCheck className="mr-2 h-4 w-4" />}
                     Generate My Basic Plan
@@ -401,24 +406,26 @@ export default function CalculatorsSection() {
                   </div>
                   <Badge variant="outline" className="border-destructive text-destructive">BETA</Badge>
                 </CardHeader>
-                <CardContent className="space-y-3 flex-grow">
-                  <CardDescription className="mb-3">
+                <CardContent className="space-y-3 flex-grow flex flex-col">
+                  <CardDescription className="mb-3 flex-shrink-0">
                     Get a (simulated) AI-powered summary of current general real estate market trends to help inform your decisions.
                   </CardDescription>
                   
-                  {marketTrendSummary && (
-                    <ScrollArea className="mt-3 h-48 rounded-md border p-3 bg-muted/30 text-sm">
-                        <pre className="whitespace-pre-wrap break-words font-body">{marketTrendSummary}</pre>
-                    </ScrollArea>
-                  )}
-                  {!marketTrendSummary && !isFetchingTrends && (
-                    <div className="flex flex-col items-center justify-center h-full text-muted-foreground p-4 text-center">
-                        <BarChart3 className="w-12 h-12 mb-2 opacity-50" />
-                        <p className="text-sm">Click the button below to load simulated market trends.</p>
-                    </div>
-                  )}
+                  <div className="flex-grow mt-auto">
+                    {marketTrendSummary && (
+                      <ScrollArea className="h-48 rounded-md border p-3 bg-muted/30 text-sm">
+                          <pre className="whitespace-pre-wrap break-words font-body">{marketTrendSummary}</pre>
+                      </ScrollArea>
+                    )}
+                    {!marketTrendSummary && !isFetchingTrends && (
+                      <div className="flex flex-col items-center justify-center h-full text-muted-foreground p-4 text-center">
+                          <BarChart3 className="w-12 h-12 mb-2 opacity-50" />
+                          <p className="text-sm">Click the button below to load simulated market trends.</p>
+                      </div>
+                    )}
+                  </div>
                 </CardContent>
-                <div className="p-6 pt-0">
+                <div className="p-6 pt-0 mt-auto">
                 <Button onClick={handleFetchTrends} disabled={isFetchingTrends} className="w-full">
                     {isFetchingTrends ? <Loader2 className="animate-spin" /> : <BarChart3 className="mr-2 h-4 w-4" />}
                     Get Simulated Trends
