@@ -5,17 +5,10 @@
 
 body {
   font-family: var(--font-body), sans-serif;
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+  /* Removed user-select properties */
 }
 
-.allow-interaction,
-.allow-interaction * { /* Apply to children as well if event target is nested */
-  -webkit-user-select: text !important; /* Safari */
-  -ms-user-select: text !important; /* IE 10 and IE 11 */
-  user-select: text !important; /* Standard syntax */
-}
+/* Removed .allow-interaction class */
 
 
 @layer base {

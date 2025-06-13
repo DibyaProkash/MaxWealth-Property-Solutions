@@ -7,8 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import ScrollToTopButton from '@/components/layout/scroll-to-top-button';
 import LoadingIndicator from '@/components/layout/loading-indicator';
 import { AuthProvider } from '@/contexts/auth-context';
-import GlobalEventListeners from '@/components/layout/global-event-listeners'; // Import the new component
-// Removed React and useEffect import as it's no longer directly used here for event listeners
+// Removed import for GlobalEventListeners as the component is being removed
 
 export const metadata: Metadata = {
   title: 'MaxWealth PS',
@@ -20,7 +19,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // The useEffect for copy/cut/contextmenu has been moved to GlobalEventListeners component
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -39,7 +37,7 @@ export default function RootLayout({
         >
           <AuthProvider>
             <LoadingIndicator>
-              <GlobalEventListeners /> {/* Add the new client component here */}
+              {/* Removed GlobalEventListeners component */}
               {children}
               <Toaster />
               <ScrollToTopButton />
