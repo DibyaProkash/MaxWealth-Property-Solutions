@@ -18,7 +18,7 @@ import { generateFinancialPlan, type PersonalizedFinancialPlanInput, type Person
 import { summarizeMarketTrends, type MarketTrendSummarizerInput, type MarketTrendSummarizerOutput } from "@/ai/flows/market-trend-summarizer-flow";
 import { useAuth } from '@/contexts/auth-context';
 
-import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, Lock, Star } from "lucide-react";
+import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, Lock } from "lucide-react";
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 
 // Dynamically import pdfjs-dist only on the client-side
@@ -239,171 +239,145 @@ export default function CalculatorsSection() {
       </Card>
     );
   } else {
-    // SIMULATED PREMIUM CHECK - In a real app, this would involve checking user roles/subscriptions from a backend.
-    const isPremiumUser = user.email === 'premium@example.com';
-
-    if (isPremiumUser) {
-      aiToolsSectionContent = (
-        <>
-          <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-8 text-center">
-            Explore Our AI-Powered Tools
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* AI Document Analyzer Card */}
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-              <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                <div className="p-2 bg-primary/10 rounded-md">
-                  <FileText className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="font-headline text-lg text-primary">AI Document Analyzer</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 flex-grow">
-                <CardDescription className="mb-3">
-                  Upload a PDF document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.
-                </CardDescription>
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2">
-                    <Button asChild variant="outline" size="sm" className="flex-grow justify-start text-muted-foreground hover:text-primary">
-                      <label htmlFor="pdf-upload" className="cursor-pointer flex items-center gap-2">
-                        <UploadCloud className="h-5 w-5" />
-                        {selectedFile ? `Selected: ${selectedFile.name.substring(0,15)}${selectedFile.name.length > 15 ? '...' : ''}` : "Upload PDF"}
-                      </label>
+    // AI tools are available for any logged-in user
+    aiToolsSectionContent = (
+      <>
+        <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-8 text-center">
+          Explore Our AI-Powered Tools
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* AI Document Analyzer Card */}
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+              <div className="p-2 bg-primary/10 rounded-md">
+                <FileText className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle className="font-headline text-lg text-primary">AI Document Analyzer</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 flex-grow">
+              <CardDescription className="mb-3">
+                Upload a PDF document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.
+              </CardDescription>
+              <div className="space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <Button asChild variant="outline" size="sm" className="flex-grow justify-start text-muted-foreground hover:text-primary">
+                    <label htmlFor="pdf-upload" className="cursor-pointer flex items-center gap-2">
+                      <UploadCloud className="h-5 w-5" />
+                      {selectedFile ? `Selected: ${selectedFile.name.substring(0,15)}${selectedFile.name.length > 15 ? '...' : ''}` : "Upload PDF"}
+                    </label>
+                  </Button>
+                  {selectedFile && (
+                    <Button variant="ghost" size="icon" onClick={handleRemovePdf} aria-label="Remove PDF" className="text-destructive hover:bg-destructive/10">
+                      <XCircle className="h-5 w-5" />
                     </Button>
-                    {selectedFile && (
-                      <Button variant="ghost" size="icon" onClick={handleRemovePdf} aria-label="Remove PDF" className="text-destructive hover:bg-destructive/10">
-                        <XCircle className="h-5 w-5" />
-                      </Button>
-                    )}
-                  </div>
-                  <ShadcnInput 
-                    id="pdf-upload"
-                    ref={fileInputRef}
-                    type="file" 
-                    accept=".pdf" 
-                    onChange={handleFileChange} 
-                    className="hidden" 
-                    disabled={isProcessingPdf || isAnalyzing}
-                  />
-                   <div className="text-xs text-muted-foreground">
-                      For example: loan estimates, disclosures, etc. Max 5MB.
-                   </div>
+                  )}
                 </div>
-                {selectedFile && !isProcessingPdf && !pdfProcessingError && !extractedPdfText && (
-                  <p className="text-xs text-primary/80">File selected. Click "Analyze" to process.</p>
-                )}
-                {isProcessingPdf && <p className="text-xs text-primary flex items-center"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing PDF...</p>}
-                {pdfProcessingError && (
-                  <p className="text-xs text-destructive">{pdfProcessingError}</p>
-                )}
-                {analysisResult && (
-                  <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
-                    <pre className="whitespace-pre-wrap break-words font-body">{analysisResult}</pre>
-                  </ScrollArea>
-                )}
-              </CardContent>
-              <div className="p-6 pt-0">
-                <Button 
-                  onClick={handleAnalyzeDocument} 
-                  disabled={isAnalyzing || isProcessingPdf || !extractedPdfText || !!pdfProcessingError} 
-                  className="w-full"
-                >
-                  {isAnalyzing ? <Loader2 className="animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
-                  Analyze Document
-                </Button>
-              </div>
-            </Card>
-
-            {/* Personalized Financial Plan AI Card */}
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-              <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                <div className="p-2 bg-primary/10 rounded-md">
-                 <BrainCircuit className="h-6 w-6 text-primary" />
-                </div>
-                <CardTitle className="font-headline text-lg text-primary">Personalized Financial Plan AI</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 flex-grow">
-                <CardDescription className="mb-3">
-                  Describe your financial situation and goals to receive an AI-generated basic financial plan with actionable next steps.
-                </CardDescription>
-                 <Textarea
-                  placeholder="E.g., Stable income, $10k saved, some student debt. Goal: buy first home in 1-2 years..."
-                  value={financialSituation}
-                  onChange={(e) => setFinancialSituation(e.target.value)}
-                  rows={6}
-                  className="bg-background/70"
-                  disabled={isGeneratingPlan}
+                <ShadcnInput 
+                  id="pdf-upload"
+                  ref={fileInputRef}
+                  type="file" 
+                  accept=".pdf" 
+                  onChange={handleFileChange} 
+                  className="hidden" 
+                  disabled={isProcessingPdf || isAnalyzing}
                 />
-                {financialPlan && (
-                  <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
-                    <pre className="whitespace-pre-wrap break-words font-body">{financialPlan}</pre>
-                  </ScrollArea>
-                )}
-              </CardContent>
-              <div className="p-6 pt-0">
-                <Button onClick={handleGeneratePlan} disabled={isGeneratingPlan || !financialSituation.trim()} className="w-full">
-                   {isGeneratingPlan ? <Loader2 className="animate-spin" /> : <UserCheck className="mr-2 h-4 w-4" />}
-                  Generate My Basic Plan
-                </Button>
-              </div>
-            </Card>
-
-            {/* AI Market Trend Summarizer Card */}
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-              <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
-                 <div className="p-2 bg-primary/10 rounded-md">
-                    <TrendingUp className="h-6 w-6 text-primary" />
+                 <div className="text-xs text-muted-foreground">
+                    For example: loan estimates, disclosures, etc. Max 5MB.
                  </div>
-                <CardTitle className="font-headline text-lg text-primary">AI Market Trend Summarizer</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 flex-grow">
-                <CardDescription className="mb-3">
-                  Get a (simulated) AI-powered summary of current general real estate market trends to help inform your decisions.
-                </CardDescription>
-                {marketTrendSummary && (
-                   <ScrollArea className="mt-3 h-48 rounded-md border p-3 bg-muted/30 text-sm">
-                      <pre className="whitespace-pre-wrap break-words font-body">{marketTrendSummary}</pre>
-                   </ScrollArea>
-                )}
-                 {!marketTrendSummary && !isFetchingTrends && (
-                  <div className="flex flex-col items-center justify-center h-full text-muted-foreground p-4 text-center">
-                      <BarChart3 className="w-12 h-12 mb-2 opacity-50" />
-                      <p className="text-sm">Click the button below to load simulated market trends.</p>
-                  </div>
-                )}
-              </CardContent>
-              <div className="p-6 pt-0">
-               <Button onClick={handleFetchTrends} disabled={isFetchingTrends} className="w-full">
-                  {isFetchingTrends ? <Loader2 className="animate-spin" /> : <BarChart3 className="mr-2 h-4 w-4" />}
-                  Get Simulated Trends
-               </Button>
               </div>
-            </Card>
-          </div>
-        </>
-      );
-    } else {
-      aiToolsSectionContent = (
-        <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 text-center py-10 mt-8">
-          <CardHeader>
-            <div className="mx-auto p-3 bg-accent/10 rounded-full mb-4 inline-block">
-              <Star className="h-10 w-10 text-accent" />
+              {selectedFile && !isProcessingPdf && !pdfProcessingError && !extractedPdfText && (
+                <p className="text-xs text-primary/80">File selected. Click "Analyze" to process.</p>
+              )}
+              {isProcessingPdf && <p className="text-xs text-primary flex items-center"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing PDF...</p>}
+              {pdfProcessingError && (
+                <p className="text-xs text-destructive">{pdfProcessingError}</p>
+              )}
+              {analysisResult && (
+                <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
+                  <pre className="whitespace-pre-wrap break-words font-body">{analysisResult}</pre>
+                </ScrollArea>
+              )}
+            </CardContent>
+            <div className="p-6 pt-0">
+              <Button 
+                onClick={handleAnalyzeDocument} 
+                disabled={isAnalyzing || isProcessingPdf || !extractedPdfText || !!pdfProcessingError} 
+                className="w-full"
+              >
+                {isAnalyzing ? <Loader2 className="animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
+                Analyze Document
+              </Button>
             </div>
-            <CardTitle className="font-headline text-2xl text-accent">Upgrade to Premium</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-lg text-muted-foreground mb-6">
-              Our advanced AI-powered tools are available for premium users. Upgrade your account to unlock personalized financial insights and analysis.
-            </p>
-            <Button variant="default" size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <Link href="#contact">Explore Premium Options</Link>
-            </Button>
-            <p className="text-xs text-muted-foreground mt-4">
-              (For demonstration, log in with email: <code className="bg-muted px-1 py-0.5 rounded">premium@example.com</code> to see AI tools)
-            </p>
-          </CardContent>
-        </Card>
-      );
-    }
+          </Card>
+
+          {/* Personalized Financial Plan AI Card */}
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+              <div className="p-2 bg-primary/10 rounded-md">
+               <BrainCircuit className="h-6 w-6 text-primary" />
+              </div>
+              <CardTitle className="font-headline text-lg text-primary">Personalized Financial Plan AI</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 flex-grow">
+              <CardDescription className="mb-3">
+                Describe your financial situation and goals to receive an AI-generated basic financial plan with actionable next steps.
+              </CardDescription>
+               <Textarea
+                placeholder="E.g., Stable income, $10k saved, some student debt. Goal: buy first home in 1-2 years..."
+                value={financialSituation}
+                onChange={(e) => setFinancialSituation(e.target.value)}
+                rows={6}
+                className="bg-background/70"
+                disabled={isGeneratingPlan}
+              />
+              {financialPlan && (
+                <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
+                  <pre className="whitespace-pre-wrap break-words font-body">{financialPlan}</pre>
+                </ScrollArea>
+              )}
+            </CardContent>
+            <div className="p-6 pt-0">
+              <Button onClick={handleGeneratePlan} disabled={isGeneratingPlan || !financialSituation.trim()} className="w-full">
+                 {isGeneratingPlan ? <Loader2 className="animate-spin" /> : <UserCheck className="mr-2 h-4 w-4" />}
+                Generate My Basic Plan
+              </Button>
+            </div>
+          </Card>
+
+          {/* AI Market Trend Summarizer Card */}
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
+            <CardHeader className="flex flex-row items-center gap-4 space-y-0 pb-2">
+               <div className="p-2 bg-primary/10 rounded-md">
+                  <TrendingUp className="h-6 w-6 text-primary" />
+               </div>
+              <CardTitle className="font-headline text-lg text-primary">AI Market Trend Summarizer</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3 flex-grow">
+              <CardDescription className="mb-3">
+                Get a (simulated) AI-powered summary of current general real estate market trends to help inform your decisions.
+              </CardDescription>
+              {marketTrendSummary && (
+                 <ScrollArea className="mt-3 h-48 rounded-md border p-3 bg-muted/30 text-sm">
+                    <pre className="whitespace-pre-wrap break-words font-body">{marketTrendSummary}</pre>
+                 </ScrollArea>
+              )}
+               {!marketTrendSummary && !isFetchingTrends && (
+                <div className="flex flex-col items-center justify-center h-full text-muted-foreground p-4 text-center">
+                    <BarChart3 className="w-12 h-12 mb-2 opacity-50" />
+                    <p className="text-sm">Click the button below to load simulated market trends.</p>
+                </div>
+              )}
+            </CardContent>
+            <div className="p-6 pt-0">
+             <Button onClick={handleFetchTrends} disabled={isFetchingTrends} className="w-full">
+                {isFetchingTrends ? <Loader2 className="animate-spin" /> : <BarChart3 className="mr-2 h-4 w-4" />}
+                Get Simulated Trends
+             </Button>
+            </div>
+          </Card>
+        </div>
+      </>
+    );
   }
 
 
