@@ -142,15 +142,15 @@ export default function ContactSection() {
             <CardContent className="space-y-4">
               <div className="flex items-center space-x-3">
                 <MapPin className="h-6 w-6 text-accent" />
-                <p className="text-muted-foreground">123 Finance Avenue, Suite 400, Prosperity City, FS 54321</p>
+                <p className="text-muted-foreground allow-interaction">123 Finance Avenue, Suite 400, Prosperity City, FS 54321</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-6 w-6 text-accent" />
-                <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">(123) 456-7890</a>
+                <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors allow-interaction">(123) 456-7890</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-6 w-6 text-accent" />
-                <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors">info@maxwealthps.com</a>
+                <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors allow-interaction">info@maxwealthps.com</a>
               </div>
               <div className="relative rounded-lg overflow-hidden shadow-md aspect-video">
                 <Image

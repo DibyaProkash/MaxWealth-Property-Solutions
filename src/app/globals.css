@@ -10,6 +10,14 @@ body {
   user-select: none; /* Standard syntax */
 }
 
+.allow-interaction,
+.allow-interaction * { /* Apply to children as well if event target is nested */
+  -webkit-user-select: text !important; /* Safari */
+  -ms-user-select: text !important; /* IE 10 and IE 11 */
+  user-select: text !important; /* Standard syntax */
+}
+
+
 @layer base {
   :root {
     --background: 210 20% 98%; /* Very Light Blue-White */

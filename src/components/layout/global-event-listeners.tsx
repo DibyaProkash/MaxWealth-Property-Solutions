@@ -5,27 +5,23 @@ import { useEffect } from 'react';
 
 export default function GlobalEventListeners() {
   useEffect(() => {
+    const checkAllowInteraction = (target: HTMLElement | null): boolean => {
+      if (!target) return false;
+      return target.tagName === 'INPUT' ||
+             target.tagName === 'TEXTAREA' ||
+             target.isContentEditable ||
+             !!target.closest('.allow-interaction');
+    };
+
     const handleContextMenu = (event: MouseEvent) => {
-      // Allow context menu on input fields, textareas, and contentEditable elements
-      const target = event.target as HTMLElement;
-      if (
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA' ||
-        target.isContentEditable
-      ) {
+      if (checkAllowInteraction(event.target as HTMLElement)) {
         return;
       }
       event.preventDefault();
     };
 
     const handleCopyCut = (event: ClipboardEvent) => {
-      // Allow copy/cut from input fields, textareas, and contentEditable elements
-      const target = event.target as HTMLElement;
-      if (
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA' ||
-        target.isContentEditable
-      ) {
+      if (checkAllowInteraction(event.target as HTMLElement)) {
         return;
       }
       event.preventDefault();
