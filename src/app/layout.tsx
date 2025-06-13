@@ -1,11 +1,14 @@
 
-import type {Metadata} from 'next';
+// Remove "use client" from here to allow metadata export
+import type {Metadata} from 'next'; // Keep this if you still have static metadata
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import ScrollToTopButton from '@/components/layout/scroll-to-top-button';
 import LoadingIndicator from '@/components/layout/loading-indicator';
 import { AuthProvider } from '@/contexts/auth-context';
+import GlobalEventListeners from '@/components/layout/global-event-listeners'; // Import the new component
+// Removed React and useEffect import as it's no longer directly used here for event listeners
 
 export const metadata: Metadata = {
   title: 'MaxWealth PS',
@@ -17,6 +20,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // The useEffect for copy/cut/contextmenu has been moved to GlobalEventListeners component
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -34,6 +39,7 @@ export default function RootLayout({
         >
           <AuthProvider>
             <LoadingIndicator>
+              <GlobalEventListeners /> {/* Add the new client component here */}
               {children}
               <Toaster />
               <ScrollToTopButton />
