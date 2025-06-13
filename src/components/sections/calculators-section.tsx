@@ -208,8 +208,8 @@ export default function CalculatorsSection() {
   };
 
   const BetaDisclaimer = () => (
-    <div className="mt-6 p-3 bg-accent/20 border border-accent/40 rounded-md text-sm text-accent-foreground/90 flex items-start">
-      <AlertTriangle className="h-4 w-4 mr-2.5 mt-0.5 flex-shrink-0 text-accent" />
+    <div className="mt-6 p-3 bg-destructive/10 border border-destructive/30 rounded-md text-sm text-destructive flex items-start">
+      <AlertTriangle className="h-4 w-4 mr-2.5 mt-0.5 flex-shrink-0 text-destructive" />
       <div>
         <span className="font-semibold">BETA Features:</span> The AI-powered tools above are currently in beta. AI can make mistakes, and the information provided is for general guidance only. Always consult with a qualified MaxWealth PS financial advisor before making any financial decisions.
       </div>
@@ -293,7 +293,7 @@ export default function CalculatorsSection() {
                     </div>
                     <CardTitle className="font-headline text-lg text-primary">AI Document Analyzer</CardTitle>
                   </div>
-                  <Badge variant="outline" className="border-accent text-accent">BETA</Badge>
+                  <Badge variant="outline" className="border-destructive text-destructive">BETA</Badge>
                 </CardHeader>
                 <CardContent className="space-y-3 flex-grow">
                   <CardDescription className="mb-3">
@@ -361,7 +361,7 @@ export default function CalculatorsSection() {
                     </div>
                     <CardTitle className="font-headline text-lg text-primary">Personalized Financial Plan AI</CardTitle>
                   </div>
-                  <Badge variant="outline" className="border-accent text-accent">BETA</Badge>
+                  <Badge variant="outline" className="border-destructive text-destructive">BETA</Badge>
                 </CardHeader>
                 <CardContent className="space-y-3 flex-grow">
                   <CardDescription className="mb-3">
@@ -399,7 +399,7 @@ export default function CalculatorsSection() {
                     </div>
                     <CardTitle className="font-headline text-lg text-primary">AI Market Trend Summarizer</CardTitle>
                   </div>
-                  <Badge variant="outline" className="border-accent text-accent">BETA</Badge>
+                  <Badge variant="outline" className="border-destructive text-destructive">BETA</Badge>
                 </CardHeader>
                 <CardContent className="space-y-3 flex-grow">
                   <CardDescription className="mb-3">
@@ -433,3 +433,4 @@ export default function CalculatorsSection() {
     </section>
   );
 }
+
