@@ -1,13 +1,14 @@
 
 // Remove "use client" from here to allow metadata export
-import type {Metadata} from 'next'; // Keep this if you still have static metadata
+import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import ScrollToTopButton from '@/components/layout/scroll-to-top-button';
 import LoadingIndicator from '@/components/layout/loading-indicator';
 import { AuthProvider } from '@/contexts/auth-context';
-// Removed import for GlobalEventListeners as the component is being removed
+import Navbar from '@/components/layout/navbar'; // Added
+import LiveChatWidget from '@/components/layout/live-chat-widget'; // Added
 
 export const metadata: Metadata = {
   title: 'MaxWealth PS',
@@ -37,10 +38,11 @@ export default function RootLayout({
         >
           <AuthProvider>
             <LoadingIndicator>
-              {/* Removed GlobalEventListeners component */}
+              <Navbar />
               {children}
               <Toaster />
               <ScrollToTopButton />
+              <LiveChatWidget />
             </LoadingIndicator>
           </AuthProvider>
         </ThemeProvider>

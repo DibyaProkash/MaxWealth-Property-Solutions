@@ -1,5 +1,4 @@
 
-import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import HeroSection from '@/components/sections/hero-section';
 import AboutUsSection from '@/components/sections/about-us-section';
@@ -13,12 +12,13 @@ import ContactSection from '@/components/sections/contact-section';
 import FaqSection from '@/components/sections/faq-section';
 import AnimatedSection from '@/components/layout/animated-section';
 import { articlesData, partnersData, testimonialsData, faqData } from '@/lib/data';
-import LiveChatWidget from '@/components/layout/live-chat-widget'; // Added
+
+// Navbar and LiveChatWidget are now in RootLayout
 
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+      {/* Navbar is now in RootLayout */}
       <main className="flex-grow">
         <AnimatedSection>
           <HeroSection />
@@ -65,9 +65,8 @@ export default function HomePage() {
           <ContactSection />
         </AnimatedSection>
       </main>
-      <LiveChatWidget />
+      {/* LiveChatWidget is now in RootLayout */}
       <Footer />
     </div>
   );
 }
-

@@ -67,7 +67,6 @@ export default function ContentSection() {
     return processedArticles;
   }, [sortOption, filterType, searchTerm]);
 
-  // Determine carousel item count based on screen size for responsive looping and button display
   const [itemsPerView, setItemsPerView] = React.useState(3);
 
   React.useEffect(() => {
@@ -81,7 +80,7 @@ export default function ContentSection() {
       }
     };
     window.addEventListener('resize', updateItemsPerView);
-    updateItemsPerView(); // Initial call
+    updateItemsPerView(); 
     return () => window.removeEventListener('resize', updateItemsPerView);
   }, []);
 
@@ -157,7 +156,6 @@ export default function ContentSection() {
             onMouseEnter={() => plugin.current?.stop()}
             onMouseLeave={() => plugin.current?.reset()}
             className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
-            // Adding a key to force re-render when itemsPerView changes for opts.loop to update
             key={displayedArticles.map(a => a.id).join('-') + '-' + sortOption + '-' + filterType + '-' + searchTerm + '-' + itemsPerView} 
           >
             <CarouselContent className="-ml-4">
