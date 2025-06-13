@@ -12,13 +12,24 @@ import MortgageCalculator from "@/components/calculators/mortgage-calculator";
 import AffordabilityCalculator from "@/components/calculators/affordability-calculator";
 import ClosingCostEstimator from "@/components/calculators/closing-cost-estimator";
 import { analyzeDocument, type DocumentAnalyzerInput, type DocumentAnalyzerOutput } from "@/ai/flows/document-analyzer-flow";
-import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2 } from "lucide-react";
+import { generateFinancialPlan, type PersonalizedFinancialPlanInput, type PersonalizedFinancialPlanOutput } from "@/ai/flows/personalized-financial-plan-flow";
+import { summarizeMarketTrends, type MarketTrendSummarizerInput, type MarketTrendSummarizerOutput } from "@/ai/flows/market-trend-summarizer-flow";
+
+import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2, UserCheck, BarChart3 } from "lucide-react";
 
 export default function CalculatorsSection() {
   const { toast } = useToast();
   const [documentText, setDocumentText] = useState("");
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const [financialSituation, setFinancialSituation] = useState("");
+  const [financialPlan, setFinancialPlan] = useState<string | null>(null);
+  const [isGeneratingPlan, setIsGeneratingPlan] = useState(false);
+
+  const [marketTrendSummary, setMarketTrendSummary] = useState<string | null>(null);
+  const [isFetchingTrends, setIsFetchingTrends] = useState(false);
+
 
   const handleAnalyzeDocument = async () => {
     if (!documentText.trim()) {
@@ -49,6 +60,62 @@ export default function CalculatorsSection() {
       });
     } finally {
       setIsAnalyzing(false);
+    }
+  };
+
+  const handleGeneratePlan = async () => {
+    if (!financialSituation.trim()) {
+      toast({
+        title: "Input Required",
+        description: "Please describe your financial situation and goals.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setIsGeneratingPlan(true);
+    setFinancialPlan(null);
+    try {
+      const input: PersonalizedFinancialPlanInput = { userSituation: financialSituation };
+      const result: PersonalizedFinancialPlanOutput = await generateFinancialPlan(input);
+      setFinancialPlan(result.plan);
+      toast({
+        title: "Plan Generated",
+        description: "Your basic financial plan has been generated.",
+      });
+    } catch (error) {
+      console.error("Error generating financial plan:", error);
+      setFinancialPlan("Failed to generate financial plan. Please try again.");
+      toast({
+        title: "Plan Generation Failed",
+        description: "An error occurred while generating your plan.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsGeneratingPlan(false);
+    }
+  };
+
+  const handleFetchTrends = async () => {
+    setIsFetchingTrends(true);
+    setMarketTrendSummary(null);
+    try {
+      // Input is optional and currently ignored by the flow
+      const result: MarketTrendSummarizerOutput = await summarizeMarketTrends();
+      setMarketTrendSummary(result.summary);
+      toast({
+        title: "Market Trends Loaded",
+        description: "Simulated market trends have been loaded.",
+      });
+    } catch (error) {
+      console.error("Error fetching market trends:", error);
+      setMarketTrendSummary("Failed to load market trends. Please try again.");
+      toast({
+        title: "Trend Loading Failed",
+        description: "An error occurred while loading market trends.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsFetchingTrends(false);
     }
   };
 
@@ -162,12 +229,28 @@ export default function CalculatorsSection() {
                   <CardTitle className="font-headline text-lg text-primary">Personalized Financial Plan AI</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 flex-grow">
-                  <CardDescription>
-                    Answer a series of targeted questions and receive an AI-generated basic financial plan, along with actionable next steps tailored to your homeownership goals.
+                  <CardDescription className="mb-3">
+                    Describe your financial situation and goals to receive an AI-generated basic financial plan with actionable next steps.
                   </CardDescription>
+                   <Textarea
+                    placeholder="E.g., Stable income, $10k saved, some student debt. Goal: buy first home in 1-2 years..."
+                    value={financialSituation}
+                    onChange={(e) => setFinancialSituation(e.target.value)}
+                    rows={6}
+                    className="bg-background/70"
+                    disabled={isGeneratingPlan}
+                  />
+                  {financialPlan && (
+                    <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
+                      <pre className="whitespace-pre-wrap break-words font-body">{financialPlan}</pre>
+                    </ScrollArea>
+                  )}
                 </CardContent>
                 <div className="p-6 pt-0">
-                  <Button variant="outline" disabled className="w-full">Try Now (Coming Soon)</Button>
+                  <Button onClick={handleGeneratePlan} disabled={isGeneratingPlan || !financialSituation.trim()} className="w-full">
+                     {isGeneratingPlan ? <Loader2 className="animate-spin" /> : <UserCheck className="mr-2 h-4 w-4" />}
+                    Generate My Basic Plan
+                  </Button>
                 </div>
               </Card>
 
@@ -179,12 +262,20 @@ export default function CalculatorsSection() {
                   <CardTitle className="font-headline text-lg text-primary">AI Market Trend Summarizer</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 flex-grow">
-                  <CardDescription>
-                    Stay informed with AI-powered summaries of current local real estate market trends, helping you make timely and strategic decisions.
+                  <CardDescription className="mb-3">
+                    Get a (simulated) AI-powered summary of current general real estate market trends to help inform your decisions.
                   </CardDescription>
+                  {marketTrendSummary && (
+                     <ScrollArea className="mt-3 h-48 rounded-md border p-3 bg-muted/30 text-sm">
+                        <pre className="whitespace-pre-wrap break-words font-body">{marketTrendSummary}</pre>
+                     </ScrollArea>
+                  )}
                 </CardContent>
                 <div className="p-6 pt-0">
-                 <Button variant="outline" disabled className="w-full">View Trends (Coming Soon)</Button>
+                 <Button onClick={handleFetchTrends} disabled={isFetchingTrends} className="w-full">
+                    {isFetchingTrends ? <Loader2 className="animate-spin" /> : <BarChart3 className="mr-2 h-4 w-4" />}
+                    Get Simulated Trends
+                 </Button>
                 </div>
               </Card>
             </div>
