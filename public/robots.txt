@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# If you have a sitemap, uncomment and add its URL below
+# Sitemap: https://yourdomain.com/sitemap.xml
