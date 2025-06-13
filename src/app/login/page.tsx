@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, Home } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -83,13 +83,17 @@ export default function LoginPage() {
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-col items-center text-sm">
+        <CardFooter className="flex flex-col items-center text-sm space-y-3">
           <p className="text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link href="/signup" className="font-medium text-primary hover:underline">
               Sign up
             </Link>
           </p>
+          <Link href="/" className="flex items-center text-muted-foreground hover:text-primary transition-colors">
+            <Home className="mr-1.5 h-4 w-4" />
+            Back to Home
+          </Link>
         </CardFooter>
       </Card>
     </div>
