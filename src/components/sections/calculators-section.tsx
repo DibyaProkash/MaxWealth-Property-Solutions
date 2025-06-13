@@ -26,12 +26,8 @@ if (typeof window !== 'undefined') {
     pdfjsLib = lib;
     // Set workerSrc for pdf.js. Using a CDN version for simplicity in Next.js.
     // Ensure the version matches the installed pdfjs-dist version.
-    // You might need to adjust the version in the URL if you update pdfjs-dist.
-    // Get version from pdfjsLib.version if available after import, or hardcode based on installed package.
-    // For pdfjs-dist 4.x, the worker is often pdf.worker.min.mjs or pdf.worker.mjs
-    // A common CDN pattern: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
-    // For pdfjs-dist v4.5.136, the worker path on cdnjs is:
-    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.mjs`;
+    // The error message indicates API version 4.10.38 is being used.
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs`;
   });
 }
 
@@ -276,15 +272,25 @@ export default function CalculatorsSection() {
                   <CardDescription className="mb-3">
                     Upload a PDF document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.
                   </CardDescription>
-                  <ShadcnInput 
-                    type="file" 
-                    accept=".pdf" 
-                    onChange={handleFileChange} 
-                    className="bg-background/70 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
-                    disabled={isProcessingPdf || isAnalyzing}
-                  />
+                  <div className="space-y-1.5">
+                    <label htmlFor="pdf-upload" className="text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:opacity-80">
+                      <UploadCloud className="h-5 w-5" />
+                      {selectedFile ? `Selected: ${selectedFile.name.substring(0,25)}${selectedFile.name.length > 25 ? '...' : ''}` : "Upload PDF Document"}
+                    </label>
+                    <ShadcnInput 
+                      id="pdf-upload"
+                      type="file" 
+                      accept=".pdf" 
+                      onChange={handleFileChange} 
+                      className="hidden" // Visually hidden, label is used for interaction
+                      disabled={isProcessingPdf || isAnalyzing}
+                    />
+                     <div className="text-xs text-muted-foreground">
+                        For example: loan estimates, disclosures, etc. Max 5MB.
+                     </div>
+                  </div>
                   {selectedFile && !isProcessingPdf && !pdfProcessingError && (
-                    <p className="text-xs text-muted-foreground">Selected: {selectedFile.name}</p>
+                    <p className="text-xs text-muted-foreground">File ready to analyze: {selectedFile.name}</p>
                   )}
                   {isProcessingPdf && <p className="text-xs text-primary flex items-center"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing PDF...</p>}
                   {pdfProcessingError && (
@@ -378,4 +384,3 @@ export default function CalculatorsSection() {
     </section>
   );
 }
-
