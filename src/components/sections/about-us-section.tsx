@@ -69,8 +69,9 @@ export default function AboutUsSection() {
                 <Image 
                   src={member.image} 
                   alt={member.name} 
-                  layout="fill" 
-                  objectFit="cover" 
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  style={{ objectFit: 'cover' }}
                   data-ai-hint={member.dataAiHint}
                 />
               </div>

@@ -135,7 +135,7 @@ export default function ContactSection() {
           </Card>
 
           {/* Card 2: Contact Information + Map */}
-          <Card className="shadow-lg">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="font-headline text-xl text-primary">Contact Information</CardTitle>
             </CardHeader>
@@ -156,8 +156,8 @@ export default function ContactSection() {
                 <Image
                   src="https://placehold.co/800x600.png"
                   alt="Map showing office location"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: "cover" }}
                   className="w-full h-full"
                   data-ai-hint="city map"
                 />
@@ -166,7 +166,7 @@ export default function ContactSection() {
           </Card>
           
           {/* Card 3: Business Hours */}
-          <Card className="shadow-lg">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="font-headline text-xl text-primary">Business Hours</CardTitle>
             </CardHeader>
@@ -178,7 +178,7 @@ export default function ContactSection() {
           </Card>
 
           {/* Card 4: Getting to Our Office */}
-          <Card className="shadow-lg">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
             <CardHeader>
               <CardTitle className="font-headline text-xl text-primary">Getting to Our Office</CardTitle>
             </CardHeader>

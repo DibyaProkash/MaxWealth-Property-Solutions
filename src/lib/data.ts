@@ -68,29 +68,29 @@ export interface Partner {
 }
 
 export const partnersData: Partner[] = [
-  { name: 'SecureBank', logo: 'https://placehold.co/150x60.png?text=SecureBank&font=sans-serif', dataAiHint: 'bank logo' },
-  { name: 'RealtyPros', logo: 'https://placehold.co/150x60.png?text=RealtyPros&font=sans-serif', dataAiHint: 'estate logo' },
-  { name: 'LegalEase', logo: 'https://placehold.co/150x60.png?text=LegalEase&font=sans-serif', dataAiHint: 'law logo' },
-  { name: 'InspectWell', logo: 'https://placehold.co/150x60.png?text=InspectWell&font=sans-serif', dataAiHint: 'inspection logo' },
-  { name: 'BuildRight Homes', logo: 'https://placehold.co/150x60.png?text=BuildRight&font=sans-serif', dataAiHint: 'builder logo' },
-  { name: 'FinanceGrowth', logo: 'https://placehold.co/150x60.png?text=FinanceGrowth&font=sans-serif', dataAiHint: 'finance logo' },
-  { name: 'CapitalTrust', logo: 'https://placehold.co/150x60.png?text=CapitalTrust&font=sans-serif', dataAiHint: 'investment logo' },
-  { name: 'HomeInsure Co.', logo: 'https://placehold.co/150x60.png?text=HomeInsure&font=sans-serif', dataAiHint: 'insurance logo' },
-  { name: 'MortgageMasters', logo: 'https://placehold.co/150x60.png?text=MortgagePro&font=sans-serif', dataAiHint: 'mortgage logo' },
+  { name: 'SecureBank', logo: 'https://placehold.co/150x60.png', dataAiHint: 'bank logo' },
+  { name: 'RealtyPros', logo: 'https://placehold.co/150x60.png', dataAiHint: 'estate logo' },
+  { name: 'LegalEase', logo: 'https://placehold.co/150x60.png', dataAiHint: 'law logo' },
+  { name: 'InspectWell', logo: 'https://placehold.co/150x60.png', dataAiHint: 'inspection logo' },
+  { name: 'BuildRight Homes', logo: 'https://placehold.co/150x60.png', dataAiHint: 'builder logo' },
+  { name: 'FinanceGrowth', logo: 'https://placehold.co/150x60.png', dataAiHint: 'finance logo' },
+  { name: 'CapitalTrust', logo: 'https://placehold.co/150x60.png', dataAiHint: 'investment logo' },
+  { name: 'HomeInsure Co.', logo: 'https://placehold.co/150x60.png', dataAiHint: 'insurance logo' },
+  { name: 'MortgageMasters', logo: 'https://placehold.co/150x60.png', dataAiHint: 'mortgage logo' },
 ];
 
 export interface Article {
   id: string;
   title: string;
-  description: string; // This will serve as summary
-  fullContent?: string; // Optional: for more detailed content later
+  description: string; 
+  fullContent?: string; 
   image: string;
   dataAiHint: string;
   type: 'Blog' | 'Vlog';
   date: string;
   icon: LucideIcon;
-  author?: string; // Optional
-  tags?: string[]; // Optional
+  author?: string; 
+  tags?: string[]; 
 }
 
 export const articlesData: Article[] = [

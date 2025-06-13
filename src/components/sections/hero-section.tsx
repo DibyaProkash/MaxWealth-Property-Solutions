@@ -11,8 +11,8 @@ export default function HeroSection() {
         <Image 
           src="https://placehold.co/1920x1080.png" 
           alt="Subtle Geometric Pattern" 
-          layout="fill" 
-          objectFit="cover" 
+          fill
+          style={{ objectFit: 'cover' }}
           data-ai-hint="abstract pattern"
           priority
         />

@@ -35,7 +35,7 @@ export default function Footer() {
         </div>
         <div className="text-center text-sm text-muted-foreground pt-8 border-t border-border/40">
           <p>&copy; {currentYear} MaxWealth PS. All rights reserved.</p>
-          <p className="mt-1">Designed by an expert designer.</p>
+          <p className="mt-1">Designed by Dibya Prokash Sarkar.</p>
         </div>
       </div>
     </footer>
