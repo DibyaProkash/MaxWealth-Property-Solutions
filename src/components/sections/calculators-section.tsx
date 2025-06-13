@@ -208,10 +208,10 @@ export default function CalculatorsSection() {
   };
 
   const BetaDisclaimer = () => (
-    <div className="mt-3 p-2.5 bg-accent/20 border border-accent/40 rounded-md text-xs text-accent-foreground/80 flex items-start">
-      <AlertTriangle className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0 text-accent/90" />
+    <div className="mt-6 p-3 bg-accent/20 border border-accent/40 rounded-md text-sm text-accent-foreground/90 flex items-start">
+      <AlertTriangle className="h-4 w-4 mr-2.5 mt-0.5 flex-shrink-0 text-accent" />
       <div>
-        <span className="font-semibold">BETA Feature:</span> AI can make mistakes. The information provided is for general guidance only. Always consult with a qualified MaxWealth PS financial advisor before making any financial decisions.
+        <span className="font-semibold">BETA Features:</span> The AI-powered tools above are currently in beta. AI can make mistakes, and the information provided is for general guidance only. Always consult with a qualified MaxWealth PS financial advisor before making any financial decisions.
       </div>
     </div>
   );
@@ -299,7 +299,7 @@ export default function CalculatorsSection() {
                   <CardDescription className="mb-3">
                     Upload a PDF document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.
                   </CardDescription>
-                  <BetaDisclaimer />
+                  
                   <div className="space-y-1.5">
                     <div className="flex items-center gap-2">
                       <Button asChild variant="outline" size="sm" className="flex-grow justify-start text-muted-foreground hover:text-primary">
@@ -367,7 +367,7 @@ export default function CalculatorsSection() {
                   <CardDescription className="mb-3">
                     Describe your financial situation and goals to receive an AI-generated basic financial plan with actionable next steps.
                   </CardDescription>
-                  <BetaDisclaimer />
+                  
                   <Textarea
                     placeholder="E.g., Stable income, $10k saved, some student debt. Goal: buy first home in 1-2 years..."
                     value={financialSituation}
@@ -405,7 +405,7 @@ export default function CalculatorsSection() {
                   <CardDescription className="mb-3">
                     Get a (simulated) AI-powered summary of current general real estate market trends to help inform your decisions.
                   </CardDescription>
-                  <BetaDisclaimer />
+                  
                   {marketTrendSummary && (
                     <ScrollArea className="mt-3 h-48 rounded-md border p-3 bg-muted/30 text-sm">
                         <pre className="whitespace-pre-wrap break-words font-body">{marketTrendSummary}</pre>
@@ -426,10 +426,10 @@ export default function CalculatorsSection() {
                 </div>
               </Card>
             </div>
+            <BetaDisclaimer />
           </div>
         </div>
       </div>
     </section>
   );
 }
-
