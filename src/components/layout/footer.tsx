@@ -1,5 +1,5 @@
 
-import { Briefcase, Facebook, Linkedin, Youtube, Instagram, BookText } from 'lucide-react';
+import { Briefcase, Facebook, Linkedin, Youtube, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -32,7 +32,6 @@ export default function Footer() {
               <a href="#" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin size={24} /></a>
               <a href="#" aria-label="YouTube" className="text-muted-foreground hover:text-primary transition-colors"><Youtube size={24} /></a>
               <a href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={24} /></a>
-              <a href="#" aria-label="Medium" className="text-muted-foreground hover:text-primary transition-colors"><BookText size={24} /></a>
             </div>
           </div>
         </div>
