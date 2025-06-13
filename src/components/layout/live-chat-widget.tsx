@@ -24,14 +24,12 @@ export default function LiveChatWidget() {
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-lg p-0">
-          {/* DialogHeader is inside AIChatbot now, so we can remove it from here if AIChatbot's header is sufficient */}
-          {/* Or, we can have a generic one here and let AIChatbot have its own more specific one */}
-          {/* For now, let AIChatbot manage its own header */}
+          {/* Add a visually hidden DialogHeader and DialogTitle for accessibility */}
+          <DialogHeader className="sr-only">
+            <DialogTitle>AI Financial Advisor Chat</DialogTitle>
+          </DialogHeader>
           <AIChatbot />
-          {/* Explicit close button for accessibility within the dialog if needed, though ShadCN DialogContent usually has one */}
-          {/* <DialogClose asChild className="absolute top-4 right-4">
-             <Button variant="ghost" size="icon"><X className="h-4 w-4" /></Button>
-          </DialogClose> */}
+          {/* DialogClose is automatically added by ShadCN's DialogContent */}
         </DialogContent>
       </Dialog>
     </>
