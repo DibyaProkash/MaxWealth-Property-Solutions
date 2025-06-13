@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useMemo, type FC } from 'react';
+import { useState, useMemo, type FC, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
@@ -19,9 +19,12 @@ import {
   KeyRound,
   ListChecks,
   Lightbulb,
+  Save,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/auth-context';
+import { useToast } from '@/hooks/use-toast';
 
 interface RoadmapStep {
   id: string;
@@ -33,7 +36,7 @@ interface RoadmapStep {
   completed: boolean;
 }
 
-const initialRoadmapSteps: RoadmapStep[] = [
+const initialRoadmapStepsData: RoadmapStep[] = [
   { 
     id: '1', 
     title: 'Assess Your Finances', 
@@ -108,19 +111,71 @@ const initialRoadmapSteps: RoadmapStep[] = [
   },
 ];
 
+const LOCAL_STORAGE_KEY_PREFIX = 'roadmapProgress_';
+
 export default function RoadmapSection() {
-  const [steps, setSteps] = useState<RoadmapStep[]>(initialRoadmapSteps);
+  const { user, loading: authLoading } = useAuth();
+  const { toast } = useToast();
+  const [steps, setSteps] = useState<RoadmapStep[]>(
+    // Deep copy initial data to prevent mutation of the original constant
+    () => JSON.parse(JSON.stringify(initialRoadmapStepsData))
+  );
+
+  // Load progress from localStorage when user is identified
+  useEffect(() => {
+    if (user && !authLoading) {
+      const storedProgressJson = localStorage.getItem(`${LOCAL_STORAGE_KEY_PREFIX}${user.uid}`);
+      if (storedProgressJson) {
+        try {
+          const storedProgress: RoadmapStep[] = JSON.parse(storedProgressJson);
+           // Merge stored progress with initial data to ensure all steps are present
+          const mergedSteps = initialRoadmapStepsData.map(initialStep => {
+            const storedStep = storedProgress.find(s => s.id === initialStep.id);
+            return storedStep ? { ...initialStep, completed: storedStep.completed } : { ...initialStep };
+          });
+          setSteps(mergedSteps);
+          toast({ title: "Roadmap Loaded", description: "Your previous progress has been loaded.", variant: "default" });
+        } catch (error) {
+          console.error("Failed to parse roadmap progress from localStorage:", error);
+          toast({ title: "Error Loading Progress", description: "Could not load saved roadmap progress.", variant: "destructive" });
+          // Reset to initial if parsing fails
+          setSteps(JSON.parse(JSON.stringify(initialRoadmapStepsData)));
+        }
+      } else {
+        // No stored progress, ensure steps are reset to initial state for this user
+        setSteps(JSON.parse(JSON.stringify(initialRoadmapStepsData)));
+      }
+    } else if (!user && !authLoading) {
+      // If user logs out or is not logged in, reset to initial non-persistent state
+      setSteps(JSON.parse(JSON.stringify(initialRoadmapStepsData)));
+    }
+  }, [user, authLoading, toast]);
+
 
   const completedStepsCount = useMemo(() => steps.filter(step => step.completed).length, [steps]);
   const totalSteps = steps.length;
   const progressPercentage = totalSteps > 0 ? (completedStepsCount / totalSteps) * 100 : 0;
 
   const handleStepToggle = (stepId: string) => {
-    setSteps(prevSteps =>
-      prevSteps.map(step =>
-        step.id === stepId ? { ...step, completed: !step.completed } : step
-      )
+    const newSteps = steps.map(step =>
+      step.id === stepId ? { ...step, completed: !step.completed } : step
     );
+    setSteps(newSteps);
+
+    if (user) {
+      try {
+        localStorage.setItem(`${LOCAL_STORAGE_KEY_PREFIX}${user.uid}`, JSON.stringify(newSteps));
+         toast({
+          title: "Progress Saved",
+          description: `Step "${newSteps.find(s => s.id === stepId)?.title}" status updated locally.`,
+          variant: "default",
+          duration: 2000,
+        });
+      } catch (error) {
+        console.error("Failed to save roadmap progress to localStorage:", error);
+        toast({ title: "Save Error", description: "Could not save progress to local storage. Your browser might be full or in private mode.", variant: "destructive" });
+      }
+    }
   };
 
   return (
@@ -132,8 +187,20 @@ export default function RoadmapSection() {
           </div>
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Your Home Buying Roadmap</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Navigate the path to homeownership with our interactive step-by-step guide. Track your progress, get insights, and prepare for each milestone. True security and proof-oriented features would require user accounts, which can be a future enhancement.
+            Navigate the path to homeownership with our interactive step-by-step guide. Track your progress and get insights for each milestone.
           </p>
+          {authLoading && <p className="text-sm text-muted-foreground mt-2">Checking authentication status...</p>}
+          {!authLoading && user && (
+            <div className="mt-4 p-3 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-md text-sm text-green-700 dark:text-green-300 flex items-center justify-center max-w-md mx-auto">
+              <Save className="h-5 w-5 mr-2" />
+              Logged in as {user.email}. Your progress is saved locally in this browser.
+            </div>
+          )}
+           {!authLoading && !user && (
+            <p className="text-sm text-muted-foreground mt-2">
+              <Link href="/login" className="text-primary hover:underline font-semibold">Login</Link> or <Link href="/signup" className="text-primary hover:underline font-semibold">Sign up</Link> to save your progress.
+            </p>
+          )}
         </div>
 
         <div className="max-w-3xl mx-auto space-y-4 mb-8">
@@ -146,13 +213,13 @@ export default function RoadmapSection() {
             <Card 
               key={step.id} 
               className={cn(
-                "shadow-lg transition-all duration-300 flex flex-col group",
-                step.completed ? "bg-card/70 border-primary/40" : "bg-card hover:shadow-xl"
+                "shadow-lg transition-all duration-300 flex flex-col group hover:shadow-xl",
+                step.completed ? "bg-card/70 border-primary/40" : "bg-card"
               )}
             >
               <CardHeader className="flex flex-row items-start space-x-4 pb-3">
-                <div className={cn("p-2.5 rounded-lg", step.completed ? "bg-accent/70" : "bg-accent/20 group-hover:bg-accent/30 transition-colors")}>
-                  <step.icon className={cn("h-7 w-7", step.completed ? "text-accent-foreground/80" : "text-accent")} />
+                <div className={cn("p-2.5 rounded-lg", step.completed ? "bg-primary/70 text-primary-foreground/90" : "bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors")}>
+                  <step.icon className={cn("h-7 w-7")} />
                 </div>
                 <div className="flex-1">
                   <CardTitle className={cn(
@@ -192,7 +259,7 @@ export default function RoadmapSection() {
                       <div className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground py-2 space-y-2">
                         <p>{step.aiTip}</p>
                         <p className="text-xs italic mt-4">
-                          This is a conceptual demonstration. Full AI personalization would require connecting to our Genkit services and potentially user-specific data (with your permission).
+                          This is a conceptual demonstration. Full AI personalization would require connecting to our Genkit services and potentially user-specific data (with your permission, after logging in and saving progress to a secure database).
                         </p>
                       </div>
                       <div className="flex justify-end pt-2">
