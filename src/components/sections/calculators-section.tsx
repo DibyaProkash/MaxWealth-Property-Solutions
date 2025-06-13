@@ -1,10 +1,11 @@
 
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input as ShadcnInput } from "@/components/ui/input"; // Renamed to avoid conflict with file input
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
@@ -15,11 +16,32 @@ import { analyzeDocument, type DocumentAnalyzerInput, type DocumentAnalyzerOutpu
 import { generateFinancialPlan, type PersonalizedFinancialPlanInput, type PersonalizedFinancialPlanOutput } from "@/ai/flows/personalized-financial-plan-flow";
 import { summarizeMarketTrends, type MarketTrendSummarizerInput, type MarketTrendSummarizerOutput } from "@/ai/flows/market-trend-summarizer-flow";
 
-import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2, UserCheck, BarChart3 } from "lucide-react";
+import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2, UserCheck, BarChart3, UploadCloud } from "lucide-react";
+import type { PDFDocumentProxy } from 'pdfjs-dist';
+
+// Dynamically import pdfjs-dist only on the client-side
+let pdfjsLib: any = null;
+if (typeof window !== 'undefined') {
+  import('pdfjs-dist/build/pdf').then(lib => {
+    pdfjsLib = lib;
+    // Set workerSrc for pdf.js. Using a CDN version for simplicity in Next.js.
+    // Ensure the version matches the installed pdfjs-dist version.
+    // You might need to adjust the version in the URL if you update pdfjs-dist.
+    // Get version from pdfjsLib.version if available after import, or hardcode based on installed package.
+    // For pdfjs-dist 4.x, the worker is often pdf.worker.min.mjs or pdf.worker.mjs
+    // A common CDN pattern: `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`
+    // For pdfjs-dist v4.5.136, the worker path on cdnjs is:
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.mjs`;
+  });
+}
+
 
 export default function CalculatorsSection() {
   const { toast } = useToast();
-  const [documentText, setDocumentText] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [extractedPdfText, setExtractedPdfText] = useState<string | null>(null);
+  const [pdfProcessingError, setPdfProcessingError] = useState<string | null>(null);
+  const [isProcessingPdf, setIsProcessingPdf] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
@@ -30,20 +52,76 @@ export default function CalculatorsSection() {
   const [marketTrendSummary, setMarketTrendSummary] = useState<string | null>(null);
   const [isFetchingTrends, setIsFetchingTrends] = useState(false);
 
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.type === "application/pdf") {
+      setSelectedFile(file);
+      setExtractedPdfText(null);
+      setAnalysisResult(null);
+      setPdfProcessingError(null);
+      setIsProcessingPdf(true);
+      try {
+        if (!pdfjsLib) {
+          throw new Error("PDF library not loaded yet. Please try again in a moment.");
+        }
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf: PDFDocumentProxy = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        let fullText = "";
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const textContent = await page.getTextContent();
+          fullText += textContent.items.map((item: any) => item.str).join(" ") + "\n";
+        }
+        setExtractedPdfText(fullText);
+        toast({
+          title: "PDF Processed",
+          description: "PDF content extracted. Ready to analyze.",
+        });
+      } catch (error: any) {
+        console.error("Error processing PDF:", error);
+        setPdfProcessingError(`Failed to process PDF: ${error.message || "Unknown error"}. Please ensure it's a valid PDF.`);
+        toast({
+          title: "PDF Processing Error",
+          description: `Could not process PDF. ${error.message || "Unknown error"}`,
+          variant: "destructive",
+        });
+      } finally {
+        setIsProcessingPdf(false);
+      }
+    } else {
+      setSelectedFile(null);
+      setExtractedPdfText(null);
+      setPdfProcessingError(file ? "Please select a valid PDF file." : null);
+      if (file) {
+        toast({ title: "Invalid File", description: "Please select a PDF file.", variant: "destructive"});
+      }
+    }
+  };
 
   const handleAnalyzeDocument = async () => {
-    if (!documentText.trim()) {
+    if (!extractedPdfText && !selectedFile) {
       toast({
         title: "Input Required",
-        description: "Please paste some document text to analyze.",
+        description: "Please select a PDF file to analyze.",
         variant: "destructive",
       });
       return;
     }
+    if (!extractedPdfText && selectedFile && !isProcessingPdf) {
+        toast({
+            title: "Processing Error",
+            description: "PDF text not extracted. Please re-select the file or check for errors.",
+            variant: "destructive"
+        });
+        return;
+    }
+    if (!extractedPdfText) return;
+
+
     setIsAnalyzing(true);
     setAnalysisResult(null);
     try {
-      const input: DocumentAnalyzerInput = { documentText };
+      const input: DocumentAnalyzerInput = { documentText: extractedPdfText };
       const result: DocumentAnalyzerOutput = await analyzeDocument(input);
       setAnalysisResult(result.analysis);
       toast({
@@ -99,7 +177,6 @@ export default function CalculatorsSection() {
     setIsFetchingTrends(true);
     setMarketTrendSummary(null);
     try {
-      // Input is optional and currently ignored by the flow
       const result: MarketTrendSummarizerOutput = await summarizeMarketTrends();
       setMarketTrendSummary(result.summary);
       toast({
@@ -197,16 +274,22 @@ export default function CalculatorsSection() {
                 </CardHeader>
                 <CardContent className="space-y-3 flex-grow">
                   <CardDescription className="mb-3">
-                    Securely paste the text of a redacted loan estimate or other financial document to get an AI-powered summary and clear explanation of key terms.
+                    Upload a PDF document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.
                   </CardDescription>
-                  <Textarea
-                    placeholder="Paste your document text here..."
-                    value={documentText}
-                    onChange={(e) => setDocumentText(e.target.value)}
-                    rows={6}
-                    className="bg-background/70"
-                    disabled={isAnalyzing}
+                  <ShadcnInput 
+                    type="file" 
+                    accept=".pdf" 
+                    onChange={handleFileChange} 
+                    className="bg-background/70 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20"
+                    disabled={isProcessingPdf || isAnalyzing}
                   />
+                  {selectedFile && !isProcessingPdf && !pdfProcessingError && (
+                    <p className="text-xs text-muted-foreground">Selected: {selectedFile.name}</p>
+                  )}
+                  {isProcessingPdf && <p className="text-xs text-primary flex items-center"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing PDF...</p>}
+                  {pdfProcessingError && (
+                    <p className="text-xs text-destructive">{pdfProcessingError}</p>
+                  )}
                   {analysisResult && (
                     <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
                       <pre className="whitespace-pre-wrap break-words font-body">{analysisResult}</pre>
@@ -214,7 +297,11 @@ export default function CalculatorsSection() {
                   )}
                 </CardContent>
                 <div className="p-6 pt-0">
-                  <Button onClick={handleAnalyzeDocument} disabled={isAnalyzing || !documentText.trim()} className="w-full">
+                  <Button 
+                    onClick={handleAnalyzeDocument} 
+                    disabled={isAnalyzing || isProcessingPdf || !extractedPdfText || !!pdfProcessingError} 
+                    className="w-full"
+                  >
                     {isAnalyzing ? <Loader2 className="animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
                     Analyze Document
                   </Button>
@@ -270,6 +357,12 @@ export default function CalculatorsSection() {
                         <pre className="whitespace-pre-wrap break-words font-body">{marketTrendSummary}</pre>
                      </ScrollArea>
                   )}
+                   {!marketTrendSummary && !isFetchingTrends && (
+                    <div className="flex flex-col items-center justify-center h-full text-muted-foreground p-4 text-center">
+                        <BarChart3 className="w-12 h-12 mb-2 opacity-50" />
+                        <p className="text-sm">Click the button below to load simulated market trends.</p>
+                    </div>
+                  )}
                 </CardContent>
                 <div className="p-6 pt-0">
                  <Button onClick={handleFetchTrends} disabled={isFetchingTrends} className="w-full">
@@ -285,3 +378,4 @@ export default function CalculatorsSection() {
     </section>
   );
 }
+
