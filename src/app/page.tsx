@@ -13,6 +13,7 @@ import ContactSection from '@/components/sections/contact-section';
 import FaqSection from '@/components/sections/faq-section';
 import AnimatedSection from '@/components/layout/animated-section';
 import { articlesData, partnersData, testimonialsData, faqData } from '@/lib/data';
+import LiveChatWidget from '@/components/layout/live-chat-widget'; // Added
 
 export default function HomePage() {
   return (
@@ -64,7 +65,9 @@ export default function HomePage() {
           <ContactSection />
         </AnimatedSection>
       </main>
+      <LiveChatWidget />
       <Footer />
     </div>
   );
 }
+
