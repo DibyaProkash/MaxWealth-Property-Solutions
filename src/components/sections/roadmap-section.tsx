@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useMemo, type FC, useEffect } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
@@ -116,38 +117,42 @@ const LOCAL_STORAGE_KEY_PREFIX = 'roadmapProgress_';
 export default function RoadmapSection() {
   const { user, loading: authLoading } = useAuth();
   const { toast } = useToast();
-  const [steps, setSteps] = useState<RoadmapStep[]>(
-    // Deep copy initial data to prevent mutation of the original constant
-    () => JSON.parse(JSON.stringify(initialRoadmapStepsData))
+  
+  const [steps, setSteps] = useState<RoadmapStep[]>(() => 
+    initialRoadmapStepsData.map(step => ({ ...step })) // Create initial copy with icon references intact
   );
 
-  // Load progress from localStorage when user is identified
   useEffect(() => {
     if (user && !authLoading) {
-      const storedProgressJson = localStorage.getItem(`${LOCAL_STORAGE_KEY_PREFIX}${user.uid}`);
+      const localStorageKey = `${LOCAL_STORAGE_KEY_PREFIX}${user.uid}`;
+      const storedProgressJson = localStorage.getItem(localStorageKey);
+      
+      let currentSteps = initialRoadmapStepsData.map(s => ({ ...s, completed: s.completed })); // Start with fresh initial data
+
       if (storedProgressJson) {
         try {
-          const storedProgress: RoadmapStep[] = JSON.parse(storedProgressJson);
-           // Merge stored progress with initial data to ensure all steps are present
-          const mergedSteps = initialRoadmapStepsData.map(initialStep => {
-            const storedStep = storedProgress.find(s => s.id === initialStep.id);
-            return storedStep ? { ...initialStep, completed: storedStep.completed } : { ...initialStep };
+          // Expect only id and completed status from localStorage
+          const storedUserProgress: Array<{ id: string, completed: boolean }> = JSON.parse(storedProgressJson);
+          
+          currentSteps = currentSteps.map(initialStep => {
+            const progressForThisStep = storedUserProgress.find(p => p.id === initialStep.id);
+            return {
+              ...initialStep, // This re-applies the icon and other static data
+              completed: progressForThisStep ? progressForThisStep.completed : initialStep.completed,
+            };
           });
-          setSteps(mergedSteps);
           toast({ title: "Roadmap Loaded", description: "Your previous progress has been loaded.", variant: "default" });
         } catch (error) {
           console.error("Failed to parse roadmap progress from localStorage:", error);
           toast({ title: "Error Loading Progress", description: "Could not load saved roadmap progress.", variant: "destructive" });
-          // Reset to initial if parsing fails
-          setSteps(JSON.parse(JSON.stringify(initialRoadmapStepsData)));
+          // If error, currentSteps remains as initialized from initialRoadmapStepsData
         }
-      } else {
-        // No stored progress, ensure steps are reset to initial state for this user
-        setSteps(JSON.parse(JSON.stringify(initialRoadmapStepsData)));
       }
+      setSteps(currentSteps);
+
     } else if (!user && !authLoading) {
-      // If user logs out or is not logged in, reset to initial non-persistent state
-      setSteps(JSON.parse(JSON.stringify(initialRoadmapStepsData)));
+      // If user logs out or is not logged in, reset to initial state
+      setSteps(initialRoadmapStepsData.map(s => ({ ...s, completed: s.completed })));
     }
   }, [user, authLoading, toast]);
 
@@ -163,8 +168,11 @@ export default function RoadmapSection() {
     setSteps(newSteps);
 
     if (user) {
+      const localStorageKey = `${LOCAL_STORAGE_KEY_PREFIX}${user.uid}`;
+      // Save only id and completed status to localStorage
+      const progressToStore = newSteps.map(s => ({ id: s.id, completed: s.completed }));
       try {
-        localStorage.setItem(`${LOCAL_STORAGE_KEY_PREFIX}${user.uid}`, JSON.stringify(newSteps));
+        localStorage.setItem(localStorageKey, JSON.stringify(progressToStore));
          toast({
           title: "Progress Saved",
           description: `Step "${newSteps.find(s => s.id === stepId)?.title}" status updated locally.`,
@@ -209,22 +217,27 @@ export default function RoadmapSection() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {steps.map((step, index) => (
+          {steps.map((step, index) => {
+            const IconComponent = step.icon; // Ensure step.icon is a component
+            return (
             <Card 
               key={step.id} 
               className={cn(
                 "shadow-lg transition-all duration-300 flex flex-col group hover:shadow-xl",
-                step.completed ? "bg-card/70 border-primary/40" : "bg-card"
+                step.completed ? "bg-card/70 border-primary/40 opacity-75" : "bg-card"
               )}
             >
               <CardHeader className="flex flex-row items-start space-x-4 pb-3">
-                <div className={cn("p-2.5 rounded-lg", step.completed ? "bg-primary/70 text-primary-foreground/90" : "bg-primary/10 text-primary group-hover:bg-primary/20 transition-colors")}>
-                  <step.icon className={cn("h-7 w-7")} />
+                <div className={cn(
+                    "p-2.5 rounded-lg flex items-center justify-center transition-colors", 
+                    step.completed ? "bg-primary/70 text-primary-foreground/90" : "bg-primary/10 text-primary group-hover:bg-primary/20"
+                )}>
+                  {IconComponent ? <IconComponent className="h-7 w-7" /> : <ListChecks className="h-7 w-7" /> }
                 </div>
                 <div className="flex-1">
                   <CardTitle className={cn(
-                    "font-headline text-xl", 
-                    step.completed ? "text-primary/70 line-through" : "text-primary group-hover:text-primary/90 transition-colors"
+                    "font-headline text-xl transition-colors", 
+                    step.completed ? "text-primary/70 line-through" : "text-primary group-hover:text-primary/90"
                   )}>
                     {index + 1}. {step.title}
                   </CardTitle>
@@ -238,7 +251,10 @@ export default function RoadmapSection() {
                 />
               </CardHeader>
               <CardContent className="flex-grow pb-4">
-                <CardDescription className={cn("text-sm", step.completed ? "text-muted-foreground/70" : "text-muted-foreground")}>
+                <CardDescription className={cn(
+                    "text-sm transition-opacity", 
+                    step.completed ? "text-muted-foreground/70" : "text-muted-foreground"
+                )}>
                   {step.longDescription}
                 </CardDescription>
               </CardContent>
@@ -271,9 +287,10 @@ export default function RoadmapSection() {
                   </Dialog>
                 </div>
             </Card>
-          ))}
+          )})}
         </div>
       </div>
     </section>
   );
 }
+
