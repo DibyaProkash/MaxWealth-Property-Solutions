@@ -6,8 +6,9 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ArrowLeft, Newspaper } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import QuizSection from '@/components/sections/quiz-section'; // Added import
-import AnimatedSection from '@/components/layout/animated-section'; // Added import
+// Removed QuizSection import as it's no longer used here.
+// AnimatedSection is still used, so it remains.
+import AnimatedSection from '@/components/layout/animated-section';
 
 export default function AllInsightsPage() {
   const sortedArticles = [...articlesData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -78,18 +79,7 @@ export default function AllInsightsPage() {
         </div>
       )}
 
-      {/* Added Quiz Section */}
-      <AnimatedSection className="my-16 md:my-24" delay="delay-100">
-        <div className="text-center mb-12">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">
-                Test Your Home Buying Readiness
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Answer a few questions to get an AI-powered assessment of your preparedness for homeownership.
-            </p>
-        </div>
-        <QuizSection />
-      </AnimatedSection>
+      {/* Removed Quiz Section from here */}
 
     </div>
   );
