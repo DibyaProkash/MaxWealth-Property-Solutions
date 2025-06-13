@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, ListChecks, HelpCircle, LogIn, UserPlus, LogOut } from 'lucide-react';
+import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, LogIn, UserPlus, LogOut } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { useAuth } from '@/contexts/auth-context';
 import { Skeleton } from '../ui/skeleton';
@@ -14,7 +14,6 @@ const navLinks = [
   { href: '#about', label: 'About Us', icon: Users },
   { href: '/insights', label: 'Insights', icon: Newspaper }, // Updated href
   { href: '#calculators', label: 'Tools', icon: CalculatorIcon },
-  { href: '#roadmap', label: 'Roadmap', icon: ListChecks },
   { href: '#testimonials', label: 'Testimonials', icon: Star },
   { href: '#faq', label: 'FAQ', icon: HelpCircle },
   { href: '#contact', label: 'Contact', icon: MessageSquare },
