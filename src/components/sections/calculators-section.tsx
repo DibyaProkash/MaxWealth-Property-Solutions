@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ import { analyzeDocument, type DocumentAnalyzerInput, type DocumentAnalyzerOutpu
 import { generateFinancialPlan, type PersonalizedFinancialPlanInput, type PersonalizedFinancialPlanOutput } from "@/ai/flows/personalized-financial-plan-flow";
 import { summarizeMarketTrends, type MarketTrendSummarizerInput, type MarketTrendSummarizerOutput } from "@/ai/flows/market-trend-summarizer-flow";
 
-import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2, UserCheck, BarChart3, UploadCloud } from "lucide-react";
+import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle } from "lucide-react";
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 
 // Dynamically import pdfjs-dist only on the client-side
@@ -24,9 +24,7 @@ let pdfjsLib: any = null;
 if (typeof window !== 'undefined') {
   import('pdfjs-dist/build/pdf').then(lib => {
     pdfjsLib = lib;
-    // Set workerSrc for pdf.js. Using a CDN version for simplicity in Next.js.
-    // Ensure the version matches the installed pdfjs-dist version.
-    // The error message indicates API version 4.10.38 is being used.
+    // Set workerSrc for pdf.js. Ensure the version matches the installed pdfjs-dist version.
     pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs`;
   });
 }
@@ -40,6 +38,7 @@ export default function CalculatorsSection() {
   const [isProcessingPdf, setIsProcessingPdf] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [financialSituation, setFinancialSituation] = useState("");
   const [financialPlan, setFinancialPlan] = useState<string | null>(null);
@@ -135,6 +134,20 @@ export default function CalculatorsSection() {
     } finally {
       setIsAnalyzing(false);
     }
+  };
+
+  const handleRemovePdf = () => {
+    setSelectedFile(null);
+    setExtractedPdfText(null);
+    setAnalysisResult(null);
+    setPdfProcessingError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ""; // Reset file input
+    }
+    toast({
+      title: "PDF Cleared",
+      description: "The selected PDF and its analysis have been cleared.",
+    });
   };
 
   const handleGeneratePlan = async () => {
@@ -273,12 +286,22 @@ export default function CalculatorsSection() {
                     Upload a PDF document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.
                   </CardDescription>
                   <div className="space-y-1.5">
-                    <label htmlFor="pdf-upload" className="text-sm font-medium text-primary flex items-center gap-2 cursor-pointer hover:opacity-80">
-                      <UploadCloud className="h-5 w-5" />
-                      {selectedFile ? `Selected: ${selectedFile.name.substring(0,25)}${selectedFile.name.length > 25 ? '...' : ''}` : "Upload PDF Document"}
-                    </label>
+                    <div className="flex items-center gap-2">
+                      <Button asChild variant="outline" size="sm" className="flex-grow justify-start text-muted-foreground hover:text-primary">
+                        <label htmlFor="pdf-upload" className="cursor-pointer flex items-center gap-2">
+                          <UploadCloud className="h-5 w-5" />
+                          {selectedFile ? `Selected: ${selectedFile.name.substring(0,15)}${selectedFile.name.length > 15 ? '...' : ''}` : "Upload PDF"}
+                        </label>
+                      </Button>
+                      {selectedFile && (
+                        <Button variant="ghost" size="icon" onClick={handleRemovePdf} aria-label="Remove PDF" className="text-destructive hover:bg-destructive/10">
+                          <XCircle className="h-5 w-5" />
+                        </Button>
+                      )}
+                    </div>
                     <ShadcnInput 
                       id="pdf-upload"
+                      ref={fileInputRef}
                       type="file" 
                       accept=".pdf" 
                       onChange={handleFileChange} 
@@ -289,8 +312,8 @@ export default function CalculatorsSection() {
                         For example: loan estimates, disclosures, etc. Max 5MB.
                      </div>
                   </div>
-                  {selectedFile && !isProcessingPdf && !pdfProcessingError && (
-                    <p className="text-xs text-muted-foreground">File ready to analyze: {selectedFile.name}</p>
+                  {selectedFile && !isProcessingPdf && !pdfProcessingError && !extractedPdfText && (
+                    <p className="text-xs text-primary/80">File selected. Click "Analyze" to process.</p>
                   )}
                   {isProcessingPdf && <p className="text-xs text-primary flex items-center"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing PDF...</p>}
                   {pdfProcessingError && (
@@ -384,3 +407,4 @@ export default function CalculatorsSection() {
     </section>
   );
 }
+
