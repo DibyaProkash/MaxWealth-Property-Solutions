@@ -1,7 +1,7 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
-import { getAuth, type Auth } from "firebase/auth";
+// import { getAuth, type Auth } from "firebase/auth"; // Removed
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -24,10 +24,10 @@ if (getApps().length === 0) {
   app = getApps()[0];
 }
 
-const auth: Auth = getAuth(app);
+// const auth: Auth = getAuth(app); // Removed
 
 // If you want to use other Firebase services like Firestore, initialize them here
 // import { getFirestore } from "firebase/firestore";
 // const db = getFirestore(app);
 
-export { app, auth /*, db */ };
+export { app /*, db */ }; // Removed auth from export

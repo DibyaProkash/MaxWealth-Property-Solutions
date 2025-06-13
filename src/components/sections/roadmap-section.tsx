@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useMemo, type FC, useEffect } from 'react';
-import Link from 'next/link';
+// import Link from 'next/link'; // No longer needed for login/signup prompts
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
@@ -20,11 +20,11 @@ import {
   KeyRound,
   ListChecks,
   Lightbulb,
-  Save,
+  Save, // Kept for generic save message
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useAuth } from '@/contexts/auth-context';
+// import { useAuth } from '@/contexts/auth-context'; // Removed
 import { useToast } from '@/hooks/use-toast';
 
 interface RoadmapStep {
@@ -112,49 +112,41 @@ const initialRoadmapStepsData: RoadmapStep[] = [
   },
 ];
 
-const LOCAL_STORAGE_KEY_PREFIX = 'roadmapProgress_';
+const LOCAL_STORAGE_KEY = 'roadmapProgress_local'; // Generic key
 
 export default function RoadmapSection() {
-  const { user, loading: authLoading } = useAuth();
+  // const { user, loading: authLoading } = useAuth(); // Removed
   const { toast } = useToast();
   
   const [steps, setSteps] = useState<RoadmapStep[]>(() => 
-    initialRoadmapStepsData.map(step => ({ ...step })) // Create initial copy with icon references intact
+    initialRoadmapStepsData.map(step => ({ ...step })) 
   );
 
   useEffect(() => {
-    if (user && !authLoading) {
-      const localStorageKey = `${LOCAL_STORAGE_KEY_PREFIX}${user.uid}`;
-      const storedProgressJson = localStorage.getItem(localStorageKey);
-      
-      let currentSteps = initialRoadmapStepsData.map(s => ({ ...s, completed: s.completed })); // Start with fresh initial data
+    // Load progress from localStorage, not dependent on user
+    const storedProgressJson = localStorage.getItem(LOCAL_STORAGE_KEY);
+    
+    let currentSteps = initialRoadmapStepsData.map(s => ({ ...s, completed: s.completed }));
 
-      if (storedProgressJson) {
-        try {
-          // Expect only id and completed status from localStorage
-          const storedUserProgress: Array<{ id: string, completed: boolean }> = JSON.parse(storedProgressJson);
-          
-          currentSteps = currentSteps.map(initialStep => {
-            const progressForThisStep = storedUserProgress.find(p => p.id === initialStep.id);
-            return {
-              ...initialStep, // This re-applies the icon and other static data
-              completed: progressForThisStep ? progressForThisStep.completed : initialStep.completed,
-            };
-          });
-          toast({ title: "Roadmap Loaded", description: "Your previous progress has been loaded.", variant: "default" });
-        } catch (error) {
-          console.error("Failed to parse roadmap progress from localStorage:", error);
-          toast({ title: "Error Loading Progress", description: "Could not load saved roadmap progress.", variant: "destructive" });
-          // If error, currentSteps remains as initialized from initialRoadmapStepsData
-        }
+    if (storedProgressJson) {
+      try {
+        const storedProgress: Array<{ id: string, completed: boolean }> = JSON.parse(storedProgressJson);
+        
+        currentSteps = currentSteps.map(initialStep => {
+          const progressForThisStep = storedProgress.find(p => p.id === initialStep.id);
+          return {
+            ...initialStep,
+            completed: progressForThisStep ? progressForThisStep.completed : initialStep.completed,
+          };
+        });
+        toast({ title: "Roadmap Loaded", description: "Your previous progress has been loaded locally.", variant: "default" });
+      } catch (error) {
+        console.error("Failed to parse roadmap progress from localStorage:", error);
+        toast({ title: "Error Loading Progress", description: "Could not load saved roadmap progress.", variant: "destructive" });
       }
-      setSteps(currentSteps);
-
-    } else if (!user && !authLoading) {
-      // If user logs out or is not logged in, reset to initial state
-      setSteps(initialRoadmapStepsData.map(s => ({ ...s, completed: s.completed })));
     }
-  }, [user, authLoading, toast]);
+    setSteps(currentSteps);
+  }, [toast]);
 
 
   const completedStepsCount = useMemo(() => steps.filter(step => step.completed).length, [steps]);
@@ -167,22 +159,19 @@ export default function RoadmapSection() {
     );
     setSteps(newSteps);
 
-    if (user) {
-      const localStorageKey = `${LOCAL_STORAGE_KEY_PREFIX}${user.uid}`;
-      // Save only id and completed status to localStorage
-      const progressToStore = newSteps.map(s => ({ id: s.id, completed: s.completed }));
-      try {
-        localStorage.setItem(localStorageKey, JSON.stringify(progressToStore));
-         toast({
-          title: "Progress Saved",
-          description: `Step "${newSteps.find(s => s.id === stepId)?.title}" status updated locally.`,
-          variant: "default",
-          duration: 2000,
-        });
-      } catch (error) {
-        console.error("Failed to save roadmap progress to localStorage:", error);
-        toast({ title: "Save Error", description: "Could not save progress to local storage. Your browser might be full or in private mode.", variant: "destructive" });
-      }
+    // Save progress to localStorage using generic key
+    const progressToStore = newSteps.map(s => ({ id: s.id, completed: s.completed }));
+    try {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(progressToStore));
+       toast({
+        title: "Progress Saved",
+        description: `Step "${newSteps.find(s => s.id === stepId)?.title}" status updated locally.`,
+        variant: "default",
+        duration: 2000,
+      });
+    } catch (error) {
+      console.error("Failed to save roadmap progress to localStorage:", error);
+      toast({ title: "Save Error", description: "Could not save progress to local storage. Your browser might be full or in private mode.", variant: "destructive" });
     }
   };
 
@@ -197,18 +186,11 @@ export default function RoadmapSection() {
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Navigate the path to homeownership with our interactive step-by-step guide. Track your progress and get insights for each milestone.
           </p>
-          {authLoading && <p className="text-sm text-muted-foreground mt-2">Checking authentication status...</p>}
-          {!authLoading && user && (
-            <div className="mt-4 p-3 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-md text-sm text-green-700 dark:text-green-300 flex items-center justify-center max-w-md mx-auto">
+          {/* Removed auth loading and login/signup prompts */}
+           <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-md text-sm text-blue-700 dark:text-blue-300 flex items-center justify-center max-w-md mx-auto">
               <Save className="h-5 w-5 mr-2" />
-              Logged in as {user.email}. Your progress is saved locally in this browser.
+              Your progress is saved locally in this browser.
             </div>
-          )}
-           {!authLoading && !user && (
-            <p className="text-sm text-muted-foreground mt-2">
-              <Link href="/login" className="text-primary hover:underline font-semibold">Login</Link> or <Link href="/signup" className="text-primary hover:underline font-semibold">Sign up</Link> to save your progress.
-            </p>
-          )}
         </div>
 
         <div className="max-w-3xl mx-auto space-y-4 mb-8">
@@ -218,7 +200,7 @@ export default function RoadmapSection() {
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {steps.map((step, index) => {
-            const IconComponent = step.icon; // Ensure step.icon is a component
+            const IconComponent = step.icon; 
             return (
             <Card 
               key={step.id} 
@@ -275,7 +257,7 @@ export default function RoadmapSection() {
                       <div className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground py-2 space-y-2">
                         <p>{step.aiTip}</p>
                         <p className="text-xs italic mt-4">
-                          This is a conceptual demonstration. Full AI personalization would require connecting to our Genkit services and potentially user-specific data (with your permission, after logging in and saving progress to a secure database).
+                          This is a conceptual demonstration. Full AI personalization would require connecting to our Genkit services.
                         </p>
                       </div>
                       <div className="flex justify-end pt-2">
@@ -293,4 +275,3 @@ export default function RoadmapSection() {
     </section>
   );
 }
-

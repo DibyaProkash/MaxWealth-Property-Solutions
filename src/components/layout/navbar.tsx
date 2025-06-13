@@ -4,13 +4,13 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, LogIn, LogOut } from 'lucide-react';
+import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle } from 'lucide-react'; // Removed LogIn, LogOut
 import { ThemeToggle } from '@/components/theme-toggle';
-import { useAuth } from '@/contexts/auth-context';
-import { Skeleton } from '../ui/skeleton';
-import { usePathname } from 'next/navigation'; // Added
-import { useScrollSpy } from '@/hooks/use-scroll-spy'; // Added
-import { cn } from '@/lib/utils'; // Added
+// import { useAuth } from '@/contexts/auth-context'; // Removed
+// import { Skeleton } from '../ui/skeleton'; // Removed
+import { usePathname } from 'next/navigation'; 
+import { useScrollSpy } from '@/hooks/use-scroll-spy'; 
+import { cn } from '@/lib/utils'; 
 
 const navLinksData = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
@@ -28,60 +28,11 @@ const homepageSectionIds = navLinksData
 
 
 export default function Navbar() {
-  const { user, loading, logout } = useAuth();
+  // const { user, loading, logout } = useAuth(); // Removed
   const pathname = usePathname();
   const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
 
-  const AuthButtons = () => {
-    if (loading) {
-      return <Skeleton className="h-9 w-20" />;
-    }
-    if (user) {
-      return (
-        <Button onClick={logout} variant="outline" size="sm">
-          <LogOut className="mr-2 h-4 w-4" /> Logout
-        </Button>
-      );
-    }
-    return (
-      <Button variant="default" size="sm" asChild>
-        <Link href="/login">
-          <LogIn className="mr-2 h-4 w-4" /> Login
-        </Link>
-      </Button>
-    );
-  };
-
-  const MobileAuthLinks = () => {
-    if (loading) {
-      return <Skeleton className="h-10 w-full" />;
-    }
-    if (user) {
-      return (
-        <SheetClose asChild>
-          <Button
-            onClick={logout}
-            className="w-full flex items-center justify-start space-x-2 rounded-md p-2 transition-colors hover:bg-destructive hover:text-destructive-foreground"
-            variant="ghost"
-          >
-            <LogOut className="h-5 w-5" />
-            <span>Logout</span>
-          </Button>
-        </SheetClose>
-      );
-    }
-    return (
-      <SheetClose asChild>
-        <Link
-          href="/login"
-          className="flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-accent hover:text-accent-foreground"
-        >
-          <LogIn className="h-5 w-5" />
-          <span>Login</span>
-        </Link>
-      </SheetClose>
-    );
-  }
+  // AuthButtons and MobileAuthLinks removed as auth is removed
 
   const getLinkHref = (href: string) => {
     if (pathname === '/' || !href.startsWith('#')) {
@@ -120,9 +71,7 @@ export default function Navbar() {
             })}
           </nav>
 
-          <div className="hidden md:flex items-center space-x-2">
-            <AuthButtons />
-          </div>
+          {/* Auth buttons placeholder removed */}
           
           <ThemeToggle />
 
@@ -159,9 +108,7 @@ export default function Navbar() {
                       </SheetClose>
                     );
                   })}
-                  <div className="pt-4 border-t border-border/40">
-                    <MobileAuthLinks />
-                  </div>
+                  {/* Mobile auth links placeholder removed */}
                 </div>
               </SheetContent>
             </Sheet>
