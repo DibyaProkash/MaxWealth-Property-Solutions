@@ -28,7 +28,6 @@ export default function Navbar() {
       return (
         <>
           <Skeleton className="h-9 w-20" />
-          <Skeleton className="h-9 w-20" />
         </>
       );
     }
@@ -41,14 +40,9 @@ export default function Navbar() {
     }
     return (
       <>
-        <Button variant="ghost" size="sm" asChild>
+        <Button variant="default" size="sm" asChild>
           <Link href="/login">
             <LogIn className="mr-2 h-4 w-4" /> Login
-          </Link>
-        </Button>
-        <Button variant="default" size="sm" asChild>
-          <Link href="/signup">
-            <UserPlus className="mr-2 h-4 w-4" /> Sign Up
           </Link>
         </Button>
       </>
@@ -82,15 +76,6 @@ export default function Navbar() {
           >
             <LogIn className="h-5 w-5" />
             <span>Login</span>
-          </Link>
-        </SheetClose>
-        <SheetClose asChild>
-          <Link
-            href="/signup"
-            className="flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            <UserPlus className="h-5 w-5" />
-            <span>Sign Up</span>
           </Link>
         </SheetClose>
       </>
