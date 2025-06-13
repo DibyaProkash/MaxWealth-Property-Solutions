@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Home, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import { cn } from "@/lib/utils"; // Added import for cn
 
 interface PasswordCriterion {
   id: string;
