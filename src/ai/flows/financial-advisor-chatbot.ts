@@ -1,3 +1,4 @@
+
 // 'use server';
 
 /**
@@ -31,11 +32,13 @@ const prompt = ai.definePrompt({
   name: 'financialAdvisorChatbotPrompt',
   input: {schema: FinancialAdvisorChatbotInputSchema},
   output: {schema: FinancialAdvisorChatbotOutputSchema},
-  prompt: `You are a helpful AI chatbot providing financial advice on buying a house.
+  prompt: `You are a helpful AI chatbot for MaxWealth PS, a company specializing in financial planning for home buying.
+Your goal is to provide clear, concise, and informative financial advice on buying a house.
+When relevant, subtly mention how MaxWealth PS can assist users with their financial journey.
 
-  User question: {{{question}}}
+User question: {{{question}}}
 
-  Please provide a concise and informative answer.`,
+Please provide a concise and informative answer.`,
 });
 
 const financialAdvisorChatbotFlow = ai.defineFlow(

@@ -1,15 +1,58 @@
 
 "use client";
 
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useToast } from "@/hooks/use-toast";
 import MortgageCalculator from "@/components/calculators/mortgage-calculator";
 import AffordabilityCalculator from "@/components/calculators/affordability-calculator";
 import ClosingCostEstimator from "@/components/calculators/closing-cost-estimator";
-import { Calculator, FileText, BrainCircuit, TrendingUp, Lightbulb } from "lucide-react";
+import { analyzeDocument, type DocumentAnalyzerInput, type DocumentAnalyzerOutput } from "@/ai/flows/document-analyzer-flow";
+import { FileText, BrainCircuit, TrendingUp, Lightbulb, Loader2, Wand2 } from "lucide-react";
 
 export default function CalculatorsSection() {
+  const { toast } = useToast();
+  const [documentText, setDocumentText] = useState("");
+  const [analysisResult, setAnalysisResult] = useState<string | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const handleAnalyzeDocument = async () => {
+    if (!documentText.trim()) {
+      toast({
+        title: "Input Required",
+        description: "Please paste some document text to analyze.",
+        variant: "destructive",
+      });
+      return;
+    }
+    setIsAnalyzing(true);
+    setAnalysisResult(null);
+    try {
+      const input: DocumentAnalyzerInput = { documentText };
+      const result: DocumentAnalyzerOutput = await analyzeDocument(input);
+      setAnalysisResult(result.analysis);
+      toast({
+        title: "Analysis Complete",
+        description: "Document analysis finished successfully.",
+      });
+    } catch (error) {
+      console.error("Error analyzing document:", error);
+      setAnalysisResult("Failed to analyze document. Please try again.");
+      toast({
+        title: "Analysis Failed",
+        description: "An error occurred during document analysis.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
+
   return (
     <section id="calculators" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
@@ -38,7 +81,7 @@ export default function CalculatorsSection() {
               </div>
 
               <TabsContent value="mortgage">
-                <Card className="shadow-lg max-w-2xl mx-auto">
+                <Card className="shadow-lg max-w-2xl mx-auto hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="font-headline text-xl text-primary text-center">Mortgage Payment Calculator</CardTitle>
                   </CardHeader>
@@ -49,7 +92,7 @@ export default function CalculatorsSection() {
               </TabsContent>
 
               <TabsContent value="affordability">
-                <Card className="shadow-lg max-w-2xl mx-auto">
+                <Card className="shadow-lg max-w-2xl mx-auto hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="font-headline text-xl text-primary text-center">Home Affordability Calculator</CardTitle>
                   </CardHeader>
@@ -60,7 +103,7 @@ export default function CalculatorsSection() {
               </TabsContent>
 
               <TabsContent value="closing">
-                <Card className="shadow-lg max-w-2xl mx-auto">
+                <Card className="shadow-lg max-w-2xl mx-auto hover:shadow-xl transition-shadow duration-300">
                   <CardHeader>
                     <CardTitle className="font-headline text-xl text-primary text-center">Closing Cost Estimator</CardTitle>
                   </CardHeader>
@@ -86,12 +129,28 @@ export default function CalculatorsSection() {
                   <CardTitle className="font-headline text-lg text-primary">AI Document Analyzer</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 flex-grow">
-                  <CardDescription>
-                    Securely upload a redacted loan estimate or other financial document to get an AI-powered summary and clear explanation of key terms.
+                  <CardDescription className="mb-3">
+                    Securely paste the text of a redacted loan estimate or other financial document to get an AI-powered summary and clear explanation of key terms.
                   </CardDescription>
+                  <Textarea
+                    placeholder="Paste your document text here..."
+                    value={documentText}
+                    onChange={(e) => setDocumentText(e.target.value)}
+                    rows={6}
+                    className="bg-background/70"
+                    disabled={isAnalyzing}
+                  />
+                  {analysisResult && (
+                    <ScrollArea className="mt-3 h-32 rounded-md border p-3 bg-muted/30 text-sm">
+                      <pre className="whitespace-pre-wrap break-words font-body">{analysisResult}</pre>
+                    </ScrollArea>
+                  )}
                 </CardContent>
                 <div className="p-6 pt-0">
-                  <Button variant="outline" disabled className="w-full">Learn More (Coming Soon)</Button>
+                  <Button onClick={handleAnalyzeDocument} disabled={isAnalyzing || !documentText.trim()} className="w-full">
+                    {isAnalyzing ? <Loader2 className="animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}
+                    Analyze Document
+                  </Button>
                 </div>
               </Card>
 
