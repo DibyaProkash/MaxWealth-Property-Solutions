@@ -3,11 +3,12 @@ import { articlesData, type Article } from '@/lib/data';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { CalendarDays, UserCircle, Tag } from 'lucide-react';
+import { CalendarDays, UserCircle, Tag, MessageSquare } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface InsightPageProps {
   params: {
@@ -82,21 +83,35 @@ export default function InsightPage({ params }: InsightPageProps) {
       )}
 
       <article className="prose dark:prose-invert prose-lg max-w-none font-body text-foreground leading-relaxed">
-        {/* Render paragraphs from fullContent if available, otherwise description */}
         {contentToDisplay.split('\n').map((paragraph, index) => (
-          <p key={index}>{paragraph}</p>
+          paragraph.trim() !== '' && <p key={index}>{paragraph}</p>
         ))}
       </article>
 
       <Separator className="my-12" />
 
-      <div className="mt-12 p-6 bg-secondary/50 rounded-lg">
-        <h3 className="font-headline text-2xl font-semibold text-primary mb-4">Comments</h3>
-        <p className="text-muted-foreground">
-          Comments section coming soon! We'd love to hear your thoughts.
-        </p>
-        {/* Placeholder for future comment form and display */}
-      </div>
+      <Card className="mt-12 shadow-lg">
+        <CardHeader>
+          <CardTitle className="font-headline text-2xl text-primary flex items-center">
+            <MessageSquare className="mr-3 h-6 w-6" />
+            Leave a Comment
+          </CardTitle>
+          <CardDescription>
+            Share your thoughts or ask questions about this {article.type.toLowerCase()}.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="p-6 bg-muted/30 rounded-lg border border-dashed border-border text-center">
+            <p className="text-muted-foreground mb-2">
+              Comment system integration (e.g., Disqus, custom solution) coming soon!
+            </p>
+            <p className="text-xs text-muted-foreground">
+              We value your feedback and look forward to enabling discussions here.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
+
