@@ -4,8 +4,10 @@ import Link from 'next/link';
 import { articlesData, type Article } from '@/lib/data';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ArrowLeft, Newspaper } from 'lucide-react'; // Added Newspaper
+import { ArrowRight, ArrowLeft, Newspaper } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import QuizSection from '@/components/sections/quiz-section'; // Added import
+import AnimatedSection from '@/components/layout/animated-section'; // Added import
 
 export default function AllInsightsPage() {
   const sortedArticles = [...articlesData].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -75,6 +77,20 @@ export default function AllInsightsPage() {
           <p className="text-lg text-muted-foreground">No insights available at the moment. Please check back later.</p>
         </div>
       )}
+
+      {/* Added Quiz Section */}
+      <AnimatedSection className="my-16 md:my-24" delay="delay-100">
+        <div className="text-center mb-12">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">
+                Test Your Home Buying Readiness
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Answer a few questions to get an AI-powered assessment of your preparedness for homeownership.
+            </p>
+        </div>
+        <QuizSection />
+      </AnimatedSection>
+
     </div>
   );
 }
