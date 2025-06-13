@@ -12,7 +12,7 @@ import { Skeleton } from '../ui/skeleton';
 const navLinks = [
   { href: '#hero', label: 'Home', icon: Home },
   { href: '#about', label: 'About Us', icon: Users },
-  { href: '#content', label: 'Insights', icon: Newspaper },
+  { href: '/insights', label: 'Insights', icon: Newspaper }, // Updated href
   { href: '#calculators', label: 'Tools', icon: CalculatorIcon },
   { href: '#roadmap', label: 'Roadmap', icon: ListChecks },
   { href: '#testimonials', label: 'Testimonials', icon: Star },

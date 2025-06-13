@@ -34,7 +34,7 @@ export default function InsightPage({ params }: InsightPageProps) {
   return (
     <div className="container mx-auto px-4 py-8 md:py-16 max-w-4xl">
       <div className="mb-8">
-        <Link href="/#content" passHref>
+        <Link href="/insights" passHref>
           <Button variant="outline" className="mb-6">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to All Insights
@@ -114,4 +114,3 @@ export default function InsightPage({ params }: InsightPageProps) {
     </div>
   );
 }
-

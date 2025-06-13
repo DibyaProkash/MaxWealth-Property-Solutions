@@ -210,17 +210,13 @@ export default function ContentSection() {
         )}
         
         <div className="text-center mt-12">
-            <Button size="lg" variant="outline" className="shadow-md hover:shadow-lg transition-shadow" 
-                onClick={() => { 
-                    setFilterType('all'); 
-                    setSortOption('date-desc'); 
-                    setSearchTerm(''); 
-                }}>
-                View All Insights
+            <Button size="lg" variant="outline" className="shadow-md hover:shadow-lg transition-shadow" asChild>
+                <Link href="/insights">
+                    View All Insights <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
             </Button>
         </div>
       </div>
     </section>
   );
 }
-
