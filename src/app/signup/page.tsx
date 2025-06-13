@@ -42,6 +42,12 @@ function PasswordStrengthIndicator({ criteria }: { criteria: PasswordCriterion[]
   );
 }
 
+const isValidEmail = (email: string): boolean => {
+  // Basic regex for email format validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -50,6 +56,7 @@ export default function SignupPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [passwordCriteria, setPasswordCriteria] = useState<PasswordCriterion[]>(initialPasswordCriteria.map(c => ({...c}))); // Deep copy
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [emailIsValidFormat, setEmailIsValidFormat] = useState(true);
 
   const router = useRouter();
   const { toast } = useToast();
@@ -63,13 +70,27 @@ export default function SignupPage() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [password]);
 
-  const allCriteriaMet = passwordCriteria.every(criterion => criterion.met);
+  useEffect(() => {
+    if (email.length > 0) {
+      setEmailIsValidFormat(isValidEmail(email));
+    } else {
+      setEmailIsValidFormat(true); // Don't show error for empty field initially
+    }
+  }, [email]);
+
+  const allPasswordCriteriaMet = passwordCriteria.every(criterion => criterion.met);
   const passwordsMatch = password === confirmPassword;
-  const canSubmit = allCriteriaMet && passwordsMatch && email.length > 0;
+  const canSubmit = allPasswordCriteriaMet && passwordsMatch && emailIsValidFormat && email.length > 0 && password.length > 0;
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+
+    if (!emailIsValidFormat) {
+      setError("Please enter a valid email address.");
+      toast({ title: "Signup Error", description: "Invalid email format.", variant: "destructive" });
+      return;
+    }
 
     if (!passwordsMatch) {
       setError("Passwords do not match.");
@@ -77,7 +98,7 @@ export default function SignupPage() {
       return;
     }
 
-    if (!allCriteriaMet) {
+    if (!allPasswordCriteriaMet) {
       setError("Password does not meet all criteria.");
       toast({ title: "Signup Error", description: "Password does not meet all criteria.", variant: "destructive" });
       return;
@@ -105,14 +126,26 @@ export default function SignupPage() {
     } catch (err: any) {
       if (err.code === 'auth/email-already-in-use') {
         setError("This email address is already in use. Please try a different email or login.");
+         toast({
+          title: "Signup Failed",
+          description: "This email address is already in use.",
+          variant: "destructive",
+        });
+      } else if (err.code === 'auth/invalid-email') {
+        setError("The email address is not valid.");
+         toast({
+          title: "Signup Failed",
+          description: "The email address is not valid. Please check and try again.",
+          variant: "destructive",
+        });
       } else {
         setError(err.message || "Failed to create account. Please try again.");
+        toast({
+          title: "Signup Failed",
+          description: err.message || "Please try again.",
+          variant: "destructive",
+        });
       }
-      toast({
-        title: "Signup Failed",
-        description: err.message || "Please try again.",
-        variant: "destructive",
-      });
     } finally {
       setIsLoading(false);
     }
@@ -138,7 +171,14 @@ export default function SignupPage() {
                 required
                 disabled={isLoading}
                 autoComplete="email"
+                className={cn(!emailIsValidFormat && email.length > 0 ? "border-destructive focus-visible:ring-destructive" : "")}
               />
+              {!emailIsValidFormat && email.length > 0 && (
+                <div className="flex items-center text-xs text-destructive mt-1">
+                  <AlertTriangle className="mr-1.5 h-3.5 w-3.5" />
+                  Please enter a valid email format.
+                </div>
+              )}
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
@@ -148,7 +188,7 @@ export default function SignupPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 onFocus={() => setIsPasswordFocused(true)}
-                onBlur={() => setIsPasswordFocused(password.length > 0)} // Keep visible if password has content
+                onBlur={() => setIsPasswordFocused(password.length > 0)} 
                 placeholder="••••••••"
                 required
                 disabled={isLoading}
@@ -197,5 +237,3 @@ export default function SignupPage() {
     </div>
   );
 }
-
-    
