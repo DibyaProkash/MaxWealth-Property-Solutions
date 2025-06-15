@@ -1,5 +1,5 @@
 
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon, Percent } from 'lucide-react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale } from 'lucide-react';
 
 export interface Testimonial {
   name: string;
@@ -438,7 +438,7 @@ export const servicesData: ServiceOffering[] = [
       'Contracts and purchase',
       'Property settlement'
     ],
-    icon: Percent, // Changed from TrendingUp to Percent to match an auction gavel/percentage feel
+    icon: Percent,
   }
 ];
 
@@ -511,28 +511,142 @@ export const whoWeHelpData: WhoWeHelpItem[] = [
     id: 'help6',
     title: 'Property Management',
     description: 'Offering professional property management services that protect your investment. We handle everything from tenant relations to maintenance, ensuring your property is well-maintained and profitable.',
-    icon: ShieldCheck, // Changed from Briefcase for better thematic fit
+    icon: ShieldCheck,
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'property keys management',
   },
 ];
 
 export interface ServiceLocationItem {
-  id: string;
+  id: string; // Unique identifier for the location
+  slug: string; // URL-friendly slug
   name: string;
   image: string;
   dataAiHint: string;
+  tagline?: string; // Optional short tagline for the city page
+  heroImage: string;
+  heroImageAiHint: string;
 }
 
 export const serviceLocationsData: ServiceLocationItem[] = [
-  { id: 'loc1', name: 'Sydney', image: 'https://placehold.co/400x300.png', dataAiHint: 'Sydney skyline' },
-  { id: 'loc2', name: 'Melbourne', image: 'https://placehold.co/400x300.png', dataAiHint: 'Melbourne city' },
-  { id: 'loc3', name: 'Brisbane', image: 'https://placehold.co/400x300.png', dataAiHint: 'Brisbane river' },
-  { id: 'loc4', name: 'Gold Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Gold Coast beach' },
-  { id: 'loc5', name: 'Adelaide', image: 'https://placehold.co/400x300.png', dataAiHint: 'Adelaide park' },
-  { id: 'loc6', name: 'Sunshine Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Sunshine Coast view' },
-  { id: 'loc7', name: 'Newcastle & Hunter Valley', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hunter Valley vineyard' },
-  { id: 'loc8', name: 'Central Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Central Coast scenery' },
-  { id: 'loc9', name: 'Hobart', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hobart waterfront' },
+  { id: 'loc1', slug: 'sydney', name: 'Sydney', image: 'https://placehold.co/400x300.png', dataAiHint: 'Sydney opera house', tagline: 'Iconic landmarks and vibrant city living.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Sydney harbour bridge' },
+  { id: 'loc2', slug: 'melbourne', name: 'Melbourne', image: 'https://placehold.co/400x300.png', dataAiHint: 'Melbourne city tram', tagline: 'Culture, coffee, and a cosmopolitan lifestyle.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Melbourne laneway art' },
+  { id: 'loc3', slug: 'brisbane', name: 'Brisbane', image: 'https://placehold.co/400x300.png', dataAiHint: 'Brisbane story bridge', tagline: 'Sunny skies and a relaxed urban atmosphere.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Brisbane river city' },
+  { id: 'loc4', slug: 'gold-coast', name: 'Gold Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Gold Coast surfers paradise', tagline: 'Famous beaches and a thriving entertainment scene.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Gold Coast beach aerial' },
+  { id: 'loc5', slug: 'adelaide', name: 'Adelaide', image: 'https://placehold.co/400x300.png', dataAiHint: 'Adelaide hills vineyard', tagline: 'Charming city with renowned wine regions nearby.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Adelaide city park' },
+  { id: 'loc6', slug: 'sunshine-coast', name: 'Sunshine Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Sunshine Coast glasshouse mountains', tagline: 'Pristine beaches and lush hinterland.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Sunshine Coast beach view' },
+  { id: 'loc7', slug: 'newcastle-hunter-valley', name: 'Newcastle & Hunter Valley', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hunter Valley wine tasting', tagline: 'Coastal city charm meets wine country elegance.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Newcastle beach sunrise' },
+  { id: 'loc8', slug: 'central-coast', name: 'Central Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Central Coast beach town', tagline: 'Beautiful waterways and beaches north of Sydney.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Central Coast lake Macquarie' },
+  { id: 'loc9', slug: 'hobart', name: 'Hobart', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hobart mount wellington', tagline: 'Historic charm and stunning natural beauty.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Hobart historic waterfront' },
 ];
-    
+
+export interface LocationDetail {
+  slug: string;
+  name: string;
+  pageIntro: string;
+  tagline?: string; // Added to match ServiceLocationItem
+  specificIntroParagraphs: string[];
+  transportInfo: {
+    train?: string;
+    ferry?: string;
+    air?: string;
+    general?: string;
+  };
+  shopsAndRestaurantsInfo: string;
+  leisureInfo: string;
+  touristLink: string;
+  heroImage: string;
+  heroImageAiHint: string;
+}
+
+export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(loc => {
+  if (loc.slug === 'central-coast') {
+    return {
+      slug: 'central-coast',
+      name: 'Central Coast',
+      pageIntro: 'Unlock Your Dream Property on the Central Coast',
+      tagline: loc.tagline,
+      specificIntroParagraphs: [
+        "Looking to buy a home or investment property on the Central Coast, just one hour north of Sydney? The Central Coast boasts a beautiful array of suburbs surrounded by waterways and beaches, offering very natural settings yet close to major services at a more affordable price.",
+        "From Gosford to Woy Woy, the prestigious beaches of Killcare, Avoca, or McMasters, the lakeside areas of Saratoga, The Entrance, Toukley, or Berkley Vale, and north to the Lake Macquarie area, our Central Coast buyers' agent has it covered! It makes perfect sense to engage our Central Coast buyers’ agent to uncover off-market opportunities that you'd never discover on your own.",
+        "Securing a property on the Central Coast requires extensive and established connections to get ahead of other buyers. Our Central Coast buyers’ agent will help you uncover the ideal area and property types to suit your individual requirements and freely share their local knowledge."
+      ],
+      transportInfo: {
+        train: "NSW TrainLink offers regular rail service to the Central Coast, approximately every hour from Newcastle and every half-hour from Sydney. The trip takes roughly 1.5 hours from each location. For details, visit transportnsw.info.",
+        ferry: "Palm Beach Ferries provide daily services between Sydney (Palm Beach) and the Central Coast (Ettalong Beach).",
+        air: "Gosford is about 115 km (1 hour 15 mins drive) from Newcastle Airport and about 85 km (1 hour 20 mins drive) from Sydney Airport."
+      },
+      shopsAndRestaurantsInfo: "For 1950s-style pizza and tropical beverages, head to Tropicana Social Club in Woy Woy, or travel back another 20 years with a drink at Hotel Mezza in Wyong, situated in a former bank from the 1930s. Long Jetty's The Savoy, a former 1950s theater transformed into a multi-purpose bar and restaurant with frequent movie screenings, is another heritage property brought back to life. After a significant renovation, Hotel Gosford has re-established itself as a legendary bar; its slick Art Deco design pays homage to its 1920s roots. Terrigal, a coastal town, is home to the edgy Pocket Bar, serving creative drinks and mouthwatering bar snacks.",
+      leisureInfo: "The Central Coast is a beach lover's paradise with an 87-kilometre coastline and over 40 beaches. Finding a piece of beach and enjoying the ocean lifestyle—whether splashing at Toowoon Bay, dipping into The Entrance Ocean Baths, or exploring rock pools at MacMasters or Pearl Beach—is a given. Kate Grenville's novel The Hidden River introduces the area near the Hawkesbury River. Pelican feeding at Pelican Plaza, The Entrance (3:30 pm daily) is a famous sight. For relaxation, Bells Day Spa at Bells at Killcare offers indigenous Australian healing methods. Vie Spa at Pullman Magenta Shores Resort uses organic, all-Australian products. Aztec Skin Clinic & Day Spa features a Roman Spa and Fijian-influenced treatments.",
+      touristLink: 'https://www.visitnsw.com/destinations/central-coast',
+      heroImage: loc.heroImage,
+      heroImageAiHint: loc.heroImageAiHint,
+    };
+  }
+  return {
+    slug: loc.slug,
+    name: loc.name,
+    pageIntro: `Unlock Your Dream Property in ${loc.name}`,
+    tagline: loc.tagline,
+    specificIntroParagraphs: [
+      `Looking to buy a home or investment property in ${loc.name}? This vibrant region offers a unique blend of lifestyle and opportunity. Our expert buyers' agents at MaxWealth PS are ready to guide you.`,
+      `${loc.name} features diverse suburbs, from bustling city centers to serene ${loc.slug.includes('coast') || loc.slug.includes('sydney') || loc.slug.includes('melbourne') ? 'coastal retreats' : 'natural landscapes'}. We can help you find the perfect match for your needs.`,
+      `With our deep local knowledge and extensive network in ${loc.name}, we uncover off-market deals and provide you with a competitive edge. Let us make your property journey in ${loc.name} a success.`
+    ],
+    transportInfo: {
+      general: `Detailed transport information for ${loc.name} is being compiled. Generally, ${loc.name} is well-connected by public transport and road networks. Check local transport authorities for specific routes and schedules.`
+    },
+    shopsAndRestaurantsInfo: `${loc.name} offers a wide variety of dining and shopping experiences, from local boutiques and farmers' markets to high-end restaurants and shopping centers. Explore its culinary scene and retail hubs.`,
+    leisureInfo: `Discover the leisure activities in ${loc.name}. Whether it's exploring natural parks, enjoying cultural events, or engaging in sports, ${loc.name} has something for everyone. Rich in history and natural beauty, there's always something to do.`,
+    touristLink: '#', // Replace with actual tourist links if available
+    heroImage: loc.heroImage,
+    heroImageAiHint: loc.heroImageAiHint,
+  };
+});
+
+
+export interface WhyChooseUsItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+export const whyChooseUsData: WhyChooseUsItem[] = [
+  {
+    id: 'wcu1',
+    title: 'Industry Experience',
+    description: 'With over two decades on the buyers’ side, we know how to successfully navigate the purchasing journey.',
+    icon: Landmark,
+  },
+  {
+    id: 'wcu2',
+    title: 'Market Coverage',
+    description: 'We have a team of residential & commercial specialists covering home buyers, property investors and commercial buyers.',
+    icon: MapPin,
+  },
+  {
+    id: 'wcu3',
+    title: 'Results Orientated',
+    description: 'Our commitment to excellence in service delivery makes us stand out from other agencies, saving you time and stress.',
+    icon: Target,
+  },
+  {
+    id: 'wcu4',
+    title: 'Accurate Appraisals',
+    description: 'Using the latest market data and local knowledge, we provide highly accurate property appraisals and independent opinions on the value of a subject property.',
+    icon: Scale,
+  },
+  {
+    id: 'wcu5',
+    title: 'Extensive Network',
+    description: 'We’ve got an extensive database of agents and the best contacts to give you the inside running, including access to off-market properties.',
+    icon: Handshake,
+  },
+  {
+    id: 'wcu6',
+    title: 'Research & Data',
+    description: 'With our own Suburb Selector™ portal and access to live property data from all major providers, we have the latest property intelligence.',
+    icon: Lightbulb,
+  },
+];

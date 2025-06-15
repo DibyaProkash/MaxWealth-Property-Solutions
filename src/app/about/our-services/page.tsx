@@ -86,7 +86,7 @@ export default function OurServicesPage() {
 
           {/* Where We Service Section */}
           <AnimatedSection delay="delay-150">
-            <section className="py-16 md:py-24 bg-secondary rounded-lg">
+            <section id="where-we-service" className="py-16 md:py-24 bg-secondary rounded-lg">
               <div className="container mx-auto px-6">
                 <div className="text-center mb-12 md:mb-16">
                   <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-4">Where We Service</h2>
@@ -94,24 +94,27 @@ export default function OurServicesPage() {
                     Discover the diverse regions we proudly serve, where our dedicated team helps clients uncover their perfect homes and investment opportunities. Whether you're drawn to vibrant cityscapes, serene coastal havens, or charming suburban retreats, we bring local expertise and personalised service to Australia’s most sought-after locations. Let us guide you in finding a property that perfectly matches your lifestyle, goals, and dreams.
                   </p>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
                   {serviceLocationsData.map((location) => (
-                    <Card key={location.id} className="shadow-md hover:shadow-lg transition-shadow duration-300 bg-card overflow-hidden group text-center">
-                      <div className="relative h-32 sm:h-40 w-full">
+                    <Link key={location.id} href={`/locations/${location.slug}`} passHref className="group block">
+                      <Card className="shadow-md hover:shadow-xl transition-shadow duration-300 bg-card overflow-hidden relative aspect-[4/3] rounded-lg">
                         <Image
                           src={location.image}
                           alt={location.name}
                           fill
                           style={{objectFit: 'cover'}}
-                          className="group-hover:scale-105 transition-transform duration-300"
+                          className="group-hover:scale-105 transition-transform duration-500 ease-in-out"
                           data-ai-hint={location.dataAiHint}
-                          sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 33vw"
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                         />
-                      </div>
-                      <CardContent className="p-3 sm:p-4">
-                        <h3 className="font-headline text-md sm:text-lg font-semibold text-primary">{location.name}</h3>
-                      </CardContent>
-                    </Card>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent group-hover:from-black/90 transition-all duration-300"></div>
+                        <CardContent className="absolute bottom-0 left-0 right-0 p-4 text-center">
+                          <h3 className="font-headline text-xl md:text-2xl font-semibold text-white group-hover:text-accent transition-colors duration-300">
+                            {location.name}
+                          </h3>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
               </div>
