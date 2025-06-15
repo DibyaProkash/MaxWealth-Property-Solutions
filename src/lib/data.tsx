@@ -1,6 +1,6 @@
 
 import React, { type SVGProps } from 'react';
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText as LucideFileText } from 'lucide-react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText as LucideFileText, Linkedin, Mail } from 'lucide-react';
 
 
 // Helper icon component (if not directly from lucide-react or if a specific one is needed)
@@ -365,6 +365,10 @@ export interface TeamMemberDetailed {
   dataAiHint: string;
   bio: string;
   specialties?: string[];
+  socialLinks?: {
+    linkedin?: string;
+    email?: string;
+  };
 }
 
 export const teamMembersDetailedData: TeamMemberDetailed[] = [
@@ -372,10 +376,14 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     id: 'tm1',
     name: 'Jacqueline Dwyer',
     title: 'CEO & Founder, Lead Buyers Advocate',
-    image: 'https://placehold.co/400x450.png',
+    image: 'https://placehold.co/400x450.png', // This was 400x450, keep if specific for her in founder section
     dataAiHint: 'woman professional portrait',
     bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas. Jacqueline has a keen focus on development sites, commercial properties, and investment markets nationwide.",
-    specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis']
+    specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis'],
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:jacqueline.dwyer@example.com'
+    }
   },
   {
     id: 'tm2',
@@ -384,7 +392,11 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     image: 'https://placehold.co/300x300.png',
     dataAiHint: 'woman portrait smiling',
     bio: 'Alice has over 10 years of experience in financial planning, specializing in mortgage structuring and first-time home buyer programs. She is passionate about empowering clients to make sound financial decisions.',
-    specialties: ['Mortgage Planning', 'First-Time Home Buyers', 'Debt Management']
+    specialties: ['Mortgage Planning', 'First-Time Home Buyers', 'Debt Management'],
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:alice.johnson@example.com'
+    }
   },
   {
     id: 'tm3',
@@ -393,7 +405,11 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     image: 'https://placehold.co/300x300.png',
     dataAiHint: 'man portrait professional',
     bio: 'Bob is an expert in real estate investment analysis and portfolio growth. He helps clients identify high-potential properties and develop long-term investment strategies.',
-    specialties: ['Property Investment', 'Portfolio Management', 'Risk Assessment']
+    specialties: ['Property Investment', 'Portfolio Management', 'Risk Assessment'],
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:bob.williams@example.com'
+    }
   },
   {
     id: 'tm4',
@@ -402,7 +418,11 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     image: 'https://placehold.co/300x300.png',
     dataAiHint: 'person friendly portrait',
     bio: 'Carol ensures a smooth and positive experience for all MaxWealth PS clients. She manages client communications and oversees operational efficiency to deliver top-tier service.',
-    specialties: ['Client Servicing', 'Process Optimization', 'Team Coordination']
+    specialties: ['Client Servicing', 'Process Optimization', 'Team Coordination'],
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:carol.davis@example.com'
+    }
   }
 ];
 
@@ -842,4 +862,3 @@ export const memberLogos = [
   { id: 'ml5', hint: 'property institute logo' },
   { id: 'ml6', hint: 'certification program logo' },
 ];
-

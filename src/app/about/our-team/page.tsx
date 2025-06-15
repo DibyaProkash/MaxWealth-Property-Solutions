@@ -5,18 +5,19 @@ import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, CheckCircle, Briefcase, SearchCheck, TrendingUp, Users, HomeIcon } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import { teamMembersDetailedData, type TeamMemberDetailed } from '@/lib/data';
 import Footer from '@/components/layout/footer';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
-// Data moved from about-us-section
 const founderData = {
-  name: 'Jacqueline Dwyer', // Updated to match reference
+  name: 'Jacqueline Dwyer',
   title: 'CEO & Founder & Buyers Advocate',
   bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas including Sydney's Eastern Suburbs, North Shore, and Northern Beaches, and nationally with offices servicing Melbourne, Brisbane and Gold Coast. Jacqueline has a keen focus on development sites, commercial properties, and investment markets Australia-wide.",
   image: 'https://placehold.co/400x450.png', 
@@ -24,20 +25,14 @@ const founderData = {
   logoText: 'MAXWEALTH PS',
 };
 
-const simpleTeamMembers = [
-  { name: 'Alice Johnson', role: 'Lead Financial Advisor', image: 'https://placehold.co/300x300.png', dataAiHint: 'woman portrait' },
-  { name: 'Bob Williams', role: 'Mortgage Specialist', image: 'https://placehold.co/300x300.png', dataAiHint: 'man portrait' },
-  { name: 'Carol Davis', role: 'Client Relations Manager', image: 'https://placehold.co/300x300.png', dataAiHint: 'person smiling' },
-  { name: 'David Lee', role: 'Investment Analyst', image: 'https://placehold.co/300x300.png', dataAiHint: 'man thinking' },
-];
-
-
 export default function OurTeamPage() {
     const autoplayPlugin = React.useRef(
         Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true })
     );
 
     const [itemsPerView, setItemsPerView] = React.useState(3);
+    const [selectedMember, setSelectedMember] = React.useState<TeamMemberDetailed | null>(null);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     React.useEffect(() => {
         const updateItemsPerView = () => {
@@ -53,6 +48,11 @@ export default function OurTeamPage() {
         updateItemsPerView();
         return () => window.removeEventListener('resize', updateItemsPerView);
     }, []);
+
+    const handleMemberClick = (member: TeamMemberDetailed) => {
+        setSelectedMember(member);
+        setIsModalOpen(true);
+    };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -103,7 +103,6 @@ export default function OurTeamPage() {
             </div>
           </AnimatedSection>
 
-          {/* Founder Showcase Section (Moved from AboutUsSection) */}
           <AnimatedSection delay="delay-100">
             <div className="mt-16 md:mt-24 mb-12 md:mb-16">
                 <Card className="bg-primary text-primary-foreground shadow-xl rounded-xl overflow-hidden">
@@ -139,19 +138,18 @@ export default function OurTeamPage() {
             </div>
           </AnimatedSection>
           
-          {/* Meet Our Expert Team Carousel (Moved from AboutUsSection) */}
           <AnimatedSection delay="delay-150">
-            <div className="text-center mb-8 mt-12"> {/* Adjusted margin */}
+            <div className="text-center mb-8 mt-12">
               <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-2">Meet Our Expert Team</h3>
               <p className="text-lg text-muted-foreground max-w-xl mx-auto font-body">
-                Our experienced professionals are passionate about helping you succeed.
+                Our experienced professionals are passionate about helping you succeed. Click on a team member to learn more.
               </p>
             </div>
-            {simpleTeamMembers.length > 0 ? (
+            {teamMembersDetailedData.length > 0 ? (
               <Carousel
                 opts={{
                 align: "start",
-                loop: simpleTeamMembers.length > itemsPerView,
+                loop: teamMembersDetailedData.length > itemsPerView,
                 }}
                 plugins={autoplayPlugin.current ? [autoplayPlugin.current] : []}
                 onMouseEnter={() => autoplayPlugin.current?.stop()}
@@ -159,8 +157,8 @@ export default function OurTeamPage() {
                 className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
               >
                 <CarouselContent className="-ml-4">
-                {simpleTeamMembers.map((member) => (
-                    <CarouselItem key={member.name} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                {teamMembersDetailedData.map((member) => (
+                    <CarouselItem key={member.id} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                     <div className="p-1 h-full">
                         <Card className="text-center shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card h-full flex flex-col">
                         <div className="relative h-60 w-full">
@@ -174,64 +172,90 @@ export default function OurTeamPage() {
                             />
                         </div>
                         <CardContent className="p-6 flex-grow">
-                            <h4 className="font-headline text-xl font-semibold text-primary mb-1">{member.name}</h4>
-                            <p className="text-accent">{member.role}</p>
+                            <Button variant="link" onClick={() => handleMemberClick(member)} className="p-0 h-auto font-headline text-xl text-primary hover:text-accent mb-1">
+                                {member.name}
+                            </Button>
+                            <p className="text-accent">{member.title}</p>
                         </CardContent>
                         </Card>
                     </div>
                     </CarouselItem>
                 ))}
                 </CarouselContent>
-                {simpleTeamMembers.length > itemsPerView && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
-                {simpleTeamMembers.length > itemsPerView && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
+                {teamMembersDetailedData.length > itemsPerView && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
+                {teamMembersDetailedData.length > itemsPerView && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
               </Carousel>
             ) : (
               <p className="text-center text-muted-foreground mb-12 md:mb-16">Team information coming soon.</p>
             )}
           </AnimatedSection>
 
-
-          {/* Detailed Team Members Section */}
-          <AnimatedSection delay="delay-200">
-            <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-8 text-center">Meet Our Core Professionals</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 md:mb-16">
-              {teamMembersDetailedData.map((member) => (
-                <Card key={member.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card overflow-hidden">
-                  <div className="md:flex">
-                    <div className="md:w-1/3 relative min-h-[250px] md:min-h-0">
+          {/* Detailed Team Member Modal */}
+          {selectedMember && (
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+              <DialogContent className="sm:max-w-2xl bg-card p-0">
+                <DialogHeader className="p-6 pb-0">
+                  <DialogTitle className="font-headline text-2xl text-primary">{selectedMember.name}</DialogTitle>
+                  <DialogDescription className="text-accent">{selectedMember.title}</DialogDescription>
+                </DialogHeader>
+                <ScrollArea className="max-h-[70vh]">
+                <div className="p-6 grid md:grid-cols-3 gap-6">
+                  <div className="md:col-span-1">
+                    <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-md mb-4">
                       <Image
-                        src={member.image}
-                        alt={member.name}
+                        src={selectedMember.image}
+                        alt={selectedMember.name}
                         fill
                         style={{ objectFit: 'cover' }}
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        data-ai-hint={member.dataAiHint}
+                        sizes="33vw"
+                        data-ai-hint={selectedMember.dataAiHint}
                       />
                     </div>
-                    <div className="md:w-2/3">
-                      <CardHeader>
-                        <CardTitle className="font-headline text-xl text-primary">{member.name}</CardTitle>
-                        <CardDescription className="text-accent">{member.title}</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm text-muted-foreground mb-3 font-body">{member.bio}</p>
-                        {member.specialties && member.specialties.length > 0 && (
-                          <div>
-                            <h4 className="text-sm font-semibold text-primary mb-1">Specialties:</h4>
-                            <ul className="list-disc list-inside text-xs text-muted-foreground space-y-0.5">
-                              {member.specialties.map(spec => <li key={spec}>{spec}</li>)}
-                            </ul>
-                          </div>
-                        )}
-                      </CardContent>
-                    </div>
+                     {selectedMember.socialLinks && (
+                        <div className="space-y-2">
+                          {selectedMember.socialLinks.linkedin && selectedMember.socialLinks.linkedin !== '#' && (
+                            <Button variant="outline" asChild className="w-full">
+                              <Link href={selectedMember.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
+                                <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
+                              </Link>
+                            </Button>
+                          )}
+                          {selectedMember.socialLinks.email && (
+                            <Button variant="outline" asChild className="w-full">
+                              <Link href={selectedMember.socialLinks.email}>
+                                <Mail className="mr-2 h-4 w-4" /> Email
+                              </Link>
+                            </Button>
+                          )}
+                        </div>
+                      )}
                   </div>
-                </Card>
-              ))}
-            </div>
-          </AnimatedSection>
+                  <div className="md:col-span-2">
+                    <h4 className="font-semibold text-primary mb-2">About {selectedMember.name.split(' ')[0]}</h4>
+                    <p className="text-sm text-muted-foreground mb-4 font-body leading-relaxed">
+                      {selectedMember.bio}
+                    </p>
+                    {selectedMember.specialties && selectedMember.specialties.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-primary mb-2">Specialties:</h4>
+                        <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1 font-body">
+                          {selectedMember.specialties.map(spec => <li key={spec}>{spec}</li>)}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                </ScrollArea>
+                <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+                    <X className="h-5 w-5" />
+                    <span className="sr-only">Close</span>
+                </DialogClose>
+              </DialogContent>
+            </Dialog>
+          )}
 
-          {/* Services Section */}
+
+          {/* Services Section - Removed Detailed Team Members section above this */}
           <AnimatedSection delay="delay-250">
             <ServicesSectionHighlights />
           </AnimatedSection>
