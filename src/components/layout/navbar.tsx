@@ -1,7 +1,7 @@
 
 "use client";
 
-import * as React from 'react'; // Added this line
+import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
@@ -115,13 +115,15 @@ export default function Navbar() {
                 }
                 return (
                   <NavigationMenuItem key={link.label}>
-                    <Link href={getLinkHref(link.href)} asChild>
-                      <NavigationMenuLink
-                        className={cn(navigationMenuTriggerStyle(),
-                          "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                          isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
-                        )}
-                      >
+                    <Link
+                      href={getLinkHref(link.href)}
+                      className={cn(navigationMenuTriggerStyle(),
+                        "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
+                        isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
+                      )}
+                      asChild
+                    >
+                      <NavigationMenuLink>
                         {link.label}
                       </NavigationMenuLink>
                     </Link>
@@ -172,7 +174,7 @@ export default function Navbar() {
                               return (
                                 <SheetClose key={subItem.label} asChild>
                                   <Link
-                                    href={subItem.href} // No need for getLinkHref for sub-items as they are direct page links
+                                    href={subItem.href} 
                                     className={cn(
                                       "flex items-center space-x-2 rounded-md p-2 text-sm transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
                                       isSubItemActive ? "bg-primary-foreground/10 text-primary-foreground font-medium" : "text-primary-foreground/80"
@@ -221,7 +223,7 @@ const ListItem = React.forwardRef<
   return (
     <li>
       <NavigationMenuLink asChild>
-        <a
+        <Link
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground",
@@ -236,9 +238,10 @@ const ListItem = React.forwardRef<
           <p className="line-clamp-2 text-sm leading-snug text-primary-foreground/70">
             {children}
           </p>
-        </a>
+        </Link>
       </NavigationMenuLink>
     </li>
   )
 })
 ListItem.displayName = "ListItem"
+
