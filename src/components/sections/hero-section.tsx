@@ -3,9 +3,6 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight, MessageSquare } from 'lucide-react';
-// Image and Card components are no longer needed here if the image section is fully removed
-// import Image from 'next/image';
-// import { Card, CardContent } from '@/components/ui/card';
 import AIChatbot from '@/components/sections/ai-chatbot';
 
 export default function HeroSection() {
@@ -13,7 +10,7 @@ export default function HeroSection() {
   return (
     <section id="hero" className="py-16 md:py-24 bg-primary text-primary-foreground">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center"> {/* Changed items-start to items-center for better vertical alignment */}
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column: Text Content */}
           <div className="md:text-left text-center">
             <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
@@ -28,7 +25,12 @@ export default function HeroSection() {
                   Book a Consultation <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground shadow-lg transform transition-transform hover:scale-105" asChild>
+              <Button 
+                size="lg" 
+                variant="secondary" // Changed variant to secondary
+                className="shadow-lg transform transition-transform hover:scale-105" // Removed custom text/border/hover overrides for outline
+                asChild
+              >
                 <a href="#about">Learn More</a>
               </Button>
             </div>
@@ -40,6 +42,7 @@ export default function HeroSection() {
                 className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground shadow-lg w-full sm:w-auto"
                 onClick={() => {
                   // This button acts as a CTA. Users will use the global floating LiveChatWidget.
+                  // No direct action needed here if the global widget is always present.
                 }}
               >
                 <MessageSquare className="mr-2 h-5 w-5" />
@@ -49,7 +52,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: AI Chatbot for Desktop */}
-          <div className="hidden md:flex justify-center items-center w-full"> {/* Ensure chatbot is centered */}
+          <div className="hidden md:flex justify-center items-center w-full">
               <AIChatbot />
           </div>
         </div>
