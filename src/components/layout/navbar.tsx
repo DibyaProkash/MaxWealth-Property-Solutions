@@ -68,11 +68,14 @@ export default function Navbar() {
   }, []);
 
   const getLinkHref = (href: string) => {
+    // If on homepage, hash links are fine.
+    // If on another page, prepend '/' to hash links to go to homepage sections.
     if (pathname === '/' || !href.startsWith('#')) {
       return href;
     }
-    return `/${href}`;
+    return `/${href}`; // e.g., /#about
   };
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-primary text-primary-foreground shadow-md">
@@ -97,22 +100,26 @@ export default function Navbar() {
                       <NavigationMenuTrigger asChild>
                         <Link
                           href={link.href}
-                          className={cn(navigationMenuTriggerStyle(), "group",
-                            "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                            isMounted && isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
-                          )}
+                          asChild // Link will pass props to its child (the <a> tag)
                         >
-                          {link.label}
-                          <ChevronDown
-                            className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
-                            aria-hidden="true"
-                          />
+                          <a // This <a> tag receives props from Link and Radix Trigger
+                            className={cn(navigationMenuTriggerStyle(), "group",
+                              "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
+                              isMounted && isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
+                            )}
+                          >
+                            {link.label}
+                            <ChevronDown
+                              className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
+                              aria-hidden="true"
+                            />
+                          </a>
                         </Link>
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                           {link.subItems.map((subItem) => (
-                            <ListItem
+                             <ListItem
                               key={subItem.label}
                               title={subItem.label}
                               href={subItem.href}
@@ -132,7 +139,7 @@ export default function Navbar() {
                       <NavigationMenuLink asChild>
                         <Link
                           href={getLinkHref(link.href)}
-                          className={cn(navigationMenuTriggerStyle(),
+                           className={cn(navigationMenuTriggerStyle(),
                              "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
                              isMounted && isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
                           )}
@@ -163,10 +170,12 @@ export default function Navbar() {
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px] sm:w-[320px] bg-primary text-primary-foreground">
                 <div className="flex flex-col space-y-1 p-4">
-                  <Link href="/" className="flex items-center space-x-2 mb-4">
-                    <Briefcase className="h-7 w-7 text-primary-foreground" />
-                    <span className="font-headline text-xl font-bold text-primary-foreground">MaxWealth PS</span>
-                  </Link>
+                  <SheetClose asChild>
+                    <Link href="/" className="flex items-center space-x-2 mb-4">
+                      <Briefcase className="h-7 w-7 text-primary-foreground" />
+                      <span className="font-headline text-xl font-bold text-primary-foreground">MaxWealth PS</span>
+                    </Link>
+                  </SheetClose>
                   {navLinksData.map((link) => {
                      const isResourcesLink = link.label === 'Resources';
                      const isActive =
@@ -240,11 +249,12 @@ export default function Navbar() {
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a"> & { title: string, icon?: LucideIcon }
->(({ className, title, children, icon: Icon, ...props }, ref) => {
+>(({ className, title, children, icon: Icon, href, ...props }, ref) => {
   return (
     <li>
       <NavigationMenuLink asChild>
         <Link
+          href={href || '/'} // Ensure href is always present
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground",
@@ -265,3 +275,4 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+
