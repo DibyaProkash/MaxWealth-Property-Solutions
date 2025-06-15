@@ -1,7 +1,7 @@
 
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Target, Eye, Award } from 'lucide-react';
+import { Users, Target, Eye, Award, Home, TrendingUp, Repeat } from 'lucide-react';
 
 const teamMembers = [
   { name: 'Alice Johnson', role: 'Lead Financial Advisor', image: 'https://placehold.co/300x300.png', dataAiHint: 'woman portrait' },
@@ -56,9 +56,58 @@ export default function AboutUsSection() {
           </Card>
         </div>
 
-        <div className="text-center mb-12">
+        {/* Tailored Financial Solutions Sub-section START */}
+        <div className="mt-16 md:mt-24 text-center">
+          <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-6">
+            Tailored Financial Solutions for Every Home Buyer
+          </h3>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4 font-body">
+            At MaxWealth PS, we simplify the journey to homeownership with smart, successful financial strategies, combining innovative thinking with a clear focus on your goals. Whether you're a first-time home buyer, looking to invest, or refinancing your current property, our expert advisors are here to guide you every step of the way.
+          </p>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12 font-body">
+            With unmatched market insight and access to a wide range of financial products, we tailor each plan to your individual needs. Our team specializes in securing residential financing with a clear focus on value and client success. We proudly support homebuyers from all walks of life with a seamless, personalized service designed to minimize stress and maximize results.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card p-6 text-center">
+            <div className="mb-4 inline-block p-3 bg-primary/10 rounded-full">
+              <Home className="h-10 w-10 text-primary" />
+            </div>
+            <h4 className="font-headline text-xl font-semibold text-primary mb-2">First-Time Buyers</h4>
+            <p className="text-muted-foreground text-sm mb-4 font-body">
+              Find the perfect financial path to your first home, tailored to your lifestyle and budget.
+            </p>
+            <a href="#contact" className="text-sm font-medium text-accent hover:underline">Learn more</a>
+          </Card>
+
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card p-6 text-center">
+            <div className="mb-4 inline-block p-3 bg-primary/10 rounded-full">
+              <TrendingUp className="h-10 w-10 text-primary" />
+            </div>
+            <h4 className="font-headline text-xl font-semibold text-primary mb-2">Experienced Buyers & Investors</h4>
+            <p className="text-muted-foreground text-sm mb-4 font-body">
+              Maximize long-term returns with strategic financing for your property investments.
+            </p>
+            <a href="#contact" className="text-sm font-medium text-accent hover:underline">Learn more</a>
+          </Card>
+
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card p-6 text-center">
+            <div className="mb-4 inline-block p-3 bg-primary/10 rounded-full">
+              <Repeat className="h-10 w-10 text-primary" />
+            </div>
+            <h4 className="font-headline text-xl font-semibold text-primary mb-2">Refinancing Clients</h4>
+            <p className="text-muted-foreground text-sm mb-4 font-body">
+              Optimize your current mortgage terms and unlock potential savings with our refinancing expertise.
+            </p>
+            <a href="#contact" className="text-sm font-medium text-accent hover:underline">Learn more</a>
+          </Card>
+        </div>
+        {/* Tailored Financial Solutions Sub-section END */}
+
+        <div className="text-center mb-12 mt-16 md:mt-24">
           <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-2">Meet Our Team</h3>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto font-body">
             Our experienced professionals are passionate about helping you succeed.
           </p>
         </div>
@@ -77,7 +126,7 @@ export default function AboutUsSection() {
               </div>
               <CardContent className="p-6">
                 <h4 className="font-headline text-xl font-semibold text-primary mb-1">{member.name}</h4>
-                <p className="text-accent">{member.role}</p> {/* Using accent for role to match reference button color */}
+                <p className="text-accent">{member.role}</p>
               </CardContent>
             </Card>
           ))}
