@@ -20,7 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, BadgeCheck, DollarSign, Edit, Mail, Phone, UserCheck, Percent, Briefcase, Info } from "lucide-react";
+import { ArrowLeft, BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Briefcase, Info } from "lucide-react";
 import AnimatedSection from '@/components/layout/animated-section';
 
 const formSchema = z.object({
@@ -124,174 +124,174 @@ export default function FeesExplainedPage() {
           </Card>
         </AnimatedSection>
 
-        {/* New Two-Column Layout Start */}
         <AnimatedSection delay="delay-150" id="feesContactFormContainer">
-          <div className="grid md:grid-cols-5 gap-8 lg:gap-12 items-start mb-12 md:mb-16">
-            {/* Left Column: Jac's Info & Licenses */}
-            <div className="md:col-span-2 space-y-8">
-              <div className="text-center md:text-left">
-                <Image
-                  src="https://placehold.co/200x200.png"
-                  alt="Jacqueline Dwyer"
-                  width={160}
-                  height={160}
-                  className="rounded-full mx-auto md:mx-0 mb-6 shadow-lg"
-                  data-ai-hint="professional woman portrait"
-                />
-                <h2 className="font-headline text-2xl text-primary mb-3">Your Next Step…</h2>
-                <p className="font-body text-muted-foreground mb-4">
-                  For more details on how I can help you find, negotiate and secure your next property… Please complete the form on this page to book a free (no obligation) <strong className="text-primary">30-minute chat with myself. Jac x</strong>
-                </p>
+          <div className="max-w-6xl mx-auto"> {/* Added max-w-6xl and mx-auto here */}
+            <div className="grid md:grid-cols-5 gap-8 lg:gap-12 items-start mb-12 md:mb-16">
+              {/* Left Column: Jac's Info & Licenses */}
+              <div className="md:col-span-2 space-y-8">
+                <div className="text-center md:text-left">
+                  <Image
+                    src="https://placehold.co/200x200.png"
+                    alt="Jacqueline Dwyer"
+                    width={160}
+                    height={160}
+                    className="rounded-full mx-auto md:mx-0 mb-6 shadow-lg"
+                    data-ai-hint="professional woman portrait"
+                  />
+                  <h2 className="font-headline text-2xl text-primary mb-3">Your Next Step…</h2>
+                  <p className="font-body text-muted-foreground mb-4">
+                    For more details on how I can help you find, negotiate and secure your next property… Please complete the form on this page to book a free (no obligation) <strong className="text-primary">30-minute chat with myself. Jac x</strong>
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-headline text-xl text-primary mb-3 flex items-center">
+                    <BadgeCheck className="mr-2 h-6 w-6 text-green-500" /> Work with a Highly Qualified Buyers Agent
+                  </h3>
+                  <p className="text-muted-foreground font-body mb-2">My Licenses & national accreditations:</p>
+                  <ul className="space-y-1.5 text-sm text-muted-foreground">
+                    {[
+                      'QLD Real Estate Licence 4284240',
+                      'NSW Real Estate Licence 20228602',
+                      'QLD Valuers Registration Board No. 4036',
+                      'Certified Practicing Valuer, The Australian Property Institute 85656'
+                    ].map((item, index) => (
+                      <li key={index} className="flex items-center">
+                        <Info className="mr-2 h-4 w-4 text-accent flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
 
-              <div>
-                <h3 className="font-headline text-xl text-primary mb-3 flex items-center">
-                  <BadgeCheck className="mr-2 h-6 w-6 text-green-500" /> Work with a Highly Qualified Buyers Agent
-                </h3>
-                <p className="text-muted-foreground font-body mb-2">My Licenses & national accreditations:</p>
-                <ul className="space-y-1.5 text-sm text-muted-foreground">
-                  {[
-                    'QLD Real Estate Licence 4284240',
-                    'NSW Real Estate Licence 20228602',
-                    'QLD Valuers Registration Board No. 4036',
-                    'Certified Practicing Valuer, The Australian Property Institute 85656'
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-center">
-                      <Info className="mr-2 h-4 w-4 text-accent flex-shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+              {/* Right Column: Strategy Call Form */}
+              <div className="md:col-span-3">
+                <Card className="shadow-xl bg-card overflow-hidden rounded-lg">
+                  <CardHeader className="text-center bg-primary text-primary-foreground p-6 md:p-8">
+                    <h2 className="font-headline text-2xl md:text-3xl font-bold">Book Your Free 30-Minute Strategy Call Now...</h2>
+                  </CardHeader>
+                  <CardContent className="p-6 md:p-8 bg-muted/20">
+                    <p className="text-muted-foreground text-center mb-2 font-body">
+                      Congratulations! You’ve made a wise choice. Your property search just became a whole lot easier!
+                    </p>
+                    <p className="text-muted-foreground text-center mb-6 font-body">
+                      <strong className="text-primary">Your next step…</strong> Drop your details here to arrange a free 30-minute phone chat. That way you can decide if we’re a good fit.
+                    </p>
+                    <Form {...form}>
+                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                        <FormField
+                          control={form.control}
+                          name="buyingLocation"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-primary">Where do you want to buy?*</FormLabel>
+                              <FormControl>
+                                <Input placeholder="e.g., Gold Coast, Brisbane CBD, Specific Suburb" {...field} className="bg-background" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="helpNeeded"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-primary">Tell us how we can help you...*</FormLabel>
+                              <FormControl>
+                                <Textarea placeholder="e.g., Investment property, first home, downsizing..." {...field} rows={3} className="bg-background" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="budget"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-primary">Approx. Budget?*</FormLabel>
+                              <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
+                                  <FormControl>
+                                      <SelectTrigger className="bg-background">
+                                      <SelectValue placeholder="Select your approximate budget" />
+                                      </SelectTrigger>
+                                  </FormControl>
+                                  <SelectContent>
+                                      <SelectItem value="<500k">&lt; $500,000</SelectItem>
+                                      <SelectItem value="500k-1m">$500,000 - $1,000,000</SelectItem>
+                                      <SelectItem value="1m-1.5m">$1,000,000 - $1,500,000</SelectItem>
+                                      <SelectItem value="1.5m-2m">$1,500,000 - $2,000,000</SelectItem>
+                                      <SelectItem value="2m+">$2,000,000 +</SelectItem>
+                                      <SelectItem value="discuss">Prefer to discuss</SelectItem>
+                                  </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <FormField
+                              control={form.control}
+                              name="name"
+                              render={({ field }) => (
+                              <FormItem>
+                                  <FormLabel className="text-primary">Name*</FormLabel>
+                                  <FormControl>
+                                  <Input placeholder="Enter your name..." {...field} className="bg-background" />
+                                  </FormControl>
+                                  <FormMessage />
+                              </FormItem>
+                              )}
+                          />
+                          <FormField
+                              control={form.control}
+                              name="number"
+                              render={({ field }) => (
+                              <FormItem>
+                                  <FormLabel className="text-primary">Number*</FormLabel>
+                                  <FormControl>
+                                  <Input type="tel" placeholder="Enter your number..." {...field} className="bg-background" />
+                                  </FormControl>
+                                  <FormMessage />
+                              </FormItem>
+                              )}
+                          />
+                        </div>
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-primary">Email*</FormLabel>
+                              <FormControl>
+                                <Input type="email" placeholder="Enter your email..." {...field} className="bg-background" />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <div className="text-sm text-muted-foreground p-3 border rounded-md bg-background flex items-center justify-between">
+                          <span>I'm not a robot</span>
+                          {/* Placeholder for reCAPTCHA logo */}
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-gray-400">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path>
+                            <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="3" fill="white">reCAPTCHA</text>
+                          </svg>
+                        </div>
+                        <Button type="submit" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" disabled={form.formState.isSubmitting}>
+                          {form.formState.isSubmitting ? "Booking..." : "Yes, Book My Chat with MaxWealth PS Now"}
+                        </Button>
+                        <p className="text-xs text-muted-foreground text-center">*Average response time is 45 minutes. Your information is secure.</p>
+                      </form>
+                    </Form>
+                  </CardContent>
+                </Card>
               </div>
-            </div>
-
-            {/* Right Column: Strategy Call Form */}
-            <div className="md:col-span-3">
-              <Card className="shadow-xl bg-card overflow-hidden rounded-lg">
-                <CardHeader className="text-center bg-primary text-primary-foreground p-6 md:p-8">
-                  <h2 className="font-headline text-2xl md:text-3xl font-bold">Book Your Free 30-Minute Strategy Call Now...</h2>
-                </CardHeader>
-                <CardContent className="p-6 md:p-8 bg-muted/20">
-                  <p className="text-muted-foreground text-center mb-2 font-body">
-                    Congratulations! You’ve made a wise choice. Your property search just became a whole lot easier!
-                  </p>
-                  <p className="text-muted-foreground text-center mb-6 font-body">
-                    <strong className="text-primary">Your next step…</strong> Drop your details here to arrange a free 30-minute phone chat. That way you can decide if we’re a good fit.
-                  </p>
-                  <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                      <FormField
-                        control={form.control}
-                        name="buyingLocation"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-primary">Where do you want to buy?*</FormLabel>
-                            <FormControl>
-                              <Input placeholder="e.g., Gold Coast, Brisbane CBD, Specific Suburb" {...field} className="bg-background" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="helpNeeded"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-primary">Tell us how we can help you...*</FormLabel>
-                            <FormControl>
-                              <Textarea placeholder="e.g., Investment property, first home, downsizing..." {...field} rows={3} className="bg-background" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="budget"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-primary">Approx. Budget?*</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value} value={field.value}>
-                                <FormControl>
-                                    <SelectTrigger className="bg-background">
-                                    <SelectValue placeholder="Select your approximate budget" />
-                                    </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                    <SelectItem value="<500k">&lt; $500,000</SelectItem>
-                                    <SelectItem value="500k-1m">$500,000 - $1,000,000</SelectItem>
-                                    <SelectItem value="1m-1.5m">$1,000,000 - $1,500,000</SelectItem>
-                                    <SelectItem value="1.5m-2m">$1,500,000 - $2,000,000</SelectItem>
-                                    <SelectItem value="2m+">$2,000,000 +</SelectItem>
-                                    <SelectItem value="discuss">Prefer to discuss</SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="text-primary">Name*</FormLabel>
-                                <FormControl>
-                                <Input placeholder="Enter your name..." {...field} className="bg-background" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="number"
-                            render={({ field }) => (
-                            <FormItem>
-                                <FormLabel className="text-primary">Number*</FormLabel>
-                                <FormControl>
-                                <Input type="tel" placeholder="Enter your number..." {...field} className="bg-background" />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                            )}
-                        />
-                      </div>
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-primary">Email*</FormLabel>
-                            <FormControl>
-                              <Input type="email" placeholder="Enter your email..." {...field} className="bg-background" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <div className="text-sm text-muted-foreground p-3 border rounded-md bg-background flex items-center justify-between">
-                        <span>I'm not a robot</span>
-                        {/* Placeholder for reCAPTCHA logo */}
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-gray-400">
-                          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path>
-                          <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="3" fill="white">reCAPTCHA</text>
-                        </svg>
-                      </div>
-                      <Button type="submit" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" disabled={form.formState.isSubmitting}>
-                        {form.formState.isSubmitting ? "Booking..." : "Yes, Book My Chat with MaxWealth PS Now"}
-                      </Button>
-                      <p className="text-xs text-muted-foreground text-center">*Average response time is 45 minutes. Your information is secure.</p>
-                    </form>
-                  </Form>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </AnimatedSection>
-        {/* New Two-Column Layout End */}
         
         <AnimatedSection delay="delay-300">
           <div className="mt-12 md:mt-20 text-center">
