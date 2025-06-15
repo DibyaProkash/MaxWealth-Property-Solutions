@@ -5,12 +5,12 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft } from 'lucide-react';
+import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon } from 'lucide-react'; // Changed Newspaper to NewspaperIcon
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink, // This is NavigationMenuPrimitive.Link
+  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
@@ -25,9 +25,9 @@ interface NavLinkItem {
   href: string;
   label: string;
   icon: LucideIcon;
-  id?: string; // For scroll spy on homepage sections or page identification
+  id?: string; 
   subItems?: NavLinkItem[];
-  description?: string; // For NavigationMenu content
+  description?: string; 
 }
 
 const resourceSubItems: NavLinkItem[] = [
@@ -41,7 +41,7 @@ const resourceSubItems: NavLinkItem[] = [
 const navLinksData: NavLinkItem[] = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
   { href: '#about', label: 'About Us', icon: Users, id: 'about' },
-  { href: '/insights', label: 'Insights', icon: Newspaper, id: 'insightsPage' },
+  { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' }, // Changed from Insights
   {
     href: '/resources',
     label: 'Resources',
@@ -71,7 +71,7 @@ export default function Navbar() {
     if (pathname === '/' || !href.startsWith('#')) {
       return href;
     }
-    return `/${href}`; // For homepage #links when on other pages
+    return `/${href}`; 
   };
 
 
@@ -88,14 +88,21 @@ export default function Navbar() {
             <NavigationMenuList>
               {navLinksData.map((link) => {
                 const isResourcesLink = link.label === 'Resources';
+                const isMediaLink = link.label === 'Media';
                 const isActive =
                   (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
-                  (!link.href.startsWith('#') && (isResourcesLink ? pathname.startsWith(link.href) : pathname === link.href));
+                  (!link.href.startsWith('#') && 
+                    (
+                      (isResourcesLink && pathname.startsWith(link.href)) ||
+                      (isMediaLink && pathname.startsWith(link.href)) ||
+                      (!isResourcesLink && !isMediaLink && pathname === link.href)
+                    )
+                  );
 
                 if (link.subItems) { // This is the "Resources" item
                   return (
                     <NavigationMenuItem key={link.label}>
-                       <Link href={link.href} passHref legacyBehavior={false} asChild>
+                       <Link href={link.href} passHref asChild>
                         <NavigationMenuTrigger
                           className={cn(navigationMenuTriggerStyle(),
                             "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
@@ -103,7 +110,6 @@ export default function Navbar() {
                           )}
                         >
                           {link.label}
-                          {/* ChevronDown is automatically rendered by custom NavigationMenuTrigger */}
                         </NavigationMenuTrigger>
                       </Link>
                       <NavigationMenuContent>
@@ -123,10 +129,10 @@ export default function Navbar() {
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                   );
-                } else { // For simple links (no subItems)
+                } else { // For simple links (Home, About, Media, Testimonials, Contact)
                   return (
                     <NavigationMenuItem key={link.label}>
-                       <NavigationMenuLink asChild>
+                      <NavigationMenuLink asChild>
                          <Link
                           href={getLinkHref(link.href)}
                            className={cn(navigationMenuTriggerStyle(),
@@ -168,9 +174,16 @@ export default function Navbar() {
                   </SheetClose>
                   {navLinksData.map((link) => {
                      const isResourcesLink = link.label === 'Resources';
+                     const isMediaLink = link.label === 'Media';
                      const isActive =
                         (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
-                        (!link.href.startsWith('#') && (isResourcesLink ? pathname.startsWith(link.href) : pathname === link.href));
+                        (!link.href.startsWith('#') && 
+                          (
+                            (isResourcesLink && pathname.startsWith(link.href)) ||
+                            (isMediaLink && pathname.startsWith(link.href)) ||
+                            (!isResourcesLink && !isMediaLink && pathname === link.href)
+                          )
+                        );
 
                     if (link.subItems) {
                       return (
@@ -267,3 +280,4 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+

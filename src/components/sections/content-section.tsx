@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Newspaper, TrendingUp } from 'lucide-react';
+import { ArrowRight, NewspaperIcon, TrendingUp } from 'lucide-react'; // Changed Newspaper to NewspaperIcon
 import { articlesData, type Article } from '@/lib/data';
 import { cn } from '@/lib/utils';
 
@@ -27,7 +27,7 @@ interface StoryCardProps {
 const StoryCard: React.FC<StoryCardProps> = ({ article, className, large = false }) => {
   return (
     <Link 
-      href={`/insights/${article.id}`} 
+      href={`/media/${article.id}`} 
       className={cn("block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 relative group", className)}
     >
         <Image
@@ -46,7 +46,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ article, className, large = false
           </h3>
           {article.author && (
             <p className={cn("text-xs md:text-sm mt-1 opacity-80", large ? "md:text-base" : "md:text-sm")}>
-              {article.author}
+              By {article.author}
             </p>
           )}
         </div>
@@ -65,9 +65,9 @@ export default function ContentSection() {
     <section id="content" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Client Success & Financial Insights</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Client Success & Media Updates</h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            At MaxWealth PS, we don't just talk about excellence, we achieve it. Our dedication to exceptional service and client satisfaction is reflected in their stories and our expert insights.
+            At MaxWealth PS, we don't just talk about excellence, we achieve it. Our dedication to exceptional service and client satisfaction is reflected in their stories and our expert media content.
           </p>
         </div>
 
@@ -92,9 +92,9 @@ export default function ContentSection() {
                   </p>
                 </div>
                 <Button variant="default" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" asChild>
-                  <Link href="/insights">
+                  <Link href="/media">
                      <span className="flex items-center">
-                        View All Stories & Insights <ArrowRight className="ml-2 h-4 w-4" />
+                        Explore All Media <ArrowRight className="ml-2 h-4 w-4" />
                      </span>
                   </Link>
                 </Button>
@@ -110,12 +110,12 @@ export default function ContentSection() {
           </div>
         ) : (
           <div className="text-center py-10">
-            <Newspaper className="mx-auto h-12 w-12 mb-4 text-primary/50" />
-            <p className="text-lg text-muted-foreground">More success stories and insights coming soon!</p>
+            <NewspaperIcon className="mx-auto h-12 w-12 mb-4 text-primary/50" />
+            <p className="text-lg text-muted-foreground">More media content coming soon!</p>
             <Button size="lg" className="mt-6 shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-                <Link href="/insights">
+                <Link href="/media">
                   <span className="flex items-center">
-                    View All Available Insights <ArrowRight className="ml-2 h-4 w-4" />
+                    View All Available Media <ArrowRight className="ml-2 h-4 w-4" />
                   </span>
                 </Link>
             </Button>
@@ -125,4 +125,3 @@ export default function ContentSection() {
     </section>
   );
 }
-

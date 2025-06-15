@@ -82,15 +82,18 @@ export const partnersData: Partner[] = [
 export interface Article {
   id: string;
   title: string;
-  description: string; 
-  fullContent?: string; 
+  description: string;
+  fullContent?: string;
   image: string;
   dataAiHint: string;
-  type: 'Blog' | 'Vlog';
+  type: 'Blog' | 'Vlog'; // Could be used as a broader category or in addition to specific category
+  category: string; // New field for specific categorization e.g. "Market Analysis"
   date: string;
-  icon: LucideIcon;
-  author?: string; 
-  tags?: string[]; 
+  icon: LucideIcon; // Retained, though new design might not use it on cards
+  author?: string;
+  tags?: string[];
+  readTime?: string; // e.g., "7 min read"
+  views?: string; // e.g., "1.2k"
 }
 
 export const articlesData: Article[] = [
@@ -102,10 +105,13 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'finance graph',
     type: 'Blog',
+    category: 'Market Analysis',
     date: '2024-07-15',
     icon: Newspaper,
     author: 'Jane Doe, Senior Financial Analyst',
     tags: ['mortgage rates', 'real estate', 'finance', '2024 trends'],
+    readTime: '7 min read',
+    views: '1.2k',
   },
   {
     id: '2',
@@ -115,10 +121,13 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'home keys',
     type: 'Vlog',
+    category: 'Buyer\'s Guide',
     date: '2024-07-10',
     icon: Video,
     author: 'MaxWealth PS Team',
     tags: ['first-time buyer', 'home buying', 'vlog', 'financial tips'],
+    readTime: '10 min read',
+    views: '3.1k',
   },
   {
     id: '3',
@@ -128,10 +137,13 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'savings money',
     type: 'Blog',
+    category: 'Finance & Economics',
     date: '2024-06-25',
     icon: Newspaper,
     author: 'John Smith, Financial Planner',
     tags: ['down payment', 'savings', 'budgeting', 'personal finance'],
+    readTime: '6 min read',
+    views: '875',
   },
   {
     id: '4',
@@ -141,10 +153,13 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'technology real estate',
     type: 'Blog',
+    category: 'Property Trends',
     date: '2024-06-12',
     icon: Newspaper,
-    author: 'Tech Forward Insights',
+    author: 'Tech Forward Media',
     tags: ['real estate tech', 'AI', 'virtual tours', 'proptech'],
+    readTime: '8 min read',
+    views: '1.5k',
   },
   {
     id: '5',
@@ -154,10 +169,13 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'documents signature',
     type: 'Vlog',
+    category: 'Buyer\'s Guide',
     date: '2024-05-30',
     icon: Video,
     author: 'MaxWealth PS Finance Experts',
     tags: ['closing costs', 'home buying', 'vlog', 'real estate finance'],
+    readTime: '9 min read',
+    views: '2.2k',
   },
   {
     id: '6',
@@ -167,10 +185,13 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'market chart',
     type: 'Blog',
+    category: 'Market Analysis',
     date: '2024-07-20',
     icon: Newspaper,
     author: 'Market Analysis Group',
     tags: ['market update', 'real estate trends', 'Q3 analysis', 'property market'],
+    readTime: '5 min read',
+    views: '950',
   },
   {
     id: '7',
@@ -180,10 +201,29 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'credit score',
     type: 'Vlog',
+    category: 'Finance & Economics',
     date: '2024-05-15',
     icon: Video,
     author: 'CreditWise Advisors',
     tags: ['credit score', 'mortgage', 'vlog', 'interest rates', 'financing'],
+    readTime: '11 min read',
+    views: '2.8k',
+  },
+   {
+    id: '8',
+    title: 'Investment Strategies for Real Estate',
+    description: 'Explore different strategies for investing in real estate, from rental properties to REITs and flipping houses.',
+    fullContent: 'Investing in real estate can be a powerful way to build wealth, but it\'s important to choose the right strategy. This article explores several popular approaches. Direct ownership of rental properties involves buying a property and leasing it out to tenants. This can provide regular cash flow and long-term appreciation but also requires active management. Real Estate Investment Trusts (REITs) offer a more passive way to invest by allowing you to buy shares in companies that own and operate income-producing real estate. This provides diversification and liquidity, similar to stocks.\n\nHouse flipping involves buying undervalued properties, renovating them, and selling them for a profit. This strategy can offer quick returns but also carries higher risk and requires significant expertise in renovation and market timing. Real estate wholesaling is another strategy where an investor contracts a home with a seller, then finds an interested party to buy it without actually taking ownership of the property. Crowdfunding platforms have also emerged, allowing multiple investors to pool funds for larger real estate projects. Each strategy has its own risk-reward profile, capital requirements, and time commitment. It\'s crucial to research thoroughly and consider your financial goals and risk tolerance before diving in. Consulting with a financial advisor specializing in real estate can help you determine the best path for your investment journey.',
+    image: 'https://placehold.co/800x450.png',
+    dataAiHint: 'investment strategy chart',
+    type: 'Blog',
+    category: 'Investment Strategy',
+    date: '2024-07-25',
+    icon: Newspaper,
+    author: 'InvestPro Group',
+    tags: ['investment', 'real estate', 'strategy', 'rentals', 'REITs'],
+    readTime: '9 min read',
+    views: '1.9k',
   },
 ];
 
@@ -233,7 +273,7 @@ export interface Guide {
   description: string;
   image: string;
   dataAiHint: string;
-  downloadLink?: string; // Placeholder for actual link
+  downloadLink?: string; 
   category: string;
 }
 
@@ -275,3 +315,4 @@ export const guidesData: Guide[] = [
     category: 'Checklist',
   },
 ];
+
