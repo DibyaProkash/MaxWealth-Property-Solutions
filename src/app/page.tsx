@@ -4,15 +4,14 @@ import HeroSection from '@/components/sections/hero-section';
 import AchievementsSection from '@/components/sections/achievements-section'; 
 import AboutUsSection from '@/components/sections/about-us-section';
 import ContentSection from '@/components/sections/content-section';
-import CalculatorsSection from '@/components/sections/calculators-section';
-import RoadmapSection from '@/components/sections/roadmap-section';
+// import CalculatorsSection from '@/components/sections/calculators-section'; // Removed
+// import RoadmapSection from '@/components/sections/roadmap-section'; // Removed
 import TestimonialsSection from '@/components/sections/testimonials-section';
 import PartnersSection from '@/components/sections/partners-section';
 import BookingSection from '@/components/sections/booking-section';
 import ContactSection from '@/components/sections/contact-section';
-// import FaqSection from '@/components/sections/faq-section'; // Removed, FAQ is now a separate page
 import AnimatedSection from '@/components/layout/animated-section';
-import { articlesData, partnersData, testimonialsData } from '@/lib/data'; // Removed faqData import
+import { articlesData, partnersData, testimonialsData } from '@/lib/data';
 
 export default function HomePage() {
   return (
@@ -36,12 +35,8 @@ export default function HomePage() {
           </AnimatedSection>
         )}
 
-        <AnimatedSection delay="delay-100" id="calculators">
-          <CalculatorsSection />
-        </AnimatedSection>
-        <AnimatedSection delay="delay-100">
-          <RoadmapSection />
-        </AnimatedSection>
+        {/* CalculatorsSection removed - content moved to /resources/calculators */}
+        {/* RoadmapSection removed - content moved to /resources/roadmap */}
 
         {testimonialsData.length > 0 && (
           <AnimatedSection delay="delay-100" id="testimonials">
@@ -54,15 +49,6 @@ export default function HomePage() {
             <PartnersSection />
           </AnimatedSection>
         )}
-
-        {/* 
-          FAQ section removed from homepage. It's now under /resources/faq
-          {faqData.length > 0 && (
-            <AnimatedSection delay="delay-100" id="faq">
-              <FaqSection />
-            </AnimatedSection>
-          )} 
-        */}
         
         <AnimatedSection delay="delay-100">
           <BookingSection />

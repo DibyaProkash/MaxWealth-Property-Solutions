@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import AnimatedSection from '@/components/layout/animated-section';
-import { HelpCircle, BrainCircuit, Download, ArrowRight, BookOpen } from 'lucide-react';
+import { HelpCircle, BrainCircuit, Download, ArrowRight, BookOpen, Calculator, ListChecks } from 'lucide-react';
 
 const resourceLinks = [
   {
@@ -26,6 +26,20 @@ const resourceLinks = [
     href: '/resources/free-guides',
     icon: Download,
     cta: 'Access Free Guides',
+  },
+  {
+    title: 'Financial Calculators',
+    description: 'Estimate mortgage payments, home affordability, and closing costs with our straightforward calculators.',
+    href: '/resources/calculators',
+    icon: Calculator,
+    cta: 'Use Calculators',
+  },
+  {
+    title: 'Home Buying Roadmap',
+    description: 'Follow our interactive step-by-step guide to navigate the path to homeownership.',
+    href: '/resources/roadmap',
+    icon: ListChecks,
+    cta: 'View Roadmap',
   },
 ];
 
