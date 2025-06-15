@@ -15,7 +15,7 @@ export default function FreeGuidesPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background">
-        <div className="container mx-auto px-4 py-8 md:py-16">
+        <div className="container mx-auto px-6 py-8 md:py-16">
           <AnimatedSection>
             <div className="mb-12">
                 <Button variant="outline" className="mb-6" asChild>

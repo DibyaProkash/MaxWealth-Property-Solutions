@@ -103,7 +103,7 @@ export default function CityLocationPage() {
           </div>
         </AnimatedSection>
 
-        <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="container mx-auto px-6 py-8 md:py-12">
           <AnimatedSection delay="delay-50">
             <div className="mb-10">
               <Button variant="outline" asChild>

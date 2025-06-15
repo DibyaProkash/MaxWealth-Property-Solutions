@@ -10,7 +10,7 @@ export default function OurCompanyPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background">
-        <div className="container mx-auto px-4 py-8 md:py-16">
+        <div className="container mx-auto px-6 py-8 md:py-16">
           <AnimatedSection>
             <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <Link href="/about" passHref>

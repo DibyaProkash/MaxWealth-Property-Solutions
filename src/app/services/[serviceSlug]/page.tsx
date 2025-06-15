@@ -23,7 +23,7 @@ import {
   type ServicePageBenefitPoint,
   type HowWeHelpStep,
   type ServiceLocationItem,
-} from '@/lib/data.tsx';
+} from '@/lib/data';
 import Footer from '@/components/layout/footer';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Button } from '@/components/ui/button';
@@ -75,7 +75,7 @@ export default function ServiceDetailPage() {
       <main className="flex-grow">
         {/* Header Section */}
         <AnimatedSection className="bg-primary text-primary-foreground py-12 md:py-20">
-          <div className="container mx-auto px-4 text-center">
+          <div className="container mx-auto px-6 text-center">
             <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
               We Offer {serviceData.title} Buying Services
             </h1>
@@ -90,7 +90,7 @@ export default function ServiceDetailPage() {
           </div>
         </AnimatedSection>
 
-        <div className="container mx-auto px-4 py-8 md:py-16">
+        <div className="container mx-auto px-6 py-8 md:py-16">
            <AnimatedSection>
              <div className="mb-8">
                 <Button variant="outline" asChild>

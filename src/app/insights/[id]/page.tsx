@@ -32,7 +32,7 @@ export default function InsightPage({ params }: InsightPageProps) {
   const contentToDisplay = article.fullContent || article.description;
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-16 max-w-4xl bg-background">
+    <div className="container mx-auto px-6 py-8 md:py-16 max-w-4xl bg-background">
       <div className="mb-8">
         <Link href="/insights" passHref>
           <Button variant="outline" className="mb-6">

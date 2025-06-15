@@ -64,7 +64,7 @@ export default function AllInsightsPage() {
   }, [sortOption, filterType, searchTerm]);
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-16 bg-background">
+    <div className="container mx-auto px-6 py-8 md:py-16 bg-background">
       <AnimatedSection>
         <div className="mb-12 text-center">
           <Link href="/" passHref>

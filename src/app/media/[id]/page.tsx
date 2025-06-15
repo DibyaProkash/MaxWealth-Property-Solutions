@@ -37,7 +37,7 @@ export default function MediaPage({ params }: MediaPageProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background">
-        <div className="container mx-auto px-4 py-8 md:py-16 max-w-4xl">
+        <div className="container mx-auto px-6 py-8 md:py-16 max-w-4xl">
           <div className="mb-8">
             <Link href="/media" passHref>
               <Button variant="outline" className="mb-6">

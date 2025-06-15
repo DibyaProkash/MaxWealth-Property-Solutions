@@ -80,7 +80,7 @@ export default function AllMediaPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-muted">
-        <div className="container mx-auto px-4 py-8 md:py-12">
+        <div className="container mx-auto px-6 py-8 md:py-12">
           <AnimatedSection>
             <div className="mb-8">
               <Link href="/" passHref>
