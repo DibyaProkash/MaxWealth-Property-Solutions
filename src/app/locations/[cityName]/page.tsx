@@ -21,13 +21,20 @@ export default function CityLocationPage() {
 
   useEffect(() => {
     if (cityNameSlug) {
+      setIsLoading(true); // Set loading true at the start of data fetch
       const data = locationDetailsData.find(loc => loc.slug === cityNameSlug);
       if (data) {
         setCityData(data);
+        window.scrollTo(0, 0); // Scroll to top when new city data is set
       }
+      // else {
+      //   // If no data found, notFound() will be called below, so cityData remains null
+      //   // and isLoading will be set to false, triggering the notFound() condition.
+      // }
       setIsLoading(false);
     } else {
-        setIsLoading(false);
+      // Handle cases where cityNameSlug might be undefined or empty if necessary
+      setIsLoading(false); 
     }
   }, [cityNameSlug]);
 
@@ -42,9 +49,21 @@ export default function CityLocationPage() {
     );
   }
 
-  if (!cityData) {
+  if (!cityData && !isLoading) { // Check !isLoading to ensure notFound isn't called prematurely
     notFound();
     return null; 
+  }
+  
+  // Ensure cityData is not null before destructuring
+  if (!cityData) {
+     return ( // Should ideally be caught by notFound, but as a fallback
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow flex items-center justify-center bg-background">
+          <p>City data could not be loaded.</p>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
   const {
@@ -178,8 +197,7 @@ export default function CityLocationPage() {
                 {amenityOrder.map((key, index) => {
                   const amenity = amenities[key];
                   if (!amenity) return null;
-                  const Icon = amenity.icon || Info; // Fallback icon
-                  const isImageLeft = index % 2 !== 0; // Transport (idx 0) -> right, Shops (idx 1) -> left
+                  const isImageLeft = index % 2 !== 0; 
 
                   return (
                     <div key={key} className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -199,12 +217,12 @@ export default function CityLocationPage() {
                           {amenity.title}
                         </h3>
                         {amenity.content.map((item, idx) => {
-                           const ItemIcon = item.icon || Utensils; // Fallback icon for content items
+                           const ItemIcon = item.icon || Info; 
                            return (
                             <div key={idx} className="mb-5">
                               {item.subTitle && (
                                 <h4 className="font-semibold text-xl text-primary/80 mb-2 flex items-center">
-                                   {item.icon && <item.icon className="mr-2.5 h-5 w-5 text-accent opacity-80" />}
+                                   {item.icon && <ItemIcon className="mr-2.5 h-5 w-5 text-accent opacity-80 flex-shrink-0" />}
                                   {item.subTitle}
                                 </h4>
                               )}
@@ -234,4 +252,3 @@ export default function CityLocationPage() {
     </div>
   );
 }
-
