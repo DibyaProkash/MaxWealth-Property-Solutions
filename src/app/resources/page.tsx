@@ -7,13 +7,6 @@ import { HelpCircle, BrainCircuit, Download, ArrowRight, BookOpen, Calculator, L
 
 const resourceLinks = [
   {
-    title: 'Frequently Asked Questions (FAQ)',
-    description: 'Find answers to common questions about home financing, our services, and the buying process.',
-    href: '/resources/faq',
-    icon: HelpCircle,
-    cta: 'View FAQs',
-  },
-  {
     title: 'AI-Powered Tools',
     description: 'Leverage intelligent tools for document analysis, basic financial planning, market trends, and readiness assessment.',
     href: '/resources/ai-tools',
@@ -40,6 +33,13 @@ const resourceLinks = [
     href: '/resources/roadmap',
     icon: ListChecks,
     cta: 'View Roadmap',
+  },
+  {
+    title: 'Frequently Asked Questions (FAQ)',
+    description: 'Find answers to common questions about home financing, our services, and the buying process.',
+    href: '/resources/faq',
+    icon: HelpCircle,
+    cta: 'View FAQs',
   },
 ];
 

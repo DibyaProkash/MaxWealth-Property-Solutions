@@ -31,11 +31,11 @@ interface NavLinkItem {
 }
 
 const resourceSubItems: NavLinkItem[] = [
-  { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, description: 'Find answers to common questions.' },
   { href: '/resources/ai-tools', label: 'AI-Powered Tools', icon: BrainCircuit, description: 'Leverage intelligent financial tools.' },
   { href: '/resources/free-guides', label: 'Free Guides & E-Books', icon: Download, description: 'Access valuable downloadable resources.' },
   { href: '/resources/calculators', label: 'Financial Calculators', icon: CalculatorIcon, description: 'Estimate payments and affordability.' },
   { href: '/resources/roadmap', label: 'Home Buying Roadmap', icon: ListChecks, description: 'Navigate your path to homeownership.' },
+  { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, description: 'Find answers to common questions.' },
 ];
 
 const navLinksData: NavLinkItem[] = [
@@ -46,7 +46,7 @@ const navLinksData: NavLinkItem[] = [
     href: '/resources',
     label: 'Resources',
     icon: BookOpen,
-    id: 'resourcesPage', // ID for the main resources page link itself
+    id: 'resourcesPage', 
     subItems: resourceSubItems
   },
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
@@ -86,9 +86,10 @@ export default function Navbar() {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               {navLinksData.map((link) => {
+                const isResourcesLink = link.label === 'Resources';
                 const isActive =
                   (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
-                  (!link.href.startsWith('#') && pathname.startsWith(link.href));
+                  (!link.href.startsWith('#') && (isResourcesLink ? pathname.startsWith(link.href) : pathname === link.href));
 
                 if (link.subItems) { // This is the "Resources" item
                   return (
@@ -161,9 +162,10 @@ export default function Navbar() {
                     <span className="font-headline text-xl font-bold text-primary-foreground">MaxWealth PS</span>
                   </Link>
                   {navLinksData.map((link) => {
+                     const isResourcesLink = link.label === 'Resources';
                      const isActive =
                         (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
-                        (!link.href.startsWith('#') && pathname.startsWith(link.href));
+                        (!link.href.startsWith('#') && (isResourcesLink ? pathname.startsWith(link.href) : pathname === link.href));
 
                     if (link.subItems) {
                       return (
@@ -236,13 +238,13 @@ const ListItem = React.forwardRef<
   return (
     <li>
       <NavigationMenuLink asChild>
-        <Link // Next.js Link
-          ref={ref} // Ref is on the Next.js Link
+        <Link 
+          ref={ref} 
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground",
             className
           )}
-          {...props} // href is passed here to Next.js Link
+          {...props} 
         >
           <div className="flex items-center space-x-2">
             {Icon && <Icon className="h-5 w-5" />}
