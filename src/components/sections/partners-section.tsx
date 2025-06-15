@@ -14,7 +14,7 @@ export default function PartnersSection() {
   );
 
   return (
-    <section id="partners" className="py-16 md:py-24 bg-secondary">
+    <section id="partners" className="py-16 md:py-24 bg-background"> {/* Changed from bg-secondary to bg-background */}
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
            <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
@@ -31,16 +31,16 @@ export default function PartnersSection() {
             align: "start",
             loop: true,
           }}
-          plugins={[plugin.current]}
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
+          plugins={plugin.current ? [plugin.current] : []}
+          onMouseEnter={() => plugin.current?.stop()}
+          onMouseLeave={() => plugin.current?.reset()}
           className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl mx-auto"
         >
           <CarouselContent className="-ml-2 md:-ml-4">
             {partnersData.map((partner) => (
               <CarouselItem key={partner.name} className="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/5 pl-2 md:pl-4">
                 <div className="p-1">
-                  <div className="flex items-center justify-center h-24 p-2 bg-background rounded-lg shadow-md opacity-70 hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex items-center justify-center h-24 p-2 bg-card rounded-lg shadow-md opacity-70 hover:opacity-100 transition-opacity duration-300"> {/* bg-card will be white */}
                     <Image 
                       src={partner.logo} 
                       alt={partner.name} 

@@ -2,7 +2,6 @@
 "use client";
 
 import { useState, useMemo, type FC, useEffect } from 'react';
-// import Link from 'next/link'; // No longer needed for login/signup prompts
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
@@ -20,11 +19,10 @@ import {
   KeyRound,
   ListChecks,
   Lightbulb,
-  Save, // Kept for generic save message
+  Save, 
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-// import { useAuth } from '@/contexts/auth-context'; // Removed
 import { useToast } from '@/hooks/use-toast';
 
 interface RoadmapStep {
@@ -112,10 +110,9 @@ const initialRoadmapStepsData: RoadmapStep[] = [
   },
 ];
 
-const LOCAL_STORAGE_KEY = 'roadmapProgress_local'; // Generic key
+const LOCAL_STORAGE_KEY = 'roadmapProgress_local';
 
 export default function RoadmapSection() {
-  // const { user, loading: authLoading } = useAuth(); // Removed
   const { toast } = useToast();
   
   const [steps, setSteps] = useState<RoadmapStep[]>(() => 
@@ -123,7 +120,6 @@ export default function RoadmapSection() {
   );
 
   useEffect(() => {
-    // Load progress from localStorage, not dependent on user
     const storedProgressJson = localStorage.getItem(LOCAL_STORAGE_KEY);
     
     let currentSteps = initialRoadmapStepsData.map(s => ({ ...s, completed: s.completed }));
@@ -159,7 +155,6 @@ export default function RoadmapSection() {
     );
     setSteps(newSteps);
 
-    // Save progress to localStorage using generic key
     const progressToStore = newSteps.map(s => ({ id: s.id, completed: s.completed }));
     try {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(progressToStore));
@@ -176,7 +171,7 @@ export default function RoadmapSection() {
   };
 
   return (
-    <section id="roadmap" className="py-16 md:py-24 bg-secondary">
+    <section id="roadmap" className="py-16 md:py-24 bg-background"> {/* Changed from bg-secondary to bg-background */}
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
@@ -186,8 +181,7 @@ export default function RoadmapSection() {
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Navigate the path to homeownership with our interactive step-by-step guide. Track your progress and get insights for each milestone.
           </p>
-          {/* Removed auth loading and login/signup prompts */}
-           <div className="mt-4 p-3 bg-blue-100 dark:bg-blue-900/30 border border-blue-300 dark:border-blue-700 rounded-md text-sm text-blue-700 dark:text-blue-300 flex items-center justify-center max-w-md mx-auto">
+           <div className="mt-4 p-3 bg-accent/10 border border-accent/30 rounded-md text-sm text-accent flex items-center justify-center max-w-md mx-auto"> {/* Changed to accent color for better visibility with new theme */}
               <Save className="h-5 w-5 mr-2" />
               Your progress is saved locally in this browser.
             </div>
@@ -195,7 +189,7 @@ export default function RoadmapSection() {
 
         <div className="max-w-3xl mx-auto space-y-4 mb-8">
           <Label className="text-sm text-muted-foreground">Overall Progress: {completedStepsCount} of {totalSteps} steps completed</Label>
-          <Progress value={progressPercentage} aria-label={`${progressPercentage.toFixed(0)}% complete`} className="w-full h-3" />
+          <Progress value={progressPercentage} aria-label={`${progressPercentage.toFixed(0)}% complete`} className="w-full h-3" /> {/* Progress bar will use primary color */}
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -206,7 +200,7 @@ export default function RoadmapSection() {
               key={step.id} 
               className={cn(
                 "shadow-lg transition-all duration-300 flex flex-col group hover:shadow-xl",
-                step.completed ? "bg-card/70 border-primary/40 opacity-75" : "bg-card"
+                step.completed ? "bg-card/70 border-primary/40 opacity-75" : "bg-card" // bg-card is white
               )}
             >
               <CardHeader className="flex flex-row items-start space-x-4 pb-3">

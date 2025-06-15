@@ -5,16 +5,13 @@
 
 body {
   font-family: var(--font-body), sans-serif;
-  /* Removed user-select properties */
 }
-
-/* Removed .allow-interaction class */
 
 
 @layer base {
   :root {
-    --background: 210 20% 98%; /* Very Light Blue-White */
-    --foreground: 210 30% 25%; /* Dark Slate Blue */
+    --background: 210 20% 98%; /* Very Light Blue-White, inspired by propertybuyer's light bg */
+    --foreground: 210 30% 25%; /* Dark Slate Blue for text */
 
     --card: 0 0% 100%; /* White */
     --card-foreground: 210 30% 25%; /* Dark Slate Blue */
@@ -22,24 +19,24 @@ body {
     --popover: 0 0% 100%; /* White */
     --popover-foreground: 210 30% 25%; /* Dark Slate Blue */
 
-    --primary: 150 60% 40%; /* Solid Green */
-    --primary-foreground: 150 100% 97%; /* Very Light Green/White */
+    --primary: 150 60% 40%; /* Solid Green, inspired by propertybuyer's green */
+    --primary-foreground: 150 100% 97%; /* Very Light Green/White for text on primary */
 
-    --secondary: 200 70% 90%; /* Light Sky Blue */
+    --secondary: 200 70% 90%; /* Light Sky Blue, for subtle secondary elements if needed */
     --secondary-foreground: 200 40% 30%; /* Deeper Sky Blue */
 
     --muted: 210 20% 92%; /* Light Grayish Blue */
     --muted-foreground: 210 20% 50%; /* Medium Grayish Blue */
 
-    --accent: 210 80% 55%; /* Vibrant Blue */
-    --accent-foreground: 210 100% 98%; /* Very Light Blue/White */
+    --accent: 210 80% 55%; /* Vibrant Blue, for accents and CTAs if not using primary */
+    --accent-foreground: 210 100% 98%; /* Very Light Blue/White for text on accent */
 
-    --destructive: 0 84.2% 60.2%; /* Keeping destructive colors for now */
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 210 20% 85%; /* Soft Grayish Blue border */
     --input: 210 20% 95%; /* Very Light Blue for input background */
-    --ring: 150 60% 50%; /* Slightly brighter Green for ring */
+    --ring: 150 60% 50%; /* Slightly brighter Green for ring/focus states */
 
     --radius: 0.5rem;
 
@@ -70,7 +67,7 @@ body {
     --popover-foreground: 160 50% 85%; /* Light Mint Green */
 
     --primary: 150 70% 55%; /* Brighter Green for Dark Mode */
-    --primary-foreground: 150 20% 10%; /* Very Dark Green/Black */
+    --primary-foreground: 150 20% 10%; /* Very Dark Green/Black for text on primary */
 
     --secondary: 210 25% 22%; /* Darker Slate Blue */
     --secondary-foreground: 160 40% 75%; /* Desaturated Mint */
@@ -78,30 +75,30 @@ body {
     --muted: 220 20% 25%; /* Dark Blue Gray */
     --muted-foreground: 160 30% 65%; /* Muted Mint */
 
-    --accent: 180 70% 60%; /* Bright Cyan/Teal */
-    --accent-foreground: 180 20% 10%; /* Very Dark Cyan/Black */
+    --accent: 180 70% 60%; /* Bright Cyan/Teal for accent */
+    --accent-foreground: 180 20% 10%; /* Very Dark Cyan/Black for text on accent */
 
-    --destructive: 0 70% 50%; /* Keeping destructive colors for now */
+    --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 220 20% 30%; /* Medium Dark Blue Gray */
     --input: 220 25% 20%; /* Slightly different Dark Navy for input */
-    --ring: 150 70% 65%; /* Brighter Green for ring */
+    --ring: 150 70% 65%; /* Brighter Green for ring/focus */
     
-    --chart-1: 150 70% 60%; /* Green variant for dark */
-    --chart-2: 180 70% 65%; /* Cyan/Teal variant for dark */
-    --chart-3: 160 60% 70%; /* Lighter Green variant for dark */
-    --chart-4: 210 60% 55%; /* Blue variant for dark */
-    --chart-5: 130 50% 60%; /* Lime Green for variety in dark */
+    --chart-1: 150 70% 60%; 
+    --chart-2: 180 70% 65%; 
+    --chart-3: 160 60% 70%; 
+    --chart-4: 210 60% 55%; 
+    --chart-5: 130 50% 60%; 
 
-    --sidebar-background: 220 25% 12%; /* Even Darker Navy for sidebar */
-    --sidebar-foreground: 160 50% 85%; /* Light Mint Green for sidebar text */
-    --sidebar-primary: 150 70% 55%; /* Brighter Green (same as main primary dark) */
-    --sidebar-primary-foreground: 150 20% 10%; /* Very Dark Green/Black */
-    --sidebar-accent: 180 50% 25%; /* Dark Cyan accent for sidebar */
-    --sidebar-accent-foreground: 150 70% 70%; /* Lighter green for sidebar accent text */
-    --sidebar-border: 220 20% 25%; /* Dark Blue Gray border for sidebar */
-    --sidebar-ring: 150 70% 65%; /* Brighter Green for ring */
+    --sidebar-background: 220 25% 12%; 
+    --sidebar-foreground: 160 50% 85%; 
+    --sidebar-primary: 150 70% 55%; 
+    --sidebar-primary-foreground: 150 20% 10%; 
+    --sidebar-accent: 180 50% 25%; 
+    --sidebar-accent-foreground: 150 70% 70%; 
+    --sidebar-border: 220 20% 25%; 
+    --sidebar-ring: 150 70% 65%; 
   }
 }
 
@@ -111,6 +108,6 @@ body {
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "liga" 1, "calt" 1; /* For better typography */
+    font-feature-settings: "liga" 1, "calt" 1; 
   }
 }
