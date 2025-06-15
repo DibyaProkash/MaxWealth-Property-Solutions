@@ -61,6 +61,11 @@ const homepageSectionIds = navLinksData
 export default function Navbar() {
   const pathname = usePathname();
   const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
+  const [isMounted, setIsMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const getLinkHref = (href: string) => {
     if (pathname === '/' || !href.startsWith('#')) {
@@ -91,7 +96,7 @@ export default function Navbar() {
                       <NavigationMenuTrigger
                         className={cn(navigationMenuTriggerStyle(),
                           "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                          isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
+                          isMounted && isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
                         )}
                       >
                         {link.label}
@@ -115,15 +120,13 @@ export default function Navbar() {
                 }
                 return (
                   <NavigationMenuItem key={link.label}>
-                    <Link
-                      href={getLinkHref(link.href)}
-                      className={cn(navigationMenuTriggerStyle(),
-                        "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                        isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
-                      )}
-                      asChild
-                    >
-                      <NavigationMenuLink>
+                    <Link href={getLinkHref(link.href)} asChild>
+                      <NavigationMenuLink
+                        className={cn(navigationMenuTriggerStyle(),
+                          "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
+                           isMounted && isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
+                        )}
+                      >
                         {link.label}
                       </NavigationMenuLink>
                     </Link>
@@ -163,14 +166,14 @@ export default function Navbar() {
                         <React.Fragment key={link.label}>
                           <p className={cn(
                             "flex items-center space-x-2 rounded-md p-2 font-semibold",
-                             isActive && "bg-primary-foreground/10 text-primary-foreground"
+                             isMounted && isActive && "bg-primary-foreground/10 text-primary-foreground"
                           )}>
                             <link.icon className="h-5 w-5" />
                             <span>{link.label}</span>
                           </p>
                           <div className="flex flex-col space-y-1 pl-6">
                             {link.subItems.map(subItem => {
-                              const isSubItemActive = pathname.startsWith(subItem.href);
+                              const isSubItemActive = isMounted && pathname.startsWith(subItem.href);
                               return (
                                 <SheetClose key={subItem.label} asChild>
                                   <Link
@@ -197,7 +200,7 @@ export default function Navbar() {
                           href={getLinkHref(link.href)}
                           className={cn(
                             "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
-                            isActive ? "bg-primary-foreground/10 text-primary-foreground font-semibold" : "text-primary-foreground/80"
+                            isMounted && isActive ? "bg-primary-foreground/10 text-primary-foreground font-semibold" : "text-primary-foreground/80"
                           )}
                         >
                           <link.icon className="h-5 w-5" />
@@ -244,4 +247,3 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-
