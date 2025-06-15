@@ -1,6 +1,6 @@
 
 import React, { type SVGProps } from 'react';
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText } from 'lucide-react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText as LucideFileText } from 'lucide-react';
 
 
 // Helper icon component (if not directly from lucide-react or if a specific one is needed)
@@ -125,7 +125,7 @@ export const articlesData: Article[] = [
     id: '1',
     title: 'Understanding Mortgage Rates in 2024',
     description: 'A deep dive into current mortgage trends and how they affect your buying power. This article explores various factors influencing rates.',
-    fullContent: 'The 2024 mortgage market presents a dynamic environment for prospective homebuyers. Several key factors are influencing interest rates. Firstly, the Federal Reserve\'s monetary policy plays a pivotal role. Any adjustments to the federal funds rate can create ripple effects across the lending industry, impacting mortgage rates directly.\\n\\nSecondly, inflation trends continue to be a significant determinant. High inflation often leads to higher interest rates as lenders seek to protect the real value of their returns. Conversely, if inflation cools, we might see some stabilization or even a slight decrease in rates. Economic growth, unemployment figures, and overall market sentiment also contribute to the complex equation of mortgage rate fluctuations. For instance, a robust economy might lead to increased demand for housing and potentially higher rates, while economic uncertainty could have the opposite effect.\\n\\nIt\\\'s also crucial to consider the type of mortgage. Fixed-rate mortgages offer stability over the loan term, locking in a rate regardless of market changes. Adjustable-rate mortgages (ARMs) typically start with a lower rate but can change periodically based on market indexes. Understanding the nuances of each can help buyers make informed decisions. We advise consulting with a financial advisor to navigate these complexities and find the best mortgage product for your specific situation.',
+    fullContent: 'The 2024 mortgage market presents a dynamic environment for prospective homebuyers. Several key factors are influencing interest rates. Firstly, the Federal Reserve\\\'s monetary policy plays a pivotal role. Any adjustments to the federal funds rate can create ripple effects across the lending industry, impacting mortgage rates directly.\\n\\nSecondly, inflation trends continue to be a significant determinant. High inflation often leads to higher interest rates as lenders seek to protect the real value of their returns. Conversely, if inflation cools, we might see some stabilization or even a slight decrease in rates. Economic growth, unemployment figures, and overall market sentiment also contribute to the complex equation of mortgage rate fluctuations. For instance, a robust economy might lead to increased demand for housing and potentially higher rates, while economic uncertainty could have the opposite effect.\\n\\nIt\\\'s also crucial to consider the type of mortgage. Fixed-rate mortgages offer stability over the loan term, locking in a rate regardless of market changes. Adjustable-rate mortgages (ARMs) typically start with a lower rate but can change periodically based on market indexes. Understanding the nuances of each can help buyers make informed decisions. We advise consulting with a financial advisor to navigate these complexities and find the best mortgage product for your specific situation.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'finance graph',
     type: 'Article',
@@ -819,7 +819,7 @@ export interface HowWeHelpStep {
   icon: LucideIcon;
 }
 export const howWeHelpStepsData: HowWeHelpStep[] = [
-  { id: 'hwh1', title: 'HELP YOU BUILD YOUR BRIEF', description: 'What are your must haves and nice to haves, and what price guides will actually match your brief? Are you confused by typical price guides?', icon: FileText },
+  { id: 'hwh1', title: 'HELP YOU BUILD YOUR BRIEF', description: 'What are your must haves and nice to haves, and what price guides will actually match your brief? Are you confused by typical price guides?', icon: LucideFileText },
   { id: 'hwh2', title: 'RESEARCH, SHORT LIST & EVALUATE', description: 'Our buyers’ agents specialise in certain areas, for example, the main cities in NSW, VIC, and QLD. This means they can easily research the...', icon: FileSearch },
   { id: 'hwh3', title: 'HANDLE THE NEGOTIATIONS', description: 'How well do you rate your negotiation skills? Is it at an expert level? Do you like dealing with real estate agents? Our knowledge of the...', icon: Handshake },
 ];
@@ -843,5 +843,3 @@ export const memberLogos = [
   { id: 'ml6', hint: 'certification program logo' },
 ];
 
-
-    
