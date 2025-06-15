@@ -106,7 +106,7 @@ export default function OurServicesPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
                   {serviceLocationsData.map((location) => (
                     <Link key={location.id} href={`/locations/${location.slug}`} passHref className="group block">
-                      <Card className="shadow-md hover:shadow-xl transition-shadow duration-300 bg-card overflow-hidden relative aspect-[4/3] rounded-lg">
+                      <Card className="shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-card border border-border/30 overflow-hidden relative aspect-[4/3] rounded-lg">
                         <Image
                           src={location.image}
                           alt={location.name}
