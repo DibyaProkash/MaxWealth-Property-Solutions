@@ -1,6 +1,7 @@
 
 import Footer from '@/components/layout/footer';
 import HeroSection from '@/components/sections/hero-section';
+import AchievementsSection from '@/components/sections/achievements-section'; // New import
 import AboutUsSection from '@/components/sections/about-us-section';
 import ContentSection from '@/components/sections/content-section';
 import CalculatorsSection from '@/components/sections/calculators-section';
@@ -23,6 +24,11 @@ export default function HomePage() {
         <AnimatedSection>
           <HeroSection />
         </AnimatedSection>
+        
+        <AnimatedSection delay="delay-50"> {/* Adjusted delay for smooth flow */}
+          <AchievementsSection />
+        </AnimatedSection>
+
         <AnimatedSection delay="delay-100">
           <AboutUsSection />
         </AnimatedSection>
