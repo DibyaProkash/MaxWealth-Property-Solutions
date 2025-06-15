@@ -1,5 +1,5 @@
 
-import { Newspaper, Video, type LucideIcon } from 'lucide-react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard } from 'lucide-react';
 
 export interface Testimonial {
   name: string;
@@ -79,6 +79,19 @@ export const partnersData: Partner[] = [
   { name: 'MortgageMasters', logo: 'https://placehold.co/150x60.png', dataAiHint: 'mortgage logo' },
 ];
 
+// Define more specific media types
+export type MediaType = 'Blog' | 'Vlog' | 'Video' | 'Reel' | 'Article';
+
+// Helper to map media types to icons
+export const mediaTypeIcons: Record<MediaType, LucideIcon> = {
+  'Blog': BookText,
+  'Vlog': Clapperboard,
+  'Video': Video,
+  'Reel': Clapperboard, // Could use a different icon if available for "Reel"
+  'Article': Newspaper,
+};
+
+
 export interface Article {
   id: string;
   title: string;
@@ -86,14 +99,14 @@ export interface Article {
   fullContent?: string;
   image: string;
   dataAiHint: string;
-  type: 'Blog' | 'Vlog'; // Could be used as a broader category or in addition to specific category
-  category: string; // New field for specific categorization e.g. "Market Analysis"
+  type: MediaType; 
+  category: string; 
   date: string;
-  icon: LucideIcon; // Retained, though new design might not use it on cards
+  icon: LucideIcon; // Retained, used on individual media pages. For cards, we can use mediaTypeIcons.
   author?: string;
   tags?: string[];
-  readTime?: string; // e.g., "7 min read"
-  views?: string; // e.g., "1.2k"
+  readTime?: string; 
+  views?: string; 
 }
 
 export const articlesData: Article[] = [
@@ -104,7 +117,7 @@ export const articlesData: Article[] = [
     fullContent: 'The 2024 mortgage market presents a dynamic environment for prospective homebuyers. Several key factors are influencing interest rates. Firstly, the Federal Reserve\'s monetary policy plays a pivotal role. Any adjustments to the federal funds rate can create ripple effects across the lending industry, impacting mortgage rates directly.\n\nSecondly, inflation trends continue to be a significant determinant. High inflation often leads to higher interest rates as lenders seek to protect the real value of their returns. Conversely, if inflation cools, we might see some stabilization or even a slight decrease in rates. Economic growth, unemployment figures, and overall market sentiment also contribute to the complex equation of mortgage rate fluctuations. For instance, a robust economy might lead to increased demand for housing and potentially higher rates, while economic uncertainty could have the opposite effect.\n\nIt\'s also crucial to consider the type of mortgage. Fixed-rate mortgages offer stability over the loan term, locking in a rate regardless of market changes. Adjustable-rate mortgages (ARMs) typically start with a lower rate but can change periodically based on market indexes. Understanding the nuances of each can help buyers make informed decisions. We advise consulting with a financial advisor to navigate these complexities and find the best mortgage product for your specific situation.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'finance graph',
-    type: 'Blog',
+    type: 'Article',
     category: 'Market Analysis',
     date: '2024-07-15',
     icon: Newspaper,
@@ -152,7 +165,7 @@ export const articlesData: Article[] = [
     fullContent: 'The real estate industry is undergoing a significant transformation driven by technology. AI-powered search platforms are becoming increasingly sophisticated, offering personalized property recommendations based on user behavior and preferences, going beyond simple keyword searches. Virtual Reality (VR) and Augmented Reality (AR) are revolutionizing property viewings. VR tours allow potential buyers to explore homes remotely in immersive detail, saving time and effort, especially for out-of-town buyers. AR can help visualize renovations or furniture placements within a space.\n\nBlockchain technology is also emerging as a potential game-changer. Its proponents suggest it could streamline transactions, enhance security, and improve transparency in property records and ownership transfers, though widespread adoption is still in its early stages. Big data analytics are providing deeper insights into market trends, property valuations, and investment opportunities, empowering both consumers and professionals. Furthermore, mobile apps continue to offer convenient access to listings, mortgage calculators, and communication tools. As these technologies mature and integrate, the home buying and selling process is set to become more efficient, data-driven, and user-centric.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'technology real estate',
-    type: 'Blog',
+    type: 'Article',
     category: 'Property Trends',
     date: '2024-06-12',
     icon: Newspaper,
@@ -200,7 +213,7 @@ export const articlesData: Article[] = [
     fullContent: 'Your credit score is a three-digit number that lenders use to assess your creditworthiness, essentially how likely you are to repay borrowed money. This vlog explains its profound impact on your mortgage journey. A higher credit score generally translates to lower interest rates, which can save you tens of thousands of dollars over the life of your loan. It can also mean access to a wider range of loan products and potentially lower down payment requirements.\n\nConversely, a lower credit score might result in higher interest rates, making your monthly payments more expensive, or it could even make it difficult to qualify for a mortgage at all with some lenders. We discuss the primary factors that influence your credit score: payment history (making payments on time is crucial), amounts owed (your credit utilization ratio), length of credit history, new credit (opening too many accounts quickly can be negative), and credit mix (having different types of credit). The vlog provides actionable advice on how to obtain your credit report (you\'re entitled to a free one annually from each major bureau), review it for errors, and strategies for improving your score over time. Building and maintaining good credit is a vital step towards favorable mortgage terms.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'credit score',
-    type: 'Vlog',
+    type: 'Video', // Changed to Video for variety
     category: 'Finance & Economics',
     date: '2024-05-15',
     icon: Video,
@@ -216,7 +229,7 @@ export const articlesData: Article[] = [
     fullContent: 'Investing in real estate can be a powerful way to build wealth, but it\'s important to choose the right strategy. This article explores several popular approaches. Direct ownership of rental properties involves buying a property and leasing it out to tenants. This can provide regular cash flow and long-term appreciation but also requires active management. Real Estate Investment Trusts (REITs) offer a more passive way to invest by allowing you to buy shares in companies that own and operate income-producing real estate. This provides diversification and liquidity, similar to stocks.\n\nHouse flipping involves buying undervalued properties, renovating them, and selling them for a profit. This strategy can offer quick returns but also carries higher risk and requires significant expertise in renovation and market timing. Real estate wholesaling is another strategy where an investor contracts a home with a seller, then finds an interested party to buy it without actually taking ownership of the property. Crowdfunding platforms have also emerged, allowing multiple investors to pool funds for larger real estate projects. Each strategy has its own risk-reward profile, capital requirements, and time commitment. It\'s crucial to research thoroughly and consider your financial goals and risk tolerance before diving in. Consulting with a financial advisor specializing in real estate can help you determine the best path for your investment journey.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'investment strategy chart',
-    type: 'Blog',
+    type: 'Article',
     category: 'Investment Strategy',
     date: '2024-07-25',
     icon: Newspaper,
@@ -224,6 +237,22 @@ export const articlesData: Article[] = [
     tags: ['investment', 'real estate', 'strategy', 'rentals', 'REITs'],
     readTime: '9 min read',
     views: '1.9k',
+  },
+  {
+    id: '9',
+    title: 'Quick Guide to Home Loan Types',
+    description: 'A 60-second reel explaining the basic differences between FHA, VA, Conventional, and USDA loans.',
+    fullContent: 'This quick guide covers the main types of home loans. Conventional loans are not insured or guaranteed by the federal government. FHA loans are insured by the Federal Housing Administration and are popular with first-time buyers due to lower down payment requirements. VA loans are available to eligible veterans, active-duty military personnel, and surviving spouses, often with no down payment. USDA loans help moderate- to low-income homebuyers purchase homes in eligible rural areas, also often with no down payment. Each has specific eligibility criteria and benefits.',
+    image: 'https://placehold.co/400x711.png', // More vertical for a reel
+    dataAiHint: 'mobile phone video',
+    type: 'Reel',
+    category: 'Buyer\'s Guide',
+    date: '2024-07-28',
+    icon: Clapperboard, 
+    author: 'MaxWealth PS Shorts',
+    tags: ['home loans', 'fha', 'va', 'usda', 'mortgage types', 'reel'],
+    readTime: '1 min watch',
+    views: '5.5k',
   },
 ];
 

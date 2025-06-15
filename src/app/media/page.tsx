@@ -4,37 +4,59 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { articlesData, type Article } from '@/lib/data';
+import { articlesData, type Article, type MediaType, mediaTypeIcons } from '@/lib/data';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ArrowLeft, NewspaperIcon as PageIcon, ListFilter, ArrowDownUp, Mail, Eye, CalendarDays, User } from 'lucide-react'; // Changed Newspaper to PageIcon
+import { ArrowRight, ArrowLeft, Newspaper, ListFilter, ArrowDownUp, Mail, Eye, CalendarDays, User, Search as SearchIcon, Clock, BookText, Clapperboard, Video as VideoIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Separator } from '@/components/ui/separator';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
-type SortOption = 'date-desc' | 'date-asc' | 'category-asc';
+type SortOption = 'date-desc' | 'date-asc' | 'category-asc' | 'type-asc';
 
 export default function AllMediaPage() {
   const [sortOption, setSortOption] = React.useState<SortOption>('date-desc');
   const [selectedCategory, setSelectedCategory] = React.useState<string>('All');
+  const [selectedType, setSelectedType] = React.useState<MediaType | 'All'>('All');
+  const [searchTerm, setSearchTerm] = React.useState<string>('');
 
   const categories = React.useMemo(() => {
-    const counts: { [key: string]: number } = { 'All': articlesData.length };
+    const counts: { [key: string]: number } = { 'All': 0 }; // Will sum all articles for "All"
     articlesData.forEach(article => {
       counts[article.category] = (counts[article.category] || 0) + 1;
     });
+    counts['All'] = articlesData.length;
     return Object.entries(counts).map(([name, count]) => ({ name, count }))
       .sort((a, b) => a.name === 'All' ? -1 : b.name === 'All' ? 1 : a.name.localeCompare(b.name));
   }, []);
+
+  const availableTypes = React.useMemo(() => {
+    const types = new Set<MediaType>(articlesData.map(article => article.type));
+    return ['All', ...Array.from(types).sort()] as (MediaType | 'All')[];
+  }, []);
+
 
   const displayedArticles = React.useMemo(() => {
     let processedArticles = [...articlesData];
 
     if (selectedCategory !== 'All') {
       processedArticles = processedArticles.filter(article => article.category === selectedCategory);
+    }
+
+    if (selectedType !== 'All') {
+      processedArticles = processedArticles.filter(article => article.type === selectedType);
+    }
+
+    if (searchTerm.trim() !== '') {
+      const lowerSearchTerm = searchTerm.toLowerCase();
+      processedArticles = processedArticles.filter(article =>
+        article.title.toLowerCase().includes(lowerSearchTerm) ||
+        article.description.toLowerCase().includes(lowerSearchTerm) ||
+        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(lowerSearchTerm)))
+      );
     }
 
     switch (sortOption) {
@@ -47,9 +69,12 @@ export default function AllMediaPage() {
       case 'category-asc':
         processedArticles.sort((a, b) => a.category.localeCompare(b.category));
         break;
+      case 'type-asc':
+        processedArticles.sort((a, b) => a.type.localeCompare(b.type));
+        break;
     }
     return processedArticles;
-  }, [sortOption, selectedCategory]);
+  }, [sortOption, selectedCategory, selectedType, searchTerm]);
 
   return (
     <div className="bg-muted min-h-screen">
@@ -110,87 +135,132 @@ export default function AllMediaPage() {
           {/* Main Content */}
           <main className="md:col-span-9">
             <AnimatedSection delay="delay-150">
-              <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
-                <h1 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4 sm:mb-0">
+              <div className="mb-8">
+                <h1 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
                   Recent Media
                 </h1>
-                <div className="flex items-center space-x-2">
-                  <Label htmlFor="sortOptionMedia" className="text-sm text-muted-foreground">Sort by:</Label>
-                  <Select value={sortOption} onValueChange={(value: string) => setSortOption(value as SortOption)}>
-                    <SelectTrigger id="sortOptionMedia" className="w-[180px] bg-card">
-                      <SelectValue placeholder="Select sort order" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="date-desc">Most Recent</SelectItem>
-                      <SelectItem value="date-asc">Oldest First</SelectItem>
-                      <SelectItem value="category-asc">Category (A-Z)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                <Card className="p-4 sm:p-6 bg-card shadow">
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6 gap-y-4 items-end">
+                    <div className="lg:col-span-3 space-y-2">
+                      <Label htmlFor="searchTermMedia" className="text-sm font-semibold text-primary flex items-center">
+                          <SearchIcon className="mr-2 h-4 w-4" /> Search Content:
+                      </Label>
+                      <Input
+                          id="searchTermMedia"
+                          type="text"
+                          placeholder="e.g., mortgage rates, buyer tips..."
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          className="bg-background"
+                      />
+                    </div>
+                    <div className="lg:col-span-2 space-y-2">
+                        <Label htmlFor="filterTypeMedia" className="text-sm font-semibold text-primary flex items-center">
+                            <ListFilter className="mr-2 h-4 w-4" /> Filter by Type:
+                        </Label>
+                        <RadioGroup
+                            id="filterTypeMedia"
+                            value={selectedType}
+                            onValueChange={(value: string) => setSelectedType(value as MediaType | 'All')}
+                            className="flex flex-wrap gap-x-3 gap-y-2 pt-1"
+                        >
+                            {availableTypes.map((type) => (
+                            <div key={type} className="flex items-center space-x-1.5">
+                                <RadioGroupItem value={type} id={`filter-media-${type}`} />
+                                <Label htmlFor={`filter-media-${type}`} className="font-normal text-xs sm:text-sm cursor-pointer hover:text-primary capitalize">{type}</Label>
+                            </div>
+                            ))}
+                        </RadioGroup>
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="sortOptionMedia" className="text-sm font-semibold text-primary flex items-center">
+                            <ArrowDownUp className="mr-2 h-4 w-4" /> Sort by:
+                        </Label>
+                        <Select value={sortOption} onValueChange={(value: string) => setSortOption(value as SortOption)}>
+                            <SelectTrigger id="sortOptionMedia" className="w-full bg-background">
+                            <SelectValue placeholder="Select sort order" />
+                            </SelectTrigger>
+                            <SelectContent>
+                            <SelectItem value="date-desc">Most Recent</SelectItem>
+                            <SelectItem value="date-asc">Oldest First</SelectItem>
+                            <SelectItem value="category-asc">Category (A-Z)</SelectItem>
+                            <SelectItem value="type-asc">Type (A-Z)</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </div>
+                  </div>
+                </Card>
               </div>
 
               {displayedArticles.length > 0 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {displayedArticles.map((article) => (
-                    <Card key={article.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-card flex flex-col">
-                      <div className="relative w-full aspect-[16/9]">
-                        <Image
-                          src={article.image}
-                          alt={article.title}
-                          fill
-                          sizes="(max-width: 1024px) 100vw, 50vw"
-                          style={{ objectFit: 'cover' }}
-                          data-ai-hint={article.dataAiHint}
-                        />
-                        <Badge variant="secondary" className="absolute top-3 left-3 bg-card/80 text-foreground backdrop-blur-sm text-xs">
-                          {article.category}
-                        </Badge>
-                      </div>
-                      <CardContent className="p-5 flex-grow">
-                        <Link href={`/media/${article.id}`} passHref>
-                          <h2 className="font-headline text-xl text-primary hover:text-accent transition-colors mb-2 cursor-pointer line-clamp-2">
-                            {article.title}
-                          </h2>
-                        </Link>
-                        <p className="text-sm text-muted-foreground line-clamp-3 mb-3">{article.description}</p>
-                        <div className="text-xs text-muted-foreground space-y-1">
-                          {article.author && (
-                            <div className="flex items-center">
-                              <User className="w-3 h-3 mr-1.5" /> {article.author}
-                            </div>
-                          )}
-                           <div className="flex items-center">
-                             <CalendarDays className="w-3 h-3 mr-1.5" /> {new Date(article.date).toLocaleDateString()}
-                           </div>
-                          <div className="flex items-center space-x-3">
-                            {article.readTime && (
-                              <div className="flex items-center">
-                                <ClockIcon className="w-3 h-3 mr-1.5" /> {article.readTime}
-                              </div>
-                            )}
-                            {article.views && (
-                              <div className="flex items-center">
-                                <Eye className="w-3 h-3 mr-1.5" /> {article.views}
-                              </div>
-                            )}
-                          </div>
+                  {displayedArticles.map((article) => {
+                    const TypeIcon = mediaTypeIcons[article.type] || Newspaper;
+                    return (
+                      <Card key={article.id} className="overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-card flex flex-col">
+                        <div className="relative w-full aspect-[16/9]">
+                          <Image
+                            src={article.image}
+                            alt={article.title}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            style={{ objectFit: 'cover' }}
+                            data-ai-hint={article.dataAiHint}
+                          />
+                          <Badge variant="secondary" className="absolute top-3 right-3 bg-card/80 text-foreground backdrop-blur-sm text-xs capitalize flex items-center">
+                             <TypeIcon className="w-3 h-3 mr-1.5 opacity-75" />
+                             {article.type}
+                          </Badge>
+                          <Badge variant="default" className="absolute top-3 left-3 bg-primary/80 text-primary-foreground backdrop-blur-sm text-xs capitalize">
+                            {article.category}
+                          </Badge>
                         </div>
-                      </CardContent>
-                      <CardFooter className="p-5 pt-0">
-                        <Link href={`/media/${article.id}`} passHref>
-                           <Button variant="link" className="text-accent p-0 h-auto text-sm">
-                            Read More <ArrowRight className="ml-1 h-3 w-3" />
-                          </Button>
-                        </Link>
-                      </CardFooter>
-                    </Card>
-                  ))}
+                        <CardContent className="p-5 flex-grow">
+                          <Link href={`/media/${article.id}`} passHref>
+                            <h2 className="font-headline text-xl text-primary hover:text-accent transition-colors mb-2 cursor-pointer line-clamp-2">
+                              {article.title}
+                            </h2>
+                          </Link>
+                          <p className="text-sm text-muted-foreground line-clamp-3 mb-3">{article.description}</p>
+                          <div className="text-xs text-muted-foreground space-y-1">
+                            {article.author && (
+                              <div className="flex items-center">
+                                <User className="w-3 h-3 mr-1.5" /> {article.author}
+                              </div>
+                            )}
+                             <div className="flex items-center">
+                               <CalendarDays className="w-3 h-3 mr-1.5" /> {new Date(article.date).toLocaleDateString()}
+                             </div>
+                            <div className="flex items-center space-x-3">
+                              {article.readTime && (
+                                <div className="flex items-center">
+                                  <Clock className="w-3 h-3 mr-1.5" /> {article.readTime}
+                                </div>
+                              )}
+                              {article.views && (
+                                <div className="flex items-center">
+                                  <Eye className="w-3 h-3 mr-1.5" /> {article.views}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        </CardContent>
+                        <CardFooter className="p-5 pt-0">
+                          <Link href={`/media/${article.id}`} passHref>
+                             <Button variant="link" className="text-accent p-0 h-auto text-sm">
+                              Read More <ArrowRight className="ml-1 h-3 w-3" />
+                            </Button>
+                          </Link>
+                        </CardFooter>
+                      </Card>
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="text-center py-10 bg-card rounded-lg shadow-md">
-                  <PageIcon className="mx-auto h-12 w-12 mb-4 text-primary/50" />
-                  <p className="text-lg text-muted-foreground">No media items match your current filter.</p>
-                  <p className="text-muted-foreground">Try selecting a different category.</p>
+                  <Newspaper className="mx-auto h-12 w-12 mb-4 text-primary/50" />
+                  <p className="text-lg text-muted-foreground">No media items match your current filters.</p>
+                  <p className="text-muted-foreground">Try adjusting your selection or search term.</p>
                 </div>
               )}
             </AnimatedSection>
@@ -201,23 +271,3 @@ export default function AllMediaPage() {
   );
 }
 
-// Helper icon for read time (if not available in lucide-react directly in older versions)
-function ClockIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="12" r="10" />
-      <polyline points="12 6 12 12 16 14" />
-    </svg>
-  );
-}

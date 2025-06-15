@@ -1,9 +1,9 @@
 
-import { articlesData, type Article } from '@/lib/data';
+import { articlesData, type Article, mediaTypeIcons } from '@/lib/data';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { CalendarDays, UserCircle, Tag, MessageSquare, Clock, Eye } from 'lucide-react';
+import { CalendarDays, UserCircle, Tag, MessageSquare, Clock, Eye, Type } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
@@ -30,6 +30,8 @@ export default function MediaPage({ params }: MediaPageProps) {
   }
 
   const contentToDisplay = article.fullContent || article.description;
+  const MediaTypeIcon = mediaTypeIcons[article.type] || Type;
+
 
   return (
     <div className="container mx-auto px-4 py-8 md:py-16 max-w-4xl bg-background">
@@ -48,7 +50,10 @@ export default function MediaPage({ params }: MediaPageProps) {
             <CalendarDays className="mr-1.5 h-4 w-4" />
             <span>Published: {new Date(article.date).toLocaleDateString()}</span>
           </div>
-          <Badge variant="secondary" className="capitalize">{article.category}</Badge>
+          <Badge variant="secondary" className="capitalize flex items-center">
+            <MediaTypeIcon className="mr-1.5 h-3.5 w-3.5" /> {article.type}
+          </Badge>
+           <Badge variant="outline" className="capitalize">{article.category}</Badge>
           {article.author && (
             <div className="flex items-center">
               <UserCircle className="mr-1.5 h-4 w-4" />
@@ -95,7 +100,7 @@ export default function MediaPage({ params }: MediaPageProps) {
       )}
 
       <article className="prose dark:prose-invert prose-lg max-w-none font-body text-foreground leading-relaxed">
-        {contentToDisplay.split('\n').map((paragraph, index) => (
+        {contentToDisplay.split('\\n').map((paragraph, index) => (
           paragraph.trim() !== '' && <p key={index}>{paragraph}</p>
         ))}
       </article>
@@ -109,7 +114,7 @@ export default function MediaPage({ params }: MediaPageProps) {
             Leave a Comment
           </CardTitle>
           <CardDescription>
-            Share your thoughts or ask questions about this {article.type === 'Blog' ? 'article' : 'video'}.
+            Share your thoughts or ask questions about this {article.type.toLowerCase()}.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -126,3 +131,4 @@ export default function MediaPage({ params }: MediaPageProps) {
     </div>
   );
 }
+
