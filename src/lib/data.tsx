@@ -1,6 +1,6 @@
 
 import React, { type SVGProps } from 'react';
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText as LucideFileText, Linkedin, Mail } from 'lucide-react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText as LucideFileText, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon } from 'lucide-react';
 
 
 // Helper icon component (if not directly from lucide-react or if a specific one is needed)
@@ -368,6 +368,8 @@ export interface TeamMemberDetailed {
   socialLinks?: {
     linkedin?: string;
     email?: string;
+    twitter?: string;
+    instagram?: string;
   };
 }
 
@@ -376,13 +378,15 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     id: 'tm1',
     name: 'Jacqueline Dwyer',
     title: 'CEO & Founder, Lead Buyers Advocate',
-    image: 'https://placehold.co/400x450.png', // This was 400x450, keep if specific for her in founder section
+    image: 'https://placehold.co/400x450.png', 
     dataAiHint: 'woman professional portrait',
     bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas. Jacqueline has a keen focus on development sites, commercial properties, and investment markets nationwide.",
     specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis'],
     socialLinks: {
       linkedin: '#',
-      email: 'mailto:jacqueline.dwyer@example.com'
+      email: 'mailto:jacqueline.dwyer@example.com',
+      twitter: '#',
+      instagram: '#'
     }
   },
   {
@@ -395,7 +399,9 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     specialties: ['Mortgage Planning', 'First-Time Home Buyers', 'Debt Management'],
     socialLinks: {
       linkedin: '#',
-      email: 'mailto:alice.johnson@example.com'
+      email: 'mailto:alice.johnson@example.com',
+      twitter: '#',
+      instagram: '#'
     }
   },
   {
@@ -408,7 +414,9 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     specialties: ['Property Investment', 'Portfolio Management', 'Risk Assessment'],
     socialLinks: {
       linkedin: '#',
-      email: 'mailto:bob.williams@example.com'
+      email: 'mailto:bob.williams@example.com',
+      twitter: '#',
+      instagram: '#'
     }
   },
   {
@@ -421,7 +429,9 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     specialties: ['Client Servicing', 'Process Optimization', 'Team Coordination'],
     socialLinks: {
       linkedin: '#',
-      email: 'mailto:carol.davis@example.com'
+      email: 'mailto:carol.davis@example.com',
+      twitter: '#',
+      instagram: '#'
     }
   }
 ];

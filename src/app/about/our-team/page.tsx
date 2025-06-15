@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X } from 'lucide-react';
+import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, X as CloseIcon } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import { teamMembersDetailedData, type TeamMemberDetailed } from '@/lib/data';
 import Footer from '@/components/layout/footer';
@@ -190,7 +190,6 @@ export default function OurTeamPage() {
             )}
           </AnimatedSection>
 
-          {/* Detailed Team Member Modal */}
           {selectedMember && (
             <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
               <DialogContent className="sm:max-w-2xl bg-card p-0">
@@ -217,6 +216,20 @@ export default function OurTeamPage() {
                             <Button variant="outline" asChild className="w-full">
                               <Link href={selectedMember.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
                                 <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
+                              </Link>
+                            </Button>
+                          )}
+                          {selectedMember.socialLinks.twitter && selectedMember.socialLinks.twitter !== '#' && (
+                            <Button variant="outline" asChild className="w-full">
+                              <Link href={selectedMember.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
+                                <TwitterIcon className="mr-2 h-4 w-4" /> Twitter/X
+                              </Link>
+                            </Button>
+                          )}
+                          {selectedMember.socialLinks.instagram && selectedMember.socialLinks.instagram !== '#' && (
+                            <Button variant="outline" asChild className="w-full">
+                              <Link href={selectedMember.socialLinks.instagram} target="_blank" rel="noopener noreferrer">
+                                <InstagramIcon className="mr-2 h-4 w-4" /> Instagram
                               </Link>
                             </Button>
                           )}
@@ -247,15 +260,13 @@ export default function OurTeamPage() {
                 </div>
                 </ScrollArea>
                 <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-                    <X className="h-5 w-5" />
+                    <CloseIcon className="h-5 w-5" />
                     <span className="sr-only">Close</span>
                 </DialogClose>
               </DialogContent>
             </Dialog>
           )}
 
-
-          {/* Services Section - Removed Detailed Team Members section above this */}
           <AnimatedSection delay="delay-250">
             <ServicesSectionHighlights />
           </AnimatedSection>
