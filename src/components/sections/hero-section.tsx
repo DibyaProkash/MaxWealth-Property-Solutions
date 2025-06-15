@@ -32,7 +32,7 @@ export default function HeroSection() {
                   Book a Consultation <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
-              <Button variant="outline" size="lg" className="shadow-lg transform transition-transform hover:scale-105 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground" asChild>
+              <Button size="lg" className="shadow-lg transform transition-transform hover:scale-105 bg-primary-foreground text-primary border border-primary-foreground hover:bg-primary-foreground/80" asChild>
                 <a href="#about">Learn More</a>
               </Button>
             </div>
