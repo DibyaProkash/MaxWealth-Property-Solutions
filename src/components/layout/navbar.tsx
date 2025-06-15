@@ -10,7 +10,7 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
+  NavigationMenuLink, // This is NavigationMenuPrimitive.Link
   NavigationMenuList,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
@@ -46,7 +46,7 @@ const navLinksData: NavLinkItem[] = [
     href: '/resources',
     label: 'Resources',
     icon: BookOpen,
-    id: 'resourcesPage', 
+    id: 'resourcesPage',
     subItems: resourceSubItems
   },
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
@@ -68,12 +68,10 @@ export default function Navbar() {
   }, []);
 
   const getLinkHref = (href: string) => {
-    // If on homepage, hash links are fine.
-    // If on another page, prepend '/' to hash links to navigate to homepage sections.
     if (pathname === '/' || !href.startsWith('#')) {
       return href;
     }
-    return `/${href}`; // e.g., /#about
+    return `/${href}`;
   };
 
   return (
@@ -96,7 +94,7 @@ export default function Navbar() {
                 if (link.subItems) { // This is the "Resources" item
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <Link href={link.href} asChild> 
+                      <Link href={link.href} asChild>
                         <NavigationMenuTrigger
                           className={cn(navigationMenuTriggerStyle(),
                             "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
@@ -126,19 +124,17 @@ export default function Navbar() {
                 } else { // For simple links (no subItems)
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <Link
-                        href={getLinkHref(link.href)}
-                        asChild
-                      >
-                        <NavigationMenuLink
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href={getLinkHref(link.href)}
                           className={cn(navigationMenuTriggerStyle(),
                              "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
                              isMounted && isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
                           )}
                         >
                           {link.label}
-                        </NavigationMenuLink>
-                      </Link>
+                        </Link>
+                      </NavigationMenuLink>
                     </NavigationMenuItem>
                   );
                 }
@@ -177,7 +173,7 @@ export default function Navbar() {
                         <React.Fragment key={link.label}>
                            <SheetClose asChild>
                             <Link
-                                href={link.href} // Main Resources link
+                                href={link.href}
                                 className={cn(
                                 "flex items-center space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
                                 isMounted && isActive && "bg-primary-foreground/10 text-primary-foreground"
@@ -243,13 +239,13 @@ const ListItem = React.forwardRef<
   return (
     <li>
       <NavigationMenuLink asChild>
-        <Link 
-          ref={ref} 
+        <Link
+          ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground",
             className
           )}
-          {...props} 
+          {...props}
         >
           <div className="flex items-center space-x-2">
             {Icon && <Icon className="h-5 w-5" />}
