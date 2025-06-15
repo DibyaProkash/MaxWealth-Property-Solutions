@@ -27,6 +27,7 @@ import {
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import AnimatedSection from '@/components/layout/animated-section';
+import Footer from '@/components/layout/footer';
 
 interface RoadmapStep {
   id: string;
@@ -174,113 +175,116 @@ export default function RoadmapPage() {
   };
 
   return (
-    <div className="py-8 md:py-16 bg-background">
-      <div className="container mx-auto px-6">
-        <AnimatedSection>
-            <div className="mb-12">
-                <Button variant="outline" className="mb-6" asChild>
-                  <Link href="/resources">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Resources
-                  </Link>
-                </Button>
-                <div className="text-center">
-                    <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
-                        <ListChecks className="h-10 w-10 text-primary" />
-                    </div>
-                    <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">Your Home Buying Roadmap</h1>
-                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                        Navigate the path to homeownership with our interactive step-by-step guide. Track your progress and get insights for each milestone.
-                    </p>
-                    <div className="mt-4 p-3 bg-accent/10 border border-accent/30 rounded-md text-sm text-accent flex items-center justify-center max-w-md mx-auto">
-                        <Save className="h-5 w-5 mr-2" />
-                        Your progress is saved locally in this browser.
-                    </div>
-                </div>
-            </div>
-        </AnimatedSection>
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow py-8 md:py-16 bg-background">
+        <div className="container mx-auto px-6">
+          <AnimatedSection>
+              <div className="mb-12">
+                  <Button variant="outline" className="mb-6" asChild>
+                    <Link href="/resources">
+                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      Back to Resources
+                    </Link>
+                  </Button>
+                  <div className="text-center">
+                      <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
+                          <ListChecks className="h-10 w-10 text-primary" />
+                      </div>
+                      <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">Your Home Buying Roadmap</h1>
+                      <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                          Navigate the path to homeownership with our interactive step-by-step guide. Track your progress and get insights for each milestone.
+                      </p>
+                      <div className="mt-4 p-3 bg-accent/10 border border-accent/30 rounded-md text-sm text-accent flex items-center justify-center max-w-md mx-auto">
+                          <Save className="h-5 w-5 mr-2" />
+                          Your progress is saved locally in this browser.
+                      </div>
+                  </div>
+              </div>
+          </AnimatedSection>
 
-        <AnimatedSection delay="delay-100">
-            <div className="max-w-3xl mx-auto space-y-4 mb-8">
-            <Label className="text-sm text-muted-foreground">Overall Progress: {completedStepsCount} of {totalSteps} steps completed</Label>
-            <Progress value={progressPercentage} aria-label={`${progressPercentage.toFixed(0)}% complete`} className="w-full h-3" />
-            </div>
+          <AnimatedSection delay="delay-100">
+              <div className="max-w-3xl mx-auto space-y-4 mb-8">
+              <Label className="text-sm text-muted-foreground">Overall Progress: {completedStepsCount} of {totalSteps} steps completed</Label>
+              <Progress value={progressPercentage} aria-label={`${progressPercentage.toFixed(0)}% complete`} className="w-full h-3" />
+              </div>
 
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {steps.map((step, index) => {
-                const IconComponent = step.icon; 
-                return (
-                <Card 
-                key={step.id} 
-                className={cn(
-                    "shadow-lg transition-all duration-300 flex flex-col group hover:shadow-xl",
-                    step.completed ? "bg-card/70 border-primary/40 opacity-75" : "bg-card" 
-                )}
-                >
-                <CardHeader className="flex flex-row items-start space-x-4 pb-3">
-                    <div className={cn(
-                        "p-2.5 rounded-lg flex items-center justify-center transition-colors", 
-                        step.completed ? "bg-primary/70 text-primary-foreground/90" : "bg-primary/10 text-primary group-hover:bg-primary/20"
-                    )}>
-                    {IconComponent ? <IconComponent className="h-7 w-7" /> : <ListChecks className="h-7 w-7" /> }
-                    </div>
-                    <div className="flex-1">
-                    <CardTitle className={cn(
-                        "font-headline text-xl transition-colors", 
-                        step.completed ? "text-primary/70 line-through" : "text-primary group-hover:text-primary/90"
-                    )}>
-                        {index + 1}. {step.title}
-                    </CardTitle>
-                    </div>
-                    <Checkbox
-                    id={`step-${step.id}`}
-                    checked={step.completed}
-                    onCheckedChange={() => handleStepToggle(step.id)}
-                    aria-label={`Mark step ${step.title} as ${step.completed ? 'incomplete' : 'complete'}`}
-                    className="mt-1 h-5 w-5 rounded border-primary/50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus:ring-primary/50"
-                    />
-                </CardHeader>
-                <CardContent className="flex-grow pb-4">
-                    <CardDescription className={cn(
-                        "text-sm transition-opacity", 
-                        step.completed ? "text-muted-foreground/70" : "text-muted-foreground"
-                    )}>
-                    {step.longDescription}
-                    </CardDescription>
-                </CardContent>
-                <div className="px-6 pb-5 pt-0 mt-auto">
-                    <Dialog>
-                        <DialogTrigger asChild>
-                        <Button variant="outline" size="sm" className="w-full text-xs hover:bg-accent/5 hover:border-accent/30 transition-colors text-accent">
-                            <Lightbulb className="mr-2 h-4 w-4 text-accent/70" /> Get AI Tip (Concept)
-                        </Button>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-md bg-card">
-                        <DialogHeader>
-                            <DialogTitle className="flex items-center text-primary font-headline">
-                            <Lightbulb className="mr-2 h-5 w-5 text-primary" />
-                            AI Tip for: {step.title}
-                            </DialogTitle>
-                        </DialogHeader>
-                        <div className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground py-2 space-y-2">
-                            <p>{step.aiTip}</p>
-                            <p className="text-xs italic mt-4">
-                            This is a conceptual demonstration. Full AI personalization would require connecting to our Genkit services.
-                            </p>
-                        </div>
-                        <div className="flex justify-end pt-2">
-                            <DialogClose asChild>
-                                <Button type="button" variant="secondary">Close</Button>
-                            </DialogClose>
-                        </div>
-                        </DialogContent>
-                    </Dialog>
-                    </div>
-                </Card>
-            )})}
-            </div>
-        </AnimatedSection>
-      </div>
+              <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {steps.map((step, index) => {
+                  const IconComponent = step.icon; 
+                  return (
+                  <Card 
+                  key={step.id} 
+                  className={cn(
+                      "shadow-lg transition-all duration-300 flex flex-col group hover:shadow-xl",
+                      step.completed ? "bg-card/70 border-primary/40 opacity-75" : "bg-card" 
+                  )}
+                  >
+                  <CardHeader className="flex flex-row items-start space-x-4 pb-3">
+                      <div className={cn(
+                          "p-2.5 rounded-lg flex items-center justify-center transition-colors", 
+                          step.completed ? "bg-primary/70 text-primary-foreground/90" : "bg-primary/10 text-primary group-hover:bg-primary/20"
+                      )}>
+                      {IconComponent ? <IconComponent className="h-7 w-7" /> : <ListChecks className="h-7 w-7" /> }
+                      </div>
+                      <div className="flex-1">
+                      <CardTitle className={cn(
+                          "font-headline text-xl transition-colors", 
+                          step.completed ? "text-primary/70 line-through" : "text-primary group-hover:text-primary/90"
+                      )}>
+                          {index + 1}. {step.title}
+                      </CardTitle>
+                      </div>
+                      <Checkbox
+                      id={`step-${step.id}`}
+                      checked={step.completed}
+                      onCheckedChange={() => handleStepToggle(step.id)}
+                      aria-label={`Mark step ${step.title} as ${step.completed ? 'incomplete' : 'complete'}`}
+                      className="mt-1 h-5 w-5 rounded border-primary/50 data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground focus:ring-primary/50"
+                      />
+                  </CardHeader>
+                  <CardContent className="flex-grow pb-4">
+                      <CardDescription className={cn(
+                          "text-sm transition-opacity", 
+                          step.completed ? "text-muted-foreground/70" : "text-muted-foreground"
+                      )}>
+                      {step.longDescription}
+                      </CardDescription>
+                  </CardContent>
+                  <div className="px-6 pb-5 pt-0 mt-auto">
+                      <Dialog>
+                          <DialogTrigger asChild>
+                          <Button variant="outline" size="sm" className="w-full text-xs hover:bg-accent/5 hover:border-accent/30 transition-colors text-accent">
+                              <Lightbulb className="mr-2 h-4 w-4 text-accent/70" /> Get AI Tip (Concept)
+                          </Button>
+                          </DialogTrigger>
+                          <DialogContent className="sm:max-w-md bg-card">
+                          <DialogHeader>
+                              <DialogTitle className="flex items-center text-primary font-headline">
+                              <Lightbulb className="mr-2 h-5 w-5 text-primary" />
+                              AI Tip for: {step.title}
+                              </DialogTitle>
+                          </DialogHeader>
+                          <div className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground py-2 space-y-2">
+                              <p>{step.aiTip}</p>
+                              <p className="text-xs italic mt-4">
+                              This is a conceptual demonstration. Full AI personalization would require connecting to our Genkit services.
+                              </p>
+                          </div>
+                          <div className="flex justify-end pt-2">
+                              <DialogClose asChild>
+                                  <Button type="button" variant="secondary">Close</Button>
+                              </DialogClose>
+                          </div>
+                          </DialogContent>
+                      </Dialog>
+                      </div>
+                  </Card>
+              )})}
+              </div>
+          </AnimatedSection>
+        </div>
+      </main>
+      <Footer />
     </div>
   );
 }
