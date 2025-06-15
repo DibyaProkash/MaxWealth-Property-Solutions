@@ -25,7 +25,7 @@ interface NavLinkItem {
   href: string;
   label: string;
   icon: LucideIcon;
-  id?: string; // For scroll spy on homepage sections
+  id?: string; // For scroll spy on homepage sections or page identification
   subItems?: NavLinkItem[];
   description?: string; // For NavigationMenu content
 }
@@ -68,10 +68,12 @@ export default function Navbar() {
   }, []);
 
   const getLinkHref = (href: string) => {
+    // If on homepage, hash links are fine.
+    // If on another page, prepend '/' to hash links to navigate to homepage sections.
     if (pathname === '/' || !href.startsWith('#')) {
       return href;
     }
-    return `/${href}`;
+    return `/${href}`; // e.g., /#about
   };
 
   return (
@@ -94,7 +96,7 @@ export default function Navbar() {
                 if (link.subItems) { // This is the "Resources" item
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <Link href={link.href} passHref legacyBehavior={false} asChild>
+                      <Link href={link.href} passHref legacyBehavior asChild={false}> 
                         <NavigationMenuTrigger
                           className={cn(navigationMenuTriggerStyle(),
                             "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
@@ -124,7 +126,10 @@ export default function Navbar() {
                 } else { // For simple links (no subItems)
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <Link href={getLinkHref(link.href)} passHref legacyBehavior={false} asChild>
+                      <Link
+                        href={getLinkHref(link.href)}
+                        asChild
+                      >
                         <NavigationMenuLink
                           className={cn(navigationMenuTriggerStyle(),
                              "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
