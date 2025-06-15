@@ -68,12 +68,10 @@ export default function Navbar() {
   }, []);
 
   const getLinkHref = (href: string) => {
-    // If on homepage, hash links are fine.
-    // If on another page, prepend '/' to hash links to go to homepage sections.
     if (pathname === '/' || !href.startsWith('#')) {
       return href;
     }
-    return `/${href}`; // e.g., /#about
+    return `/${href}`; // For homepage #links when on other pages
   };
 
 
@@ -97,25 +95,17 @@ export default function Navbar() {
                 if (link.subItems) { // This is the "Resources" item
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <NavigationMenuTrigger asChild>
-                        <Link
-                          href={link.href}
-                          asChild // Link will pass props to its child (the <a> tag)
+                       <Link href={link.href} passHref legacyBehavior={false} asChild>
+                        <NavigationMenuTrigger
+                          className={cn(navigationMenuTriggerStyle(),
+                            "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
+                            isMounted && isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
+                          )}
                         >
-                          <a // This <a> tag receives props from Link and Radix Trigger
-                            className={cn(navigationMenuTriggerStyle(), "group",
-                              "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                              isMounted && isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
-                            )}
-                          >
-                            {link.label}
-                            <ChevronDown
-                              className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
-                              aria-hidden="true"
-                            />
-                          </a>
-                        </Link>
-                      </NavigationMenuTrigger>
+                          {link.label}
+                          {/* ChevronDown is automatically rendered by custom NavigationMenuTrigger */}
+                        </NavigationMenuTrigger>
+                      </Link>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                           {link.subItems.map((subItem) => (
@@ -136,8 +126,8 @@ export default function Navbar() {
                 } else { // For simple links (no subItems)
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <NavigationMenuLink asChild>
-                        <Link
+                       <NavigationMenuLink asChild>
+                         <Link
                           href={getLinkHref(link.href)}
                            className={cn(navigationMenuTriggerStyle(),
                              "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
@@ -189,13 +179,15 @@ export default function Navbar() {
                             <Link
                                 href={link.href}
                                 className={cn(
-                                "flex items-center space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
+                                "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
                                 isMounted && isActive && "bg-primary-foreground/10 text-primary-foreground"
                                 )}
                             >
+                              <span className="flex items-center space-x-2">
                                 <link.icon className="h-5 w-5" />
                                 <span>{link.label}</span>
-                                <ChevronDown className="h-4 w-4 ml-auto opacity-70" />
+                              </span>
+                                <ChevronDown className="h-4 w-4 opacity-70" />
                             </Link>
                            </SheetClose>
                           <div className="flex flex-col space-y-1 pl-6">
@@ -254,7 +246,7 @@ const ListItem = React.forwardRef<
     <li>
       <NavigationMenuLink asChild>
         <Link
-          href={href || '/'} // Ensure href is always present
+          href={href || '/'}
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground",
@@ -275,4 +267,3 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-
