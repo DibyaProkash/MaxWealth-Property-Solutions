@@ -44,12 +44,8 @@ export default function OurServicesPage() {
             </header>
           </AnimatedSection>
 
-          <AnimatedSection delay="delay-100">
-            <ServicesSectionHighlights />
-          </AnimatedSection>
-
           {/* Who We Help Section */}
-          <AnimatedSection delay="delay-150">
+          <AnimatedSection delay="delay-100">
             <section className="py-16 md:py-24">
               <div className="text-center mb-12 md:mb-16">
                 <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-4">Who We Help</h2>
@@ -89,7 +85,7 @@ export default function OurServicesPage() {
           </AnimatedSection>
 
           {/* Where We Service Section */}
-          <AnimatedSection delay="delay-200">
+          <AnimatedSection delay="delay-150">
             <section className="py-16 md:py-24 bg-secondary rounded-lg">
               <div className="container mx-auto px-6">
                 <div className="text-center mb-12 md:mb-16">
@@ -123,7 +119,7 @@ export default function OurServicesPage() {
           </AnimatedSection>
 
           {/* Call to Action Cards Section */}
-          <AnimatedSection delay="delay-250">
+          <AnimatedSection delay="delay-200">
             <section className="py-16 md:py-24">
               <div className="grid md:grid-cols-2 gap-8 items-stretch">
                 <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-primary text-primary-foreground p-6 md:p-10 rounded-lg flex flex-col justify-between items-center text-center relative overflow-hidden">
@@ -161,6 +157,11 @@ export default function OurServicesPage() {
                 </Card>
               </div>
             </section>
+          </AnimatedSection>
+
+          {/* Our Comprehensive Services Section (Moved to bottom) */}
+          <AnimatedSection delay="delay-250">
+            <ServicesSectionHighlights />
           </AnimatedSection>
 
         </div>
