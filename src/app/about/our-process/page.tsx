@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, Workflow, Settings2 } from 'lucide-react';
+import { ArrowLeft, Workflow, Settings2, HomeIcon } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 
@@ -18,12 +18,12 @@ export default function OurProcessPage() {
                   <Link href="/about" passHref>
                   <Button variant="outline">
                       <ArrowLeft className="mr-2 h-4 w-4" />
-                      Back to About Us
+                      Back to About Overview
                   </Button>
                   </Link>
                   <Link href="/" passHref>
                   <Button variant="outline">
-                      <ArrowLeft className="mr-2 h-4 w-4" />
+                      <HomeIcon className="mr-2 h-4 w-4" />
                       Back to Home
                   </Button>
                   </Link>

@@ -1,16 +1,59 @@
 
 "use client";
 
+import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, CheckCircle, Briefcase, SearchCheck, TrendingUp, Users } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Briefcase, SearchCheck, TrendingUp, Users, HomeIcon } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
-import { teamMembersDetailedData, servicesData, type TeamMemberDetailed, type ServiceOffering } from '@/lib/data';
+import { teamMembersDetailedData, type TeamMemberDetailed } from '@/lib/data';
 import Footer from '@/components/layout/footer';
+import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Autoplay from "embla-carousel-autoplay";
+
+// Data moved from about-us-section
+const founderData = {
+  name: 'Jacqueline Dwyer', // Updated to match reference
+  title: 'CEO & Founder & Buyers Advocate',
+  bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas including Sydney's Eastern Suburbs, North Shore, and Northern Beaches, and nationally with offices servicing Melbourne, Brisbane and Gold Coast. Jacqueline has a keen focus on development sites, commercial properties, and investment markets Australia-wide.",
+  image: 'https://placehold.co/400x450.png', 
+  dataAiHint: 'woman professional portrait',
+  logoText: 'MAXWEALTH PS',
+};
+
+const simpleTeamMembers = [
+  { name: 'Alice Johnson', role: 'Lead Financial Advisor', image: 'https://placehold.co/300x300.png', dataAiHint: 'woman portrait' },
+  { name: 'Bob Williams', role: 'Mortgage Specialist', image: 'https://placehold.co/300x300.png', dataAiHint: 'man portrait' },
+  { name: 'Carol Davis', role: 'Client Relations Manager', image: 'https://placehold.co/300x300.png', dataAiHint: 'person smiling' },
+  { name: 'David Lee', role: 'Investment Analyst', image: 'https://placehold.co/300x300.png', dataAiHint: 'man thinking' },
+];
+
 
 export default function OurTeamPage() {
+    const autoplayPlugin = React.useRef(
+        Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true })
+    );
+
+    const [itemsPerView, setItemsPerView] = React.useState(3);
+
+    React.useEffect(() => {
+        const updateItemsPerView = () => {
+        if (window.innerWidth < 768) {
+            setItemsPerView(1);
+        } else if (window.innerWidth < 1024) {
+            setItemsPerView(2);
+        } else {
+            setItemsPerView(3);
+        }
+        };
+        window.addEventListener('resize', updateItemsPerView);
+        updateItemsPerView();
+        return () => window.removeEventListener('resize', updateItemsPerView);
+    }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background text-foreground">
@@ -20,12 +63,12 @@ export default function OurTeamPage() {
               <Link href="/about" passHref>
                 <Button variant="outline">
                   <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to About Us
+                  Back to About Overview
                 </Button>
               </Link>
               <Link href="/" passHref>
                 <Button variant="outline">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
+                  <HomeIcon className="mr-2 h-4 w-4" />
                   Back to Home
                 </Button>
               </Link>
@@ -40,30 +83,117 @@ export default function OurTeamPage() {
             </header>
           </AnimatedSection>
 
-          {/* Introduction Section - No longer in a Card */}
           <AnimatedSection delay="delay-50">
             <div className="mb-12 md:mb-16 text-lg text-muted-foreground font-body space-y-4 max-w-4xl mx-auto">
                 <p>
-                  At MaxWealth PS, we redefine the property buying experience across Australia. Under the leadership of Jacqueline Dwyer, a celebrated figure in property, our agency stands as a beacon for discerning buyers targeting prime real estate in major cities and desirable regional hubs.
+                  MaxWealth PS is a leading Australian Buyers Agency. Spearheaded by Jacqueline Dwyer, an award-winning property professional, we’re the go-to agency for discerning buyers seeking premium real estate in major cities and desirable regional hubs.
                 </p>
                 <p className="font-headline text-xl text-primary">
-                  What truly sets us apart isn't just our reach, but our core philosophy...
+                  But here’s what really separates us from the rest…
                 </p>
                 <p>
-                  With over two decades navigating the intricacies of real estate—witnessing every triumph, setback, and the competitive edge that often eludes aspiring homeowners—we recognized a critical need. This inspired us to champion the buyer's cause exclusively.
+                  We’ve seen it all in 20+ years of real estate buying and selling—the wins, losses and competitive advantage that makes buying tough for the average individual with big dreams. 
                 </p>
                 <p>
-                  We empower you, the buyer, turning the tables in real estate negotiations. Our mission is to meticulously seek out and secure your ideal property, especially if you're time-poor, daunted by the search, or concerned about overpaying.
+                  Determined to shake things up, we set out to advocate exclusively for buyers, giving them the upper hand in real estate transactions. It’s our job (and pleasure) to step in, hunt and negotiate for buyers just like you who are strapped for time, dread ‘the chase’ and are anxious about paying too much. 
                 </p>
                 <p>
-                  The dedicated team at MaxWealth PS is committed to a seamless, effective, and even enjoyable property acquisition, ensuring your goals are met on schedule and within your financial plan. Partner with us, and experience the MaxWealth PS difference.
+                  Our A-team will strive to find and skillfully secure your next property, on time and within budget. With MaxWealth PS on your side, property buying can be simple, stress-free and enjoyable.
                 </p>
             </div>
           </AnimatedSection>
 
-          {/* Team Members Section */}
+          {/* Founder Showcase Section (Moved from AboutUsSection) */}
           <AnimatedSection delay="delay-100">
-            <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-8 text-center">Meet Our Professionals</h2>
+            <div className="mt-16 md:mt-24 mb-12 md:mb-16">
+                <Card className="bg-primary text-primary-foreground shadow-xl rounded-xl overflow-hidden">
+                    <div className="grid md:grid-cols-5">
+                        <div className="md:col-span-3 p-8 md:p-12">
+                            <h2 className="font-headline text-3xl sm:text-4xl font-bold mb-1">
+                                CEO &amp; FOUNDER
+                            </h2>
+                            <h3 className="font-headline text-2xl sm:text-3xl text-accent mb-6">
+                                &amp; BUYERS ADVOCATE
+                            </h3>
+                            <p className="font-body text-primary-foreground/80 mb-6 leading-relaxed text-sm sm:text-base">
+                                {founderData.bio}
+                            </p>
+                            <div className="mt-auto">
+                            <p className="font-headline text-xl font-semibold text-primary-foreground/90">{founderData.logoText}</p>
+                            <p className="text-sm text-primary-foreground/70">{founderData.title.split('&')[1].trim()} &amp; {founderData.title.split('&')[2].trim()}</p>
+                            </div>
+                        </div>
+                        <div className="md:col-span-2 relative min-h-[300px] md:min-h-0">
+                            <Image
+                                src={founderData.image}
+                                alt={founderData.name}
+                                fill
+                                style={{ objectFit: 'cover' }}
+                                className="md:rounded-l-none"
+                                data-ai-hint={founderData.dataAiHint}
+                                sizes="(max-width: 768px) 100vw, 40vw"
+                            />
+                        </div>
+                    </div>
+                </Card>
+            </div>
+          </AnimatedSection>
+          
+          {/* Meet Our Expert Team Carousel (Moved from AboutUsSection) */}
+          <AnimatedSection delay="delay-150">
+            <div className="text-center mb-8 mt-12"> {/* Adjusted margin */}
+              <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-2">Meet Our Expert Team</h3>
+              <p className="text-lg text-muted-foreground max-w-xl mx-auto font-body">
+                Our experienced professionals are passionate about helping you succeed.
+              </p>
+            </div>
+            {simpleTeamMembers.length > 0 ? (
+              <Carousel
+                opts={{
+                align: "start",
+                loop: simpleTeamMembers.length > itemsPerView,
+                }}
+                plugins={autoplayPlugin.current ? [autoplayPlugin.current] : []}
+                onMouseEnter={() => autoplayPlugin.current?.stop()}
+                onMouseLeave={() => autoplayPlugin.current?.play()}
+                className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
+              >
+                <CarouselContent className="-ml-4">
+                {simpleTeamMembers.map((member) => (
+                    <CarouselItem key={member.name} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
+                    <div className="p-1 h-full">
+                        <Card className="text-center shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card h-full flex flex-col">
+                        <div className="relative h-60 w-full">
+                            <Image
+                            src={member.image}
+                            alt={member.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            style={{ objectFit: 'cover' }}
+                            data-ai-hint={member.dataAiHint}
+                            />
+                        </div>
+                        <CardContent className="p-6 flex-grow">
+                            <h4 className="font-headline text-xl font-semibold text-primary mb-1">{member.name}</h4>
+                            <p className="text-accent">{member.role}</p>
+                        </CardContent>
+                        </Card>
+                    </div>
+                    </CarouselItem>
+                ))}
+                </CarouselContent>
+                {simpleTeamMembers.length > itemsPerView && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
+                {simpleTeamMembers.length > itemsPerView && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
+              </Carousel>
+            ) : (
+              <p className="text-center text-muted-foreground mb-12 md:mb-16">Team information coming soon.</p>
+            )}
+          </AnimatedSection>
+
+
+          {/* Detailed Team Members Section */}
+          <AnimatedSection delay="delay-200">
+            <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-8 text-center">Meet Our Core Professionals</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 md:mb-16">
               {teamMembersDetailedData.map((member) => (
                 <Card key={member.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card overflow-hidden">
@@ -102,39 +232,8 @@ export default function OurTeamPage() {
           </AnimatedSection>
 
           {/* Services Section */}
-          <AnimatedSection delay="delay-150">
-            <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-8 text-center">Our Comprehensive Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {servicesData.map((service) => {
-                const Icon = service.icon;
-                return (
-                  <Card key={service.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card flex flex-col">
-                    <CardHeader className="items-center text-center">
-                      <div className="p-3 bg-primary/10 rounded-full mb-3">
-                        <Icon className="h-8 w-8 text-primary" />
-                      </div>
-                      <CardTitle className="font-headline text-xl text-primary">{service.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-grow">
-                      <p className="text-sm text-muted-foreground mb-4 text-center font-body">{service.intro}</p>
-                      <ul className="space-y-2 text-sm text-muted-foreground">
-                        {service.features.map((feature) => (
-                          <li key={feature} className="flex items-start">
-                            <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                    <div className="p-6 pt-0 mt-auto">
-                      <Button variant="outline" className="w-full mt-4 border-accent text-accent hover:bg-accent hover:text-accent-foreground" asChild>
-                        <Link href="/fees-explained">VIEW OUR FEES</Link>
-                      </Button>
-                    </div>
-                  </Card>
-                );
-              })}
-            </div>
+          <AnimatedSection delay="delay-250">
+            <ServicesSectionHighlights />
           </AnimatedSection>
         </div>
       </main>

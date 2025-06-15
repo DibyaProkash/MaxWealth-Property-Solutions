@@ -5,50 +5,12 @@ import * as React from 'react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Users, Target, Eye, Award, Home, TrendingUp, Repeat, DollarSign, Briefcase, UserCircle } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import Autoplay from "embla-carousel-autoplay";
 
-const founderData = {
-  name: 'Rich Harvey', // Placeholder name
-  title: 'CEO & Founder & Buyers Advocate',
-  bio: "Rich, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; he's a seasoned property investor and professional economist with over two decades of experience in the property industry. His expertise extends to the prestige real estate & luxury property in Sydney's Eastern Suburbs, North Shore, and Northern Beaches, and nationally with offices servicing Melbourne, Brisbane and Gold Coast. Rich has a keen focus on development sites, commercial properties, and investment markets Australia-wide.",
-  image: 'https://placehold.co/400x450.png', // Placeholder image
-  dataAiHint: 'man professional portrait',
-  logoText: 'MAXWEALTH PS', // Placeholder for "RICH HARVEY" text with logo
-};
-
-const teamMembers = [
-  { name: 'Alice Johnson', role: 'Lead Financial Advisor', image: 'https://placehold.co/300x300.png', dataAiHint: 'woman portrait' },
-  { name: 'Bob Williams', role: 'Mortgage Specialist', image: 'https://placehold.co/300x300.png', dataAiHint: 'man portrait' },
-  { name: 'Carol Davis', role: 'Client Relations Manager', image: 'https://placehold.co/300x300.png', dataAiHint: 'person smiling' },
-  { name: 'David Lee', role: 'Investment Analyst', image: 'https://placehold.co/300x300.png', dataAiHint: 'man thinking' },
-];
+// FounderData and teamMembers carousel are removed from here and will be managed in /about/our-team page.
 
 export default function AboutUsSection() {
-  const autoplayPlugin = React.useRef(
-    Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true })
-  );
-
-  const [itemsPerView, setItemsPerView] = React.useState(3);
-
-  React.useEffect(() => {
-    const updateItemsPerView = () => {
-      if (window.innerWidth < 768) {
-        setItemsPerView(1);
-      } else if (window.innerWidth < 1024) {
-        setItemsPerView(2);
-      } else {
-        setItemsPerView(3);
-      }
-    };
-    window.addEventListener('resize', updateItemsPerView);
-    updateItemsPerView();
-    return () => window.removeEventListener('resize', updateItemsPerView);
-  }, []);
-
-
   return (
-    <section id="about" className="py-16 md:py-24 bg-background">
+    <section id="about-company" className="py-16 md:py-24 bg-background"> {/* Changed id for clarity */}
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">About MaxWealth PS</h2>
@@ -187,90 +149,10 @@ export default function AboutUsSection() {
         </div>
         {/* Agency Strength Sub-section END */}
 
-        {/* Founder Showcase Section START */}
-        <div className="mt-16 md:mt-24">
-            <Card className="bg-primary text-primary-foreground shadow-xl rounded-xl overflow-hidden">
-                <div className="grid md:grid-cols-5">
-                    <div className="md:col-span-3 p-8 md:p-12">
-                        <h2 className="font-headline text-3xl sm:text-4xl font-bold mb-1">
-                            CEO &amp; FOUNDER
-                        </h2>
-                        <h3 className="font-headline text-2xl sm:text-3xl text-accent mb-6">
-                            &amp; BUYERS ADVOCATE
-                        </h3>
-                        <p className="font-body text-primary-foreground/80 mb-6 leading-relaxed text-sm sm:text-base">
-                            {founderData.bio}
-                        </p>
-                        <div className="mt-auto">
-                           <p className="font-headline text-xl font-semibold text-primary-foreground/90">{founderData.logoText}</p> {/* Replaced Rich Harvey with company name for now */}
-                           <p className="text-sm text-primary-foreground/70">{founderData.title.split('&')[1].trim()} &amp; {founderData.title.split('&')[2].trim()}</p>
-                        </div>
-                    </div>
-                    <div className="md:col-span-2 relative min-h-[300px] md:min-h-0">
-                        <Image
-                            src={founderData.image}
-                            alt={founderData.name}
-                            fill
-                            style={{ objectFit: 'cover' }}
-                            className="md:rounded-l-none"
-                            data-ai-hint={founderData.dataAiHint}
-                        />
-                    </div>
-                </div>
-            </Card>
-        </div>
-        {/* Founder Showcase Section END */}
+        {/* Founder Showcase and Team Carousel are removed from this component */}
 
-        <div className="text-center mb-12 mt-16 md:mt-24">
-          <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-2">Meet Our Expert Team</h3>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto font-body">
-            Our experienced professionals are passionate about helping you succeed.
-          </p>
-        </div>
-        {teamMembers.length > 0 ? (
-          <Carousel
-            opts={{
-              align: "start",
-              loop: teamMembers.length > itemsPerView,
-            }}
-            plugins={autoplayPlugin.current ? [autoplayPlugin.current] : []}
-            onMouseEnter={() => autoplayPlugin.current?.stop()}
-            onMouseLeave={() => autoplayPlugin.current?.play()}
-            className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
-          >
-            <CarouselContent className="-ml-4">
-              {teamMembers.map((member) => (
-                <CarouselItem key={member.name} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1 h-full">
-                    <Card className="text-center shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card h-full flex flex-col">
-                      <div className="relative h-60 w-full">
-                        <Image
-                          src={member.image}
-                          alt={member.name}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          style={{ objectFit: 'cover' }}
-                          data-ai-hint={member.dataAiHint}
-                        />
-                      </div>
-                      <CardContent className="p-6 flex-grow">
-                        <h4 className="font-headline text-xl font-semibold text-primary mb-1">{member.name}</h4>
-                        <p className="text-accent">{member.role}</p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            {teamMembers.length > itemsPerView && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
-            {teamMembers.length > itemsPerView && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
-          </Carousel>
-        ) : (
-          <p className="text-center text-muted-foreground">Team information coming soon.</p>
-        )}
       </div>
     </section>
   );
 }
-
     
