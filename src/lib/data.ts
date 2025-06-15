@@ -1,5 +1,5 @@
 
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell } from 'lucide-react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon, Percent } from 'lucide-react';
 
 export interface Testimonial {
   name: string;
@@ -79,15 +79,13 @@ export const partnersData: Partner[] = [
   { name: 'MortgageMasters', logo: 'https://placehold.co/150x60.png', dataAiHint: 'mortgage logo' },
 ];
 
-// Define more specific media types
 export type MediaType = 'Blog' | 'Vlog' | 'Video' | 'Reel' | 'Article';
 
-// Helper to map media types to icons
 export const mediaTypeIcons: Record<MediaType, LucideIcon> = {
   'Blog': BookText,
   'Vlog': Clapperboard,
   'Video': Video,
-  'Reel': Clapperboard, // Could use a different icon if available for "Reel"
+  'Reel': Clapperboard,
   'Article': Newspaper,
 };
 
@@ -102,7 +100,7 @@ export interface Article {
   type: MediaType;
   category: string;
   date: string;
-  icon: LucideIcon; // Retained, used on individual media pages. For cards, we can use mediaTypeIcons.
+  icon: LucideIcon;
   author?: string;
   tags?: string[];
   readTime?: string;
@@ -213,7 +211,7 @@ export const articlesData: Article[] = [
     fullContent: 'Your credit score is a three-digit number that lenders use to assess your creditworthiness, essentially how likely you are to repay borrowed money. This vlog explains its profound impact on your mortgage journey. A higher credit score generally translates to lower interest rates, which can save you tens of thousands of dollars over the life of your loan. It can also mean access to a wider range of loan products and potentially lower down payment requirements.\n\nConversely, a lower credit score might result in higher interest rates, making your monthly payments more expensive, or it could even make it difficult to qualify for a mortgage at all with some lenders. We discuss the primary factors that influence your credit score: payment history (making payments on time is crucial), amounts owed (your credit utilization ratio), length of credit history, new credit (opening too many accounts quickly can be negative), and credit mix (having different types of credit). The vlog provides actionable advice on how to obtain your credit report (you\'re entitled to a free one annually from each major bureau), review it for errors, and strategies for improving your score over time. Building and maintaining good credit is a vital step towards favorable mortgage terms.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'credit score',
-    type: 'Video', // Changed to Video for variety
+    type: 'Video',
     category: 'Finance & Economics',
     date: '2024-05-15',
     icon: Video,
@@ -243,7 +241,7 @@ export const articlesData: Article[] = [
     title: 'Quick Guide to Home Loan Types',
     description: 'A 60-second reel explaining the basic differences between FHA, VA, Conventional, and USDA loans.',
     fullContent: 'This quick guide covers the main types of home loans. Conventional loans are not insured or guaranteed by the federal government. FHA loans are insured by the Federal Housing Administration and are popular with first-time buyers due to lower down payment requirements. VA loans are available to eligible veterans, active-duty military personnel, and surviving spouses, often with no down payment. USDA loans help moderate- to low-income homebuyers purchase homes in eligible rural areas, also often with no down payment. Each has specific eligibility criteria and benefits.',
-    image: 'https://placehold.co/400x711.png', // More vertical for a reel
+    image: 'https://placehold.co/400x711.png',
     dataAiHint: 'mobile phone video',
     type: 'Reel',
     category: 'Buyer\'s Guide',
@@ -346,7 +344,6 @@ export const guidesData: Guide[] = [
 ];
 
 
-// Data for "Our Team" page
 export interface TeamMemberDetailed {
   id: string;
   name: string;
@@ -360,7 +357,7 @@ export interface TeamMemberDetailed {
 export const teamMembersDetailedData: TeamMemberDetailed[] = [
   {
     id: 'tm1',
-    name: 'Jacqueline Dwyer', // Placeholder, adapt from AboutUsSection or new
+    name: 'Jacqueline Dwyer',
     title: 'CEO & Founder, Lead Buyers Advocate',
     image: 'https://placehold.co/400x450.png',
     dataAiHint: 'woman professional portrait',
@@ -396,7 +393,6 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
   }
 ];
 
-// Data for Services
 export interface ServiceOffering {
   id: string;
   title: string;
@@ -442,11 +438,10 @@ export const servicesData: ServiceOffering[] = [
       'Contracts and purchase',
       'Property settlement'
     ],
-    icon: TrendingUp,
+    icon: Percent, // Changed from TrendingUp to Percent to match an auction gavel/percentage feel
   }
 ];
 
-// For Navbar sub-items
 export const aboutUsSubItems = [
   { href: '/about/our-company', label: 'Our Company', icon: Building2, description: 'Learn about our mission, vision, and values.' },
   { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth PS.' },
@@ -460,5 +455,84 @@ export const resourceSubItems = [
   { href: '/resources/calculators', label: 'Financial Calculators', icon: CalculatorIcon, description: 'Estimate payments and affordability.' },
   { href: '/resources/roadmap', label: 'Home Buying Roadmap', icon: ListChecks, description: 'Navigate your path to homeownership.' },
   { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, description: 'Find answers to common questions.' },
+];
+
+export interface WhoWeHelpItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  image: string;
+  dataAiHint: string;
+}
+
+export const whoWeHelpData: WhoWeHelpItem[] = [
+  {
+    id: 'help1',
+    title: 'Residential Home',
+    description: 'Helping you find the perfect home, whether it’s your first or forever home. We ensure it meets your needs and long-term goals, making the buying process seamless and stress-free.',
+    icon: Home,
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'family home residential',
+  },
+  {
+    id: 'help2',
+    title: 'Investment Property',
+    description: 'Guiding you to high-yield investment properties that match your financial objectives. Our expertise ensures you make informed decisions to grow your property portfolio and achieve strong returns.',
+    icon: TrendingUp,
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'investment chart property',
+  },
+  {
+    id: 'help3',
+    title: 'Commercial Property',
+    description: 'Assisting you in finding the right commercial space for your business needs. From office buildings to retail spaces, we help you secure the ideal location to support your growth.',
+    icon: BuildingIcon,
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'commercial building office',
+  },
+  {
+    id: 'help4',
+    title: 'Prestige Property',
+    description: 'Specialising in luxury homes that offer the highest level of comfort and style. We match you with properties that reflect your lifestyle and aspirations, ensuring a perfect fit.',
+    icon: Gem,
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'luxury mansion prestige',
+  },
+  {
+    id: 'help5',
+    title: 'Holiday Home',
+    description: 'Helping you discover the ideal holiday property, whether for personal enjoyment or investment. We find locations that offer relaxation and strong potential for future returns.',
+    icon: Hotel,
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'beach house holiday',
+  },
+  {
+    id: 'help6',
+    title: 'Property Management',
+    description: 'Offering professional property management services that protect your investment. We handle everything from tenant relations to maintenance, ensuring your property is well-maintained and profitable.',
+    icon: ShieldCheck, // Changed from Briefcase for better thematic fit
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'property keys management',
+  },
+];
+
+export interface ServiceLocationItem {
+  id: string;
+  name: string;
+  image: string;
+  dataAiHint: string;
+}
+
+export const serviceLocationsData: ServiceLocationItem[] = [
+  { id: 'loc1', name: 'Sydney', image: 'https://placehold.co/400x300.png', dataAiHint: 'Sydney skyline' },
+  { id: 'loc2', name: 'Melbourne', image: 'https://placehold.co/400x300.png', dataAiHint: 'Melbourne city' },
+  { id: 'loc3', name: 'Brisbane', image: 'https://placehold.co/400x300.png', dataAiHint: 'Brisbane river' },
+  { id: 'loc4', name: 'Gold Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Gold Coast beach' },
+  { id: 'loc5', name: 'Adelaide', image: 'https://placehold.co/400x300.png', dataAiHint: 'Adelaide park' },
+  { id: 'loc6', name: 'Sunshine Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Sunshine Coast view' },
+  { id: 'loc7', name: 'Newcastle & Hunter Valley', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hunter Valley vineyard' },
+  { id: 'loc8', name: 'Central Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Central Coast scenery' },
+  { id: 'loc9', name: 'Hobart', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hobart waterfront' },
 ];
     
