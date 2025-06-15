@@ -115,7 +115,7 @@ export default function Navbar() {
                 }
                 return (
                   <NavigationMenuItem key={link.label}>
-                    <Link href={getLinkHref(link.href)} legacyBehavior passHref>
+                    <Link href={getLinkHref(link.href)} asChild>
                       <NavigationMenuLink
                         className={cn(navigationMenuTriggerStyle(),
                           "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
