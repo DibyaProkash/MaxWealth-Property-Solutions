@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle } from 'lucide-react';
+import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import { usePathname } from 'next/navigation'; 
 import { useScrollSpy } from '@/hooks/use-scroll-spy'; 
@@ -14,9 +14,12 @@ const navLinksData = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
   { href: '#about', label: 'About Us', icon: Users, id: 'about' },
   { href: '/insights', label: 'Insights', icon: Newspaper, id: 'insights' },
-  { href: '#calculators', label: 'Tools', icon: CalculatorIcon, id: 'calculators' },
+  { href: '/resources', label: 'Resources', icon: BookOpen, id: 'resources' }, // Changed from Tools to Resources
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
-  { href: '#faq', label: 'FAQ', icon: HelpCircle, id: 'faq' },
+  // FAQ is now under resources, Calculators (basic) might still be a section or moved.
+  // For now, removing direct FAQ nav link from homepage primary nav.
+  // Keeping Calculators section on homepage, but "Tools" in nav becomes "Resources" page.
+  { href: '#calculators', label: 'Calculators', icon: CalculatorIcon, id: 'calculators'}, 
   { href: '#contact', label: 'Contact', icon: MessageSquare, id: 'contact' },
 ];
 
@@ -30,9 +33,11 @@ export default function Navbar() {
   const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
 
   const getLinkHref = (href: string) => {
+    // If on homepage OR link is not a hash link, use it directly
     if (pathname === '/' || !href.startsWith('#')) {
       return href;
     }
+    // If on a subpage AND link IS a hash link, prefix with '/' to go to homepage section
     return `/${href}`;
   };
 
@@ -70,7 +75,11 @@ export default function Navbar() {
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className="text-primary-foreground border border-primary-foreground/30 hover:bg-primary-foreground/10 hover:text-primary-foreground focus-visible:ring-primary-foreground"
+                >
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Toggle Navigation</span>
                 </Button>

@@ -1,45 +1,11 @@
 
 "use client";
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { faqData, type FaqItem } from "@/lib/data";
-import { HelpCircle } from "lucide-react";
+// This component is no longer used on the homepage.
+// Its functionality has been moved to src/app/resources/faq/page.tsx
+// This file can be safely deleted if it's not imported elsewhere.
+// For now, returning null to avoid build errors if an old import remains.
 
 export default function FaqSection() {
-  if (faqData.length === 0) {
-    return null;
-  }
-
-  return (
-    <section id="faq" className="py-16 md:py-24 bg-secondary"> 
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
-            <HelpCircle className="h-10 w-10 text-primary" />
-          </div>
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">
-            Frequently Asked Questions
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Find answers to common questions about home financing and our services.
-          </p>
-        </div>
-
-        <div className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="w-full">
-            {faqData.map((item) => (
-              <AccordionItem key={item.id} value={item.id} className="bg-card shadow-sm rounded-md mb-3 px-2">
-                <AccordionTrigger className="text-left font-headline text-lg hover:text-primary transition-colors text-primary">
-                  {item.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground font-body leading-relaxed">
-                  {item.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </div>
-    </section>
-  );
+  return null;
 }
