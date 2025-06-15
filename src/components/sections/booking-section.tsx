@@ -17,9 +17,11 @@ export default function BookingSection() {
               <CardDescription className="text-lg mb-8 text-primary-foreground/80">
                 Schedule a free, no-obligation consultation with one of our expert financial advisors. Let's discuss your home buying goals and create a personalized plan.
               </CardDescription>
-              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90 shadow-lg transform transition-transform hover:scale-105" asChild> {/* White button with primary text */}
+              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90 shadow-lg transform transition-transform hover:scale-105" asChild>
                 <a href="#contact">
-                  Book Your Appointment <ArrowRight className="ml-2 h-5 w-5" />
+                  <span className="flex items-center">
+                    Book Your Appointment <ArrowRight className="ml-2 h-5 w-5" />
+                  </span>
                 </a>
               </Button>
             </div>
