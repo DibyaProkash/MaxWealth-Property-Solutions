@@ -86,7 +86,7 @@ export default function ContentSection() {
 
 
   return (
-    <section id="content" className="py-16 md:py-24 bg-background"> {/* Changed from bg-secondary to bg-background */}
+    <section id="content" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Financial Insights & Updates</h2>
@@ -95,7 +95,7 @@ export default function ContentSection() {
           </p>
         </div>
 
-        <div className="mb-10 p-4 border rounded-lg bg-background/50 shadow"> {/* bg-background/50 is good for themed background */}
+        <div className="mb-10 p-4 border rounded-lg bg-background/50 shadow">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
                 <div className="space-y-2">
                     <Label htmlFor="searchTerm" className="text-md font-semibold text-primary flex items-center">
@@ -162,7 +162,7 @@ export default function ContentSection() {
               {displayedArticles.map((article) => (
                 <CarouselItem key={article.id} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                   <div className="p-1 h-full">
-                    <Card className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full bg-card"> {/* bg-card will adapt */}
+                    <Card className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full bg-card">
                       <CardHeader className="p-0">
                         <div className="relative h-52 w-full">
                           <Image 
@@ -185,7 +185,7 @@ export default function ContentSection() {
                         <p className="text-muted-foreground text-sm font-body line-clamp-3">{article.description}</p>
                       </CardContent>
                       <CardFooter className="p-6 pt-0">
-                        <Button variant="link" className="text-accent p-0 h-auto" asChild> {/* Accent color for "Read More" */}
+                        <Button variant="link" className="text-accent p-0 h-auto" asChild>
                           <Link href={`/insights/${article.id}`}>
                             Read More <ArrowRight className="ml-1 h-4 w-4" />
                           </Link>
@@ -210,7 +210,9 @@ export default function ContentSection() {
         <div className="text-center mt-12">
             <Button size="lg" variant="outline" className="shadow-md hover:shadow-lg transition-shadow" asChild>
                 <Link href="/insights">
+                  <span className="flex items-center">
                     View All Insights <ArrowRight className="ml-2 h-4 w-4" />
+                  </span>
                 </Link>
             </Button>
         </div>
