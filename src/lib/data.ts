@@ -1,5 +1,5 @@
 
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard } from 'lucide-react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building } from 'lucide-react';
 
 export interface Testimonial {
   name: string;
@@ -99,14 +99,14 @@ export interface Article {
   fullContent?: string;
   image: string;
   dataAiHint: string;
-  type: MediaType; 
-  category: string; 
+  type: MediaType;
+  category: string;
   date: string;
   icon: LucideIcon; // Retained, used on individual media pages. For cards, we can use mediaTypeIcons.
   author?: string;
   tags?: string[];
-  readTime?: string; 
-  views?: string; 
+  readTime?: string;
+  views?: string;
 }
 
 export const articlesData: Article[] = [
@@ -248,7 +248,7 @@ export const articlesData: Article[] = [
     type: 'Reel',
     category: 'Buyer\'s Guide',
     date: '2024-07-28',
-    icon: Clapperboard, 
+    icon: Clapperboard,
     author: 'MaxWealth PS Shorts',
     tags: ['home loans', 'fha', 'va', 'usda', 'mortgage types', 'reel'],
     readTime: '1 min watch',
@@ -302,7 +302,7 @@ export interface Guide {
   description: string;
   image: string;
   dataAiHint: string;
-  downloadLink?: string; 
+  downloadLink?: string;
   category: string;
 }
 
@@ -345,3 +345,112 @@ export const guidesData: Guide[] = [
   },
 ];
 
+
+// Data for "Our Team" page
+export interface TeamMemberDetailed {
+  id: string;
+  name: string;
+  title: string;
+  image: string;
+  dataAiHint: string;
+  bio: string;
+  specialties?: string[];
+}
+
+export const teamMembersDetailedData: TeamMemberDetailed[] = [
+  {
+    id: 'tm1',
+    name: 'Jacqueline Dwyer', // Placeholder, adapt from AboutUsSection or new
+    title: 'CEO & Founder, Lead Buyers Advocate',
+    image: 'https://placehold.co/400x450.png',
+    dataAiHint: 'woman professional portrait',
+    bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas. Jacqueline has a keen focus on development sites, commercial properties, and investment markets nationwide.",
+    specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis']
+  },
+  {
+    id: 'tm2',
+    name: 'Alice Johnson',
+    title: 'Senior Financial Advisor',
+    image: 'https://placehold.co/300x300.png',
+    dataAiHint: 'woman portrait smiling',
+    bio: 'Alice has over 10 years of experience in financial planning, specializing in mortgage structuring and first-time home buyer programs. She is passionate about empowering clients to make sound financial decisions.',
+    specialties: ['Mortgage Planning', 'First-Time Home Buyers', 'Debt Management']
+  },
+  {
+    id: 'tm3',
+    name: 'Bob Williams',
+    title: 'Investment Portfolio Manager',
+    image: 'https://placehold.co/300x300.png',
+    dataAiHint: 'man portrait professional',
+    bio: 'Bob is an expert in real estate investment analysis and portfolio growth. He helps clients identify high-potential properties and develop long-term investment strategies.',
+    specialties: ['Property Investment', 'Portfolio Management', 'Risk Assessment']
+  },
+  {
+    id: 'tm4',
+    name: 'Carol Davis',
+    title: 'Client Relations & Operations Lead',
+    image: 'https://placehold.co/300x300.png',
+    dataAiHint: 'person friendly portrait',
+    bio: 'Carol ensures a smooth and positive experience for all MaxWealth PS clients. She manages client communications and oversees operational efficiency to deliver top-tier service.',
+    specialties: ['Client Servicing', 'Process Optimization', 'Team Coordination']
+  }
+];
+
+// Data for Services
+export interface ServiceOffering {
+  id: string;
+  title: string;
+  intro: string;
+  features: string[];
+  icon: LucideIcon;
+}
+
+export const servicesData: ServiceOffering[] = [
+  {
+    id: 's1',
+    title: 'Full Buying Service',
+    intro: 'Want MaxWealth PS to handle everything for you? We’ll handle every step of the process from search to settlement.',
+    features: [
+      'Property consultation',
+      'Full property search',
+      'Off-market opportunities',
+      'Inspection & due diligence',
+      'Negotiation/purchase',
+      'Property Settlement'
+    ],
+    icon: Briefcase,
+  },
+  {
+    id: 's2',
+    title: 'Inspect & Negotiate',
+    intro: 'Found a property you want to buy? Let MaxWealth PS negotiate the best deal possible for you.',
+    features: [
+      'Purchase strategy meeting',
+      'Inspection & due diligence',
+      'Negotiation/purchase',
+      'Property settlement'
+    ],
+    icon: SearchCheck,
+  },
+  {
+    id: 's3',
+    title: 'Auction Bidding',
+    intro: 'Win your real estate auction! We’ll do your auction bidding for you and make your property auction stress-free.',
+    features: [
+      'Auction strategy meeting',
+      'Auction bidding service',
+      'Contracts and purchase',
+      'Property settlement'
+    ],
+    icon: TrendingUp,
+  }
+];
+
+// For Navbar sub-items
+export const aboutUsSubItems = [
+  { href: '/about', label: 'Our Company', icon: Building, description: 'Learn about our mission, vision, and values.' },
+  { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth PS.' },
+  { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
+];
+
+    

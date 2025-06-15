@@ -5,7 +5,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon } from 'lucide-react'; // Changed Newspaper to NewspaperIcon
+import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -20,17 +20,20 @@ import { usePathname } from 'next/navigation';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
+import { resourceSubItems } from '@/lib/data'; // Assuming you might move resourceSubItems to data.ts
+import { aboutUsSubItems } from '@/lib/data'; // Import new sub-items
 
 interface NavLinkItem {
   href: string;
   label: string;
   icon: LucideIcon;
-  id?: string; 
+  id?: string;
   subItems?: NavLinkItem[];
-  description?: string; 
+  description?: string;
 }
 
-const resourceSubItems: NavLinkItem[] = [
+// Keep resourceSubItems defined here or move to data.ts as preferred
+const localResourceSubItems: NavLinkItem[] = [
   { href: '/resources/ai-tools', label: 'AI-Powered Tools', icon: BrainCircuit, description: 'Leverage intelligent financial tools.' },
   { href: '/resources/free-guides', label: 'Free Guides & E-Books', icon: Download, description: 'Access valuable downloadable resources.' },
   { href: '/resources/calculators', label: 'Financial Calculators', icon: CalculatorIcon, description: 'Estimate payments and affordability.' },
@@ -40,14 +43,20 @@ const resourceSubItems: NavLinkItem[] = [
 
 const navLinksData: NavLinkItem[] = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
-  { href: '#about', label: 'About Us', icon: Users, id: 'about' },
-  { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' }, // Changed from Insights
+  {
+    href: '/about',
+    label: 'About Us',
+    icon: Building, // Changed icon for main "About Us"
+    id: 'aboutPage', // ID for direct page link
+    subItems: aboutUsSubItems // Use imported sub-items
+  },
+  { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
   {
     href: '/resources',
     label: 'Resources',
     icon: BookOpen,
     id: 'resourcesPage',
-    subItems: resourceSubItems
+    subItems: localResourceSubItems // Use local or imported
   },
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
   { href: '#contact', label: 'Contact', icon: MessageSquare, id: 'contact' },
@@ -71,7 +80,7 @@ export default function Navbar() {
     if (pathname === '/' || !href.startsWith('#')) {
       return href;
     }
-    return `/${href}`; 
+    return `/${href}`;
   };
 
 
@@ -87,26 +96,19 @@ export default function Navbar() {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               {navLinksData.map((link) => {
-                const isResourcesLink = link.label === 'Resources';
-                const isMediaLink = link.label === 'Media';
+                const isCurrentPageRoot = link.id && (pathname === link.href || pathname.startsWith(link.href + '/'));
                 const isActive =
                   (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
-                  (!link.href.startsWith('#') && 
-                    (
-                      (isResourcesLink && pathname.startsWith(link.href)) ||
-                      (isMediaLink && pathname.startsWith(link.href)) ||
-                      (!isResourcesLink && !isMediaLink && pathname === link.href)
-                    )
-                  );
+                  (!link.href.startsWith('#') && isMounted && isCurrentPageRoot);
 
-                if (link.subItems) { // This is the "Resources" item
+                if (link.subItems) {
                   return (
                     <NavigationMenuItem key={link.label}>
-                       <Link href={link.href} passHref asChild>
+                      <Link href={link.href} passHref legacyBehavior={false} asChild>
                         <NavigationMenuTrigger
                           className={cn(navigationMenuTriggerStyle(),
                             "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                            isMounted && isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
+                            isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
                           )}
                         >
                           {link.label}
@@ -120,7 +122,7 @@ export default function Navbar() {
                               title={subItem.label}
                               href={subItem.href}
                               icon={subItem.icon}
-                              className={isMounted && pathname.startsWith(subItem.href) ? "bg-primary-foreground/10 text-primary-foreground" : ""}
+                              className={isMounted && pathname === subItem.href ? "bg-primary-foreground/10 text-primary-foreground" : ""}
                             >
                               {subItem.description || ""}
                             </ListItem>
@@ -129,15 +131,15 @@ export default function Navbar() {
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                   );
-                } else { // For simple links (Home, About, Media, Testimonials, Contact)
+                } else {
                   return (
                     <NavigationMenuItem key={link.label}>
                       <NavigationMenuLink asChild>
                          <Link
                           href={getLinkHref(link.href)}
                            className={cn(navigationMenuTriggerStyle(),
-                             "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                             isMounted && isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
+                             "bg-transparent",
+                             isMounted && isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10"
                           )}
                         >
                           {link.label}
@@ -173,17 +175,10 @@ export default function Navbar() {
                     </Link>
                   </SheetClose>
                   {navLinksData.map((link) => {
-                     const isResourcesLink = link.label === 'Resources';
-                     const isMediaLink = link.label === 'Media';
+                     const isCurrentPageRoot = link.id && (pathname === link.href || pathname.startsWith(link.href + '/'));
                      const isActive =
                         (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
-                        (!link.href.startsWith('#') && 
-                          (
-                            (isResourcesLink && pathname.startsWith(link.href)) ||
-                            (isMediaLink && pathname.startsWith(link.href)) ||
-                            (!isResourcesLink && !isMediaLink && pathname === link.href)
-                          )
-                        );
+                        (!link.href.startsWith('#') && isMounted && isCurrentPageRoot);
 
                     if (link.subItems) {
                       return (
@@ -193,7 +188,7 @@ export default function Navbar() {
                                 href={link.href}
                                 className={cn(
                                 "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
-                                isMounted && isActive && "bg-primary-foreground/10 text-primary-foreground"
+                                isActive && "bg-primary-foreground/10 text-primary-foreground"
                                 )}
                             >
                               <span className="flex items-center space-x-2">
@@ -205,7 +200,7 @@ export default function Navbar() {
                            </SheetClose>
                           <div className="flex flex-col space-y-1 pl-6">
                             {link.subItems.map(subItem => {
-                              const isSubItemActive = isMounted && pathname.startsWith(subItem.href);
+                              const isSubItemActive = isMounted && pathname === subItem.href;
                               return (
                                 <SheetClose key={subItem.label} asChild>
                                   <Link
@@ -232,7 +227,7 @@ export default function Navbar() {
                           href={getLinkHref(link.href)}
                           className={cn(
                             "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
-                            isMounted && isActive ? "bg-primary-foreground/10 text-primary-foreground font-semibold" : "text-primary-foreground/80"
+                            isActive ? "bg-primary-foreground/10 text-primary-foreground font-semibold" : "text-primary-foreground/80"
                           )}
                         >
                           <link.icon className="h-5 w-5" />
@@ -281,3 +276,4 @@ const ListItem = React.forwardRef<
 })
 ListItem.displayName = "ListItem"
 
+    
