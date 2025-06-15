@@ -3,8 +3,9 @@
 
 import { Button } from '@/components/ui/button';
 import { ArrowRight, MessageSquare } from 'lucide-react';
-import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
+// Image and Card components are no longer needed here if the image section is fully removed
+// import Image from 'next/image';
+// import { Card, CardContent } from '@/components/ui/card';
 import AIChatbot from '@/components/sections/ai-chatbot';
 
 export default function HeroSection() {
@@ -12,8 +13,8 @@ export default function HeroSection() {
   return (
     <section id="hero" className="py-16 md:py-24 bg-primary text-primary-foreground">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-start">
-          {/* Left Column: Text Content & Mobile Chat CTA */}
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center"> {/* Changed items-start to items-center for better vertical alignment */}
+          {/* Left Column: Text Content */}
           <div className="md:text-left text-center">
             <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Unlock Your Dream Home with <span className="text-accent">Expert Financial Guidance</span>
@@ -39,7 +40,6 @@ export default function HeroSection() {
                 className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground shadow-lg w-full sm:w-auto"
                 onClick={() => {
                   // This button acts as a CTA. Users will use the global floating LiveChatWidget.
-                  // For direct control, context/state management would be needed.
                 }}
               >
                 <MessageSquare className="mr-2 h-5 w-5" />
@@ -48,32 +48,9 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Image and Desktop AI Chatbot */}
-          <div className="flex flex-col items-center space-y-8">
-            {/* Image and Info Box */}
-            <div className="w-full max-w-lg">
-                <div className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-2xl">
-                <Image
-                    src="https://placehold.co/600x450.png"
-                    alt="Scenic view of residential area with city skyline"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    data-ai-hint="cityscape residential view"
-                    priority
-                />
-                </div>
-                <Card className="relative mt-[-40px] sm:mt-[-50px] md:mt-[-60px] z-10 mx-auto w-4/5 sm:w-3/5 max-w-xs bg-background/90 backdrop-blur-sm text-card-foreground shadow-xl rounded-lg">
-                <CardContent className="p-4 text-center">
-                    <p className="font-headline text-2xl font-bold text-primary">$2.8M+</p>
-                    <p className="text-xs text-muted-foreground">Average Savings Per Client</p>
-                </CardContent>
-                </Card>
-            </div>
-
-            {/* AI Chatbot for Desktop */}
-            <div className="hidden md:flex justify-center w-full max-w-lg mt-8 md:mt-0"> {/* Reset md:mt-0 or adjust spacing */}
+          {/* Right Column: AI Chatbot for Desktop */}
+          <div className="hidden md:flex justify-center items-center w-full"> {/* Ensure chatbot is centered */}
               <AIChatbot />
-            </div>
           </div>
         </div>
       </div>
