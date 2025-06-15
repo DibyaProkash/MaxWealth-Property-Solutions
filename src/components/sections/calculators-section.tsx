@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import MortgageCalculator from "@/components/calculators/mortgage-calculator";
 import AffordabilityCalculator from "@/components/calculators/affordability-calculator";
 import ClosingCostEstimator from "@/components/calculators/closing-cost-estimator";
+import Link from 'next/link'; // Added import
 
 import { Calculator } from "lucide-react";
 
@@ -63,3 +64,4 @@ export default function CalculatorsSection() {
     </section>
   );
 }
+
