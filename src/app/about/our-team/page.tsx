@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, CheckCircle, Briefcase, SearchCheck, TrendingUp, Users, Workflow, Building } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Briefcase, SearchCheck, TrendingUp, Users } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import { teamMembersDetailedData, servicesData, type TeamMemberDetailed, type ServiceOffering } from '@/lib/data';
 
@@ -38,27 +38,25 @@ export default function OurTeamPage() {
           </header>
         </AnimatedSection>
 
-        {/* Introduction Section */}
+        {/* Introduction Section - No longer in a Card */}
         <AnimatedSection delay="delay-50">
-          <Card className="mb-12 md:mb-16 shadow-lg bg-card">
-            <CardContent className="p-6 md:p-8">
-              <p className="text-lg text-muted-foreground mb-4 font-body">
-                MaxWealth PS is a leading Australian Buyers Agency. Spearheaded by Jacqueline Dwyer, an award-winning property professional, we’re the go-to agency for savvy buyers seeking premium real estate in key metropolitan and regional centers.
+          <div className="mb-12 md:mb-16 text-lg text-muted-foreground font-body space-y-4 max-w-4xl mx-auto">
+              <p>
+                At MaxWealth PS, we redefine the property buying experience across Australia. Under the leadership of Jacqueline Dwyer, a celebrated figure in property, our agency stands as a beacon for discerning buyers targeting prime real estate in major cities and desirable regional hubs.
               </p>
-              <p className="font-headline text-xl text-primary mb-4">
-                But here’s what really separates us from the rest…
+              <p className="font-headline text-xl text-primary">
+                What truly sets us apart isn't just our reach, but our core philosophy...
               </p>
-              <p className="text-muted-foreground mb-4 font-body">
-                We’ve seen it all in 20+ years of real estate buying and selling—the wins, losses and competitive advantage that makes buying tough for the average punter with big dreams.
+              <p>
+                With over two decades navigating the intricacies of real estate—witnessing every triumph, setback, and the competitive edge that often eludes aspiring homeowners—we recognized a critical need. This inspired us to champion the buyer's cause exclusively.
               </p>
-              <p className="text-muted-foreground mb-4 font-body">
-                Determined to shake things up, we set out to advocate exclusively for buyers, giving them the upper hand in real estate transactions. It’s our job (and pleasure) to step in, hunt and negotiate for buyers just like you who are strapped for time, dread ‘the chase’ and anxious about paying too much.
+              <p>
+                We empower you, the buyer, turning the tables in real estate negotiations. Our mission is to meticulously seek out and secure your ideal property, especially if you're time-poor, daunted by the search, or concerned about overpaying.
               </p>
-              <p className="text-muted-foreground font-body">
-                Our A-team will fight to find and skillfully secure your next property, on time and within budget. With MaxWealth PS on your side, property buying can be simple, stress-free and enjoyable. Who wouldn’t jump at that?
+              <p>
+                The dedicated team at MaxWealth PS is committed to a seamless, effective, and even enjoyable property acquisition, ensuring your goals are met on schedule and within your financial plan. Partner with us, and experience the MaxWealth PS difference.
               </p>
-            </CardContent>
-          </Card>
+          </div>
         </AnimatedSection>
 
         {/* Team Members Section */}
@@ -128,7 +126,7 @@ export default function OurTeamPage() {
                   </CardContent>
                   <div className="p-6 pt-0 mt-auto">
                     <Button variant="outline" className="w-full mt-4 border-accent text-accent hover:bg-accent hover:text-accent-foreground" asChild>
-                      <Link href="#contact">VIEW OUR FEES</Link>
+                      <Link href="/fees-explained">VIEW OUR FEES</Link>
                     </Button>
                   </div>
                 </Card>
@@ -140,5 +138,4 @@ export default function OurTeamPage() {
     </div>
   );
 }
-
     
