@@ -32,20 +32,13 @@ const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
 });
 
-const socialMediaPlaceholders = [
-  { id: 'sm1', hint: 'social media graphic' },
-  { id: 'sm2', hint: 'social media post' },
-  { id: 'sm3', hint: 'social media icon' },
-  { id: 'sm4', hint: 'social media example' },
-  { id: 'sm5', hint: 'social media design' },
-];
-
 const memberLogos = [
-  { id: 'ml1', hint: 'association logo' },
-  { id: 'ml2', hint: 'industry body' },
-  { id: 'ml3', hint: 'certification logo' },
-  { id: 'ml4', hint: 'partner logo' },
-  { id: 'ml5', hint: 'accreditation seal' },
+  { id: 'ml1', hint: 'real estate institute logo' },
+  { id: 'ml2', hint: 'property association logo' },
+  { id: 'ml3', hint: 'industry body logo' },
+  { id: 'ml4', hint: 'valuation board logo' },
+  { id: 'ml5', hint: 'property institute logo' },
+  { id: 'ml6', hint: 'certification program logo' },
 ];
 
 export default function FeesExplainedPage() {
@@ -125,7 +118,7 @@ export default function FeesExplainedPage() {
         </AnimatedSection>
 
         <AnimatedSection delay="delay-150" id="feesContactFormContainer">
-          <div className="max-w-6xl mx-auto"> {/* Added max-w-6xl and mx-auto here */}
+          <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-5 gap-8 lg:gap-12 items-start mb-12 md:mb-16">
               {/* Left Column: Jac's Info & Licenses */}
               <div className="md:col-span-2 space-y-8">
@@ -299,24 +292,17 @@ export default function FeesExplainedPage() {
             <Button variant="outline" asChild>
                 <Link href="/#testimonials">View Client Testimonials</Link>
             </Button>
-            
-            <div className="mt-10 mb-10">
-              <h4 className="font-headline text-xl text-primary mb-4">MaxWealth PS Social Media Highlights</h4>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-2xl mx-auto">
-                {socialMediaPlaceholders.map(placeholder => (
-                  <div key={placeholder.id} className="aspect-square bg-muted rounded-lg flex items-center justify-center">
-                    <Image src={`https://placehold.co/150x150.png`} alt="Social media placeholder" width={100} height={100} data-ai-hint={placeholder.hint} className="rounded"/>
-                  </div>
-                ))}
-              </div>
-            </div>
+          </div>
 
-            <div>
-              <h4 className="font-headline text-xl text-primary mb-6">We’re Proud Members Of:</h4>
-              <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
+          <div className="mt-12 md:mt-16">
+            <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6 md:gap-8">
+              <h4 className="font-headline text-xl text-primary flex-shrink-0 md:mb-0">
+                We’re Proud Members Of:
+              </h4>
+              <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-8 gap-y-4">
                 {memberLogos.map(logo => (
-                    <div key={logo.id} className="opacity-70 hover:opacity-100 transition-opacity">
-                         <Image src={`https://placehold.co/120x60.png`} alt="Member logo placeholder" width={120} height={60} data-ai-hint={logo.hint} style={{objectFit: 'contain'}} />
+                    <div key={logo.id} className="opacity-80 hover:opacity-100 transition-opacity">
+                         <Image src={`https://placehold.co/120x50.png`} alt="Member logo placeholder" width={120} height={50} data-ai-hint={logo.hint} style={{objectFit: 'contain'}} />
                     </div>
                 ))}
               </div>
@@ -328,5 +314,3 @@ export default function FeesExplainedPage() {
     </div>
   );
 }
-
-    
