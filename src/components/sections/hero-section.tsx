@@ -1,4 +1,6 @@
 
+'use client'; // Add this directive
+
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import AIChatbot from '@/components/sections/ai-chatbot';
