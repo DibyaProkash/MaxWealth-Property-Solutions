@@ -5,7 +5,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown } from 'lucide-react';
+import { Menu, Home, Users, Newspaper, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -96,7 +96,7 @@ export default function Navbar() {
                 if (link.subItems) { // This is the "Resources" item
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <Link href={link.href} passHref legacyBehavior asChild={false}> 
+                      <Link href={link.href} asChild> 
                         <NavigationMenuTrigger
                           className={cn(navigationMenuTriggerStyle(),
                             "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
