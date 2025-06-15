@@ -518,12 +518,12 @@ export const whoWeHelpData: WhoWeHelpItem[] = [
 ];
 
 export interface ServiceLocationItem {
-  id: string; // Unique identifier for the location
-  slug: string; // URL-friendly slug
+  id: string; 
+  slug: string; 
   name: string;
   image: string;
   dataAiHint: string;
-  tagline?: string; // Optional short tagline for the city page
+  tagline?: string; 
   heroImage: string;
   heroImageAiHint: string;
 }
@@ -540,24 +540,63 @@ export const serviceLocationsData: ServiceLocationItem[] = [
   { id: 'loc9', slug: 'hobart', name: 'Hobart', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hobart mount wellington', tagline: 'Historic charm and stunning natural beauty.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Hobart historic waterfront' },
 ];
 
+interface AmenityContentItem {
+  subTitle?: string;
+  text: string;
+  icon?: LucideIcon;
+}
+
+interface AmenitySection {
+  title: string;
+  content: AmenityContentItem[];
+  image: string;
+  imageAiHint: string;
+}
+
 export interface LocationDetail {
   slug: string;
   name: string;
   pageIntro: string;
-  tagline?: string; // Added to match ServiceLocationItem
+  tagline?: string;
   specificIntroParagraphs: string[];
-  transportInfo: {
-    train?: string;
-    ferry?: string;
-    air?: string;
-    general?: string;
+  amenities: {
+    transport: AmenitySection;
+    shopsAndRestaurants: AmenitySection;
+    leisure: AmenitySection;
   };
-  shopsAndRestaurantsInfo: string;
-  leisureInfo: string;
   touristLink: string;
   heroImage: string;
   heroImageAiHint: string;
 }
+
+const generatePlaceholderAmenities = (cityName: string): LocationDetail['amenities'] => ({
+  transport: {
+    title: "TRANSPORT",
+    content: [
+      { subTitle: "Train", text: `Discover convenient train routes connecting ${cityName} to major hubs. Efficient and scenic journeys await.`, icon: Train },
+      { subTitle: "Bus", text: `Extensive bus networks provide easy access across ${cityName} and surrounding areas.`, icon: Utensils }, // Using Utensils as a generic placeholder for bus, consider a more specific one if available or needed
+      { text: `General public transport in ${cityName} is designed for accessibility and convenience, making it easy to explore.`, icon: MapPin },
+    ],
+    image: 'https://placehold.co/600x450.png',
+    imageAiHint: `transport ${cityName.toLowerCase()}`,
+  },
+  shopsAndRestaurants: {
+    title: "SHOPS & RESTAURANTS",
+    content: [
+      { text: `${cityName} boasts a vibrant shopping scene, from boutique stores to major retail centers. Explore diverse culinary delights, with a wide array of cafes, casual eateries, and fine dining restaurants catering to all tastes. Find unique local crafts and global brands.` }
+    ],
+    image: 'https://placehold.co/600x450.png',
+    imageAiHint: `shopping ${cityName.toLowerCase()}`,
+  },
+  leisure: {
+    title: "LEISURE & ATTRACTIONS",
+    content: [
+      { text: `Explore the rich cultural heritage of ${cityName} with its museums, galleries, and historic landmarks. Enjoy outdoor activities in beautiful parks and natural reserves. The city offers a lively calendar of events, festivals, and entertainment options for all ages.` }
+    ],
+    image: 'https://placehold.co/600x450.png',
+    imageAiHint: `leisure ${cityName.toLowerCase()}`,
+  },
+});
 
 export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(loc => {
   if (loc.slug === 'central-coast') {
@@ -571,18 +610,43 @@ export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(lo
         "From Gosford to Woy Woy, the prestigious beaches of Killcare, Avoca, or McMasters, the lakeside areas of Saratoga, The Entrance, Toukley, or Berkley Vale, and north to the Lake Macquarie area, our Central Coast buyers' agent has it covered! It makes perfect sense to engage our Central Coast buyers’ agent to uncover off-market opportunities that you'd never discover on your own.",
         "Securing a property on the Central Coast requires extensive and established connections to get ahead of other buyers. Our Central Coast buyers’ agent will help you uncover the ideal area and property types to suit your individual requirements and freely share their local knowledge."
       ],
-      transportInfo: {
-        train: "NSW TrainLink offers regular rail service to the Central Coast, approximately every hour from Newcastle and every half-hour from Sydney. The trip takes roughly 1.5 hours from each location. For details, visit transportnsw.info.",
-        ferry: "Palm Beach Ferries provide daily services between Sydney (Palm Beach) and the Central Coast (Ettalong Beach).",
-        air: "Gosford is about 115 km (1 hour 15 mins drive) from Newcastle Airport and about 85 km (1 hour 20 mins drive) from Sydney Airport."
+      amenities: {
+        transport: {
+          title: "TRANSPORT",
+          content: [
+            { subTitle: "Train", text: "Every hour from Newcastle and every half-hour from Sydney, NSW TrainLink offers regular rail service to the Central Coast. The trip takes roughly one hour and thirty minutes from each location. For additional information, go to transportnsw.info.", icon: Train },
+            { subTitle: "Ferry", text: "Daily services between Sydney (Palm Beach) and the Central Coast are provided by Palm Beach Ferries (Ettalong Beach).", icon: Sailboat },
+            { subTitle: "Air", text: "About 115 kilometers and 1 hour and 15 minutes' driving separate Gosford from Newcastle Airport. About 85 kilometers and 1 hour and 20 minutes' journey separate Gosford from Sydney Airport.", icon: Plane }
+          ],
+          image: 'https://placehold.co/600x450.png',
+          imageAiHint: 'train station Central Coast'
+        },
+        shopsAndRestaurants: {
+          title: "SHOPS & RESTAURANTS",
+          content: [
+            { text: "For 1950s-style pizza and tropical beverages, head to Tropicana Social Club in Woy Woy, or travel back another 20 years with a drink at Hotel Mezza in Wyong, which is situated in a former bank from the 1930s. Long Jetty's The Savoy, a former 1950s theater that has been transformed into a multi-purpose bar and restaurant with frequent movie screenings, is another heritage property that has been brought back to life. After undergoing a significant renovation, Hotel Gosford has once again established itself as a legendary bar; its slick Art Deco design pays homage to its 1920s roots. Terrigal, a coastal town, is home to the edgy Pocket Bar, which serves up creative drinks and mouthwatering bar snacks." }
+          ],
+          image: 'https://placehold.co/600x450.png',
+          imageAiHint: 'restaurant cafe Central Coast'
+        },
+        leisure: {
+          title: "LEISURE",
+          content: [
+            { text: "The Central Coast is a beach lover's paradise with an 87-kilometre coastline and over 40 beaches. Finding a piece of beach and taking advantage of the ocean lifestyle—whether that means splashing around at Toowoon Bay with the kids, dipping into the water at The Entrance Ocean Baths, or exploring the rock pools at MacMasters Beach or Pearl Beach—is practically a given when on vacation." },
+            { text: "Between Sydney and Newcastle, NSW's second-largest city, is the Central Coast. The area is introduced in Kate Grenville's classic historical novel The Hidden River, which is located in Broken Bay near the mouth of the lovely Hawkesbury River." },
+            { text: "Pelican feeding time at Pelican Plaza, The Entrance, is a well-known sight on the Central Coast. At 3.30 pm every afternoon, Australia's largest aquatic birds, some with wingspans up to 2.8 meters, congregate here." },
+            { text: "At the cozy Bells Day Spa at Bells at Killcare, you may disconnect from your hectic schedule and re-establish a connection with the natural world by utilizing traditional goods and healing methods that were developed by indigenous Australians. The top-to-toe rituals are performed at the Vie Spa in the Pullman Magenta Beaches Resort using only organic, all-Australian products in a setting that exudes Japanese calm. Alternately, unwind in the opulent Roman Spa at Aztec Skin Clinic & Day Spa, complete with a fruit and cheese platter, before receiving a treatment with a Fijian influence."}
+          ],
+          image: 'https://placehold.co/600x450.png',
+          imageAiHint: 'beach Central Coast'
+        }
       },
-      shopsAndRestaurantsInfo: "For 1950s-style pizza and tropical beverages, head to Tropicana Social Club in Woy Woy, or travel back another 20 years with a drink at Hotel Mezza in Wyong, situated in a former bank from the 1930s. Long Jetty's The Savoy, a former 1950s theater transformed into a multi-purpose bar and restaurant with frequent movie screenings, is another heritage property brought back to life. After a significant renovation, Hotel Gosford has re-established itself as a legendary bar; its slick Art Deco design pays homage to its 1920s roots. Terrigal, a coastal town, is home to the edgy Pocket Bar, serving creative drinks and mouthwatering bar snacks.",
-      leisureInfo: "The Central Coast is a beach lover's paradise with an 87-kilometre coastline and over 40 beaches. Finding a piece of beach and enjoying the ocean lifestyle—whether splashing at Toowoon Bay, dipping into The Entrance Ocean Baths, or exploring rock pools at MacMasters or Pearl Beach—is a given. Kate Grenville's novel The Hidden River introduces the area near the Hawkesbury River. Pelican feeding at Pelican Plaza, The Entrance (3:30 pm daily) is a famous sight. For relaxation, Bells Day Spa at Bells at Killcare offers indigenous Australian healing methods. Vie Spa at Pullman Magenta Shores Resort uses organic, all-Australian products. Aztec Skin Clinic & Day Spa features a Roman Spa and Fijian-influenced treatments.",
       touristLink: 'https://www.visitnsw.com/destinations/central-coast',
       heroImage: loc.heroImage,
       heroImageAiHint: loc.heroImageAiHint,
     };
   }
+  // Fallback for other cities
   return {
     slug: loc.slug,
     name: loc.name,
@@ -593,12 +657,8 @@ export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(lo
       `${loc.name} features diverse suburbs, from bustling city centers to serene ${loc.slug.includes('coast') || loc.slug.includes('sydney') || loc.slug.includes('melbourne') ? 'coastal retreats' : 'natural landscapes'}. We can help you find the perfect match for your needs.`,
       `With our deep local knowledge and extensive network in ${loc.name}, we uncover off-market deals and provide you with a competitive edge. Let us make your property journey in ${loc.name} a success.`
     ],
-    transportInfo: {
-      general: `Detailed transport information for ${loc.name} is being compiled. Generally, ${loc.name} is well-connected by public transport and road networks. Check local transport authorities for specific routes and schedules.`
-    },
-    shopsAndRestaurantsInfo: `${loc.name} offers a wide variety of dining and shopping experiences, from local boutiques and farmers' markets to high-end restaurants and shopping centers. Explore its culinary scene and retail hubs.`,
-    leisureInfo: `Discover the leisure activities in ${loc.name}. Whether it's exploring natural parks, enjoying cultural events, or engaging in sports, ${loc.name} has something for everyone. Rich in history and natural beauty, there's always something to do.`,
-    touristLink: '#', // Replace with actual tourist links if available
+    amenities: generatePlaceholderAmenities(loc.name),
+    touristLink: '#', 
     heroImage: loc.heroImage,
     heroImageAiHint: loc.heroImageAiHint,
   };

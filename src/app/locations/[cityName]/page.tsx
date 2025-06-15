@@ -10,7 +10,7 @@ import Footer from '@/components/layout/footer';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowLeft, MapPin, Train, Sailboat, Plane, Utensils, Trees, ShoppingCart, Briefcase, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb } from 'lucide-react';
+import { ArrowLeft, MapPin, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees } from 'lucide-react';
 import ContactFormCityPage from '@/components/forms/contact-form-city-page'; 
 
 export default function CityLocationPage() {
@@ -52,13 +52,14 @@ export default function CityLocationPage() {
     pageIntro,
     tagline,
     specificIntroParagraphs,
-    transportInfo,
-    shopsAndRestaurantsInfo,
-    leisureInfo,
+    amenities,
     touristLink,
     heroImage,
     heroImageAiHint
   } = cityData;
+
+  const amenityOrder: Array<keyof LocationDetail['amenities']> = ['transport', 'shopsAndRestaurants', 'leisure'];
+
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -170,48 +171,54 @@ export default function CityLocationPage() {
 
           <AnimatedSection delay="delay-250">
             <section className="py-12 md:py-16">
-              <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-12 text-center">
-                Why {name}? Lifestyle & Amenities
+              <h2 className="font-headline text-3xl md:text-4xl font-bold text-accent mb-12 md:mb-16 text-center uppercase">
+                WHY {name}?
               </h2>
-              <div className="space-y-10">
-                <Card className="shadow-lg bg-card overflow-hidden">
-                  <CardHeader className="bg-primary/5">
-                    <CardTitle className="font-headline text-xl text-primary flex items-center">
-                      <MapPin className="mr-3 h-6 w-6 text-accent" /> Transport Links
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6 space-y-4 text-muted-foreground font-body">
-                    {transportInfo.train && <div className="flex items-start"><Train className="inline mr-3 h-5 w-5 text-accent mt-1 flex-shrink-0" /><div><strong>Train:</strong> {transportInfo.train}</div></div>}
-                    {transportInfo.ferry && <div className="flex items-start"><Sailboat className="inline mr-3 h-5 w-5 text-accent mt-1 flex-shrink-0" /><div><strong>Ferry:</strong> {transportInfo.ferry}</div></div>}
-                    {transportInfo.air && <div className="flex items-start"><Plane className="inline mr-3 h-5 w-5 text-accent mt-1 flex-shrink-0" /><div><strong>Air:</strong> {transportInfo.air}</div></div>}
-                    {transportInfo.general && <div className="flex items-start"><Info className="inline mr-3 h-5 w-5 text-accent mt-1 flex-shrink-0" /><div>{transportInfo.general}</div></div>}
-                  </CardContent>
-                </Card>
+              <div className="space-y-12 md:space-y-20">
+                {amenityOrder.map((key, index) => {
+                  const amenity = amenities[key];
+                  if (!amenity) return null;
+                  const Icon = amenity.icon || Info; // Fallback icon
+                  const isImageLeft = index % 2 !== 0; // Transport (idx 0) -> right, Shops (idx 1) -> left
 
-                <Card className="shadow-lg bg-card overflow-hidden">
-                  <CardHeader className="bg-primary/5">
-                    <CardTitle className="font-headline text-xl text-primary flex items-center">
-                      <ShoppingCart className="mr-3 h-6 w-6 text-accent" /> Shops & Restaurants
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6">
-                    <p className="text-muted-foreground font-body leading-relaxed">{shopsAndRestaurantsInfo}</p>
-                  </CardContent>
-                </Card>
-
-                <Card className="shadow-lg bg-card overflow-hidden">
-                  <CardHeader className="bg-primary/5">
-                    <CardTitle className="font-headline text-xl text-primary flex items-center">
-                      <Trees className="mr-3 h-6 w-6 text-accent" /> Leisure & Attractions
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="pt-6">
-                    <p className="text-muted-foreground font-body leading-relaxed">{leisureInfo}</p>
-                  </CardContent>
-                </Card>
+                  return (
+                    <div key={key} className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
+                      <div className={`relative aspect-[4/3] rounded-lg overflow-hidden shadow-xl group ${isImageLeft ? 'md:order-first' : 'md:order-last'}`}>
+                        <Image
+                          src={amenity.image}
+                          alt={amenity.title}
+                          fill
+                          style={{ objectFit: 'cover' }}
+                          className="group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                          data-ai-hint={amenity.imageAiHint}
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      </div>
+                      <div className={`${isImageLeft ? 'md:order-last' : 'md:order-first'}`}>
+                        <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-6 uppercase tracking-wider">
+                          {amenity.title}
+                        </h3>
+                        {amenity.content.map((item, idx) => {
+                           const ItemIcon = item.icon || Utensils; // Fallback icon for content items
+                           return (
+                            <div key={idx} className="mb-5">
+                              {item.subTitle && (
+                                <h4 className="font-semibold text-xl text-primary/80 mb-2 flex items-center">
+                                   {item.icon && <item.icon className="mr-2.5 h-5 w-5 text-accent opacity-80" />}
+                                  {item.subTitle}
+                                </h4>
+                              )}
+                              <p className="text-muted-foreground font-body leading-relaxed text-md">{item.text}</p>
+                            </div>
+                           );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
               {touristLink && touristLink !== '#' && (
-                <div className="text-center mt-12">
+                <div className="text-center mt-16">
                   <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-md hover:shadow-lg transition-all">
                     <Link href={touristLink} target="_blank" rel="noopener noreferrer">
                       More About {name} <ExternalLink className="ml-2 h-4 w-4" />
@@ -227,3 +234,4 @@ export default function CityLocationPage() {
     </div>
   );
 }
+
