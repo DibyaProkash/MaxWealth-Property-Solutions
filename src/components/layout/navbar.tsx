@@ -117,21 +117,22 @@ export default function Navbar() {
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                   );
+                } else { // For simple links (no subItems)
+                  return (
+                    <NavigationMenuItem key={link.label}>
+                      <Link href={getLinkHref(link.href)} asChild>
+                        <NavigationMenuLink
+                          className={cn(navigationMenuTriggerStyle(),
+                            "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
+                             isMounted && isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
+                          )}
+                        >
+                          {link.label}
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                  );
                 }
-                return (
-                  <NavigationMenuItem key={link.label}>
-                    <Link href={getLinkHref(link.href)} asChild>
-                      <NavigationMenuLink
-                        className={cn(navigationMenuTriggerStyle(),
-                          "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                           isMounted && isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
-                        )}
-                      >
-                        {link.label}
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
-                );
               })}
             </NavigationMenuList>
           </NavigationMenu>
@@ -177,7 +178,7 @@ export default function Navbar() {
                               return (
                                 <SheetClose key={subItem.label} asChild>
                                   <Link
-                                    href={subItem.href} 
+                                    href={subItem.href}
                                     className={cn(
                                       "flex items-center space-x-2 rounded-md p-2 text-sm transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
                                       isSubItemActive ? "bg-primary-foreground/10 text-primary-foreground font-medium" : "text-primary-foreground/80"
@@ -232,7 +233,7 @@ const ListItem = React.forwardRef<
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground",
             className
           )}
-          {...props}
+          {...props} // href is passed here
         >
           <div className="flex items-center space-x-2">
             {Icon && <Icon className="h-5 w-5" />}
@@ -247,3 +248,4 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+
