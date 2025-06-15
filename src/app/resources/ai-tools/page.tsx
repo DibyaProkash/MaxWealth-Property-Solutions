@@ -15,9 +15,7 @@ import { summarizeMarketTrends, type MarketTrendSummarizerInput, type MarketTren
 import QuizSection from '@/components/sections/quiz-section';
 import AnimatedSection from '@/components/layout/animated-section';
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-
-import { FileText, BrainCircuit, TrendingUp, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, AlertTriangle } from "lucide-react";
+import { ArrowLeft, FileText, BrainCircuit, TrendingUp, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, AlertTriangle } from "lucide-react";
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 
 let pdfjsLib: any = null;
@@ -181,12 +179,12 @@ export default function AiToolsPage() {
       <div className="container mx-auto px-6">
         <AnimatedSection>
           <div className="mb-12">
-            <Link href="/resources" passHref>
-              <Button variant="outline" className="mb-6">
+            <Button variant="outline" className="mb-6" asChild>
+              <Link href="/resources">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Resources
-              </Button>
-            </Link>
+              </Link>
+            </Button>
             <div className="text-center">
                 <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                 <BrainCircuit className="h-10 w-10 text-primary" />

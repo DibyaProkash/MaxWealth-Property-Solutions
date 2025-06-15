@@ -15,12 +15,12 @@ export default function FreeGuidesPage() {
     <div className="container mx-auto px-4 py-8 md:py-16 bg-background">
       <AnimatedSection>
         <div className="mb-12">
-            <Link href="/resources" passHref>
-                <Button variant="outline" className="mb-6">
+            <Button variant="outline" className="mb-6" asChild>
+                <Link href="/resources">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Resources
-                </Button>
-            </Link>
+                </Link>
+            </Button>
             <div className="text-center">
                 <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                     <BookMarked className="h-10 w-10 text-primary" />

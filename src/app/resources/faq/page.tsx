@@ -4,10 +4,9 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { faqData, type FaqItem } from '@/lib/data';
 import AnimatedSection from '@/components/layout/animated-section';
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
 
 export default function FaqPage() {
   if (faqData.length === 0) {
@@ -23,12 +22,12 @@ export default function FaqPage() {
       <div className="container mx-auto px-6">
         <AnimatedSection>
           <div className="mb-12">
-            <Link href="/resources" passHref>
-              <Button variant="outline" className="mb-6">
+            <Button variant="outline" className="mb-6" asChild>
+              <Link href="/resources">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Resources
-              </Button>
-            </Link>
+              </Link>
+            </Button>
             <div className="text-center">
               <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                 <HelpCircle className="h-10 w-10 text-primary" />

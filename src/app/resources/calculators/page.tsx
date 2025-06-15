@@ -17,12 +17,12 @@ export default function CalculatorsPage() {
       <div className="container mx-auto px-6">
         <AnimatedSection>
           <div className="mb-12">
-            <Link href="/resources" passHref>
-              <Button variant="outline" className="mb-6">
+            <Button variant="outline" className="mb-6" asChild>
+              <Link href="/resources">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Resources
-              </Button>
-            </Link>
+              </Link>
+            </Button>
             <div className="text-center">
                 <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                 <Calculator className="h-10 w-10 text-primary" />
