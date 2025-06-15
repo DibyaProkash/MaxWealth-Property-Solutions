@@ -2,6 +2,7 @@
 import React, { type SVGProps } from 'react';
 import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText } from 'lucide-react';
 
+
 // Helper icon component (if not directly from lucide-react or if a specific one is needed)
 // For example, a BusIcon if not in lucide or a custom one:
 const BusIcon = (props: SVGProps<SVGSVGElement>) => (
@@ -124,7 +125,7 @@ export const articlesData: Article[] = [
     id: '1',
     title: 'Understanding Mortgage Rates in 2024',
     description: 'A deep dive into current mortgage trends and how they affect your buying power. This article explores various factors influencing rates.',
-    fullContent: 'The 2024 mortgage market presents a dynamic environment for prospective homebuyers. Several key factors are influencing interest rates. Firstly, the Federal Reserve\'s monetary policy plays a pivotal role. Any adjustments to the federal funds rate can create ripple effects across the lending industry, impacting mortgage rates directly.\n\nSecondly, inflation trends continue to be a significant determinant. High inflation often leads to higher interest rates as lenders seek to protect the real value of their returns. Conversely, if inflation cools, we might see some stabilization or even a slight decrease in rates. Economic growth, unemployment figures, and overall market sentiment also contribute to the complex equation of mortgage rate fluctuations. For instance, a robust economy might lead to increased demand for housing and potentially higher rates, while economic uncertainty could have the opposite effect.\n\nIt\'s also crucial to consider the type of mortgage. Fixed-rate mortgages offer stability over the loan term, locking in a rate regardless of market changes. Adjustable-rate mortgages (ARMs) typically start with a lower rate but can change periodically based on market indexes. Understanding the nuances of each can help buyers make informed decisions. We advise consulting with a financial advisor to navigate these complexities and find the best mortgage product for your specific situation.',
+    fullContent: 'The 2024 mortgage market presents a dynamic environment for prospective homebuyers. Several key factors are influencing interest rates. Firstly, the Federal Reserve\'s monetary policy plays a pivotal role. Any adjustments to the federal funds rate can create ripple effects across the lending industry, impacting mortgage rates directly.\\n\\nSecondly, inflation trends continue to be a significant determinant. High inflation often leads to higher interest rates as lenders seek to protect the real value of their returns. Conversely, if inflation cools, we might see some stabilization or even a slight decrease in rates. Economic growth, unemployment figures, and overall market sentiment also contribute to the complex equation of mortgage rate fluctuations. For instance, a robust economy might lead to increased demand for housing and potentially higher rates, while economic uncertainty could have the opposite effect.\\n\\nIt\\\'s also crucial to consider the type of mortgage. Fixed-rate mortgages offer stability over the loan term, locking in a rate regardless of market changes. Adjustable-rate mortgages (ARMs) typically start with a lower rate but can change periodically based on market indexes. Understanding the nuances of each can help buyers make informed decisions. We advise consulting with a financial advisor to navigate these complexities and find the best mortgage product for your specific situation.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'finance graph',
     type: 'Article',
@@ -140,11 +141,11 @@ export const articlesData: Article[] = [
     id: '2',
     title: 'First-Time Home Buyer? Watch This First!',
     description: 'Our latest vlog covers essential tips for navigating your first home purchase, from saving for a down payment to understanding closing.',
-    fullContent: 'Welcome, future homeowners! Buying your first home is a monumental step, and this vlog is designed to guide you through the essentials. We begin by emphasizing financial preparedness. This involves a thorough assessment of your current financial health – your income, expenses, debts, and most importantly, your credit score. A higher credit score generally unlocks better mortgage terms. We also discuss practical strategies for saving for a down payment, which can often seem like the biggest hurdle. Setting up a dedicated savings account and automating contributions are excellent starting points.\n\nNext, we dive into the pre-approval process. Obtaining a mortgage pre-approval before you start house hunting is crucial. It gives you a clear budget, shows sellers you\'re a serious buyer, and can expedite the offer process. Choosing the right real estate agent is another key topic. Look for an agent with experience in your desired area and a good understanding of first-time buyer needs. During the home search, we advise creating a list of "must-haves" versus "nice-to-haves" to stay focused. When you find "the one," making a competitive offer involves more than just the price; contingencies like inspection and financing are also vital. Finally, we demystify the closing process, explaining the various documents you\'ll sign and the costs involved. Our aim is to equip you with the knowledge to make this journey as smooth as possible.',
+    fullContent: 'Welcome, future homeowners! Buying your first home is a monumental step, and this vlog is designed to guide you through the essentials. We begin by emphasizing financial preparedness. This involves a thorough assessment of your current financial health – your income, expenses, debts, and most importantly, your credit score. A higher credit score generally unlocks better mortgage terms. We also discuss practical strategies for saving for a down payment, which can often seem like the biggest hurdle. Setting up a dedicated savings account and automating contributions are excellent starting points.\\n\\nNext, we dive into the pre-approval process. Obtaining a mortgage pre-approval before you start house hunting is crucial. It gives you a clear budget, shows sellers you\\\'re a serious buyer, and can expedite the offer process. Choosing the right real estate agent is another key topic. Look for an agent with experience in your desired area and a good understanding of first-time buyer needs. During the home search, we advise creating a list of "must-haves" versus "nice-to-haves" to stay focused. When you find "the one," making a competitive offer involves more than just the price; contingencies like inspection and financing are also vital. Finally, we demystify the closing process, explaining the various documents you\\\'ll sign and the costs involved. Our aim is to equip you with the knowledge to make this journey as smooth as possible.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'home keys',
     type: 'Vlog',
-    category: 'Buyer\'s Guide',
+    category: 'Buyer\\\'s Guide',
     date: '2024-07-10',
     icon: Video,
     author: 'MaxWealth PS Team',
@@ -156,7 +157,7 @@ export const articlesData: Article[] = [
     id: '3',
     title: 'Saving Strategies for Your Down Payment',
     description: 'Practical advice on building your down payment fund effectively. Learn about different savings accounts and goal-setting.',
-    fullContent: 'Saving for a down payment is often the first major financial challenge for aspiring homeowners. This article outlines effective strategies to build your fund. Start by setting a clear goal: determine how much you need based on typical home prices in your target area and the type of mortgage you might pursue. Once you have a target, create a detailed budget to track your income and expenses. Identify areas where you can reduce spending – dining out, subscriptions, or entertainment – and redirect those funds towards your down payment savings.\n\nConsider opening a high-yield savings account specifically for your down payment. These accounts often offer better interest rates than traditional savings accounts, helping your money grow faster. Automating your savings by setting up regular transfers from your checking account to your down payment fund can also be highly effective, ensuring consistency. Explore if your employer offers any programs or if there are government-backed down payment assistance programs you might qualify for. Sometimes, financial gifts from family can contribute, but be sure to understand any rules or tax implications. Remember, consistency and discipline are key. Even small, regular contributions can add up significantly over time.',
+    fullContent: 'Saving for a down payment is often the first major financial challenge for aspiring homeowners. This article outlines effective strategies to build your fund. Start by setting a clear goal: determine how much you need based on typical home prices in your target area and the type of mortgage you might pursue. Once you have a target, create a detailed budget to track your income and expenses. Identify areas where you can reduce spending – dining out, subscriptions, or entertainment – and redirect those funds towards your down payment savings.\\n\\nConsider opening a high-yield savings account specifically for your down payment. These accounts often offer better interest rates than traditional savings accounts, helping your money grow faster. Automating your savings by setting up regular transfers from your checking account to your down payment fund can also be highly effective, ensuring consistency. Explore if your employer offers any programs or if there are government-backed down payment assistance programs you might qualify for. Sometimes, financial gifts from family can contribute, but be sure to understand any rules or tax implications. Remember, consistency and discipline are key. Even small, regular contributions can add up significantly over time.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'savings money',
     type: 'Blog',
@@ -172,7 +173,7 @@ export const articlesData: Article[] = [
     id: '4',
     title: 'The Future of Real Estate Technology',
     description: 'Exploring how tech is shaping the home buying and selling process, from AI-powered searches to virtual tours.',
-    fullContent: 'The real estate industry is undergoing a significant transformation driven by technology. AI-powered search platforms are becoming increasingly sophisticated, offering personalized property recommendations based on user behavior and preferences, going beyond simple keyword searches. Virtual Reality (VR) and Augmented Reality (AR) are revolutionizing property viewings. VR tours allow potential buyers to explore homes remotely in immersive detail, saving time and effort, especially for out-of-town buyers. AR can help visualize renovations or furniture placements within a space.\n\nBlockchain technology is also emerging as a potential game-changer. Its proponents suggest it could streamline transactions, enhance security, and improve transparency in property records and ownership transfers, though widespread adoption is still in its early stages. Big data analytics are providing deeper insights into market trends, property valuations, and investment opportunities, empowering both consumers and professionals. Furthermore, mobile apps continue to offer convenient access to listings, mortgage calculators, and communication tools. As these technologies mature and integrate, the home buying and selling process is set to become more efficient, data-driven, and user-centric.',
+    fullContent: 'The real estate industry is undergoing a significant transformation driven by technology. AI-powered search platforms are becoming increasingly sophisticated, offering personalized property recommendations based on user behavior and preferences, going beyond simple keyword searches. Virtual Reality (VR) and Augmented Reality (AR) are revolutionizing property viewings. VR tours allow potential buyers to explore homes remotely in immersive detail, saving time and effort, especially for out-of-town buyers. AR can help visualize renovations or furniture placements within a space.\\n\\nBlockchain technology is also emerging as a potential game-changer. Its proponents suggest it could streamline transactions, enhance security, and improve transparency in property records and ownership transfers, though widespread adoption is still in its early stages. Big data analytics are providing deeper insights into market trends, property valuations, and investment opportunities, empowering both consumers and professionals. Furthermore, mobile apps continue to offer convenient access to listings, mortgage calculators, and communication tools. As these technologies mature and integrate, the home buying and selling process is set to become more efficient, data-driven, and user-centric.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'technology real estate',
     type: 'Article',
@@ -188,11 +189,11 @@ export const articlesData: Article[] = [
     id: '5',
     title: 'Navigating Closing Costs: A Complete Guide',
     description: 'Understand all the fees involved when you close on your new home in this comprehensive vlog.',
-    fullContent: 'Closing costs are a collection of fees paid at the final stage of a real estate transaction. They typically amount to 2-5% of the home\'s purchase price. This vlog provides a breakdown. Lender fees are a significant component, including loan origination fees (for processing the loan), underwriting fees (for assessing risk), and appraisal fees (to determine the property\'s market value). Title-related fees cover title searches (to ensure the seller has clear ownership) and title insurance (protecting the lender and buyer from future title disputes).\n\nEscrow fees are paid to a neutral third party that handles the funds and documents during the closing process. You\'ll also encounter recording fees, charged by local governments to record the sale publicly. Prepaid items are another category, often including upfront payments for property taxes and homeowners insurance, which are held in an escrow account by the lender. It\'s important to review your Loan Estimate carefully, which outlines these costs early in the process, and compare it to the Closing Disclosure you receive a few days before closing. Understanding these costs helps you budget effectively and avoid surprises on closing day. Don\'t hesitate to ask your lender or real estate agent to clarify any fees you don\'t understand.',
+    fullContent: 'Closing costs are a collection of fees paid at the final stage of a real estate transaction. They typically amount to 2-5% of the home\\\'s purchase price. This vlog provides a breakdown. Lender fees are a significant component, including loan origination fees (for processing the loan), underwriting fees (for assessing risk), and appraisal fees (to determine the property\\\'s market value). Title-related fees cover title searches (to ensure the seller has clear ownership) and title insurance (protecting the lender and buyer from future title disputes).\\n\\nEscrow fees are paid to a neutral third party that handles the funds and documents during the closing process. You\\\'ll also encounter recording fees, charged by local governments to record the sale publicly. Prepaid items are another category, often including upfront payments for property taxes and homeowners insurance, which are held in an escrow account by the lender. It\\\'s important to review your Loan Estimate carefully, which outlines these costs early in the process, and compare it to the Closing Disclosure you receive a few days before closing. Understanding these costs helps you budget effectively and avoid surprises on closing day. Don\\\'t hesitate to ask your lender or real estate agent to clarify any fees you don\\\'t understand.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'documents signature',
     type: 'Vlog',
-    category: 'Buyer\'s Guide',
+    category: 'Buyer\\\'s Guide',
     date: '2024-05-30',
     icon: Video,
     author: 'MaxWealth PS Finance Experts',
@@ -204,7 +205,7 @@ export const articlesData: Article[] = [
     id: '6',
     title: 'Market Update Q3: Trends to Watch',
     description: 'An overview of the real estate market performance in the third quarter and predictions for what lies ahead.',
-    fullContent: 'The third quarter of the year often provides critical insights into the real estate market\'s trajectory. Key trends we are observing include shifts in inventory levels. In many areas, while still historically low, inventory has seen a slight uptick, potentially offering buyers more choices. Median home prices continue to show resilience, though the pace of appreciation may be moderating compared to previous periods. Interest rates remain a dominant factor influencing buyer affordability and market activity. Days on market (DOM) figures are also important to watch; a decrease in DOM suggests a faster-moving market, while an increase might indicate a cooling trend.\n\nRegional variations are prominent. Some metropolitan areas might experience continued high demand, while others could see more balanced conditions. We are also monitoring the impact of broader economic factors such as employment rates and consumer confidence on housing demand. Looking ahead, these Q3 trends will likely shape market dynamics for the remainder of the year and into early next year. Buyers should stay informed about local conditions and be prepared to act decisively when opportunities arise. Sellers should work with experienced agents to price their homes competitively based on current market realities.',
+    fullContent: 'The third quarter of the year often provides critical insights into the real estate market\\\'s trajectory. Key trends we are observing include shifts in inventory levels. In many areas, while still historically low, inventory has seen a slight uptick, potentially offering buyers more choices. Median home prices continue to show resilience, though the pace of appreciation may be moderating compared to previous periods. Interest rates remain a dominant factor influencing buyer affordability and market activity. Days on market (DOM) figures are also important to watch; a decrease in DOM suggests a faster-moving market, while an increase might indicate a cooling trend.\\n\\nRegional variations are prominent. Some metropolitan areas might experience continued high demand, while others could see more balanced conditions. We are also monitoring the impact of broader economic factors such as employment rates and consumer confidence on housing demand. Looking ahead, these Q3 trends will likely shape market dynamics for the remainder of the year and into early next year. Buyers should stay informed about local conditions and be prepared to act decisively when opportunities arise. Sellers should work with experienced agents to price their homes competitively based on current market realities.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'market chart',
     type: 'Blog',
@@ -220,7 +221,7 @@ export const articlesData: Article[] = [
     id: '7',
     title: 'Impact of Credit Score on Mortgages (Vlog)',
     description: 'Learn how your credit score affects your mortgage options, interest rates, and overall borrowing power in this informative vlog.',
-    fullContent: 'Your credit score is a three-digit number that lenders use to assess your creditworthiness, essentially how likely you are to repay borrowed money. This vlog explains its profound impact on your mortgage journey. A higher credit score generally translates to lower interest rates, which can save you tens of thousands of dollars over the life of your loan. It can also mean access to a wider range of loan products and potentially lower down payment requirements.\n\nConversely, a lower credit score might result in higher interest rates, making your monthly payments more expensive, or it could even make it difficult to qualify for a mortgage at all with some lenders. We discuss the primary factors that influence your credit score: payment history (making payments on time is crucial), amounts owed (your credit utilization ratio), length of credit history, new credit (opening too many accounts quickly can be negative), and credit mix (having different types of credit). The vlog provides actionable advice on how to obtain your credit report (you\'re entitled to a free one annually from each major bureau), review it for errors, and strategies for improving your score over time. Building and maintaining good credit is a vital step towards favorable mortgage terms.',
+    fullContent: 'Your credit score is a three-digit number that lenders use to assess your creditworthiness, essentially how likely you are to repay borrowed money. This vlog explains its profound impact on your mortgage journey. A higher credit score generally translates to lower interest rates, which can save you tens of thousands of dollars over the life of your loan. It can also mean access to a wider range of loan products and potentially lower down payment requirements.\\n\\nConversely, a lower credit score might result in higher interest rates, making your monthly payments more expensive, or it could even make it difficult to qualify for a mortgage at all with some lenders. We discuss the primary factors that influence your credit score: payment history (making payments on time is crucial), amounts owed (your credit utilization ratio), length of credit history, new credit (opening too many accounts quickly can be negative), and credit mix (having different types of credit). The vlog provides actionable advice on how to obtain your credit report (you\\\'re entitled to a free one annually from each major bureau), review it for errors, and strategies for improving your score over time. Building and maintaining good credit is a vital step towards favorable mortgage terms.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'credit score',
     type: 'Video',
@@ -236,7 +237,7 @@ export const articlesData: Article[] = [
     id: '8',
     title: 'Investment Strategies for Real Estate',
     description: 'Explore different strategies for investing in real estate, from rental properties to REITs and flipping houses.',
-    fullContent: 'Investing in real estate can be a powerful way to build wealth, but it\'s important to choose the right strategy. This article explores several popular approaches. Direct ownership of rental properties involves buying a property and leasing it out to tenants. This can provide regular cash flow and long-term appreciation but also requires active management. Real Estate Investment Trusts (REITs) offer a more passive way to invest by allowing you to buy shares in companies that own and operate income-producing real estate. This provides diversification and liquidity, similar to stocks.\n\nHouse flipping involves buying undervalued properties, renovating them, and selling them for a profit. This strategy can offer quick returns but also carries higher risk and requires significant expertise in renovation and market timing. Real estate wholesaling is another strategy where an investor contracts a home with a seller, then finds an interested party to buy it without actually taking ownership of the property. Crowdfunding platforms have also emerged, allowing multiple investors to pool funds for larger real estate projects. Each strategy has its own risk-reward profile, capital requirements, and time commitment. It\'s crucial to research thoroughly and consider your financial goals and risk tolerance before diving in. Consulting with a financial advisor specializing in real estate can help you determine the best path for your investment journey.',
+    fullContent: 'Investing in real estate can be a powerful way to build wealth, but it\\\'s important to choose the right strategy. This article explores several popular approaches. Direct ownership of rental properties involves buying a property and leasing it out to tenants. This can provide regular cash flow and long-term appreciation but also requires active management. Real Estate Investment Trusts (REITs) offer a more passive way to invest by allowing you to buy shares in companies that own and operate income-producing real estate. This provides diversification and liquidity, similar to stocks.\\n\\nHouse flipping involves buying undervalued properties, renovating them, and selling them for a profit. This strategy can offer quick returns but also carries higher risk and requires significant expertise in renovation and market timing. Real estate wholesaling is another strategy where an investor contracts a home with a seller, then finds an interested party to buy it without actually taking ownership of the property. Crowdfunding platforms have also emerged, allowing multiple investors to pool funds for larger real estate projects. Each strategy has its own risk-reward profile, capital requirements, and time commitment. It\\\'s crucial to research thoroughly and consider your financial goals and risk tolerance before diving in. Consulting with a financial advisor specializing in real estate can help you determine the best path for your investment journey.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'investment strategy chart',
     type: 'Article',
@@ -256,7 +257,7 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/400x711.png',
     dataAiHint: 'mobile phone video',
     type: 'Reel',
-    category: 'Buyer\'s Guide',
+    category: 'Buyer\\\'s Guide',
     date: '2024-07-28',
     icon: Clapperboard,
     author: 'MaxWealth PS Shorts',
@@ -282,12 +283,12 @@ export const faqData: FaqItem[] = [
   {
     id: 'faq2',
     question: 'How much down payment do I need?',
-    answer: 'The traditional down payment is 20% of the home\'s purchase price, but many loan programs allow for much lower down payments, some as low as 3% or even 0% for certain government-backed loans like VA or USDA loans. We can explore options that fit your financial situation.'
+    answer: 'The traditional down payment is 20% of the home\\\'s purchase price, but many loan programs allow for much lower down payments, some as low as 3% or even 0% for certain government-backed loans like VA or USDA loans. We can explore options that fit your financial situation.'
   },
   {
     id: 'faq3',
     question: 'What are closing costs?',
-    answer: 'Closing costs are fees associated with finalizing your mortgage and purchasing the home. They typically range from 2% to 5% of the home\'s purchase price and can include expenses like appraisal fees, title insurance, loan origination fees, and pre-paid property taxes and insurance.'
+    answer: 'Closing costs are fees associated with finalizing your mortgage and purchasing the home. They typically range from 2% to 5% of the home\\\'s purchase price and can include expenses like appraisal fees, title insurance, loan origination fees, and pre-paid property taxes and insurance.'
   },
   {
     id: 'faq4',
@@ -297,7 +298,7 @@ export const faqData: FaqItem[] = [
   {
     id: 'faq5',
     question: 'Should I get pre-approved for a mortgage before looking for homes?',
-    answer: 'Yes, absolutely! Getting pre-approved gives you a clear idea of how much you can afford, shows sellers you are a serious buyer, and can speed up the closing process once you find a home. It\'s a crucial first step in the home buying journey.'
+    answer: 'Yes, absolutely! Getting pre-approved gives you a clear idea of how much you can afford, shows sellers you are a serious buyer, and can speed up the closing process once you find a home. It\\\'s a crucial first step in the home buying journey.'
   },
   {
     id: 'faq6',
@@ -319,7 +320,7 @@ export interface Guide {
 export const guidesData: Guide[] = [
   {
     id: 'guide1',
-    title: 'The Ultimate First-Time Home Buyer\'s Guide',
+    title: 'The Ultimate First-Time Home Buyer\\\'s Guide',
     description: 'Everything you need to know, from saving for a down payment to getting the keys. This comprehensive e-book walks you through each step of the journey.',
     image: 'https://placehold.co/400x300.png',
     dataAiHint: 'ebook cover house',
@@ -347,7 +348,7 @@ export const guidesData: Guide[] = [
   {
     id: 'guide4',
     title: 'Checklist: Home Buying Documents',
-    description: 'A handy checklist of all the documents you\'ll typically need when applying for a mortgage and purchasing a home.',
+    description: 'A handy checklist of all the documents you\\\'ll typically need when applying for a mortgage and purchasing a home.',
     image: 'https://placehold.co/400x300.png',
     dataAiHint: 'checklist documents',
     downloadLink: '#',
@@ -747,22 +748,22 @@ export interface ServicePageAdvocate {
 
 export const servicePageAdvocates: ServicePageAdvocate[] = [
   { id: 'spa1', name: 'Rich Harvey', title: 'CEO & Founder', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait ceo' },
-  { id: 'spa2', name: 'Matt Corbett', title: 'PRINCIPAL - BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait professional' },
-  { id: 'spa3', name: 'Nick Taylor-Fick', title: 'PRINCIPAL - BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait smiling' },
+  { id: 'spa2', name: 'Matt Corbett', title: 'PRINCIPAL - BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait professional' },
+  { id: 'spa3', name: 'Nick Taylor-Fick', title: 'PRINCIPAL - BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait smiling' },
   { id: 'spa4', name: 'Munro Donen', title: 'DIRECTOR & PRINCIPAL, PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait director' },
-  { id: 'spa5', name: 'Niki McComb', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait senior' },
-  { id: 'spa6', name: 'Kevin Mason', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait advocate' },
-  { id: 'spa7', name: 'Anthony Knight', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait formal' },
-  { id: 'spa8', name: 'Glen Sainsbury', title: 'PRINCIPAL - BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait principal' },
-  { id: 'spa9', name: 'Robyn Toohey', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait experienced' },
-  { id: 'spa10', name: 'Angela Murray', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait friendly' },
-  { id: 'spa11', name: 'Amanda Jones', title: 'PRINCIPAL - BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait leader' },
+  { id: 'spa5', name: 'Niki McComb', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait senior' },
+  { id: 'spa6', name: 'Kevin Mason', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait advocate' },
+  { id: 'spa7', name: 'Anthony Knight', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait formal' },
+  { id: 'spa8', name: 'Glen Sainsbury', title: 'PRINCIPAL - BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait principal' },
+  { id: 'spa9', name: 'Robyn Toohey', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait experienced' },
+  { id: 'spa10', name: 'Angela Murray', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait friendly' },
+  { id: 'spa11', name: 'Amanda Jones', title: 'PRINCIPAL - BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait leader' },
   { id: 'spa12', name: 'Tass Pattas', title: 'SENIOR BUYERS ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait confident' },
   { id: 'spa13', name: 'Michelle Derderyan', title: 'DIRECTOR OF OPERATIONS', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait operations' },
   { id: 'spa14', name: 'Peter Domjen', title: 'DIRECTOR, BUSINESS DEVELOPMENT & CLIENT STRATEGY', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait strategy' },
-  { id: 'spa15', name: 'Lisa Schapiro', title: 'BUYERS\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait associate' },
-  { id: 'spa16', name: 'Jodie Gottlieb', title: 'ASSOCIATE BUYERS\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait associate' },
-  { id: 'spa17', name: 'Stan Rosenberg', title: 'ASSOCIATE BUYERS\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait senior associate' },
+  { id: 'spa15', name: 'Lisa Schapiro', title: 'BUYERS\\\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait associate' },
+  { id: 'spa16', name: 'Jodie Gottlieb', title: 'ASSOCIATE BUYERS\\\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait associate' },
+  { id: 'spa17', name: 'Stan Rosenberg', title: 'ASSOCIATE BUYERS\\\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait senior associate' },
 ];
 
 
@@ -794,7 +795,7 @@ export interface ServicePageCtaCardItem {
 }
 export const servicePageCtaCardsData: ServicePageCtaCardItem[] = [
   { id: 'cta1', title: 'UNSURE OF WHAT YOU WANT?', description: 'Are you feeling overwhelmed, frustrated, or simply tired of searching for real estate in the residential areas in Sydney, Brisbane, and other key locations?', icon: HelpCircle },
-  { id: 'cta2', title: 'DON\'T HAVE THE TIME?', description: 'Have biased real estate agents taken you to homes and apartments that are way off the mark? Have they tried to convince you that buying a home is easy?', icon: Timer },
+  { id: 'cta2', title: 'DON\\\'T HAVE THE TIME?', description: 'Have biased real estate agents taken you to homes and apartments that are way off the mark? Have they tried to convince you that buying a home is easy?', icon: Timer },
   { id: 'cta3', title: 'MISSED OUT AT AUCTIONS?', description: 'Have you had to try and cope at a property auction without any support? Have you missed out on several suitable homes for sale as a result?', icon: Award },
 ];
 
@@ -841,3 +842,6 @@ export const memberLogos = [
   { id: 'ml5', hint: 'property institute logo' },
   { id: 'ml6', hint: 'certification program logo' },
 ];
+
+
+    
