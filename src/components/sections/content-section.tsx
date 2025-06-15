@@ -6,16 +6,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Newspaper, TrendingUp, Users } from 'lucide-react'; // Added icons for story cards
+import { ArrowRight, Newspaper, TrendingUp } from 'lucide-react';
 import { articlesData, type Article } from '@/lib/data';
 import { cn } from '@/lib/utils';
 
-// Helper function to get a limited set of articles for the new layout
 const getFeaturedStories = () => {
   const stories = [];
-  if (articlesData.length > 0) stories.push(articlesData[0]); // For top-left small card
-  if (articlesData.length > 1) stories.push(articlesData[1]); // For bottom-left small card
-  if (articlesData.length > 2) stories.push(articlesData[2]); // For large right card
+  if (articlesData.length > 0) stories.push(articlesData[0]); 
+  if (articlesData.length > 1) stories.push(articlesData[1]); 
+  if (articlesData.length > 2) stories.push(articlesData[2]); 
   return stories;
 };
 
@@ -26,8 +25,6 @@ interface StoryCardProps {
 }
 
 const StoryCard: React.FC<StoryCardProps> = ({ article, className, large = false }) => {
-  const Icon = article.type === 'Blog' ? Newspaper : TrendingUp; // Example, can be customized or removed
-
   return (
     <Link 
       href={`/insights/${article.id}`} 
@@ -77,12 +74,12 @@ export default function ContentSection() {
         {featuredStories.length >= 3 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
             {/* Left Column */}
-            <div className="md:col-span-1 space-y-6 md:space-y-8">
+            <div className="md:col-span-1 flex flex-col gap-6 md:gap-8">
               {storyTopLeft && (
                 <StoryCard article={storyTopLeft} className="aspect-[4/3]" />
               )}
 
-              <Card className="bg-primary text-primary-foreground p-6 md:p-8 rounded-lg shadow-xl flex flex-col justify-between h-full">
+              <Card className="bg-primary text-primary-foreground p-6 md:p-8 rounded-lg shadow-xl flex flex-col justify-between flex-grow">
                 <div>
                   <h3 className="font-headline text-4xl md:text-5xl font-bold mb-2">4500+</h3>
                   <p className="font-headline text-xl text-primary-foreground/80 mb-3">Success Stories</p>
@@ -92,7 +89,7 @@ export default function ContentSection() {
                 </div>
                 <Button variant="default" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" asChild>
                   <Link href="/insights">
-                     <span className="flex items-center"> {/* Added span here */}
+                     <span className="flex items-center">
                         View All Stories & Insights <ArrowRight className="ml-2 h-4 w-4" />
                      </span>
                   </Link>
@@ -128,4 +125,3 @@ export default function ContentSection() {
     </section>
   );
 }
-
