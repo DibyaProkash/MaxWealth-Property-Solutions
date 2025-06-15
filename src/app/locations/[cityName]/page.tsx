@@ -11,7 +11,7 @@ import AnimatedSection from '@/components/layout/animated-section';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ArrowLeft, MapPin, Train, Sailboat, Plane, Utensils, Trees, ShoppingCart, Briefcase, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb } from 'lucide-react';
-import ContactFormCityPage from '@/components/forms/contact-form-city-page'; // Corrected import path
+import ContactFormCityPage from '@/components/forms/contact-form-city-page'; 
 
 export default function CityLocationPage() {
   const params = useParams();
@@ -226,10 +226,4 @@ export default function CityLocationPage() {
       <Footer />
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  return serviceLocationsData.map((location) => ({
-    cityName: location.slug,
-  }));
 }
