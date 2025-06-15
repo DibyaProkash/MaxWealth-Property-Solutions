@@ -1,6 +1,7 @@
 
 "use client";
 
+import * as React from 'react'; // Added this line
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
@@ -15,9 +16,9 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { ThemeToggle } from '@/components/theme-toggle';
-import { usePathname } from 'next/navigation'; 
-import { useScrollSpy } from '@/hooks/use-scroll-spy'; 
-import { cn } from '@/lib/utils'; 
+import { usePathname } from 'next/navigation';
+import { useScrollSpy } from '@/hooks/use-scroll-spy';
+import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
 
 interface NavLinkItem {
@@ -40,13 +41,13 @@ const resourceSubItems: NavLinkItem[] = [
 const navLinksData: NavLinkItem[] = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
   { href: '#about', label: 'About Us', icon: Users, id: 'about' },
-  { href: '/insights', label: 'Insights', icon: Newspaper, id: 'insightsPage' }, // Changed id to avoid conflict if #insights exists
-  { 
-    href: '/resources', 
-    label: 'Resources', 
-    icon: BookOpen, 
-    id: 'resourcesPage', // Changed id
-    subItems: resourceSubItems 
+  { href: '/insights', label: 'Insights', icon: Newspaper, id: 'insightsPage' },
+  {
+    href: '/resources',
+    label: 'Resources',
+    icon: BookOpen,
+    id: 'resourcesPage',
+    subItems: resourceSubItems
   },
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
   { href: '#contact', label: 'Contact', icon: MessageSquare, id: 'contact' },
@@ -72,23 +73,23 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-primary text-primary-foreground shadow-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
-          <Briefcase className="h-7 w-7 text-primary-foreground" /> 
-          <span className="font-headline text-2xl font-bold text-primary-foreground">MaxWealth PS</span> 
+          <Briefcase className="h-7 w-7 text-primary-foreground" />
+          <span className="font-headline text-2xl font-bold text-primary-foreground">MaxWealth PS</span>
         </Link>
-        
+
         <div className="flex items-center space-x-2 sm:space-x-4">
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               {navLinksData.map((link) => {
-                const isActive = 
+                const isActive =
                   (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
                   (!link.href.startsWith('#') && pathname.startsWith(link.href));
 
                 if (link.subItems) {
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <NavigationMenuTrigger 
-                        className={cn(navigationMenuTriggerStyle(), 
+                      <NavigationMenuTrigger
+                        className={cn(navigationMenuTriggerStyle(),
                           "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
                           isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
                         )}
@@ -115,8 +116,8 @@ export default function Navbar() {
                 return (
                   <NavigationMenuItem key={link.label}>
                     <Link href={getLinkHref(link.href)} legacyBehavior passHref>
-                      <NavigationMenuLink 
-                        className={cn(navigationMenuTriggerStyle(), 
+                      <NavigationMenuLink
+                        className={cn(navigationMenuTriggerStyle(),
                           "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
                           isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground"
                         )}
@@ -129,15 +130,15 @@ export default function Navbar() {
               })}
             </NavigationMenuList>
           </NavigationMenu>
-          
+
           <ThemeToggle />
 
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button 
-                  variant="ghost" 
-                  size="icon" 
+                <Button
+                  variant="ghost"
+                  size="icon"
                   className="text-primary-foreground border border-primary-foreground/30 hover:bg-primary-foreground/10 hover:text-primary-foreground focus-visible:ring-primary-foreground"
                 >
                   <Menu className="h-6 w-6" />
@@ -147,19 +148,19 @@ export default function Navbar() {
               <SheetContent side="right" className="w-[280px] sm:w-[320px] bg-primary text-primary-foreground">
                 <div className="flex flex-col space-y-1 p-4">
                   <Link href="/" className="flex items-center space-x-2 mb-4">
-                    <Briefcase className="h-7 w-7 text-primary-foreground" /> 
-                    <span className="font-headline text-xl font-bold text-primary-foreground">MaxWealth PS</span> 
+                    <Briefcase className="h-7 w-7 text-primary-foreground" />
+                    <span className="font-headline text-xl font-bold text-primary-foreground">MaxWealth PS</span>
                   </Link>
                   {navLinksData.map((link) => {
-                     const isActive = 
+                     const isActive =
                         (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
                         (!link.href.startsWith('#') && pathname.startsWith(link.href));
-                    
+
                     if (link.subItems) {
                       return (
                         <React.Fragment key={link.label}>
                           <p className={cn(
-                            "flex items-center space-x-2 rounded-md p-2 font-semibold", 
+                            "flex items-center space-x-2 rounded-md p-2 font-semibold",
                              isActive && "bg-primary-foreground/10 text-primary-foreground"
                           )}>
                             <link.icon className="h-5 w-5" />
@@ -173,7 +174,7 @@ export default function Navbar() {
                                   <Link
                                     href={subItem.href} // No need for getLinkHref for sub-items as they are direct page links
                                     className={cn(
-                                      "flex items-center space-x-2 rounded-md p-2 text-sm transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground", 
+                                      "flex items-center space-x-2 rounded-md p-2 text-sm transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
                                       isSubItemActive ? "bg-primary-foreground/10 text-primary-foreground font-medium" : "text-primary-foreground/80"
                                     )}
                                   >
@@ -193,7 +194,7 @@ export default function Navbar() {
                         <Link
                           href={getLinkHref(link.href)}
                           className={cn(
-                            "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground", 
+                            "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
                             isActive ? "bg-primary-foreground/10 text-primary-foreground font-semibold" : "text-primary-foreground/80"
                           )}
                         >
