@@ -94,16 +94,21 @@ export default function Navbar() {
                 if (link.subItems) { // This is the "Resources" item
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <Link href={link.href} asChild>
-                        <NavigationMenuTrigger
-                          className={cn(navigationMenuTriggerStyle(),
+                      <NavigationMenuTrigger asChild>
+                        <Link
+                          href={link.href}
+                          className={cn(navigationMenuTriggerStyle(), "group",
                             "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
                             isMounted && isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
                           )}
                         >
                           {link.label}
-                        </NavigationMenuTrigger>
-                      </Link>
+                          <ChevronDown
+                            className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                           {link.subItems.map((subItem) => (
