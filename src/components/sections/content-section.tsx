@@ -78,6 +78,10 @@ export default function ContentSection() {
               {storyTopLeft && (
                 <StoryCard article={storyTopLeft} className="aspect-[4/3]" />
               )}
+              
+              {storyBottomLeft && (
+                <StoryCard article={storyBottomLeft} className="aspect-[4/3]" />
+              )}
 
               <Card className="bg-primary text-primary-foreground p-6 md:p-8 rounded-lg shadow-xl flex flex-col justify-between flex-grow">
                 <div>
@@ -95,10 +99,6 @@ export default function ContentSection() {
                   </Link>
                 </Button>
               </Card>
-
-              {storyBottomLeft && (
-                <StoryCard article={storyBottomLeft} className="aspect-[4/3]" />
-              )}
             </div>
 
             {/* Right Column */}
@@ -125,3 +125,4 @@ export default function ContentSection() {
     </section>
   );
 }
+
