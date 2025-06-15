@@ -23,7 +23,7 @@ import {
   type ServicePageBenefitPoint,
   type HowWeHelpStep,
   type ServiceLocationItem,
-} from '@/lib/data';
+} from '@/lib/data.tsx';
 import Footer from '@/components/layout/footer';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Button } from '@/components/ui/button';
@@ -31,13 +31,8 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ContactFormServicePage from '@/components/forms/contact-form-service-page';
-import { ArrowLeft, CheckCircle, ChevronRight, Home, Award as AwardIcon, Users, MessageSquare, MapPinIcon, ThumbsUp, Star } from 'lucide-react';
+import { ArrowLeft, CheckCircle, ChevronRight, Home, Award as AwardIcon, Users, MessageSquare, MapPinIcon, ThumbsUp, Star, Timer, HelpCircle, BuildingIcon as DefaultBuildingIcon, DollarSign, FileSearch, Handshake, FileText as LucideFileText, Loader2 } from 'lucide-react';
 
-export async function generateStaticParams() {
-  return whoWeHelpData.map((service) => ({
-    serviceSlug: service.slug,
-  }));
-}
 
 export default function ServiceDetailPage() {
   const params = useParams();
@@ -61,7 +56,7 @@ export default function ServiceDetailPage() {
     return (
       <div className="flex flex-col min-h-screen">
         <main className="flex-grow flex items-center justify-center bg-background">
-          <ArrowLeft className="h-16 w-16 animate-spin text-primary" />
+          <Loader2 className="h-16 w-16 animate-spin text-primary" />
         </main>
         <Footer />
       </div>
@@ -73,7 +68,7 @@ export default function ServiceDetailPage() {
     return null;
   }
 
-  const currentServiceAdvocates = servicePageAdvocates.slice(0, 12); // Example: show first 12
+  const currentServiceAdvocates = servicePageAdvocates.slice(0, 12); 
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -192,7 +187,7 @@ export default function ServiceDetailPage() {
               Where We Service
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6 justify-center">
-              {serviceLocationsData.slice(0, 8).map(location => ( // Show first 8 locations as example
+              {serviceLocationsData.slice(0, 8).map(location => ( 
                 <Link key={location.id} href={`/locations/${location.slug}`} passHref className="group block text-center">
                     <Button variant="ghost" className="h-auto p-2 flex flex-col items-center space-y-1 hover:bg-primary/5">
                         <MapPinIcon className="h-6 w-6 text-accent mb-1 group-hover:text-primary transition-colors" />
@@ -365,3 +360,4 @@ export default function ServiceDetailPage() {
     </div>
   );
 }
+
