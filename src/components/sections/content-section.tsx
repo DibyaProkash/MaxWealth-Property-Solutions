@@ -29,8 +29,10 @@ const StoryCard: React.FC<StoryCardProps> = ({ article, className, large = false
   const Icon = article.type === 'Blog' ? Newspaper : TrendingUp; // Example, can be customized or removed
 
   return (
-    <Link href={`/insights/${article.id}`} passHref legacyBehavior>
-      <a className={cn("block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 relative group", className)}>
+    <Link 
+      href={`/insights/${article.id}`} 
+      className={cn("block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 relative group", className)}
+    >
         <Image
           src={article.image}
           alt={article.title}
@@ -51,7 +53,6 @@ const StoryCard: React.FC<StoryCardProps> = ({ article, className, large = false
             </p>
           )}
         </div>
-      </a>
     </Link>
   );
 };
@@ -91,7 +92,9 @@ export default function ContentSection() {
                 </div>
                 <Button variant="default" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" asChild>
                   <Link href="/insights">
-                    View All Stories & Insights
+                     <span className="flex items-center"> {/* Added span here */}
+                        View All Stories & Insights <ArrowRight className="ml-2 h-4 w-4" />
+                     </span>
                   </Link>
                 </Button>
               </Card>
@@ -125,3 +128,4 @@ export default function ContentSection() {
     </section>
   );
 }
+
