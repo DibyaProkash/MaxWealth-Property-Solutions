@@ -77,6 +77,13 @@ export default function OurServicesPage() {
                       <CardContent className="flex-grow text-center">
                         <p className="text-sm text-muted-foreground font-body">{item.description}</p>
                       </CardContent>
+                      <CardFooter className="p-6 pt-0 mt-auto">
+                        <Button asChild variant="link" className="text-accent p-0 h-auto">
+                          <Link href={`/services/${item.slug}`}>
+                            Learn More <ArrowRight className="ml-1 h-4 w-4" />
+                          </Link>
+                        </Button>
+                      </CardFooter>
                     </Card>
                   );
                 })}
@@ -135,7 +142,7 @@ export default function OurServicesPage() {
                       Are you searching for Home or Investment property?
                     </p>
                     <Button size="lg" variant="default" className="mt-auto bg-accent text-accent-foreground hover:bg-accent/90 shadow-md w-full sm:w-auto" asChild>
-                      <Link href="#contact">
+                      <Link href="/contact">
                         Get Started <ArrowRight className="ml-2 h-5 w-5" />
                       </Link>
                     </Button>
@@ -152,7 +159,7 @@ export default function OurServicesPage() {
                       Are you in search of the commercial property or Investment to grow your business.
                     </p>
                      <Button size="lg" variant="default" className="mt-auto bg-primary text-primary-foreground hover:bg-primary/90 shadow-md w-full sm:w-auto" asChild>
-                       <Link href="#contact">
+                       <Link href="/contact">
                         Get Started <ArrowRight className="ml-2 h-5 w-5" />
                       </Link>
                     </Button>

@@ -23,6 +23,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { ArrowLeft, BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Briefcase, Info } from "lucide-react";
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
+import { memberLogos } from '@/lib/data';
+
 
 const formSchema = z.object({
   buyingLocation: z.string().min(2, { message: "Please specify your desired buying location." }),
@@ -32,15 +34,6 @@ const formSchema = z.object({
   number: z.string().min(5, { message: "Please enter a valid phone number." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
 });
-
-const memberLogos = [
-  { id: 'ml1', hint: 'real estate institute logo' },
-  { id: 'ml2', hint: 'property association logo' },
-  { id: 'ml3', hint: 'industry body logo' },
-  { id: 'ml4', hint: 'valuation board logo' },
-  { id: 'ml5', hint: 'property institute logo' },
-  { id: 'ml6', hint: 'certification program logo' },
-];
 
 export default function FeesExplainedPage() {
   const { toast } = useToast();
@@ -317,3 +310,4 @@ export default function FeesExplainedPage() {
     </div>
   );
 }
+

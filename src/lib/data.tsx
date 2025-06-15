@@ -1,7 +1,6 @@
 
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus } from 'lucide-react';
-import type { SVGProps } from 'react';
-
+import React, { type SVGProps } from 'react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign } from 'lucide-react';
 
 // Helper icon component (if not directly from lucide-react or if a specific one is needed)
 // For example, a BusIcon if not in lucide or a custom one:
@@ -594,7 +593,7 @@ const generatePlaceholderAmenities = (cityName: string): LocationDetail['ameniti
     title: "TRANSPORT",
     content: [
       { subTitle: "Train", text: `Discover convenient train routes connecting ${cityName} to major hubs. Efficient and scenic journeys await.`, icon: Train },
-      { subTitle: "Bus Network", text: `Extensive bus networks provide easy access across ${cityName} and surrounding areas. Local and regional services available.`, icon: BusIcon }, // Using the new BusIcon
+      { subTitle: "Bus Network", text: `Extensive bus networks provide easy access across ${cityName} and surrounding areas. Local and regional services available.`, icon: BusIcon },
       { text: `General public transport in ${cityName} is designed for accessibility and convenience, making it easy to explore the city and its attractions.`, icon: MapPin },
     ],
     image: 'https://placehold.co/600x450.png',
@@ -659,7 +658,7 @@ export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(lo
           content: [
             { subTitle: "Beaches & Waterways", text: "The Central Coast is a beach lover's paradise with an 87-kilometre coastline and over 40 beaches. Finding a piece of beach and taking advantage of the ocean lifestyle—whether that means splashing around at Toowoon Bay with the kids, dipping into the water at The Entrance Ocean Baths, or exploring the rock pools at MacMasters Beach or Pearl Beach—is practically a given when on vacation.", icon: Sailboat },
             { subTitle: "Natural Beauty", text: "Between Sydney and Newcastle, NSW's second-largest city, is the Central Coast. The area is introduced in Kate Grenville's classic historical novel The Hidden River, which is located in Broken Bay near the mouth of the lovely Hawkesbury River.", icon: Trees },
-            { subTitle: "Local Attractions", text: "Pelican feeding time at Pelican Plaza, The Entrance, is a well-known sight on the Central Coast. At 3.30 pm every afternoon, Australia's largest aquatic birds, some with wingspans up to 2.8 meters, congregate here.", icon: CameraIcon }, // Using the new CameraIcon
+            { subTitle: "Local Attractions", text: "Pelican feeding time at Pelican Plaza, The Entrance, is a well-known sight on the Central Coast. At 3.30 pm every afternoon, Australia's largest aquatic birds, some with wingspans up to 2.8 meters, congregate here.", icon: CameraIcon },
             { subTitle: "Relaxation & Wellness", text: "At the cozy Bells Day Spa at Bells at Killcare, you may disconnect from your hectic schedule and re-establish a connection with the natural world by utilizing traditional goods and healing methods that were developed by indigenous Australians. The top-to-toe rituals are performed at the Vie Spa in the Pullman Magenta Beaches Resort using only organic, all-Australian products in a setting that exudes Japanese calm. Alternately, unwind in the opulent Roman Spa at Aztec Skin Clinic & Day Spa, complete with a fruit and cheese platter, before receiving a treatment with a Fijian influence.", icon: Sparkles }
           ],
           image: 'https://placehold.co/600x450.png',
@@ -842,3 +841,4 @@ export const memberLogos = [
   { id: 'ml5', hint: 'property institute logo' },
   { id: 'ml6', hint: 'certification program logo' },
 ];
+
