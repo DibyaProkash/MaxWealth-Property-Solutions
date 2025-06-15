@@ -6,216 +6,121 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ArrowRight, ListFilter, ArrowDownUp, Search as SearchIcon, Newspaper } from 'lucide-react';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import Autoplay from "embla-carousel-autoplay";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
+import { ArrowRight, Newspaper, TrendingUp, Users } from 'lucide-react'; // Added icons for story cards
 import { articlesData, type Article } from '@/lib/data';
+import { cn } from '@/lib/utils';
 
-type SortOption = 'date-desc' | 'date-asc' | 'type-asc';
-type FilterType = string; 
+// Helper function to get a limited set of articles for the new layout
+const getFeaturedStories = () => {
+  const stories = [];
+  if (articlesData.length > 0) stories.push(articlesData[0]); // For top-left small card
+  if (articlesData.length > 1) stories.push(articlesData[1]); // For bottom-left small card
+  if (articlesData.length > 2) stories.push(articlesData[2]); // For large right card
+  return stories;
+};
+
+interface StoryCardProps {
+  article: Article;
+  className?: string;
+  large?: boolean;
+}
+
+const StoryCard: React.FC<StoryCardProps> = ({ article, className, large = false }) => {
+  const Icon = article.type === 'Blog' ? Newspaper : TrendingUp; // Example, can be customized or removed
+
+  return (
+    <Link href={`/insights/${article.id}`} passHref legacyBehavior>
+      <a className={cn("block rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 relative group", className)}>
+        <Image
+          src={article.image}
+          alt={article.title}
+          fill
+          sizes={large ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
+          style={{ objectFit: 'cover' }}
+          className="group-hover:scale-105 transition-transform duration-500 ease-in-out"
+          data-ai-hint={article.dataAiHint}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 p-4 md:p-6 text-white w-full">
+          <h3 className={cn("font-headline font-semibold", large ? "text-xl md:text-2xl lg:text-3xl" : "text-lg md:text-xl")}>
+            {article.title}
+          </h3>
+          {article.author && (
+            <p className={cn("text-xs md:text-sm mt-1 opacity-80", large ? "md:text-base" : "md:text-sm")}>
+              {article.author}
+            </p>
+          )}
+        </div>
+      </a>
+    </Link>
+  );
+};
+
 
 export default function ContentSection() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 4500, stopOnInteraction: false, stopOnMouseEnter: true })
-  );
-
-  const [sortOption, setSortOption] = React.useState<SortOption>('date-desc');
-  const [filterType, setFilterType] = React.useState<FilterType>('all');
-  const [searchTerm, setSearchTerm] = React.useState<string>('');
-
-  const availableTypes = React.useMemo(() => {
-    const types = new Set<string>(['all']);
-    articlesData.forEach(article => types.add(article.type));
-    return Array.from(types).sort((a, b) => {
-      if (a === 'all') return -1;
-      if (b === 'all') return 1;
-      return a.localeCompare(b);
-    });
-  }, []);
-
-  const displayedArticles = React.useMemo(() => {
-    let processedArticles = [...articlesData];
-
-    if (searchTerm.trim() !== '') {
-      const lowerSearchTerm = searchTerm.toLowerCase();
-      processedArticles = processedArticles.filter(article =>
-        article.title.toLowerCase().includes(lowerSearchTerm) ||
-        article.description.toLowerCase().includes(lowerSearchTerm) ||
-        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(lowerSearchTerm)))
-      );
-    }
-
-    if (filterType !== 'all') {
-      processedArticles = processedArticles.filter(article => article.type === filterType);
-    }
-
-    switch (sortOption) {
-      case 'date-desc':
-        processedArticles.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-        break;
-      case 'date-asc':
-        processedArticles.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-        break;
-      case 'type-asc':
-        processedArticles.sort((a, b) => a.type.localeCompare(b.type));
-        break;
-    }
-    return processedArticles;
-  }, [sortOption, filterType, searchTerm]);
-
-  const [itemsPerView, setItemsPerView] = React.useState(3);
-
-  React.useEffect(() => {
-    const updateItemsPerView = () => {
-      if (window.innerWidth < 768) { 
-        setItemsPerView(1);
-      } else if (window.innerWidth < 1024) { 
-        setItemsPerView(2);
-      } else { 
-        setItemsPerView(3);
-      }
-    };
-    window.addEventListener('resize', updateItemsPerView);
-    updateItemsPerView(); 
-    return () => window.removeEventListener('resize', updateItemsPerView);
-  }, []);
-
+  const featuredStories = getFeaturedStories();
+  const storyTopLeft = featuredStories[0];
+  const storyBottomLeft = featuredStories[1];
+  const storyRightLarge = featuredStories[2];
 
   return (
     <section id="content" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Financial Insights & Updates</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Stay informed with our latest articles, guides, and company news on home financing.
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Client Success & Financial Insights</h2>
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            At MaxWealth PS, we don't just talk about excellence, we achieve it. Our dedication to exceptional service and client satisfaction is reflected in their stories and our expert insights.
           </p>
         </div>
 
-        <div className="mb-10 p-4 border rounded-lg bg-card shadow">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
-                <div className="space-y-2">
-                    <Label htmlFor="searchTerm" className="text-md font-semibold text-primary flex items-center">
-                        <SearchIcon className="mr-2 h-5 w-5" /> Search Content:
-                    </Label>
-                    <Input
-                        id="searchTerm"
-                        type="text"
-                        placeholder="e.g., mortgage rates, buyer tips..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="bg-background" 
-                    />
+        {featuredStories.length >= 3 ? (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
+            {/* Left Column */}
+            <div className="md:col-span-1 space-y-6 md:space-y-8">
+              {storyTopLeft && (
+                <StoryCard article={storyTopLeft} className="aspect-[4/3]" />
+              )}
+
+              <Card className="bg-primary text-primary-foreground p-6 md:p-8 rounded-lg shadow-xl flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="font-headline text-4xl md:text-5xl font-bold mb-2">4500+</h3>
+                  <p className="font-headline text-xl text-primary-foreground/80 mb-3">Success Stories</p>
+                  <p className="text-sm text-primary-foreground/70 mb-6">
+                    Discover real success through stories of impact and achievement from clients like you.
+                  </p>
                 </div>
-                <div className="space-y-2">
-                    <Label htmlFor="filterType" className="text-md font-semibold text-primary flex items-center">
-                        <ListFilter className="mr-2 h-5 w-5" /> Filter by Type:
-                    </Label>
-                    <RadioGroup
-                        id="filterType"
-                        value={filterType}
-                        onValueChange={(value: string) => setFilterType(value as FilterType)}
-                        className="flex flex-wrap gap-x-4 gap-y-2 pt-2"
-                    >
-                        {availableTypes.map((type) => (
-                        <div key={type} className="flex items-center space-x-2">
-                            <RadioGroupItem value={type} id={`filter-${type}`} />
-                            <Label htmlFor={`filter-${type}`} className="font-normal cursor-pointer hover:text-primary capitalize">{type}</Label>
-                        </div>
-                        ))}
-                    </RadioGroup>
-                </div>
-                <div className="space-y-2">
-                    <Label htmlFor="sortOption" className="text-md font-semibold text-primary flex items-center">
-                        <ArrowDownUp className="mr-2 h-5 w-5" /> Sort by:
-                    </Label>
-                    <Select value={sortOption} onValueChange={(value: string) => setSortOption(value as SortOption)}>
-                        <SelectTrigger id="sortOption" className="w-full bg-background">
-                        <SelectValue placeholder="Select sort order" />
-                        </SelectTrigger>
-                        <SelectContent>
-                        <SelectItem value="date-desc">Newest First</SelectItem>
-                        <SelectItem value="date-asc">Oldest First</SelectItem>
-                        <SelectItem value="type-asc">Type (A-Z)</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
+                <Button variant="default" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" asChild>
+                  <Link href="/insights">
+                    View All Stories & Insights
+                  </Link>
+                </Button>
+              </Card>
+
+              {storyBottomLeft && (
+                <StoryCard article={storyBottomLeft} className="aspect-[4/3]" />
+              )}
             </div>
-        </div>
-        
-        {displayedArticles.length > 0 ? (
-          <Carousel
-            opts={{
-              align: "start",
-              loop: displayedArticles.length > itemsPerView, 
-            }}
-            plugins={plugin.current ? [plugin.current] : []}
-            onMouseEnter={() => plugin.current?.stop()}
-            onMouseLeave={() => plugin.current?.reset()}
-            className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto"
-            key={displayedArticles.map(a => a.id).join('-') + '-' + sortOption + '-' + filterType + '-' + searchTerm + '-' + itemsPerView} 
-          >
-            <CarouselContent className="-ml-4">
-              {displayedArticles.map((article) => (
-                <CarouselItem key={article.id} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                  <div className="p-1 h-full">
-                    <Card className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full bg-card">
-                      <CardHeader className="p-0">
-                        <div className="relative h-52 w-full">
-                          <Image 
-                            src={article.image} 
-                            alt={article.title} 
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            style={{ objectFit: 'cover' }}
-                            data-ai-hint={article.dataAiHint}
-                          />
-                          <div className="absolute top-2 right-2 bg-secondary text-secondary-foreground px-2 py-1 text-xs rounded font-medium flex items-center capitalize">
-                            <article.icon className="w-4 h-4 mr-1" />
-                            {article.type}
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent className="flex-grow p-6">
-                        <CardTitle className="font-headline text-xl text-primary mb-2 leading-tight">{article.title}</CardTitle>
-                        <p className="text-xs text-muted-foreground mb-2">Published: {new Date(article.date).toLocaleDateString()}</p>
-                        <p className="text-muted-foreground text-sm font-body line-clamp-3">{article.description}</p>
-                      </CardContent>
-                      <CardFooter className="p-6 pt-0">
-                        <Button variant="link" className="text-accent p-0 h-auto" asChild>
-                           <Link href={`/insights/${article.id}`}>
-                            Read More <ArrowRight className="ml-1 h-4 w-4" />
-                          </Link>
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            {displayedArticles.length > itemsPerView && <CarouselPrevious className="hidden sm:flex" />}
-            {displayedArticles.length > itemsPerView && <CarouselNext className="hidden sm:flex" />}
-          </Carousel>
-        ) : (
-          <div className="text-center py-10 text-muted-foreground">
-            <Newspaper className="mx-auto h-12 w-12 mb-4 text-primary/50" />
-            <p className="text-lg">No articles match your current filter and search criteria.</p>
-            <p>Try adjusting your selection or view all articles.</p>
+
+            {/* Right Column */}
+            <div className="md:col-span-2">
+              {storyRightLarge && (
+                <StoryCard article={storyRightLarge} className="h-full min-h-[300px] md:min-h-full aspect-[4/3] md:aspect-auto" large />
+              )}
+            </div>
           </div>
-        )}
-        
-        <div className="text-center mt-12">
-            <Button size="lg" className="shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+        ) : (
+          <div className="text-center py-10">
+            <Newspaper className="mx-auto h-12 w-12 mb-4 text-primary/50" />
+            <p className="text-lg text-muted-foreground">More success stories and insights coming soon!</p>
+            <Button size="lg" className="mt-6 shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                 <Link href="/insights">
                   <span className="flex items-center">
-                    View All Insights <ArrowRight className="ml-2 h-4 w-4" />
+                    View All Available Insights <ArrowRight className="ml-2 h-4 w-4" />
                   </span>
                 </Link>
             </Button>
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );
