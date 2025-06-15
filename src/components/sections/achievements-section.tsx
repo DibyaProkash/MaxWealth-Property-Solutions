@@ -88,9 +88,9 @@ export default function AchievementsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-8 md:py-12 bg-secondary">
+    <section ref={sectionRef}> {/* Removed py and bg-secondary */}
       <div className="container mx-auto px-6">
-        <Card className="p-6 md:p-10 bg-card shadow-lg rounded-xl">
+        <Card className="p-6 md:p-10 bg-card shadow-xl rounded-xl"> {/* Changed to shadow-xl */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-center">
             {achievementsData.map((stat) => (
               <div key={stat.label} className="flex flex-col items-center">

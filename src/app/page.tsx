@@ -25,7 +25,7 @@ export default function HomePage() {
           <HeroSection />
         </AnimatedSection>
         
-        <AnimatedSection delay="delay-50"> {/* Adjusted delay for smooth flow */}
+        <AnimatedSection delay="delay-50" className="relative z-10 -mt-16 md:-mt-20"> {/* Adjusted for overlap */}
           <AchievementsSection />
         </AnimatedSection>
 
@@ -34,7 +34,7 @@ export default function HomePage() {
         </AnimatedSection>
         
         {articlesData.length > 0 && (
-          <AnimatedSection delay="delay-100">
+          <AnimatedSection delay="delay-100" id="content">
             <ContentSection />
           </AnimatedSection>
         )}
