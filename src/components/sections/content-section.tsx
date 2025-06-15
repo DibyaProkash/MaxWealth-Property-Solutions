@@ -95,7 +95,7 @@ export default function ContentSection() {
           </p>
         </div>
 
-        <div className="mb-10 p-4 border rounded-lg bg-background/50 shadow">
+        <div className="mb-10 p-4 border rounded-lg bg-card shadow">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
                 <div className="space-y-2">
                     <Label htmlFor="searchTerm" className="text-md font-semibold text-primary flex items-center">
@@ -173,7 +173,7 @@ export default function ContentSection() {
                             style={{ objectFit: 'cover' }}
                             data-ai-hint={article.dataAiHint}
                           />
-                          <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 text-xs rounded font-medium flex items-center capitalize">
+                          <div className="absolute top-2 right-2 bg-secondary text-secondary-foreground px-2 py-1 text-xs rounded font-medium flex items-center capitalize">
                             <article.icon className="w-4 h-4 mr-1" />
                             {article.type}
                           </div>
@@ -186,7 +186,7 @@ export default function ContentSection() {
                       </CardContent>
                       <CardFooter className="p-6 pt-0">
                         <Button variant="link" className="text-accent p-0 h-auto" asChild>
-                          <Link href={`/insights/${article.id}`}>
+                           <Link href={`/insights/${article.id}`}>
                             Read More <ArrowRight className="ml-1 h-4 w-4" />
                           </Link>
                         </Button>
@@ -208,7 +208,7 @@ export default function ContentSection() {
         )}
         
         <div className="text-center mt-12">
-            <Button size="lg" variant="outline" className="shadow-md hover:shadow-lg transition-shadow" asChild>
+            <Button size="lg" className="shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90" asChild>
                 <Link href="/insights">
                   <span className="flex items-center">
                     View All Insights <ArrowRight className="ml-2 h-4 w-4" />

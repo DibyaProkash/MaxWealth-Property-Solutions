@@ -171,7 +171,7 @@ export default function RoadmapSection() {
   };
 
   return (
-    <section id="roadmap" className="py-16 md:py-24 bg-background"> {/* Changed from bg-secondary to bg-background */}
+    <section id="roadmap" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
@@ -181,7 +181,7 @@ export default function RoadmapSection() {
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Navigate the path to homeownership with our interactive step-by-step guide. Track your progress and get insights for each milestone.
           </p>
-           <div className="mt-4 p-3 bg-accent/10 border border-accent/30 rounded-md text-sm text-accent flex items-center justify-center max-w-md mx-auto"> {/* Changed to accent color for better visibility with new theme */}
+           <div className="mt-4 p-3 bg-accent/10 border border-accent/30 rounded-md text-sm text-accent flex items-center justify-center max-w-md mx-auto">
               <Save className="h-5 w-5 mr-2" />
               Your progress is saved locally in this browser.
             </div>
@@ -189,7 +189,7 @@ export default function RoadmapSection() {
 
         <div className="max-w-3xl mx-auto space-y-4 mb-8">
           <Label className="text-sm text-muted-foreground">Overall Progress: {completedStepsCount} of {totalSteps} steps completed</Label>
-          <Progress value={progressPercentage} aria-label={`${progressPercentage.toFixed(0)}% complete`} className="w-full h-3" /> {/* Progress bar will use primary color */}
+          <Progress value={progressPercentage} aria-label={`${progressPercentage.toFixed(0)}% complete`} className="w-full h-3" />
         </div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -200,7 +200,7 @@ export default function RoadmapSection() {
               key={step.id} 
               className={cn(
                 "shadow-lg transition-all duration-300 flex flex-col group hover:shadow-xl",
-                step.completed ? "bg-card/70 border-primary/40 opacity-75" : "bg-card" // bg-card is white
+                step.completed ? "bg-card/70 border-primary/40 opacity-75" : "bg-card" 
               )}
             >
               <CardHeader className="flex flex-row items-start space-x-4 pb-3">
@@ -237,11 +237,11 @@ export default function RoadmapSection() {
               <div className="px-6 pb-5 pt-0 mt-auto">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" size="sm" className="w-full text-xs hover:bg-primary/5 hover:border-primary/30 transition-colors">
-                        <Lightbulb className="mr-2 h-4 w-4 text-primary/70" /> Get AI Tip (Concept)
+                      <Button variant="outline" size="sm" className="w-full text-xs hover:bg-accent/5 hover:border-accent/30 transition-colors text-accent">
+                        <Lightbulb className="mr-2 h-4 w-4 text-accent/70" /> Get AI Tip (Concept)
                       </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-md">
+                    <DialogContent className="sm:max-w-md bg-card">
                       <DialogHeader>
                         <DialogTitle className="flex items-center text-primary font-headline">
                           <Lightbulb className="mr-2 h-5 w-5 text-primary" />

@@ -40,7 +40,6 @@ export default function ContactSection() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log(values);
     toast({
@@ -62,8 +61,7 @@ export default function ContactSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Card 1: Send Us a Message */}
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
             <CardHeader>
               <CardTitle className="font-headline text-2xl text-primary">Send Us a Message</CardTitle>
               <CardDescription>Fill out the form below and we'll respond as soon as possible.</CardDescription>
@@ -126,7 +124,7 @@ export default function ContactSection() {
                   <div className="text-xs text-muted-foreground">
                     reCAPTCHA placeholder: This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
                   </div>
-                  <Button type="submit" size="lg" className="w-full shadow-md hover:shadow-lg transition-shadow" disabled={form.formState.isSubmitting}>
+                  <Button type="submit" size="lg" className="w-full shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90" disabled={form.formState.isSubmitting}>
                     {form.formState.isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </form>
@@ -134,25 +132,21 @@ export default function ContactSection() {
             </CardContent>
           </Card>
 
-          {/* Card 2: Contact Information + Map */}
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
             <CardHeader>
               <CardTitle className="font-headline text-xl text-primary">Contact Information</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex items-center space-x-3">
                 <MapPin className="h-6 w-6 text-accent" />
-                {/* Removed allow-interaction class */}
                 <p className="text-muted-foreground">123 Finance Avenue, Suite 400, Prosperity City, FS 54321</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-6 w-6 text-accent" />
-                 {/* Removed allow-interaction class */}
                 <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">(123) 456-7890</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-6 w-6 text-accent" />
-                 {/* Removed allow-interaction class */}
                 <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors">info@maxwealthps.com</a>
               </div>
               <div className="relative rounded-lg overflow-hidden shadow-md aspect-video">
@@ -168,8 +162,7 @@ export default function ContactSection() {
             </CardContent>
           </Card>
           
-          {/* Card 3: Business Hours */}
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
             <CardHeader>
               <CardTitle className="font-headline text-xl text-primary">Business Hours</CardTitle>
             </CardHeader>
@@ -180,8 +173,7 @@ export default function ContactSection() {
             </CardContent>
           </Card>
 
-          {/* Card 4: Getting to Our Office */}
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
             <CardHeader>
               <CardTitle className="font-headline text-xl text-primary">Getting to Our Office</CardTitle>
             </CardHeader>

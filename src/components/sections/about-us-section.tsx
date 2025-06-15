@@ -21,7 +21,7 @@ export default function AboutUsSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
             <CardHeader className="items-center">
               <div className="p-3 bg-primary/10 rounded-full mb-2">
                 <Target className="h-8 w-8 text-primary" />
@@ -32,7 +32,7 @@ export default function AboutUsSection() {
               To provide transparent, personalized financial strategies that make home buying accessible and stress-free.
             </CardContent>
           </Card>
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
             <CardHeader className="items-center">
               <div className="p-3 bg-primary/10 rounded-full mb-2">
                 <Eye className="h-8 w-8 text-primary" />
@@ -43,7 +43,7 @@ export default function AboutUsSection() {
               To be the leading financial advisory firm recognized for integrity, expertise, and client success in the real estate market.
             </CardContent>
           </Card>
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
             <CardHeader className="items-center">
               <div className="p-3 bg-primary/10 rounded-full mb-2">
                  <Award className="h-8 w-8 text-primary" />
@@ -64,7 +64,7 @@ export default function AboutUsSection() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member) => (
-            <Card key={member.name} className="text-center shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <Card key={member.name} className="text-center shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card">
               <div className="relative h-60 w-full">
                 <Image 
                   src={member.image} 
@@ -77,7 +77,7 @@ export default function AboutUsSection() {
               </div>
               <CardContent className="p-6">
                 <h4 className="font-headline text-xl font-semibold text-primary mb-1">{member.name}</h4>
-                <p className="text-accent">{member.role}</p>
+                <p className="text-accent">{member.role}</p> {/* Using accent for role to match reference button color */}
               </CardContent>
             </Card>
           ))}

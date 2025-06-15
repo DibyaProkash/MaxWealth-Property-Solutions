@@ -39,7 +39,7 @@ export default function TestimonialsSection() {
             {testimonialsData.map((testimonial, index) => (
               <CarouselItem key={index} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                 <div className="p-1 h-full">
-                  <Card className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+                  <Card className="flex flex-col shadow-lg hover:shadow-xl transition-shadow duration-300 h-full bg-card">
                     <CardContent className="p-6 flex-grow flex flex-col items-center text-center">
                       <Quote className="w-10 h-10 text-accent mb-4 transform rotate-180" />
                       <p className="text-muted-foreground font-body mb-6 italic flex-grow text-sm md:text-base">"{testimonial.quote}"</p>
@@ -76,10 +76,10 @@ export default function TestimonialsSection() {
             Integrate live reviews from trusted platforms to showcase client satisfaction.
           </p>
           <div className="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
               <CardHeader>
                 <CardTitle className="font-headline text-xl text-primary flex items-center justify-center">
-                  <svg className="w-6 h-6 mr-2 fill-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.62 9.41H3.38c-.28 0-.38.31-.19.51l8.52 8.64c.1.1.26.1.36 0l8.55-8.64c.19-.2.09-.51-.2-.51zM12 17.14L4.85 9.91h14.3L12 17.14z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fillRule="evenodd" clipRule="evenodd"/></svg> {/* Generic Google-like icon */}
+                  <svg className="w-6 h-6 mr-2 fill-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.62 9.41H3.38c-.28 0-.38.31-.19.51l8.52 8.64c.1.1.26.1.36 0l8.55-8.64c.19-.2.09-.51-.2-.51zM12 17.14L4.85 9.91h14.3L12 17.14z"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" fillRule="evenodd" clipRule="evenodd"/></svg> 
                   Google Reviews
                 </CardTitle>
               </CardHeader>
@@ -109,10 +109,10 @@ export default function TestimonialsSection() {
                 </Button>
               </CardContent>
             </Card>
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
               <CardHeader>
                 <CardTitle className="font-headline text-xl text-primary flex items-center justify-center">
-                   <svg className="w-6 h-6 mr-2 fill-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.926 9.573l-4.211-1.353-1.879-3.951c-.186-.39-.759-.39-.945 0l-1.879 3.951-4.211 1.353c-.419.135-.588.67-.282.986l3.193 3.279-.938 4.418c-.088.414.341.748.718.544l3.861-2.197 3.861 2.197c.377.204.806-.13.718-.544l-.938-4.418 3.193-3.279c.306-.316.137-.851-.282-.986zm-6.925 3.018l-2.008 2.062.589 2.774-2.427-1.381-2.427 1.381.589-2.774-2.008-2.062 2.648-.851 1.181-2.483 1.181 2.483 2.648.851z" fillRule="evenodd" clipRule="evenodd"/></svg> {/* Generic Trustpilot-like star icon */}
+                   <svg className="w-6 h-6 mr-2 fill-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.926 9.573l-4.211-1.353-1.879-3.951c-.186-.39-.759-.39-.945 0l-1.879 3.951-4.211 1.353c-.419.135-.588.67-.282.986l3.193 3.279-.938 4.418c-.088.414.341.748.718.544l3.861-2.197 3.861 2.197c.377.204.806-.13.718-.544l-.938-4.418 3.193-3.279c.306-.316.137-.851-.282-.986zm-6.925 3.018l-2.008 2.062.589 2.774-2.427-1.381-2.427 1.381.589-2.774-2.008-2.062 2.648-.851 1.181-2.483 1.181 2.483 2.648.851z" fillRule="evenodd" clipRule="evenodd"/></svg>
                   Trustpilot Reviews
                 </CardTitle>
               </CardHeader>

@@ -64,7 +64,7 @@ export default function AllInsightsPage() {
   }, [sortOption, filterType, searchTerm]);
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-16">
+    <div className="container mx-auto px-4 py-8 md:py-16 bg-background">
       <AnimatedSection>
         <div className="mb-12 text-center">
           <Link href="/" passHref>
@@ -85,8 +85,7 @@ export default function AllInsightsPage() {
         </div>
       </AnimatedSection>
 
-      {/* Filtering and Sorting Controls */}
-      <div className="mb-10 p-4 border rounded-lg bg-background/50 shadow">
+      <div className="mb-10 p-4 border rounded-lg bg-card shadow">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-6">
               <div className="space-y-2">
                   <Label htmlFor="searchTermInsights" className="text-md font-semibold text-primary flex items-center">
@@ -153,7 +152,7 @@ export default function AllInsightsPage() {
                         style={{ objectFit: 'cover' }}
                         data-ai-hint={article.dataAiHint}
                       />
-                      <Badge variant="secondary" className="absolute top-2 right-2 capitalize flex items-center bg-primary/80 text-primary-foreground">
+                      <Badge variant="secondary" className="absolute top-2 right-2 capitalize flex items-center bg-secondary text-secondary-foreground">
                         <article.icon className="w-4 h-4 mr-1.5" />
                         {article.type}
                       </Badge>

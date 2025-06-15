@@ -11,7 +11,7 @@ export default function FaqSection() {
   }
 
   return (
-    <section id="faq" className="py-16 md:py-24 bg-background">
+    <section id="faq" className="py-16 md:py-24 bg-secondary"> 
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
@@ -28,8 +28,8 @@ export default function FaqSection() {
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="w-full">
             {faqData.map((item) => (
-              <AccordionItem key={item.id} value={item.id}>
-                <AccordionTrigger className="text-left font-headline text-lg hover:text-primary transition-colors">
+              <AccordionItem key={item.id} value={item.id} className="bg-card shadow-sm rounded-md mb-3 px-2">
+                <AccordionTrigger className="text-left font-headline text-lg hover:text-primary transition-colors text-primary">
                   {item.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-muted-foreground font-body leading-relaxed">

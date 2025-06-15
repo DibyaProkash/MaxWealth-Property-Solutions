@@ -32,7 +32,7 @@ export default function InsightPage({ params }: InsightPageProps) {
   const contentToDisplay = article.fullContent || article.description;
 
   return (
-    <div className="container mx-auto px-4 py-8 md:py-16 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 md:py-16 max-w-4xl bg-background">
       <div className="mb-8">
         <Link href="/insights" passHref>
           <Button variant="outline" className="mb-6">
@@ -90,7 +90,7 @@ export default function InsightPage({ params }: InsightPageProps) {
 
       <Separator className="my-12" />
 
-      <Card className="mt-12 shadow-lg">
+      <Card className="mt-12 shadow-lg bg-card">
         <CardHeader>
           <CardTitle className="font-headline text-2xl text-primary flex items-center">
             <MessageSquare className="mr-3 h-6 w-6" />

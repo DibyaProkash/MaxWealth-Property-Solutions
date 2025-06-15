@@ -37,11 +37,11 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-primary text-primary-foreground shadow-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         <Link href="/" className="flex items-center space-x-2">
-          <Briefcase className="h-7 w-7 text-primary" /> {/* Primary color for logo icon */}
-          <span className="font-headline text-2xl font-bold text-primary">MaxWealth PS</span> {/* Primary color for name */}
+          <Briefcase className="h-7 w-7 text-primary-foreground" /> 
+          <span className="font-headline text-2xl font-bold text-primary-foreground">MaxWealth PS</span> 
         </Link>
         
         <div className="flex items-center space-x-2 sm:space-x-4">
@@ -55,8 +55,8 @@ export default function Navbar() {
                   key={link.label}
                   href={getLinkHref(link.href)}
                   className={cn(
-                    "transition-colors hover:text-primary", // Hover to primary (green)
-                    isActive ? "text-primary font-semibold" : "text-foreground/70 hover:text-foreground" // Active is primary, inactive is muted foreground
+                    "transition-colors hover:text-primary-foreground/80", 
+                    isActive ? "text-primary-foreground font-semibold underline underline-offset-4" : "text-primary-foreground/70 hover:text-primary-foreground" 
                   )}
                 >
                   {link.label}
@@ -70,16 +70,16 @@ export default function Navbar() {
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Toggle Navigation</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px] sm:w-[320px]">
+              <SheetContent side="right" className="w-[280px] sm:w-[320px] bg-primary text-primary-foreground">
                 <div className="flex flex-col space-y-4 p-4">
                   <Link href="/" className="flex items-center space-x-2 mb-4">
-                    <Briefcase className="h-7 w-7 text-primary" /> {/* Primary color */}
-                    <span className="font-headline text-xl font-bold text-primary">MaxWealth PS</span> {/* Primary color */}
+                    <Briefcase className="h-7 w-7 text-primary-foreground" /> 
+                    <span className="font-headline text-xl font-bold text-primary-foreground">MaxWealth PS</span> 
                   </Link>
                   {navLinksData.map((link) => {
                      const isActive = 
@@ -90,8 +90,8 @@ export default function Navbar() {
                         <Link
                           href={getLinkHref(link.href)}
                           className={cn(
-                            "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-accent hover:text-accent-foreground", // Accent for hover in sheet
-                            isActive && "bg-accent text-accent-foreground font-semibold" // Accent for active in sheet
+                            "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground", 
+                            isActive && "bg-primary-foreground/10 text-primary-foreground font-semibold"
                           )}
                         >
                           <link.icon className="h-5 w-5" />

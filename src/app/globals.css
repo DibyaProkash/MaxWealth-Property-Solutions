@@ -10,95 +10,97 @@ body {
 
 @layer base {
   :root {
-    --background: 210 20% 98%; /* Very Light Blue-White, inspired by propertybuyer's light bg */
-    --foreground: 210 30% 25%; /* Dark Slate Blue for text */
+    /* Inspired by propertybuyer.com.au: Dark Teal, Terracotta, White/Light Grey */
+    --background: 0 0% 100%; /* White */
+    --foreground: 200 15% 25%; /* Dark Cool Gray for text */
 
     --card: 0 0% 100%; /* White */
-    --card-foreground: 210 30% 25%; /* Dark Slate Blue */
+    --card-foreground: 200 15% 25%; /* Dark Cool Gray */
 
     --popover: 0 0% 100%; /* White */
-    --popover-foreground: 210 30% 25%; /* Dark Slate Blue */
+    --popover-foreground: 200 15% 25%; /* Dark Cool Gray */
 
-    --primary: 150 60% 40%; /* Solid Green, inspired by propertybuyer's green */
-    --primary-foreground: 150 100% 97%; /* Very Light Green/White for text on primary */
+    --primary: 180 35% 25%; /* Dark Teal (e.g., for Nav, Hero BG, Headings) */
+    --primary-foreground: 180 100% 95%; /* Very Light Cyan/White for text on primary */
 
-    --secondary: 200 70% 90%; /* Light Sky Blue, for subtle secondary elements if needed */
-    --secondary-foreground: 200 40% 30%; /* Deeper Sky Blue */
+    --secondary: 180 20% 92%; /* Lighter Teal/Gray (for subtle secondary elements if needed) */
+    --secondary-foreground: 180 30% 30%; /* Deeper Teal */
 
-    --muted: 210 20% 92%; /* Light Grayish Blue */
-    --muted-foreground: 210 20% 50%; /* Medium Grayish Blue */
+    --muted: 200 20% 94%; /* Light Cool Gray */
+    --muted-foreground: 200 15% 45%; /* Medium Cool Gray */
 
-    --accent: 210 80% 55%; /* Vibrant Blue, for accents and CTAs if not using primary */
-    --accent-foreground: 210 100% 98%; /* Very Light Blue/White for text on accent */
+    --accent: 25 70% 55%; /* Terracotta/Orange (for CTAs) */
+    --accent-foreground: 25 100% 98%; /* Very Light for text on accent */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 20% 85%; /* Soft Grayish Blue border */
-    --input: 210 20% 95%; /* Very Light Blue for input background */
-    --ring: 150 60% 50%; /* Slightly brighter Green for ring/focus states */
+    --border: 200 20% 88%; /* Subtle Cool Gray border */
+    --input: 200 20% 96%; /* Very Light Cool Gray for input background */
+    --ring: 25 70% 60%; /* Slightly brighter Terracotta for ring/focus states */
 
     --radius: 0.5rem;
 
-    --chart-1: 150 70% 45%; /* Green */
-    --chart-2: 210 70% 60%; /* Blue */
-    --chart-3: 160 50% 60%; /* Lighter Green */
-    --chart-4: 190 60% 50%; /* Teal/Cyan */
-    --chart-5: 220 50% 70%; /* Lighter Blue */
+    --chart-1: 180 40% 50%; /* Teal shade 1 */
+    --chart-2: 25 70% 60%;  /* Terracotta shade 1 */
+    --chart-3: 180 30% 65%; /* Lighter Teal */
+    --chart-4: 200 25% 60%; /* Cool Blue/Gray */
+    --chart-5: 35 65% 60%;  /* Lighter Terracotta/Orange */
     
-    --sidebar-background: 200 50% 96%; /* Very Light Blue for sidebar */
-    --sidebar-foreground: 210 30% 30%; /* Dark Slate Blue for sidebar text */
-    --sidebar-primary: 150 60% 40%; /* Solid Green (same as main primary) */
-    --sidebar-primary-foreground: 150 100% 97%; /* Very Light Green/White */
-    --sidebar-accent: 210 60% 92%; /* Light Accent Blue for sidebar */
-    --sidebar-accent-foreground: 150 60% 35%; /* Darker Green for sidebar accent text */
-    --sidebar-border: 200 30% 88%; /* Softer Blue border for sidebar */
-    --sidebar-ring: 150 60% 50%; /* Slightly brighter Green for ring */
+    /* Sidebar colors to align with the new theme */
+    --sidebar-background: 190 20% 97%; /* Very Light Bluish Grey for sidebar */
+    --sidebar-foreground: 200 15% 30%; /* Dark Cool Gray for sidebar text */
+    --sidebar-primary: 180 35% 25%; /* Dark Teal (same as main primary) */
+    --sidebar-primary-foreground: 180 100% 95%; /* Very Light Cyan/White */
+    --sidebar-accent: 25 60% 90%; /* Light Terracotta/Peach for sidebar accent */
+    --sidebar-accent-foreground: 25 50% 30%; /* Darker Terracotta for sidebar accent text */
+    --sidebar-border: 190 15% 88%; /* Softer Bluish Grey border for sidebar */
+    --sidebar-ring: 25 70% 60%; /* Terracotta for ring */
   }
 
   .dark {
-    --background: 220 30% 15%; /* Dark Navy Blue */
-    --foreground: 160 50% 85%; /* Light Mint Green */
+    --background: 200 20% 12%; /* Very Dark Cool Blue/Gray */
+    --foreground: 180 20% 88%; /* Light Teal/Gray text */
 
-    --card: 220 30% 18%; /* Slightly Lighter Navy */
-    --card-foreground: 160 50% 85%; /* Light Mint Green */
+    --card: 200 20% 15%; /* Slightly Lighter Dark Cool Blue/Gray */
+    --card-foreground: 180 20% 88%; /* Light Teal/Gray text */
 
-    --popover: 220 30% 18%; /* Slightly Lighter Navy */
-    --popover-foreground: 160 50% 85%; /* Light Mint Green */
+    --popover: 200 20% 15%; 
+    --popover-foreground: 180 20% 88%;
 
-    --primary: 150 70% 55%; /* Brighter Green for Dark Mode */
-    --primary-foreground: 150 20% 10%; /* Very Dark Green/Black for text on primary */
+    --primary: 180 40% 35%; /* Brighter Teal for Dark Mode */
+    --primary-foreground: 180 15% 90%; /* Light text for primary */
 
-    --secondary: 210 25% 22%; /* Darker Slate Blue */
-    --secondary-foreground: 160 40% 75%; /* Desaturated Mint */
+    --secondary: 180 25% 20%; /* Darker Teal/Gray */
+    --secondary-foreground: 180 20% 75%; /* Desaturated Teal */
 
-    --muted: 220 20% 25%; /* Dark Blue Gray */
-    --muted-foreground: 160 30% 65%; /* Muted Mint */
+    --muted: 200 15% 25%; /* Dark Cool Gray */
+    --muted-foreground: 200 10% 65%; /* Muted Cool Gray */
 
-    --accent: 180 70% 60%; /* Bright Cyan/Teal for accent */
-    --accent-foreground: 180 20% 10%; /* Very Dark Cyan/Black for text on accent */
+    --accent: 25 75% 65%; /* Brighter Terracotta for accent */
+    --accent-foreground: 25 15% 15%; /* Dark for text on accent */
 
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 20% 30%; /* Medium Dark Blue Gray */
-    --input: 220 25% 20%; /* Slightly different Dark Navy for input */
-    --ring: 150 70% 65%; /* Brighter Green for ring/focus */
+    --border: 200 15% 30%; /* Medium Dark Cool Gray */
+    --input: 200 15% 18%; /* Slightly different Dark Cool Blue for input */
+    --ring: 25 75% 70%; /* Brighter Terracotta for ring/focus */
     
-    --chart-1: 150 70% 60%; 
-    --chart-2: 180 70% 65%; 
-    --chart-3: 160 60% 70%; 
-    --chart-4: 210 60% 55%; 
-    --chart-5: 130 50% 60%; 
+    --chart-1: 180 40% 55%; 
+    --chart-2: 25 75% 70%; 
+    --chart-3: 180 30% 70%; 
+    --chart-4: 200 25% 65%; 
+    --chart-5: 35 65% 65%; 
 
-    --sidebar-background: 220 25% 12%; 
-    --sidebar-foreground: 160 50% 85%; 
-    --sidebar-primary: 150 70% 55%; 
-    --sidebar-primary-foreground: 150 20% 10%; 
-    --sidebar-accent: 180 50% 25%; 
-    --sidebar-accent-foreground: 150 70% 70%; 
-    --sidebar-border: 220 20% 25%; 
-    --sidebar-ring: 150 70% 65%; 
+    --sidebar-background: 200 15% 10%; 
+    --sidebar-foreground: 180 20% 88%; 
+    --sidebar-primary: 180 40% 35%; 
+    --sidebar-primary-foreground: 180 15% 90%; 
+    --sidebar-accent: 25 50% 28%; 
+    --sidebar-accent-foreground: 25 70% 75%; 
+    --sidebar-border: 200 15% 25%; 
+    --sidebar-ring: 25 75% 70%; 
   }
 }
 

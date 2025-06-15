@@ -6,7 +6,7 @@ import AnimatedSection from '@/components/layout/animated-section';
 
 export default function NotFound() {
   return (
-    <div className="container mx-auto flex min-h-[calc(100vh-8rem)] items-center justify-center px-6 py-12 text-center">
+    <div className="container mx-auto flex min-h-[calc(100vh-8rem)] items-center justify-center px-6 py-12 text-center bg-background">
       <AnimatedSection>
         <div className="max-w-md">
           <div className="inline-block p-4 bg-destructive/10 rounded-full mb-6">
@@ -21,7 +21,7 @@ export default function NotFound() {
           <p className="text-lg text-muted-foreground mb-8">
             The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
           </p>
-          <Button size="lg" asChild className="shadow-md hover:shadow-lg transition-shadow">
+          <Button size="lg" asChild className="shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90">
             <Link href="/">
               Return to Homepage
             </Link>
