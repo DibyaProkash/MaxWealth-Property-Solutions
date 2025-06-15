@@ -10,6 +10,7 @@ import ServicesSectionHighlights from '@/components/sections/services-section-hi
 import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { whoWeHelpData, serviceLocationsData } from '@/lib/data';
+import { cn } from '@/lib/utils';
 
 export default function OurServicesPage() {
   return (
@@ -54,39 +55,40 @@ export default function OurServicesPage() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {whoWeHelpData.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Card key={item.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card flex flex-col">
-                      <CardHeader className="items-center text-center">
-                        <div className="relative h-40 w-full mb-4 rounded-t-md overflow-hidden">
-                          <Image
-                            src={item.image}
-                            alt={item.title}
-                            fill
-                            style={{objectFit: 'cover'}}
-                            data-ai-hint={item.dataAiHint}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          />
-                        </div>
-                        <div className="p-2 bg-primary/10 rounded-full mb-2">
-                          <Icon className="h-7 w-7 text-primary" />
-                        </div>
-                        <CardTitle className="font-headline text-xl text-primary">{item.title}</CardTitle>
-                      </CardHeader>
-                      <CardContent className="flex-grow text-center">
-                        <p className="text-sm text-muted-foreground font-body">{item.description}</p>
-                      </CardContent>
-                      <CardFooter className="p-6 pt-0 mt-auto">
-                        <Button asChild variant="link" className="text-accent p-0 h-auto">
-                          <Link href={`/services/${item.slug}`}>
-                            Learn More <ArrowRight className="ml-1 h-4 w-4" />
-                          </Link>
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  );
-                })}
+                {whoWeHelpData.map((item) => (
+                  <Link 
+                    key={item.id} 
+                    href={`/services/${item.slug}`} 
+                    passHref 
+                    className="group block rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative aspect-[4/3]"
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                      data-ai-hint={item.dataAiHint}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div // Overlay container for gradient, title, and description
+                      className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/40 to-transparent"
+                    >
+                      {/* Description: initially hidden, slides up */}
+                      <div className="px-4 pt-4 pb-2 md:px-6 md:pt-6 md:pb-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-in-out">
+                        <p className="text-sm text-gray-200 line-clamp-3 font-body"> {/* Increased line-clamp for better visibility */}
+                          {item.description}
+                        </p>
+                      </div>
+                      
+                      {/* Title: always visible at the bottom */}
+                      <div className="px-4 pb-4 md:px-6 md:pb-6">
+                        <h3 className="font-headline text-xl md:text-2xl font-semibold text-white group-hover:text-accent transition-colors duration-300">
+                          {item.title}
+                        </h3>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </section>
           </AnimatedSection>
