@@ -2,7 +2,7 @@
 "use client"
 
 import * as React from "react"
-import { Moon, Sun } from "lucide-react"
+import { Moon, Sun, Trees } from "lucide-react" // Added Trees icon
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
@@ -35,6 +35,10 @@ export function ThemeToggle() {
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme("forest")}>
+          <Trees className="mr-2 h-4 w-4" />
+          Forest
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
           System
