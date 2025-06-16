@@ -10,97 +10,98 @@ body {
 
 @layer base {
   :root {
-    /* Inspired by propertybuyer.com.au: Dark Teal, Terracotta, White/Light Grey */
-    --background: 0 0% 100%; /* White */
-    --foreground: 200 15% 25%; /* Dark Cool Gray for text */
+    /* MaxWealth PS: Deep Blue, Very Light Blue, Purple */
+    --background: 225 67% 94.1%; /* Very light blue #E8EAF6 */
+    --foreground: 225 50% 25%; /* Dark, desaturated blue for text */
 
     --card: 0 0% 100%; /* White */
-    --card-foreground: 200 15% 25%; /* Dark Cool Gray */
+    --card-foreground: 225 50% 25%; /* Dark, desaturated blue */
 
     --popover: 0 0% 100%; /* White */
-    --popover-foreground: 200 15% 25%; /* Dark Cool Gray */
+    --popover-foreground: 225 50% 25%;
 
-    --primary: 180 35% 25%; /* Dark Teal (e.g., for Nav, Hero BG, Headings) */
-    --primary-foreground: 180 100% 95%; /* Very Light Cyan/White for text on primary */
+    --primary: 225 77.1% 36.5%; /* Deep blue #1434A4 */
+    --primary-foreground: 220 60% 95%; /* Very light, slightly desaturated blue for text on primary */
 
-    --secondary: 180 20% 92%; /* Lighter Teal/Gray (for subtle secondary elements if needed) */
-    --secondary-foreground: 180 30% 30%; /* Deeper Teal */
+    --secondary: 225 60% 88%; /* Lighter shade of the light blue background */
+    --secondary-foreground: 225 77% 30%; /* A slightly lighter deep blue */
 
-    --muted: 200 20% 94%; /* Light Cool Gray */
-    --muted-foreground: 200 15% 45%; /* Medium Cool Gray */
+    --muted: 225 50% 90%; /* Even lighter shade of light blue, or a very soft blue-grey */
+    --muted-foreground: 225 30% 55%; /* Muted blue-grey for less important text */
 
-    --accent: 25 70% 55%; /* Terracotta/Orange (for CTAs) */
-    --accent-foreground: 25 100% 98%; /* Very Light for text on accent */
+    --accent: 260 46.3% 55.1%; /* Purple #7E57C2 */
+    --accent-foreground: 260 60% 96%; /* Very light purple/white for text on accent */
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84.2% 60.2%; /* Default red */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 200 20% 88%; /* Subtle Cool Gray border */
-    --input: 200 20% 96%; /* Very Light Cool Gray for input background */
-    --ring: 25 70% 60%; /* Slightly brighter Terracotta for ring/focus states */
+    --border: 225 50% 85%; /* Subtle blue-grey border */
+    --input: 0 0% 100%; /* White input backgrounds */
+    --ring: 260 46.3% 60.1%; /* Slightly brighter Purple for focus states */
 
     --radius: 0.5rem;
 
-    --chart-1: 180 40% 50%; /* Teal shade 1 */
-    --chart-2: 25 70% 60%;  /* Terracotta shade 1 */
-    --chart-3: 180 30% 65%; /* Lighter Teal */
-    --chart-4: 200 25% 60%; /* Cool Blue/Gray */
-    --chart-5: 35 65% 60%;  /* Lighter Terracotta/Orange */
+    --chart-1: 225 70% 60%; 
+    --chart-2: 260 50% 65%;  
+    --chart-3: 225 60% 75%; 
+    --chart-4: 260 40% 75%; 
+    --chart-5: 210 60% 60%; 
     
-    /* Sidebar colors to align with the new theme */
-    --sidebar-background: 190 20% 97%; /* Very Light Bluish Grey for sidebar */
-    --sidebar-foreground: 200 15% 30%; /* Dark Cool Gray for sidebar text */
-    --sidebar-primary: 180 35% 25%; /* Dark Teal (same as main primary) */
-    --sidebar-primary-foreground: 180 100% 95%; /* Very Light Cyan/White */
-    --sidebar-accent: 25 60% 90%; /* Light Terracotta/Peach for sidebar accent */
-    --sidebar-accent-foreground: 25 50% 30%; /* Darker Terracotta for sidebar accent text */
-    --sidebar-border: 190 15% 88%; /* Softer Bluish Grey border for sidebar */
-    --sidebar-ring: 25 70% 60%; /* Terracotta for ring */
+    /* Sidebar colors for Light Theme */
+    --sidebar-background: 225 75% 97%; /* Very light blue, slightly lighter/brighter than main bg */
+    --sidebar-foreground: 225 50% 30%; /* Dark blue for text */
+    --sidebar-primary: 225 77.1% 36.5%; /* Deep Blue (same as main primary) */
+    --sidebar-primary-foreground: 220 60% 95%; /* Very light blue text on primary */
+    --sidebar-accent: 260 60% 92%; /* Light Purple for sidebar accent */
+    --sidebar-accent-foreground: 260 46.3% 45%; /* Darker Purple for text on sidebar accent */
+    --sidebar-border: 225 50% 88%; /* Softer blue border for sidebar elements */
+    --sidebar-ring: 260 46.3% 60.1%; /* Purple for ring, same as main */
   }
 
   .dark {
-    --background: 200 20% 12%; /* Very Dark Cool Blue/Gray */
-    --foreground: 180 20% 88%; /* Light Teal/Gray text */
+    --background: 225 30% 12%; /* Very Dark Desaturated Blue */
+    --foreground: 225 40% 88%; /* Light Bluish Grey text */
 
-    --card: 200 20% 15%; /* Slightly Lighter Dark Cool Blue/Gray */
-    --card-foreground: 180 20% 88%; /* Light Teal/Gray text */
+    --card: 225 30% 18%; /* Slightly Lighter Dark Blue for cards */
+    --card-foreground: 225 40% 88%; 
 
-    --popover: 200 20% 15%; 
-    --popover-foreground: 180 20% 88%;
+    --popover: 225 30% 18%; 
+    --popover-foreground: 225 40% 88%;
 
-    --primary: 180 40% 35%; /* Brighter Teal for Dark Mode */
-    --primary-foreground: 180 15% 90%; /* Light text for primary */
+    --primary: 225 70% 55%; /* Brighter Deep Blue for Dark Mode */
+    --primary-foreground: 225 30% 92%; /* Light text for primary */
 
-    --secondary: 180 25% 20%; /* Darker Teal/Gray */
-    --secondary-foreground: 180 20% 75%; /* Desaturated Teal */
+    --secondary: 225 30% 25%; /* Darker Desaturated Blue */
+    --secondary-foreground: 225 35% 75%; 
 
-    --muted: 200 15% 25%; /* Dark Cool Gray */
-    --muted-foreground: 200 10% 65%; /* Muted Cool Gray */
+    --muted: 225 25% 30%; /* Darker Greyish Blue */
+    --muted-foreground: 225 20% 65%; 
 
-    --accent: 25 75% 65%; /* Brighter Terracotta for accent */
-    --accent-foreground: 25 15% 15%; /* Dark for text on accent */
+    --accent: 260 55% 70%; /* Brighter Purple for accent in dark mode */
+    --accent-foreground: 260 80% 97%; /* Very Light text for accent */
 
-    --destructive: 0 70% 50%;
+    --destructive: 0 62.8% 30.6%; /* Darker Red */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 200 15% 30%; /* Medium Dark Cool Gray */
-    --input: 200 15% 18%; /* Slightly different Dark Cool Blue for input */
-    --ring: 25 75% 70%; /* Brighter Terracotta for ring/focus */
+    --border: 225 25% 35%; /* Medium Dark Blue-Grey border */
+    --input: 225 25% 22%; /* Dark input background */
+    --ring: 260 55% 75%; /* Brighter Purple for ring/focus */
     
-    --chart-1: 180 40% 55%; 
-    --chart-2: 25 75% 70%; 
-    --chart-3: 180 30% 70%; 
-    --chart-4: 200 25% 65%; 
-    --chart-5: 35 65% 65%; 
+    --chart-1: 225 70% 65%; 
+    --chart-2: 260 55% 75%; 
+    --chart-3: 225 60% 80%; 
+    --chart-4: 260 45% 80%; 
+    --chart-5: 210 60% 70%; 
 
-    --sidebar-background: 200 15% 10%; 
-    --sidebar-foreground: 180 20% 88%; 
-    --sidebar-primary: 180 40% 35%; 
-    --sidebar-primary-foreground: 180 15% 90%; 
-    --sidebar-accent: 25 50% 28%; 
-    --sidebar-accent-foreground: 25 70% 75%; 
-    --sidebar-border: 200 15% 25%; 
-    --sidebar-ring: 25 75% 70%; 
+    /* Sidebar colors for Dark Theme */
+    --sidebar-background: 225 30% 9%;  /* Even darker blue for sidebar bg */
+    --sidebar-foreground: 225 40% 88%; /* Light Bluish Grey text */
+    --sidebar-primary: 225 70% 55%; /* Brighter Deep Blue (same as main primary dark) */
+    --sidebar-primary-foreground: 225 30% 92%; /* Light text on primary */
+    --sidebar-accent: 260 40% 30%; /* Darker Purple for sidebar accent */
+    --sidebar-accent-foreground: 260 55% 80%; /* Lighter purple text on sidebar accent */
+    --sidebar-border: 225 25% 28%; /* Darker blue border for sidebar elements */
+    --sidebar-ring: 260 55% 75%; /* Brighter Purple for ring */
   }
 }
 
