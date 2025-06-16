@@ -5,11 +5,11 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react'; 
 import { Badge } from '@/components/ui/badge'; 
-import { useChatWidget } from '@/contexts/chat-widget-context'; 
-import AIChatbot from '@/components/sections/ai-chatbot'; // Import AIChatbot
+// useChatWidget is not directly used here anymore for opening, AIChatbot is just embedded
+import AIChatbot from '@/components/sections/ai-chatbot';
 
 export default function HeroSection() {
-  const { openChat } = useChatWidget(); 
+  // const { openChat } = useChatWidget(); // Not needed if button is removed from hero for mobile
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden">
@@ -75,6 +75,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: AI Chatbot for Desktop */}
+          {/* This div is hidden by default (on mobile) and becomes flex (visible) on md screens and up. */}
           <div className="hidden md:flex md:col-span-1 items-center justify-center">
             <AIChatbot />
           </div>
