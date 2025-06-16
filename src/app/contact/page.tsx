@@ -9,6 +9,7 @@ import DetailedContactForm from "@/components/forms/detailed-contact-form";
 import Footer from "@/components/layout/footer";
 import AnimatedSection from "@/components/layout/animated-section";
 import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Youtube, X as TwitterIcon } from "lucide-react";
+import { maxWealthDifferenceData, type DifferencePoint } from '@/lib/data';
 
 export default function ContactUsPage() {
   return (
@@ -82,6 +83,35 @@ export default function ContactUsPage() {
               </div>
             </Card>
           </AnimatedSection>
+
+          {/* MaxWealth PS Advantage Section */}
+          <AnimatedSection delay="delay-200">
+            <section className="py-16 md:py-24">
+              <div className="text-center mb-12 md:mb-16">
+                <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-3">
+                  The <span className="text-accent">MaxWealth PS</span> Advantage
+                </h2>
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                  Discover what sets us apart and how we deliver exceptional value to our clients.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {maxWealthDifferenceData.map((point) => {
+                  const Icon = point.icon;
+                  return (
+                    <Card key={point.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-secondary/50 text-center p-6 flex flex-col items-center">
+                      <div className="p-4 bg-primary/10 rounded-full mb-5 inline-block">
+                        <Icon className="h-10 w-10 text-primary" />
+                      </div>
+                      <CardTitle className="font-headline text-xl text-primary mb-3">{point.title}</CardTitle>
+                      <CardDescription className="text-sm text-muted-foreground flex-grow">{point.description}</CardDescription>
+                    </Card>
+                  );
+                })}
+              </div>
+            </section>
+          </AnimatedSection>
+
         </div>
       </main>
       <Footer />

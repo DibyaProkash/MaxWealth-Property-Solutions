@@ -1,6 +1,6 @@
 
 import React, { type SVGProps } from 'react';
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText as LucideFileText, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon } from 'lucide-react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText as LucideFileText, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, Zap, BarChartBig, BadgePercent, Network, UserCog, SearchCode } from 'lucide-react';
 
 
 // Helper icon component (if not directly from lucide-react or if a specific one is needed)
@@ -880,4 +880,51 @@ export const buyerTypesData = [
   { value: "downsizer", label: "Downsizer" },
   { value: "commercial_buyer", label: "Commercial Buyer" },
   { value: "other", label: "Other" },
+];
+
+
+export interface DifferencePoint {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+export const maxWealthDifferenceData: DifferencePoint[] = [
+  {
+    id: 'diff1',
+    title: 'Deep Market Expertise',
+    description: 'Over two decades of navigating local markets, providing you unparalleled insights and successful outcomes.',
+    icon: Zap, // Represents energy, expertise
+  },
+  {
+    id: 'diff2',
+    title: 'Holistic Financial Strategy',
+    description: 'We cover all aspects of home financing, from initial planning to securing investment properties and commercial assets.',
+    icon: BarChartBig, // Represents comprehensive coverage/strategy
+  },
+  {
+    id: 'diff3',
+    title: 'Client-Centric Results',
+    description: 'Our commitment to service excellence ensures a stress-free journey tailored to your unique financial goals.',
+    icon: ThumbsUp, // Represents client satisfaction, positive results
+  },
+  {
+    id: 'diff4',
+    title: 'Precision Appraisals',
+    description: 'Leveraging cutting-edge data and local knowledge for highly accurate property valuations and informed decisions.',
+    icon: BadgePercent, // Represents accuracy, value
+  },
+  {
+    id: 'diff5',
+    title: 'Exclusive Network Access',
+    description: 'Gain an edge with our extensive database of agents and access to off-market opportunities.',
+    icon: Network, // Represents connections, network
+  },
+  {
+    id: 'diff6',
+    title: 'Advanced Research & AI Tools',
+    description: 'Utilizing our proprietary "Suburb Selector™", AI insights, and live data for the latest property intelligence.',
+    icon: SearchCode, // Represents research, tech, AI
+  },
 ];
