@@ -61,7 +61,7 @@ export default function HeroSection() {
             </div>
             
             {/* Trust Points */}
-            <div className="mt-8 flex flex-col sm:flex-row justify-center md:justify-start space-y-3 sm:space-y-0 sm:space-x-6">
+            <div className="mt-8 flex flex-row justify-center md:justify-start space-x-4 md:space-x-6">
               <div className="flex items-center justify-center md:justify-start">
                 <CheckCircle className="h-5 w-5 text-green-400 mr-2" />
                 <span className="text-sm text-primary-foreground/90">Licensed & Insured</span>
@@ -84,3 +84,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
