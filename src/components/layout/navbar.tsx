@@ -87,7 +87,7 @@ export default function Navbar() {
 
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/30 backdrop-blur-lg shadow-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-primary/30 backdrop-blur-lg shadow-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
           <Briefcase className="h-7 w-7 text-foreground" />
@@ -124,7 +124,7 @@ export default function Navbar() {
                               title={subItem.label}
                               href={subItem.href}
                               icon={subItem.icon}
-                              className={isMounted && pathname === subItem.href ? "bg-primary-foreground/10 text-primary-foreground" : ""}
+                              className={isMounted && pathname === subItem.href ? "bg-accent/10 text-accent-foreground" : ""}
                             >
                               {subItem.description || ""}
                             </ListItem>
@@ -178,8 +178,6 @@ export default function Navbar() {
                   placeholder="e.g. Mortgage rates..."
                   className="col-span-2 h-8"
                 />
-                {/* Add a search button if needed, or trigger search on enter */}
-                {/* <Button variant="outline" size="sm">Search</Button> */}
               </div>
             </PopoverContent>
           </Popover>
@@ -198,12 +196,12 @@ export default function Navbar() {
                   <span className="sr-only">Toggle Navigation</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[280px] sm:w-[320px] bg-primary text-primary-foreground">
+              <SheetContent side="right" className="w-[280px] sm:w-[320px] bg-sidebar text-sidebar-foreground">
                 <div className="flex flex-col space-y-1 p-4">
                   <SheetClose asChild>
                     <Link href="/" className="flex items-center space-x-2 mb-4">
-                      <Briefcase className="h-7 w-7 text-primary-foreground" />
-                      <span className="font-headline text-xl font-bold text-primary-foreground">MaxWealth PS</span>
+                      <Briefcase className="h-7 w-7 text-sidebar-foreground" />
+                      <span className="font-headline text-xl font-bold text-sidebar-foreground">MaxWealth PS</span>
                     </Link>
                   </SheetClose>
                   {navLinksData.map((link) => {
@@ -219,8 +217,8 @@ export default function Navbar() {
                             <Link
                                 href={link.href}
                                 className={cn(
-                                "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
-                                isActive && "bg-primary-foreground/10 text-primary-foreground"
+                                "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                                isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
                                 )}
                             >
                               <span className="flex items-center space-x-2">
@@ -238,8 +236,8 @@ export default function Navbar() {
                                   <Link
                                     href={subItem.href}
                                     className={cn(
-                                      "flex items-center space-x-2 rounded-md p-2 text-sm transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
-                                      isSubItemActive ? "bg-primary-foreground/10 text-primary-foreground font-medium" : "text-primary-foreground/80"
+                                      "flex items-center space-x-2 rounded-md p-2 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                                      isSubItemActive ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" : "text-sidebar-foreground/80"
                                     )}
                                   >
                                     <subItem.icon className="h-4 w-4" />
@@ -258,8 +256,8 @@ export default function Navbar() {
                         <Link
                           href={getLinkHref(link.href)}
                           className={cn(
-                            "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground",
-                            isActive ? "bg-primary-foreground/10 text-primary-foreground font-semibold" : "text-primary-foreground/80"
+                            "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                            isActive ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold" : "text-sidebar-foreground/80"
                           )}
                         >
                           <link.icon className="h-5 w-5" />
@@ -289,8 +287,8 @@ const ListItem = React.forwardRef<
           href={href || '/'}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground",
-            className // Dropdown items will retain their original color scheme from within the primary-bg dropdown
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/10 hover:text-accent-foreground focus:bg-accent/10 focus:text-accent-foreground",
+            className 
           )}
           {...props}
         >
@@ -298,7 +296,7 @@ const ListItem = React.forwardRef<
             {Icon && <Icon className="h-5 w-5" />}
             <div className="text-sm font-medium leading-none">{title}</div>
           </div>
-          <p className="line-clamp-2 text-sm leading-snug text-primary-foreground/70">
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
           </p>
         </Link>
