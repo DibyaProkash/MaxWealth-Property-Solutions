@@ -1,4 +1,3 @@
-
 # MaxWealth PS - Financial Planning for Home Buying
 
 MaxWealth PS is a modern, responsive web application designed to assist users with financial planning, specifically tailored for the journey of buying a home. It leverages Next.js, React, Tailwind CSS, ShadCN UI components, and Genkit for AI-powered features.
@@ -51,6 +50,7 @@ MaxWealth PS is a modern, responsive web application designed to assist users wi
 *   [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
 ### Installation
+
 
 1.  **Clone the repository**:
     ```bash
