@@ -872,3 +872,12 @@ export const memberLogos = [
   { id: 'ml5', hint: 'property institute logo' },
   { id: 'ml6', hint: 'certification program logo' },
 ];
+
+export const buyerTypesData = [
+  { value: "first_home_buyer", label: "First Home Buyer" },
+  { value: "investor", label: "Investor" },
+  { value: "upgrader", label: "Upgrader" },
+  { value: "downsizer", label: "Downsizer" },
+  { value: "commercial_buyer", label: "Commercial Buyer" },
+  { value: "other", label: "Other" },
+];
