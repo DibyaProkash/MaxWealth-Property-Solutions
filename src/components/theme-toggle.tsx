@@ -12,9 +12,10 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { cn } from "@/lib/utils" // Import cn
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme() // Use resolvedTheme for icon logic
 
   return (
     <DropdownMenu>
@@ -24,8 +25,9 @@ export function ThemeToggle() {
           size="icon"
           className="text-foreground border border-foreground/30 hover:bg-foreground/10 hover:text-foreground focus-visible:ring-foreground"
         >
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          {/* Conditional class application based on resolvedTheme */}
+          <Sun className={cn("h-[1.2rem] w-[1.2rem] transition-all", resolvedTheme === 'light' ? 'rotate-0 scale-100' : '-rotate-90 scale-0')} />
+          <Moon className={cn("absolute h-[1.2rem] w-[1.2rem] transition-all", resolvedTheme !== 'light' ? 'rotate-0 scale-100' : 'rotate-90 scale-0')} />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
@@ -46,5 +48,3 @@ export function ThemeToggle() {
     </DropdownMenu>
   )
 }
-
-    
