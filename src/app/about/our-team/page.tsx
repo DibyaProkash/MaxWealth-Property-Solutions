@@ -98,6 +98,8 @@ export default function OurTeamPage() {
         setIsModalOpen(true);
     };
 
+    const canAutoplay = teamMembers.length > itemsPerView;
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background text-foreground">
@@ -200,11 +202,19 @@ export default function OurTeamPage() {
               <Carousel
                 opts={{
                 align: "start",
-                loop: teamMembers.length > itemsPerView,
+                loop: canAutoplay, // Use canAutoplay for loop condition
                 }}
                 plugins={autoplayPlugin.current ? [autoplayPlugin.current] : []}
-                onMouseEnter={() => autoplayPlugin.current?.stop()}
-                onMouseLeave={() => autoplayPlugin.current?.play()}
+                onMouseEnter={() => {
+                  if (canAutoplay && autoplayPlugin.current) {
+                    autoplayPlugin.current.stop();
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (canAutoplay && autoplayPlugin.current) {
+                    autoplayPlugin.current.play();
+                  }
+                }}
                 className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
               >
                 <CarouselContent className="-ml-4">
@@ -287,7 +297,7 @@ export default function OurTeamPage() {
                           )}
                           {selectedMember.socialLinks.email && (
                             <Button variant="outline" asChild className="w-full">
-                              <Link href={selectedMember.socialLinks.email}>
+                              <Link href={`mailto:${selectedMember.socialLinks.email}`}>
                                 <Mail className="mr-2 h-4 w-4" /> Email
                               </Link>
                             </Button>
@@ -311,9 +321,11 @@ export default function OurTeamPage() {
                   </div>
                 </div>
                 </ScrollArea>
-                <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+                <DialogClose asChild>
+                  <Button type="button" variant="ghost" size="icon" className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
                     <CloseIcon className="h-5 w-5" />
                     <span className="sr-only">Close</span>
+                  </Button>
                 </DialogClose>
               </DialogContent>
             </Dialog>
@@ -328,3 +340,5 @@ export default function OurTeamPage() {
     </div>
   );
 }
+
+    
