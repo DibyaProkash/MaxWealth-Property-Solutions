@@ -3,18 +3,33 @@
 
 import type { ReactNode } from 'react';
 import React, { createContext, useState, useContext, useCallback } from 'react';
+import { financialAdvisorChatbot, type FinancialAdvisorChatbotInput, type FinancialAdvisorChatbotOutput } from '@/ai/flows/financial-advisor-chatbot';
+
+export interface Message {
+  id: string;
+  type: 'user' | 'ai';
+  text: string;
+}
 
 interface ChatWidgetContextType {
   isChatOpen: boolean;
   setChatOpen: (isOpen: boolean) => void;
   openChat: () => void;
   closeChat: () => void;
+  messages: Message[];
+  currentInput: string;
+  isChatLoading: boolean;
+  setCurrentInputText: (text: string) => void;
+  handleSendMessage: (inputText: string) => Promise<void>;
 }
 
 const ChatWidgetContext = createContext<ChatWidgetContextType | undefined>(undefined);
 
 export const ChatWidgetProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isChatOpen, setChatOpenState] = useState(false);
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [currentInput, setCurrentInputText] = useState('');
+  const [isChatLoading, setIsChatLoading] = useState(false);
 
   const setChatOpen = useCallback((isOpen: boolean) => {
     setChatOpenState(isOpen);
@@ -28,8 +43,39 @@ export const ChatWidgetProvider: React.FC<{ children: ReactNode }> = ({ children
     setChatOpenState(false);
   }, []);
 
+  const handleSendMessage = useCallback(async (inputText: string) => {
+    if (!inputText.trim() || isChatLoading) return;
+
+    const userMessage: Message = { id: Date.now().toString(), type: 'user', text: inputText };
+    setMessages((prev) => [...prev, userMessage]);
+    setCurrentInputText(''); // Clear input after sending
+    setIsChatLoading(true);
+
+    try {
+      const chatbotInput: FinancialAdvisorChatbotInput = { question: inputText };
+      const response: FinancialAdvisorChatbotOutput = await financialAdvisorChatbot(chatbotInput);
+      const aiMessage: Message = { id: (Date.now() + 1).toString(), type: 'ai', text: response.answer };
+      setMessages((prev) => [...prev, aiMessage]);
+    } catch (error) {
+      console.error('Error fetching AI response:', error);
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        type: 'ai',
+        text: "Sorry, I encountered an error. Please try again."
+      };
+      setMessages((prev) => [...prev, errorMessage]);
+    } finally {
+      setIsChatLoading(false);
+    }
+  }, [isChatLoading]);
+
+
   return (
-    <ChatWidgetContext.Provider value={{ isChatOpen, setChatOpen, openChat, closeChat }}>
+    <ChatWidgetContext.Provider value={{ 
+      isChatOpen, setChatOpen, openChat, closeChat,
+      messages, currentInput, isChatLoading,
+      setCurrentInputText, handleSendMessage
+    }}>
       {children}
     </ChatWidgetContext.Provider>
   );
