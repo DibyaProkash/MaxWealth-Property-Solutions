@@ -1,13 +1,16 @@
 
 'use client';
 
-import Image from 'next/image'; // Added for background image
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react'; // Added CheckCircle
 import AIChatbot from '@/components/sections/ai-chatbot';
 import { Badge } from '@/components/ui/badge'; 
+import { useChatWidget } from '@/contexts/chat-widget-context'; // Import useChatWidget
 
 export default function HeroSection() {
+  const { openChat } = useChatWidget(); // Get openChat from context
+
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden">
       {/* Background Image and Overlay */}
@@ -56,6 +59,19 @@ export default function HeroSection() {
                 <a href="/about/our-process">View Our Process</a>
               </Button>
             </div>
+            
+            {/* Trust Points */}
+            <div className="mt-8 flex flex-col sm:flex-row justify-center md:justify-start space-y-3 sm:space-y-0 sm:space-x-6">
+              <div className="flex items-center justify-center md:justify-start">
+                <CheckCircle className="h-5 w-5 text-green-400 mr-2" />
+                <span className="text-sm text-primary-foreground/90">Licensed & Insured</span>
+              </div>
+              <div className="flex items-center justify-center md:justify-start">
+                <CheckCircle className="h-5 w-5 text-green-400 mr-2" />
+                <span className="text-sm text-primary-foreground/90">500+ Properties Secured</span>
+              </div>
+            </div>
+
           </div>
 
           {/* Right Column: AI Chatbot for Desktop */}
