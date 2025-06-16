@@ -20,8 +20,8 @@ import { usePathname } from 'next/navigation';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
-import { resourceSubItems } from '@/lib/data'; // Assuming you might move resourceSubItems to data.ts
-import { aboutUsSubItems } from '@/lib/data'; // Import new sub-items
+import { resourceSubItems } from '@/lib/data'; 
+import { aboutUsSubItems } from '@/lib/data'; 
 
 interface NavLinkItem {
   href: string;
@@ -46,9 +46,9 @@ const navLinksData: NavLinkItem[] = [
   {
     href: '/about',
     label: 'About Us',
-    icon: Building, // Changed icon for main "About Us"
-    id: 'aboutPage', // ID for direct page link
-    subItems: aboutUsSubItems // Use imported sub-items
+    icon: Building, 
+    id: 'aboutPage', 
+    subItems: aboutUsSubItems 
   },
   { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
   {
@@ -56,10 +56,10 @@ const navLinksData: NavLinkItem[] = [
     label: 'Resources',
     icon: BookOpen,
     id: 'resourcesPage',
-    subItems: localResourceSubItems // Use local or imported
+    subItems: localResourceSubItems 
   },
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
-  { href: '#contact', label: 'Contact', icon: MessageSquare, id: 'contact' },
+  { href: '/contact', label: 'Contact', icon: MessageSquare }, // Updated href, removed id
 ];
 
 const homepageSectionIds = navLinksData
