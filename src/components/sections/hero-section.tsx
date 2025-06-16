@@ -40,7 +40,7 @@ export default function HeroSection() {
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl mx-auto md:mx-0">
               We secure the best properties at the right price across Sydney, Melbourne, Brisbane, Perth, and Adelaide. Save time, money, and stress with Australia's leading property buyer advocates.
             </p>
-            <div className="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="flex flex-row justify-center md:justify-start gap-4">
               <Button 
                 size="lg" 
                 className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105" 
@@ -84,4 +84,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
