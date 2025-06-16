@@ -6,9 +6,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import ScrollToTopButton from '@/components/layout/scroll-to-top-button';
 import LoadingIndicator from '@/components/layout/loading-indicator';
-// import { AuthProvider } from '@/contexts/auth-context'; // Removed
 import Navbar from '@/components/layout/navbar'; 
 import LiveChatWidget from '@/components/layout/live-chat-widget'; 
+import { ChatWidgetProvider } from '@/contexts/chat-widget-context';
 
 export const metadata: Metadata = {
   title: 'MaxWealth PS',
@@ -32,11 +32,11 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
+            defaultTheme="light" 
+            enableSystem={false} 
             disableTransitionOnChange
         >
-          {/* <AuthProvider> Removed */}
+          <ChatWidgetProvider>
             <LoadingIndicator>
               <Navbar />
               {children}
@@ -44,7 +44,7 @@ export default function RootLayout({
               <ScrollToTopButton />
               <LiveChatWidget />
             </LoadingIndicator>
-          {/* </AuthProvider> Removed */}
+          </ChatWidgetProvider>
         </ThemeProvider>
       </body>
     </html>

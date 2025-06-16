@@ -4,8 +4,10 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight, MessageSquare } from 'lucide-react';
 import AIChatbot from '@/components/sections/ai-chatbot';
+import { useChatWidget } from '@/contexts/chat-widget-context';
 
 export default function HeroSection() {
+  const { openChat } = useChatWidget();
 
   return (
     <section id="hero" className="py-16 md:py-24 bg-primary text-primary-foreground">
@@ -27,23 +29,19 @@ export default function HeroSection() {
               </Button>
               <Button 
                 size="lg" 
-                variant="secondary" // Changed variant to secondary
-                className="shadow-lg transform transition-transform hover:scale-105" // Removed custom text/border/hover overrides for outline
+                variant="secondary" 
+                className="shadow-lg transform transition-transform hover:scale-105"
                 asChild
               >
                 <a href="#about">Learn More</a>
               </Button>
             </div>
-            {/* Mobile Chat Button - CTA for the global widget */}
+            {/* Mobile Chat Button */}
             <div className="md:hidden text-center mt-8">
               <Button
                 size="lg"
-                variant="outline"
-                className="text-primary-foreground border-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground shadow-lg w-full sm:w-auto"
-                onClick={() => {
-                  // This button acts as a CTA. Users will use the global floating LiveChatWidget.
-                  // No direct action needed here if the global widget is always present.
-                }}
+                className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg w-full sm:w-auto"
+                onClick={openChat}
               >
                 <MessageSquare className="mr-2 h-5 w-5" />
                 Chat with AI Advisor
