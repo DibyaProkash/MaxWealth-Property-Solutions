@@ -4,12 +4,12 @@
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react'; 
-// AIChatbot import removed as it's no longer directly embedded
 import { Badge } from '@/components/ui/badge'; 
-import { useChatWidget } from '@/contexts/chat-widget-context'; // Import useChatWidget
+import { useChatWidget } from '@/contexts/chat-widget-context'; 
+import AIChatbot from '@/components/sections/ai-chatbot'; // Import AIChatbot
 
 export default function HeroSection() {
-  const { openChat } = useChatWidget(); // Get openChat function from context
+  const { openChat } = useChatWidget(); 
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden">
@@ -74,8 +74,10 @@ export default function HeroSection() {
 
           </div>
 
-          {/* Right Column: AI Chatbot for Desktop - REMOVED */}
-          {/* The AIChatbot is now accessed via the global LiveChatWidget */}
+          {/* Right Column: AI Chatbot for Desktop */}
+          <div className="hidden md:flex md:col-span-1 items-center justify-center">
+            <AIChatbot />
+          </div>
         </div>
       </div>
     </section>
