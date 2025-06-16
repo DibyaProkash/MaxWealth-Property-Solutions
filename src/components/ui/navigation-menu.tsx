@@ -50,17 +50,19 @@ const navigationMenuTriggerStyle = cva(
 const NavigationMenuTrigger = React.forwardRef<
   React.ElementRef<typeof NavigationMenuPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof NavigationMenuPrimitive.Trigger>
->(({ className, children, ...props }, ref) => {
-  const isAsChild = props.asChild;
+>(({ className, children, asChild: asChildFromParent, ...restOfProps }, ref) => {
+  // `asChildFromParent` is the asChild prop received from the parent (e.g., Link)
+  // `restOfProps` contains all other props, including href, onClick, etc., but not asChildFromParent.
 
   return (
     <NavigationMenuPrimitive.Trigger
       ref={ref}
       className={cn(navigationMenuTriggerStyle(), "group", className)}
-      {...props} // This will pass asChild to the primitive
+      {...restOfProps} // Pass props to Radix primitive, EXCLUDING asChildFromParent
     >
       {children}
-      {!isAsChild && ( // Only render ChevronDown if this component is NOT using asChild
+      {/* Chevron visibility logic based on asChildFromParent (consistent with user's existing code) */}
+      {!asChildFromParent && (
         <ChevronDown
           className="relative top-[1px] ml-1 h-3 w-3 transition duration-200 group-data-[state=open]:rotate-180"
           aria-hidden="true"
