@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from 'react';
@@ -48,7 +49,8 @@ const navLinksData: NavLinkItem[] = [
     label: 'About Us',
     icon: Building, 
     id: 'aboutPage', 
-    subItems: aboutUsSubItems 
+    subItems: aboutUsSubItems,
+    description: "Learn more about our company, team, and services."
   },
   { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
   {
@@ -56,7 +58,8 @@ const navLinksData: NavLinkItem[] = [
     label: 'Resources',
     icon: BookOpen,
     id: 'resourcesPage',
-    subItems: localResourceSubItems 
+    subItems: localResourceSubItems,
+    description: "Access tools, guides, and FAQs."
   },
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
   { href: '/contact', label: 'Contact', icon: MessageSquare },
@@ -122,18 +125,25 @@ export default function Navbar() {
                 if (link.subItems) {
                   return (
                     <NavigationMenuItem key={link.label}>
-                      <Link href={link.href} passHref legacyBehavior={false} asChild>
-                        <NavigationMenuTrigger
-                          className={cn(navigationMenuTriggerStyle(),
-                            "bg-transparent text-foreground/70 hover:text-foreground hover:bg-foreground/10 focus:bg-foreground/10 focus:text-foreground",
-                            isActive && "text-foreground font-semibold bg-foreground/10"
-                          )}
-                        >
-                          {link.label}
-                        </NavigationMenuTrigger>
-                      </Link>
+                      <NavigationMenuTrigger
+                        className={cn(navigationMenuTriggerStyle(),
+                          "bg-transparent text-foreground/70 hover:text-foreground hover:bg-foreground/10 focus:bg-foreground/10 focus:text-foreground",
+                          isActive && "text-foreground font-semibold bg-foreground/10"
+                        )}
+                      >
+                        {link.label}
+                      </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                          <ListItem
+                            key={`${link.label}-overview`}
+                            title={`Explore ${link.label}`}
+                            href={link.href} // Main link for the section overview
+                            icon={link.icon}
+                            className={isMounted && pathname === link.href ? "bg-accent/10 text-accent-foreground" : ""}
+                          >
+                            {link.description || `Visit the main ${link.label} page.`}
+                          </ListItem>
                           {link.subItems.map((subItem) => (
                              <ListItem
                               key={subItem.label}
@@ -235,9 +245,10 @@ export default function Navbar() {
                     if (link.subItems) {
                       return (
                         <React.Fragment key={link.label}>
+                           {/* For mobile, the main item itself can be a link to its overview page, then sub-items */}
                            <SheetClose asChild>
                             <Link
-                                href={link.href}
+                                href={link.href} // Main link for section overview
                                 className={cn(
                                 "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                                 isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
@@ -247,10 +258,10 @@ export default function Navbar() {
                                 <link.icon className="h-5 w-5" />
                                 <span>{link.label}</span>
                               </span>
-                                <ChevronDown className="h-4 w-4 opacity-70" />
+                                {/* Optionally add a chevron or similar if you expand inline, or remove if it just links */}
                             </Link>
                            </SheetClose>
-                          <div className="flex flex-col space-y-1 pl-6">
+                          <div className="flex flex-col space-y-1 pl-6 border-l border-sidebar-border/50 ml-2">
                             {link.subItems.map(subItem => {
                               const isSubItemActive = isMounted && pathname === subItem.href;
                               return (
@@ -327,3 +338,6 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+
+
+    
