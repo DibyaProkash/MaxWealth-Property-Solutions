@@ -40,10 +40,9 @@ export default function HeroSection() {
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl mx-auto md:mx-0">
               We secure the best properties at the right price across Sydney, Melbourne, Brisbane, Perth, and Adelaide. Save time, money, and stress with Australia's leading property buyer advocates.
             </p>
-            <div className="flex flex-row flex-wrap justify-center md:justify-start gap-3">
+            <div className="flex flex-row justify-center md:justify-start gap-3">
               <Button
-                size="lg"
-                className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105"
+                className="h-10 px-4 text-sm md:h-11 md:px-8 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105"
                 asChild
               >
                 <a href="/contact">
@@ -51,16 +50,15 @@ export default function HeroSection() {
                 </a>
               </Button>
               <Button
-                size="lg"
                 variant="secondary"
-                className="shadow-lg transform transition-transform hover:scale-105"
+                className="h-10 px-4 text-sm md:h-11 md:px-8 shadow-lg transform transition-transform hover:scale-105"
                 asChild
               >
                 <a href="/about/our-process">View Our Process</a>
               </Button>
+              {/* AI Advisor Button for Mobile */}
               <Button
-                size="lg"
-                className="shadow-lg transform transition-transform hover:scale-105 block md:hidden bg-[hsl(var(--background))/50] hover:bg-[hsl(var(--background))/70] backdrop-blur-sm text-primary-foreground border border-primary-foreground/30"
+                className="h-10 px-4 text-sm md:h-11 md:px-8 shadow-lg transform transition-transform hover:scale-105 block md:hidden bg-[hsl(var(--background))/50] hover:bg-[hsl(var(--background))/70] backdrop-blur-sm text-primary-foreground border border-primary-foreground/30"
                 onClick={openChat}
                 aria-label="Open financial advisor chat"
               >
