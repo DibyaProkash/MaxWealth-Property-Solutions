@@ -1,18 +1,30 @@
 
 'use client';
 
+import Image from 'next/image'; // Added for background image
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import AIChatbot from '@/components/sections/ai-chatbot';
-import { useChatWidget } from '@/contexts/chat-widget-context';
-import { Badge } from '@/components/ui/badge'; // Added import for Badge
+import { Badge } from '@/components/ui/badge'; 
 
 export default function HeroSection() {
-  const { openChat } = useChatWidget();
-
   return (
-    <section id="hero" className="py-16 md:py-24 bg-primary text-primary-foreground">
-      <div className="container mx-auto px-6">
+    <section id="hero" className="relative text-primary-foreground overflow-hidden">
+      {/* Background Image and Overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://ugc.same-assets.com/jCVVeBWy4B84ONocCwkNBlVMGmuggCHq.jpeg"
+          alt="Modern cityscape background"
+          layout="fill"
+          objectFit="cover"
+          priority
+          data-ai-hint="cityscape building"
+        />
+        <div className="absolute inset-0 bg-black/60"></div> {/* Overlay for text contrast */}
+      </div>
+
+      {/* Content */}
+      <div className="container relative z-10 mx-auto px-6 py-16 md:py-24">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column: Text Content */}
           <div className="md:text-left text-center">
@@ -44,8 +56,6 @@ export default function HeroSection() {
                 <a href="/about/our-process">View Our Process</a>
               </Button>
             </div>
-            {/* Trust points previously here are removed to match the new design focus */}
-            {/* Mobile Chat Button previously here is removed to simplify CTA */}
           </div>
 
           {/* Right Column: AI Chatbot for Desktop */}
