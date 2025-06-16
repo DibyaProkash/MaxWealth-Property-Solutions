@@ -24,12 +24,12 @@ export interface TeamMemberDetailed {
 export const teamMembersDetailedData: TeamMemberDetailed[] = [
   {
     id: 'tm1',
-    name: 'Jacqueline Dwyer',
+    name: 'Jyoti Poul Mitra',
     title: 'CEO & Founder, Lead Buyers Advocate',
-    image: 'https://placehold.co/300x300.png',
-    dataAiHint: 'woman professional portrait',
-    bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas. Jacqueline has a keen focus on development sites, commercial properties, and investment markets nationwide.",
-    shortBio: "Jacqueline leads our operations with over 20 years in premium property markets. She's secured over $100M in properties for clients.",
+    image: '/founder-jyoti-poul-mitra.jpg',
+    dataAiHint: 'man professional portrait',
+    bio: "Jyoti, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; he's a seasoned property investor and professional economist with over two decades of experience in the property industry. His expertise extends to prestige real estate & luxury property in key metropolitan areas. Jyoti has a keen focus on development sites, commercial properties, and investment markets nationwide.",
+    shortBio: "Jyoti leads our operations with over 20 years in premium property markets. He's secured over $100M in properties for clients.",
     location: "Sydney & NSW",
     credentials: ["Licensed Real Estate Agent", "Certified Property Investment Adviser", "Member - REBAA", "Professional Economist"],
     specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis', 'Development Sites'],

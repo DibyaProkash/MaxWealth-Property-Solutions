@@ -12,7 +12,7 @@ import Footer from '@/components/layout/footer';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'; // Removed DialogClose from import
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -22,7 +22,7 @@ const founderData = {
   name: 'Jyoti Poul Mitra',
   title: 'Founder & Buyers Advocate',
   bio: "Jyoti Poul Mitra, the visionary Founder of MaxWealth PS, brings extensive experience as a Buyers Advocate. With a deep understanding of property markets, Jyoti is dedicated to helping clients navigate the complexities of real estate investment and home buying, focusing on delivering tailored strategies and exceptional outcomes. Jyoti's expertise spans across residential and investment properties, ensuring clients achieve their property aspirations.",
-  image: '/founder-jyoti-poul-mitra.jpeg', // Corrected image path
+  image: '/founder-jyoti-poul-mitra.jpeg',
   dataAiHint: 'man professional casual',
 };
 
@@ -114,7 +114,7 @@ export default function OurTeamPage() {
           <AnimatedSection delay="delay-50">
             <div className="mb-12 md:mb-16 text-lg text-muted-foreground font-body space-y-4 max-w-4xl mx-auto">
                 <p>
-                  MaxWealth PS is a leading Australian Buyers Agency. Spearheaded by Jacqueline Dwyer, an award-winning property professional, we’re the go-to agency for discerning buyers seeking premium real estate in major cities and desirable regional hubs.
+                  MaxWealth PS is a leading Australian Buyers Agency. Spearheaded by Jyoti Poul Mitra, an award-winning property professional, we’re the go-to agency for discerning buyers seeking premium real estate in major cities and desirable regional hubs.
                 </p>
                 <p className="font-headline text-xl text-primary">
                   But here’s what really separates us from the rest…
@@ -221,7 +221,7 @@ export default function OurTeamPage() {
                               <div className="mb-3">
                                 <h4 className="text-[0.7rem] font-semibold text-primary/80 mb-1 uppercase tracking-wider">Credentials</h4>
                                 <ul className="space-y-0.5">
-                                  {member.credentials.slice(0,3).map(cred => ( // Limit to 3 for card
+                                  {member.credentials.slice(0,3).map(cred => (
                                     <li key={cred} className="flex items-center text-xs text-muted-foreground">
                                       <CheckCircle className="mr-1.5 h-3 w-3 text-green-500 flex-shrink-0" /> {cred}
                                     </li>
@@ -234,7 +234,7 @@ export default function OurTeamPage() {
                               <div className="mb-4">
                                 <h4 className="text-[0.7rem] font-semibold text-primary/80 mb-1.5 uppercase tracking-wider">Specialties</h4>
                                 <div className="flex flex-wrap gap-1">
-                                  {member.specialties.slice(0,3).map(spec => ( // Limit to 3-4 for card
+                                  {member.specialties.slice(0,3).map(spec => ( 
                                     <Badge key={spec} variant="secondary" className="text-[0.65rem] px-1.5 py-0.5 font-normal bg-secondary/70 text-secondary-foreground/80">{spec}</Badge>
                                   ))}
                                 </div>
@@ -357,12 +357,7 @@ export default function OurTeamPage() {
                   </div>
                 </div>
                 </ScrollArea>
-                <DialogClose asChild>
-                  <Button type="button" variant="ghost" size="icon" className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-                    <CloseIcon className="h-5 w-5" />
-                    <span className="sr-only">Close</span>
-                  </Button>
-                </DialogClose>
+                {/* The explicit DialogClose button is removed from here as DialogContent already provides one */}
               </DialogContent>
             </Dialog>
           )}

@@ -376,9 +376,9 @@ export interface TeamMemberDetailed {
 export const teamMembersDetailedData: TeamMemberDetailed[] = [
   {
     id: 'tm1',
-    name: 'Jacqueline Dwyer',
+    name: 'Jyoti Poul Mitra',
     title: 'CEO & Founder, Lead Buyers Advocate',
-    image: 'https://placehold.co/400x450.png', 
+    image: '/founder-jyoti-poul-mitra.jpg', 
     dataAiHint: 'woman professional portrait',
     bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas. Jacqueline has a keen focus on development sites, commercial properties, and investment markets nationwide.",
     specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis'],
