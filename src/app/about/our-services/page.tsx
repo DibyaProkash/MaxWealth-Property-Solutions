@@ -10,11 +10,11 @@ import AnimatedSection from '@/components/layout/animated-section';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { whoWeHelpData, type WhoWeHelpItem /*, serviceLocationsData */ } from '@/lib/data'; // serviceLocationsData will be fetched
+import { whoWeHelpData, type WhoWeHelpItem } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services';
+import FeeStructureSection from '@/components/sections/fee-structure-section'; // Added import
 
-// Define ServiceLocationItem type for this page (as it's fetched)
 export interface ServiceLocationItem {
   id: string;
   slug: string;
@@ -80,12 +80,10 @@ export default function OurServicesPage() {
             </header>
           </AnimatedSection>
 
-          {/* New Comprehensive Property Buyer Services Section */}
           <AnimatedSection delay="delay-50">
             <ComprehensivePropertyServices />
           </AnimatedSection>
 
-          {/* Who We Help Section */}
           <AnimatedSection delay="delay-100">
             <section className="py-16 md:py-24">
               <div className="text-center mb-12 md:mb-16">
@@ -110,17 +108,15 @@ export default function OurServicesPage() {
                       data-ai-hint={item.dataAiHint}
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    <div // Overlay container for gradient, title, and description
+                    <div 
                       className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/70 via-black/40 to-transparent"
                     >
-                      {/* Description: initially hidden, slides up */}
                       <div className="px-4 pt-4 pb-2 md:px-6 md:pt-6 md:pb-3 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 ease-in-out">
-                        <p className="text-sm text-gray-200 line-clamp-3 font-body"> {/* Increased line-clamp for better visibility */}
+                        <p className="text-sm text-gray-200 line-clamp-3 font-body"> 
                           {item.description}
                         </p>
                       </div>
                       
-                      {/* Title: always visible at the bottom */}
                       <div className="px-4 pb-4 md:px-6 md:pb-6">
                         <h3 className="font-headline text-xl md:text-2xl font-semibold text-white group-hover:text-accent transition-colors duration-300">
                           {item.title}
@@ -133,7 +129,6 @@ export default function OurServicesPage() {
             </section>
           </AnimatedSection>
 
-          {/* Where We Service Section */}
           <AnimatedSection delay="delay-150">
             <section id="where-we-service" className="py-16 md:py-24 bg-secondary rounded-lg">
               <div className="container mx-auto px-6">
@@ -181,7 +176,6 @@ export default function OurServicesPage() {
             </section>
           </AnimatedSection>
 
-          {/* Call to Action Cards Section */}
           <AnimatedSection delay="delay-200">
             <section className="py-16 md:py-24">
               <div className="grid md:grid-cols-2 gap-8 items-stretch">
@@ -222,11 +216,11 @@ export default function OurServicesPage() {
             </section>
           </AnimatedSection>
 
-          {/* Our Comprehensive Services Section (Moved to bottom) */}
           <AnimatedSection delay="delay-250">
             <ServicesSectionHighlights />
           </AnimatedSection>
 
+          <FeeStructureSection /> 
         </div>
       </main>
       <Footer />

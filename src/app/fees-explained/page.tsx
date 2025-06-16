@@ -24,6 +24,7 @@ import { ArrowLeft, BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Bri
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 import { memberLogos } from '@/lib/data';
+import FeeStructureSection from '@/components/sections/fee-structure-section'; // Added import
 
 
 const formSchema = z.object({
@@ -115,7 +116,6 @@ export default function FeesExplainedPage() {
           <AnimatedSection delay="delay-150" id="feesContactFormContainer">
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-5 gap-8 lg:gap-12 items-start mb-12 md:mb-16">
-                {/* Left Column: Jac's Info & Licenses */}
                 <div className="md:col-span-2 space-y-8">
                   <div className="text-center md:text-left">
                     <Image
@@ -153,7 +153,6 @@ export default function FeesExplainedPage() {
                   </div>
                 </div>
 
-                {/* Right Column: Strategy Call Form */}
                 <div className="md:col-span-3">
                   <Card className="shadow-xl bg-card overflow-hidden rounded-lg">
                     <CardHeader className="text-center bg-primary text-primary-foreground p-6 md:p-8">
@@ -262,7 +261,6 @@ export default function FeesExplainedPage() {
                           />
                           <div className="text-sm text-muted-foreground p-3 border rounded-md bg-background flex items-center justify-between">
                             <span>I'm not a robot</span>
-                            {/* Placeholder for reCAPTCHA logo */}
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-gray-400">
                               <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path>
                               <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="3" fill="white">reCAPTCHA</text>
@@ -281,6 +279,8 @@ export default function FeesExplainedPage() {
             </div>
           </AnimatedSection>
           
+          <FeeStructureSection />
+
           <AnimatedSection delay="delay-300">
             <div className="mt-12 md:mt-20 text-center">
               <h3 className="font-headline text-2xl font-semibold text-primary mb-6">Here's What Our Clients Say About Us...</h3>
@@ -310,4 +310,3 @@ export default function FeesExplainedPage() {
     </div>
   );
 }
-

@@ -12,17 +12,18 @@ import Footer from '@/components/layout/footer';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'; // Removed DialogClose from import
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import type { TeamMemberDetailed } from '@/lib/data/team'; // Updated import path
+import type { TeamMemberDetailed } from '@/lib/data/team';
+import FeeStructureSection from '@/components/sections/fee-structure-section'; // Added import
 
 const founderData = {
   name: 'Jyoti Poul Mitra',
   title: 'Founder & Buyers Advocate',
   bio: "Jyoti Poul Mitra, the visionary Founder of MaxWealth PS, brings extensive experience as a Buyers Advocate. With a deep understanding of property markets, Jyoti is dedicated to helping clients navigate the complexities of real estate investment and home buying, focusing on delivering tailored strategies and exceptional outcomes. Jyoti's expertise spans across residential and investment properties, ensuring clients achieve their property aspirations.",
-  image: '/founder-jyoti-poul-mitra.jpeg',
+  image: '/founder-jyoti-poul-mitra.jpg',
   dataAiHint: 'man professional casual',
 };
 
@@ -186,7 +187,7 @@ export default function OurTeamPage() {
                 align: "start",
                 loop: canAutoplay,
                 }}
-                plugins={canAutoplay && autoplayPlugin.current ? [autoplayPlugin.current] : []}
+                plugins={canAutoplay ? (autoplayPlugin.current ? [autoplayPlugin.current] : []) : []}
                 onMouseEnter={() => { if (canAutoplay && autoplayPlugin.current) autoplayPlugin.current.stop(); }}
                 onMouseLeave={() => { if (canAutoplay && autoplayPlugin.current) autoplayPlugin.current.play(); }}
                 className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
@@ -234,7 +235,7 @@ export default function OurTeamPage() {
                               <div className="mb-4">
                                 <h4 className="text-[0.7rem] font-semibold text-primary/80 mb-1.5 uppercase tracking-wider">Specialties</h4>
                                 <div className="flex flex-wrap gap-1">
-                                  {member.specialties.slice(0,3).map(spec => ( 
+                                  {member.specialties.slice(0,3).map(spec => 
                                     <Badge key={spec} variant="secondary" className="text-[0.65rem] px-1.5 py-0.5 font-normal bg-secondary/70 text-secondary-foreground/80">{spec}</Badge>
                                   ))}
                                 </div>
@@ -357,7 +358,6 @@ export default function OurTeamPage() {
                   </div>
                 </div>
                 </ScrollArea>
-                {/* The explicit DialogClose button is removed from here as DialogContent already provides one */}
               </DialogContent>
             </Dialog>
           )}
@@ -365,6 +365,8 @@ export default function OurTeamPage() {
           <AnimatedSection delay="delay-250">
             <ServicesSectionHighlights />
           </AnimatedSection>
+
+          <FeeStructureSection />
         </div>
       </main>
       <Footer />
