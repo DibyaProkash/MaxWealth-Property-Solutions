@@ -1,16 +1,8 @@
 
 import React, { type SVGProps } from 'react';
 import type { LucideIcon } from 'lucide-react';
-import { MapPin, Landmark, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles, Target, Scale, Handshake, Lightbulb } from 'lucide-react';
-
-// Helper icon components (if not directly from lucide-react or for custom SVGs)
-const BusIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M8 6v6"/><path d="M16 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg>
-);
-
-const CameraIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
-);
+import { MapPin, Landmark, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles, Target, Scale, Handshake, Lightbulb, Info } from 'lucide-react';
+import { BusIcon, CameraIcon } from '@/components/icons/custom-icons';
 
 export interface ServiceLocationItem {
   id: string;
@@ -38,7 +30,7 @@ export const serviceLocationsData: ServiceLocationItem[] = [
 export interface AmenityContentItem {
   subTitle?: string;
   text: string;
-  icon?: LucideIcon;
+  iconName?: string; 
 }
 
 export interface AmenitySection {
@@ -68,9 +60,9 @@ const generatePlaceholderAmenities = (cityName: string): LocationDetail['ameniti
   transport: {
     title: "TRANSPORT",
     content: [
-      { subTitle: "Train", text: `Discover convenient train routes connecting ${cityName} to major hubs. Efficient and scenic journeys await.`, icon: Train },
-      { subTitle: "Bus Network", text: `Extensive bus networks provide easy access across ${cityName} and surrounding areas. Local and regional services available.`, icon: BusIcon },
-      { text: `General public transport in ${cityName} is designed for accessibility and convenience, making it easy to explore the city and its attractions.`, icon: MapPin },
+      { subTitle: "Train", text: `Discover convenient train routes connecting ${cityName} to major hubs. Efficient and scenic journeys await.`, iconName: "Train" },
+      { subTitle: "Bus Network", text: `Extensive bus networks provide easy access across ${cityName} and surrounding areas. Local and regional services available.`, iconName: "BusIcon" },
+      { text: `General public transport in ${cityName} is designed for accessibility and convenience, making it easy to explore the city and its attractions.`, iconName: "MapPin" },
     ],
     image: 'https://placehold.co/600x450.png',
     imageAiHint: `transport ${cityName.toLowerCase()}`,
@@ -78,8 +70,8 @@ const generatePlaceholderAmenities = (cityName: string): LocationDetail['ameniti
   shopsAndRestaurants: {
     title: "SHOPS & RESTAURANTS",
     content: [
-      { subTitle: "Retail Therapy", text: `${cityName} boasts a vibrant shopping scene, from boutique stores offering unique local crafts to major retail centers with global brands.`, icon: ShoppingCart },
-      { subTitle: "Culinary Delights", text: `Explore diverse culinary delights, with a wide array of cafes, casual eateries, and fine dining restaurants catering to all tastes in ${cityName}.`, icon: Utensils },
+      { subTitle: "Retail Therapy", text: `${cityName} boasts a vibrant shopping scene, from boutique stores offering unique local crafts to major retail centers with global brands.`, iconName: "ShoppingCart" },
+      { subTitle: "Culinary Delights", text: `Explore diverse culinary delights, with a wide array of cafes, casual eateries, and fine dining restaurants catering to all tastes in ${cityName}.`, iconName: "Utensils" },
     ],
     image: 'https://placehold.co/600x450.png',
     imageAiHint: `shopping ${cityName.toLowerCase()}`,
@@ -87,9 +79,9 @@ const generatePlaceholderAmenities = (cityName: string): LocationDetail['ameniti
   leisure: {
     title: "LEISURE & ATTRACTIONS",
     content: [
-      { subTitle: "Culture & History", text: `Explore the rich cultural heritage of ${cityName} with its museums, galleries, and historic landmarks.`, icon: Landmark },
-      { subTitle: "Parks & Nature", text: `Enjoy outdoor activities in beautiful parks and natural reserves surrounding ${cityName}. Perfect for hiking, picnics, and relaxation.`, icon: Trees },
-      { subTitle: "Events & Entertainment", text: `The city offers a lively calendar of events, festivals, and entertainment options for all ages.`, icon: Sparkles },
+      { subTitle: "Culture & History", text: `Explore the rich cultural heritage of ${cityName} with its museums, galleries, and historic landmarks.`, iconName: "Landmark" },
+      { subTitle: "Parks & Nature", text: `Enjoy outdoor activities in beautiful parks and natural reserves surrounding ${cityName}. Perfect for hiking, picnics, and relaxation.`, iconName: "Trees" },
+      { subTitle: "Events & Entertainment", text: `The city offers a lively calendar of events, festivals, and entertainment options for all ages.`, iconName: "Sparkles" },
     ],
     image: 'https://placehold.co/600x450.png',
     imageAiHint: `leisure ${cityName.toLowerCase()}`,
@@ -112,9 +104,9 @@ export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(lo
         transport: {
           title: "TRANSPORT",
           content: [
-            { subTitle: "Train", text: "Every hour from Newcastle and every half-hour from Sydney, NSW TrainLink offers regular rail service to the Central Coast. The trip takes roughly one hour and thirty minutes from each location. For additional information, go to transportnsw.info.", icon: Train },
-            { subTitle: "Ferry", text: "Daily services between Sydney (Palm Beach) and the Central Coast are provided by Palm Beach Ferries (Ettalong Beach).", icon: Sailboat },
-            { subTitle: "Air", text: "About 115 kilometers and 1 hour and 15 minutes' driving separate Gosford from Newcastle Airport. About 85 kilometers and 1 hour and 20 minutes' journey separate Gosford from Sydney Airport.", icon: Plane }
+            { subTitle: "Train", text: "Every hour from Newcastle and every half-hour from Sydney, NSW TrainLink offers regular rail service to the Central Coast. The trip takes roughly one hour and thirty minutes from each location. For additional information, go to transportnsw.info.", iconName: "Train" },
+            { subTitle: "Ferry", text: "Daily services between Sydney (Palm Beach) and the Central Coast are provided by Palm Beach Ferries (Ettalong Beach).", iconName: "Sailboat" },
+            { subTitle: "Air", text: "About 115 kilometers and 1 hour and 15 minutes' driving separate Gosford from Newcastle Airport. About 85 kilometers and 1 hour and 20 minutes' journey separate Gosford from Sydney Airport.", iconName: "Plane" }
           ],
           image: 'https://placehold.co/600x450.png',
           imageAiHint: 'train station Central Coast'
@@ -122,8 +114,8 @@ export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(lo
         shopsAndRestaurants: {
           title: "SHOPS & RESTAURANTS",
           content: [
-            { subTitle: "Dining Hotspots", text: "For 1950s-style pizza and tropical beverages, head to Tropicana Social Club in Woy Woy, or travel back another 20 years with a drink at Hotel Mezza in Wyong, which is situated in a former bank from the 1930s. Long Jetty's The Savoy, a former 1950s theater that has been transformed into a multi-purpose bar and restaurant with frequent movie screenings, is another heritage property that has been brought back to life. After undergoing a significant renovation, Hotel Gosford has once again established itself as a legendary bar; its slick Art Deco design pays homage to its 1920s roots. Terrigal, a coastal town, is home to the edgy Pocket Bar, which serves up creative drinks and mouthwatering bar snacks.", icon: Utensils },
-            { subTitle: "Shopping Destinations", text: "Discover a mix of local boutiques, surf shops, and larger shopping centres like Erina Fair, offering a wide range of retail options.", icon: ShoppingCart }
+            { subTitle: "Dining Hotspots", text: "For 1950s-style pizza and tropical beverages, head to Tropicana Social Club in Woy Woy, or travel back another 20 years with a drink at Hotel Mezza in Wyong, which is situated in a former bank from the 1930s. Long Jetty's The Savoy, a former 1950s theater that has been transformed into a multi-purpose bar and restaurant with frequent movie screenings, is another heritage property that has been brought back to life. After undergoing a significant renovation, Hotel Gosford has once again established itself as a legendary bar; its slick Art Deco design pays homage to its 1920s roots. Terrigal, a coastal town, is home to the edgy Pocket Bar, which serves up creative drinks and mouthwatering bar snacks.", iconName: "Utensils" },
+            { subTitle: "Shopping Destinations", text: "Discover a mix of local boutiques, surf shops, and larger shopping centres like Erina Fair, offering a wide range of retail options.", iconName: "ShoppingCart" }
           ],
           image: 'https://placehold.co/600x450.png',
           imageAiHint: 'restaurant cafe Central Coast'
@@ -131,10 +123,10 @@ export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(lo
         leisure: {
           title: "LEISURE & ATTRACTIONS",
           content: [
-            { subTitle: "Beaches & Waterways", text: "The Central Coast is a beach lover's paradise with an 87-kilometre coastline and over 40 beaches. Finding a piece of beach and taking advantage of the ocean lifestyle—whether that means splashing around at Toowoon Bay with the kids, dipping into the water at The Entrance Ocean Baths, or exploring the rock pools at MacMasters Beach or Pearl Beach—is practically a given when on vacation.", icon: Sailboat },
-            { subTitle: "Natural Beauty", text: "Between Sydney and Newcastle, NSW's second-largest city, is the Central Coast. The area is introduced in Kate Grenville's classic historical novel The Hidden River, which is located in Broken Bay near the mouth of the lovely Hawkesbury River.", icon: Trees },
-            { subTitle: "Local Attractions", text: "Pelican feeding time at Pelican Plaza, The Entrance, is a well-known sight on the Central Coast. At 3.30 pm every afternoon, Australia's largest aquatic birds, some with wingspans up to 2.8 meters, congregate here.", icon: CameraIcon },
-            { subTitle: "Relaxation & Wellness", text: "At the cozy Bells Day Spa at Bells at Killcare, you may disconnect from your hectic schedule and re-establish a connection with the natural world by utilizing traditional goods and healing methods that were developed by indigenous Australians. The top-to-toe rituals are performed at the Vie Spa in the Pullman Magenta Beaches Resort using only organic, all-Australian products in a setting that exudes Japanese calm. Alternately, unwind in the opulent Roman Spa at Aztec Skin Clinic & Day Spa, complete with a fruit and cheese platter, before receiving a treatment with a Fijian influence.", icon: Sparkles }
+            { subTitle: "Beaches & Waterways", text: "The Central Coast is a beach lover's paradise with an 87-kilometre coastline and over 40 beaches. Finding a piece of beach and taking advantage of the ocean lifestyle—whether that means splashing around at Toowoon Bay with the kids, dipping into the water at The Entrance Ocean Baths, or exploring the rock pools at MacMasters Beach or Pearl Beach—is practically a given when on vacation.", iconName: "Sailboat" },
+            { subTitle: "Natural Beauty", text: "Between Sydney and Newcastle, NSW's second-largest city, is the Central Coast. The area is introduced in Kate Grenville's classic historical novel The Hidden River, which is located in Broken Bay near the mouth of the lovely Hawkesbury River.", iconName: "Trees" },
+            { subTitle: "Local Attractions", text: "Pelican feeding time at Pelican Plaza, The Entrance, is a well-known sight on the Central Coast. At 3.30 pm every afternoon, Australia's largest aquatic birds, some with wingspans up to 2.8 meters, congregate here.", iconName: "CameraIcon" },
+            { subTitle: "Relaxation & Wellness", text: "At the cozy Bells Day Spa at Bells at Killcare, you may disconnect from your hectic schedule and re-establish a connection with the natural world by utilizing traditional goods and healing methods that were developed by indigenous Australians. The top-to-toe rituals are performed at the Vie Spa in the Pullman Magenta Beaches Resort using only organic, all-Australian products in a setting that exudes Japanese calm. Alternately, unwind in the opulent Roman Spa at Aztec Skin Clinic & Day Spa, complete with a fruit and cheese platter, before receiving a treatment with a Fijian influence.", iconName: "Sparkles" }
           ],
           image: 'https://placehold.co/600x450.png',
           imageAiHint: 'beach Central Coast'
@@ -166,7 +158,7 @@ export interface WhyChooseUsItem {
   id: string;
   title: string;
   description: string;
-  icon: LucideIcon;
+  iconName: string; 
 }
 
 export const whyChooseUsData: WhyChooseUsItem[] = [
@@ -174,36 +166,36 @@ export const whyChooseUsData: WhyChooseUsItem[] = [
     id: 'wcu1',
     title: 'Industry Experience',
     description: 'With over two decades on the buyers’ side, we know how to successfully navigate the purchasing journey.',
-    icon: Landmark,
+    iconName: "Landmark",
   },
   {
     id: 'wcu2',
     title: 'Market Coverage',
     description: 'We have a team of residential & commercial specialists covering home buyers, property investors and commercial buyers.',
-    icon: MapPin,
+    iconName: "MapPin",
   },
   {
     id: 'wcu3',
     title: 'Results Orientated',
     description: 'Our commitment to excellence in service delivery makes us stand out from other agencies, saving you time and stress.',
-    icon: Target,
+    iconName: "Target",
   },
   {
     id: 'wcu4',
     title: 'Accurate Appraisals',
     description: 'Using the latest market data and local knowledge, we provide highly accurate property appraisals and independent opinions on the value of a subject property.',
-    icon: Scale,
+    iconName: "Scale",
   },
   {
     id: 'wcu5',
     title: 'Extensive Network',
     description: 'We’ve got an extensive database of agents and the best contacts to give you the inside running, including access to off-market properties.',
-    icon: Handshake,
+    iconName: "Handshake",
   },
   {
     id: 'wcu6',
     title: 'Research & Data',
     description: 'With our own Suburb Selector™ portal and access to live property data from all major providers, we have the latest property intelligence.',
-    icon: Lightbulb,
+    iconName: "Lightbulb",
   },
 ];

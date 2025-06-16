@@ -13,12 +13,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ArrowLeft, MapPin, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles } from 'lucide-react';
 import ContactFormCityPage from '@/components/forms/contact-form-city-page'; 
+import { BusIcon, CameraIcon } from '@/components/icons/custom-icons';
 
-// Define interfaces for this page (matching fetched data)
+
 export interface AmenityContentItem {
   subTitle?: string;
   text: string;
-  iconName?: string; // Store icon name as string, resolve to component client-side
+  iconName?: string; 
 }
 
 export interface AmenitySection {
@@ -48,20 +49,20 @@ export interface WhyChooseUsItem {
   id: string;
   title: string;
   description: string;
-  iconName: string; // Store icon name as string
+  iconName: string; 
 }
 
-// Helper to map icon names to Lucide components (client-side)
-const iconMap: { [key: string]: LucideIcon } = {
+
+const iconMap: { [key: string]: LucideIcon | React.FC<React.SVGProps<SVGSVGElement>> } = {
   Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles, Info, MapPin,
-  // Add any other icons used in locationDetailsData.amenities.content.icon or whyChooseUsData.icon
+  BusIcon, CameraIcon
 };
 
-const getIconComponent = (iconName?: string): LucideIcon => {
+const getIconComponent = (iconName?: string): LucideIcon | React.FC<React.SVGProps<SVGSVGElement>> => {
   if (iconName && iconMap[iconName]) {
     return iconMap[iconName];
   }
-  return Info; // Default icon
+  return Info; 
 };
 
 
@@ -100,7 +101,6 @@ export default function CityLocationPage() {
           window.scrollTo(0, 0);
         } catch (err: any) {
           if (err.message === 'CityNotFound') {
-            // Set cityData to null explicitly so notFound() can be called
             setCityData(null); 
           } else {
             setError(err.message || "Could not load city information.");
@@ -112,7 +112,6 @@ export default function CityLocationPage() {
       fetchData();
     } else {
       setIsLoading(false);
-       // If no cityNameSlug, it's effectively a "not found" scenario for this dynamic page.
       setCityData(null);
     }
   }, [cityNameSlug]);
