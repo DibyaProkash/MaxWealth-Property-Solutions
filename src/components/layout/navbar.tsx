@@ -140,7 +140,7 @@ export default function Navbar() {
                             title={`Explore ${link.label}`}
                             href={link.href}
                             icon={link.icon}
-                            className={isMounted && pathname === link.href ? "bg-accent/10 text-accent-foreground" : ""}
+                            className={isMounted && pathname === link.href ? "bg-accent/10 text-accent" : ""}
                           >
                             {link.description || `Visit the main ${link.label} page.`}
                           </ListItem>
@@ -150,7 +150,7 @@ export default function Navbar() {
                               title={subItem.label}
                               href={subItem.href}
                               icon={subItem.icon}
-                              className={isMounted && pathname === subItem.href ? "bg-accent/10 text-accent-foreground" : ""}
+                              className={isMounted && pathname === subItem.href ? "bg-accent/10 text-accent" : ""}
                             >
                               {subItem.description || ""}
                             </ListItem>
@@ -318,7 +318,7 @@ const ListItem = React.forwardRef<
           href={href || '/'}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/10 hover:text-accent focus:bg-accent/10 focus:text-accent",
             className
           )}
           {...props}
@@ -336,3 +336,4 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+
