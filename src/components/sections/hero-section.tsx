@@ -46,7 +46,7 @@ export default function HeroSection() {
                 asChild
               >
                 <a href="/contact">
-                  Book Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
+                  Book Free Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
                 </a>
               </Button>
               <Button
@@ -62,7 +62,8 @@ export default function HeroSection() {
                 onClick={openChat}
                 aria-label="Open financial advisor chat"
               >
-                <MessageSquare className="mr-2 h-5 w-5" /> AI Advisor
+                <MessageSquare className="h-4 w-4" />
+                <span>AI Advisor</span>
               </Button>
             </div>
 
