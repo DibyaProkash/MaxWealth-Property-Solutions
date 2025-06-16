@@ -6,9 +6,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, X as CloseIcon } from 'lucide-react';
+import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, X as CloseIcon, Loader2 } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
-import { teamMembersDetailedData, type TeamMemberDetailed } from '@/lib/data';
+// import { teamMembersDetailedData, type TeamMemberDetailed } from '@/lib/data'; // Removed direct import
 import Footer from '@/components/layout/footer';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
@@ -16,7 +16,24 @@ import Autoplay from "embla-carousel-autoplay";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
-const founderData = {
+// Define TeamMemberDetailed type for this page
+export interface TeamMemberDetailed {
+  id: string;
+  name: string;
+  title: string;
+  image: string;
+  dataAiHint: string;
+  bio: string;
+  specialties?: string[];
+  socialLinks?: {
+    linkedin?: string;
+    email?: string;
+    twitter?: string;
+    instagram?: string;
+  };
+}
+
+const founderData = { // This can remain static or be fetched if it becomes dynamic
   name: 'Jacqueline Dwyer',
   title: 'CEO & Founder & Buyers Advocate',
   bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas including Sydney's Eastern Suburbs, North Shore, and Northern Beaches, and nationally with offices servicing Melbourne, Brisbane and Gold Coast. Jacqueline has a keen focus on development sites, commercial properties, and investment markets Australia-wide.",
@@ -33,6 +50,33 @@ export default function OurTeamPage() {
     const [itemsPerView, setItemsPerView] = React.useState(3);
     const [selectedMember, setSelectedMember] = React.useState<TeamMemberDetailed | null>(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+    const [teamMembers, setTeamMembers] = React.useState<TeamMemberDetailed[]>([]);
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [error, setError] = React.useState<string | null>(null);
+
+    React.useEffect(() => {
+        const fetchTeamMembers = async () => {
+          setIsLoading(true);
+          setError(null);
+          try {
+            const response = await fetch('/api/team');
+            if (!response.ok) {
+              throw new Error('Failed to fetch team members');
+            }
+            const data: TeamMemberDetailed[] = await response.json();
+            // Filter out the founder if they are part of the general team data, to avoid duplication.
+            // Or, if founderData is always separate, this filter is not strictly needed.
+            setTeamMembers(data.filter(member => member.id !== 'tm1')); // Assuming 'tm1' is founder
+          } catch (err: any) {
+            setError(err.message || 'Could not load team members.');
+          } finally {
+            setIsLoading(false);
+          }
+        };
+        fetchTeamMembers();
+    }, []);
+
 
     React.useEffect(() => {
         const updateItemsPerView = () => {
@@ -145,11 +189,18 @@ export default function OurTeamPage() {
                 Our experienced professionals are passionate about helping you succeed. Click on a team member to learn more.
               </p>
             </div>
-            {teamMembersDetailedData.length > 0 ? (
+            {isLoading && (
+                <div className="flex justify-center items-center py-10">
+                    <Loader2 className="h-12 w-12 animate-spin text-primary" />
+                </div>
+            )}
+            {error && <p className="text-center text-destructive mb-12 md:mb-16">Error: {error}</p>}
+
+            {!isLoading && !error && teamMembers.length > 0 && (
               <Carousel
                 opts={{
                 align: "start",
-                loop: teamMembersDetailedData.length > itemsPerView,
+                loop: teamMembers.length > itemsPerView,
                 }}
                 plugins={autoplayPlugin.current ? [autoplayPlugin.current] : []}
                 onMouseEnter={() => autoplayPlugin.current?.stop()}
@@ -157,7 +208,7 @@ export default function OurTeamPage() {
                 className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
               >
                 <CarouselContent className="-ml-4">
-                {teamMembersDetailedData.map((member) => (
+                {teamMembers.map((member) => (
                     <CarouselItem key={member.id} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                     <div className="p-1 h-full">
                         <Card className="text-center shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card h-full flex flex-col">
@@ -182,10 +233,11 @@ export default function OurTeamPage() {
                     </CarouselItem>
                 ))}
                 </CarouselContent>
-                {teamMembersDetailedData.length > itemsPerView && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
-                {teamMembersDetailedData.length > itemsPerView && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
+                {teamMembers.length > itemsPerView && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
+                {teamMembers.length > itemsPerView && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
               </Carousel>
-            ) : (
+            )}
+            {!isLoading && !error && teamMembers.length === 0 && (
               <p className="text-center text-muted-foreground mb-12 md:mb-16">Team information coming soon.</p>
             )}
           </AnimatedSection>
@@ -276,4 +328,3 @@ export default function OurTeamPage() {
     </div>
   );
 }
-

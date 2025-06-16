@@ -1,19 +1,53 @@
 
 "use client";
 
+import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ConciergeBell, HomeIcon, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ConciergeBell, HomeIcon, ArrowRight, Loader2 } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { whoWeHelpData, serviceLocationsData } from '@/lib/data';
+import { whoWeHelpData, type WhoWeHelpItem /*, serviceLocationsData */ } from '@/lib/data'; // serviceLocationsData will be fetched
 import { cn } from '@/lib/utils';
 import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services';
 
+// Define ServiceLocationItem type for this page (as it's fetched)
+export interface ServiceLocationItem {
+  id: string;
+  slug: string;
+  name: string;
+  image: string;
+  dataAiHint: string;
+}
+
 export default function OurServicesPage() {
+  const [locations, setLocations] = React.useState<ServiceLocationItem[]>([]);
+  const [isLoadingLocations, setIsLoadingLocations] = React.useState(true);
+  const [locationsError, setLocationsError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const fetchLocations = async () => {
+      setIsLoadingLocations(true);
+      setLocationsError(null);
+      try {
+        const response = await fetch('/api/locations');
+        if (!response.ok) {
+          throw new Error('Failed to fetch service locations');
+        }
+        const data: ServiceLocationItem[] = await response.json();
+        setLocations(data);
+      } catch (err: any) {
+        setLocationsError(err.message || 'Could not load service locations.');
+      } finally {
+        setIsLoadingLocations(false);
+      }
+    };
+    fetchLocations();
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background text-foreground">
@@ -109,29 +143,40 @@ export default function OurServicesPage() {
                     Discover the diverse regions we proudly serve, where our dedicated team helps clients uncover their perfect homes and investment opportunities. Whether you're drawn to vibrant cityscapes, serene coastal havens, or charming suburban retreats, we bring local expertise and personalised service to Australia’s most sought-after locations. Let us guide you in finding a property that perfectly matches your lifestyle, goals, and dreams.
                   </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-                  {serviceLocationsData.map((location) => (
-                    <Link key={location.id} href={`/locations/${location.slug}`} passHref className="group block">
-                      <Card className="shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-card border border-border/30 overflow-hidden relative aspect-[4/3] rounded-lg">
-                        <Image
-                          src={location.image}
-                          alt={location.name}
-                          fill
-                          style={{objectFit: 'cover'}}
-                          className="group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                          data-ai-hint={location.dataAiHint}
-                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent group-hover:from-black/90 transition-all duration-300"></div>
-                        <CardContent className="absolute bottom-0 left-0 right-0 p-4 text-center">
-                          <h3 className="font-headline text-xl md:text-2xl font-semibold text-white group-hover:text-accent transition-colors duration-300">
-                            {location.name}
-                          </h3>
-                        </CardContent>
-                      </Card>
-                    </Link>
-                  ))}
-                </div>
+                {isLoadingLocations && (
+                  <div className="flex justify-center items-center py-10">
+                    <Loader2 className="h-12 w-12 animate-spin text-primary" />
+                  </div>
+                )}
+                {locationsError && <p className="text-center text-destructive">Error: {locationsError}</p>}
+                {!isLoadingLocations && !locationsError && locations.length > 0 && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                    {locations.map((location) => (
+                      <Link key={location.id} href={`/locations/${location.slug}`} passHref className="group block">
+                        <Card className="shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-card border border-border/30 overflow-hidden relative aspect-[4/3] rounded-lg">
+                          <Image
+                            src={location.image}
+                            alt={location.name}
+                            fill
+                            style={{objectFit: 'cover'}}
+                            className="group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                            data-ai-hint={location.dataAiHint}
+                            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent group-hover:from-black/90 transition-all duration-300"></div>
+                          <CardContent className="absolute bottom-0 left-0 right-0 p-4 text-center">
+                            <h3 className="font-headline text-xl md:text-2xl font-semibold text-white group-hover:text-accent transition-colors duration-300">
+                              {location.name}
+                            </h3>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                {!isLoadingLocations && !locationsError && locations.length === 0 && (
+                   <p className="text-center text-muted-foreground">No service locations to display currently.</p>
+                )}
               </div>
             </section>
           </AnimatedSection>

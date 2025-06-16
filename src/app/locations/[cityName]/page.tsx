@@ -5,36 +5,115 @@ import { useEffect, useState } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { locationDetailsData, whyChooseUsData, type LocationDetail } from '@/lib/data';
+// import { locationDetailsData, whyChooseUsData, type LocationDetail } from '@/lib/data'; // Removed direct import
+import type { LucideIcon } from 'lucide-react'; // Import LucideIcon
 import Footer from '@/components/layout/footer';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowLeft, MapPin, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees } from 'lucide-react';
+import { ArrowLeft, MapPin, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles } from 'lucide-react';
 import ContactFormCityPage from '@/components/forms/contact-form-city-page'; 
+
+// Define interfaces for this page (matching fetched data)
+export interface AmenityContentItem {
+  subTitle?: string;
+  text: string;
+  iconName?: string; // Store icon name as string, resolve to component client-side
+}
+
+export interface AmenitySection {
+  title: string;
+  content: AmenityContentItem[];
+  image: string;
+  imageAiHint: string;
+}
+
+export interface LocationDetail {
+  slug: string;
+  name: string;
+  pageIntro: string;
+  tagline?: string;
+  specificIntroParagraphs: string[];
+  amenities: {
+    transport: AmenitySection;
+    shopsAndRestaurants: AmenitySection;
+    leisure: AmenitySection;
+  };
+  touristLink: string;
+  heroImage: string;
+  heroImageAiHint: string;
+}
+
+export interface WhyChooseUsItem {
+  id: string;
+  title: string;
+  description: string;
+  iconName: string; // Store icon name as string
+}
+
+// Helper to map icon names to Lucide components (client-side)
+const iconMap: { [key: string]: LucideIcon } = {
+  Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles, Info, MapPin,
+  // Add any other icons used in locationDetailsData.amenities.content.icon or whyChooseUsData.icon
+};
+
+const getIconComponent = (iconName?: string): LucideIcon => {
+  if (iconName && iconMap[iconName]) {
+    return iconMap[iconName];
+  }
+  return Info; // Default icon
+};
+
 
 export default function CityLocationPage() {
   const params = useParams();
   const cityNameSlug = typeof params.cityName === 'string' ? params.cityName : '';
   const [cityData, setCityData] = useState<LocationDetail | null>(null);
+  const [whyChooseUs, setWhyChooseUs] = useState<WhyChooseUsItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (cityNameSlug) {
-      setIsLoading(true); // Set loading true at the start of data fetch
-      const data = locationDetailsData.find(loc => loc.slug === cityNameSlug);
-      if (data) {
-        setCityData(data);
-        window.scrollTo(0, 0); // Scroll to top when new city data is set
-      }
-      // else {
-      //   // If no data found, notFound() will be called below, so cityData remains null
-      //   // and isLoading will be set to false, triggering the notFound() condition.
-      // }
-      setIsLoading(false);
+      const fetchData = async () => {
+        setIsLoading(true);
+        setError(null);
+        try {
+          const [cityRes, whyChooseUsRes] = await Promise.all([
+            fetch(`/api/locations/details/${cityNameSlug}`),
+            fetch('/api/locations/why-choose-us')
+          ]);
+
+          if (!cityRes.ok) {
+            if (cityRes.status === 404) throw new Error('CityNotFound');
+            throw new Error('Failed to fetch city details');
+          }
+          const cityDetailsData: LocationDetail = await cityRes.json();
+          setCityData(cityDetailsData);
+
+          if (!whyChooseUsRes.ok) {
+            throw new Error('Failed to fetch "why choose us" data');
+          }
+          const whyChooseUsItems: WhyChooseUsItem[] = await whyChooseUsRes.json();
+          setWhyChooseUs(whyChooseUsItems);
+          
+          window.scrollTo(0, 0);
+        } catch (err: any) {
+          if (err.message === 'CityNotFound') {
+            // Set cityData to null explicitly so notFound() can be called
+            setCityData(null); 
+          } else {
+            setError(err.message || "Could not load city information.");
+          }
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      fetchData();
     } else {
-      // Handle cases where cityNameSlug might be undefined or empty if necessary
-      setIsLoading(false); 
+      setIsLoading(false);
+       // If no cityNameSlug, it's effectively a "not found" scenario for this dynamic page.
+      setCityData(null);
     }
   }, [cityNameSlug]);
 
@@ -49,23 +128,26 @@ export default function CityLocationPage() {
     );
   }
 
-  if (!cityData && !isLoading) { // Check !isLoading to ensure notFound isn't called prematurely
-    notFound();
-    return null; 
-  }
-  
-  // Ensure cityData is not null before destructuring
-  if (!cityData) {
-     return ( // Should ideally be caught by notFound, but as a fallback
+  if (error) {
+    return (
       <div className="flex flex-col min-h-screen">
-        <main className="flex-grow flex items-center justify-center bg-background">
-          <p>City data could not be loaded.</p>
+        <main className="flex-grow flex flex-col items-center justify-center bg-background p-4 text-center">
+          <h1 className="text-xl font-semibold text-destructive">Error</h1>
+          <p className="text-muted-foreground">{error}</p>
+          <Button asChild variant="outline" className="mt-4">
+            <Link href="/about/our-services#where-we-service">Back to Service Locations</Link>
+          </Button>
         </main>
         <Footer />
       </div>
     );
   }
 
+  if (!cityData) {
+    notFound();
+    return null; 
+  }
+  
   const {
     name,
     pageIntro,
@@ -167,8 +249,8 @@ export default function CityLocationPage() {
                   WHY Choose MaxWealth PS for {name}?
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {whyChooseUsData.map((item) => {
-                    const Icon = item.icon;
+                  {whyChooseUs.map((item) => {
+                    const Icon = getIconComponent(item.iconName);
                     return (
                       <Card key={item.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card text-center p-2 hover:border-accent">
                         <CardHeader className="items-center pt-6 pb-3">
@@ -217,12 +299,12 @@ export default function CityLocationPage() {
                           {amenity.title}
                         </h3>
                         {amenity.content.map((item, idx) => {
-                           const ItemIcon = item.icon || Info; 
+                           const ItemIcon = getIconComponent(item.iconName); 
                            return (
                             <div key={idx} className="mb-5">
                               {item.subTitle && (
                                 <h4 className="font-semibold text-xl text-primary/80 mb-2 flex items-center">
-                                   {item.icon && <ItemIcon className="mr-2.5 h-5 w-5 text-accent opacity-80 flex-shrink-0" />}
+                                   {item.iconName && <ItemIcon className="mr-2.5 h-5 w-5 text-accent opacity-80 flex-shrink-0" />}
                                   {item.subTitle}
                                 </h4>
                               )}

@@ -1,16 +1,72 @@
 
 "use client"; // Required for Accordion client component
 
+import * as React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { faqData, type FaqItem } from '@/lib/data';
+// import { faqData, type FaqItem } from '@/lib/data'; // Removed direct import
 import AnimatedSection from '@/components/layout/animated-section';
-import { HelpCircle, ArrowLeft } from "lucide-react";
+import { HelpCircle, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Footer from '@/components/layout/footer';
 
+// Define FaqItem type for this page
+export interface FaqItem {
+  id: string;
+  question: string;
+  answer: string;
+}
+
 export default function FaqPage() {
-  if (faqData.length === 0) {
+  const [faqItems, setFaqItems] = React.useState<FaqItem[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const fetchFaqs = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await fetch('/api/faqs');
+        if (!response.ok) {
+          throw new Error('Failed to fetch FAQs');
+        }
+        const data: FaqItem[] = await response.json();
+        setFaqItems(data);
+      } catch (err: any) {
+        setError(err.message || 'Could not load FAQs.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchFaqs();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow bg-secondary flex items-center justify-center">
+          <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow bg-secondary">
+          <div className="container mx-auto px-4 py-8 md:py-16 text-center">
+            <p className="text-destructive">Error: {error}</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  
+  if (faqItems.length === 0 && !isLoading) {
     return (
       <div className="flex flex-col min-h-screen">
         <main className="flex-grow bg-secondary">
@@ -22,6 +78,7 @@ export default function FaqPage() {
       </div>
     );
   }
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -52,7 +109,7 @@ export default function FaqPage() {
           <AnimatedSection delay="delay-100">
             <div className="max-w-3xl mx-auto">
               <Accordion type="single" collapsible className="w-full">
-                {faqData.map((item) => (
+                {faqItems.map((item) => (
                   <AccordionItem key={item.id} value={item.id} className="bg-card shadow-sm rounded-md mb-3 px-2">
                     <AccordionTrigger className="text-left font-headline text-lg hover:text-primary transition-colors text-primary">
                       {item.question}

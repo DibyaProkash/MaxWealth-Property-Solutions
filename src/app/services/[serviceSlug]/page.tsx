@@ -2,28 +2,28 @@
 // src/app/services/[serviceSlug]/page.tsx
 "use client";
 
-import { useEffect, useState } from 'react';
+import * as React from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
   whoWeHelpData,
-  servicePageAdvocates,
+  // servicePageAdvocates, // Fetched
   recentPurchasesData,
   servicePageCtaCardsData,
   servicePageBenefitPointsData,
   howWeHelpStepsData,
   genericServicePageTestimonial,
   awardsPlaceholderText,
-  serviceLocationsData,
+  // serviceLocationsData, // Fetched
   type WhoWeHelpItem,
-  type ServicePageAdvocate,
+  // type ServicePageAdvocate, // Defined below
   type RecentPurchaseItem,
   type ServicePageCtaCardItem,
   type ServicePageBenefitPoint,
   type HowWeHelpStep,
-  type ServiceLocationItem,
-} from '@/lib/data';
+  // type ServiceLocationItem, // Defined below
+} from '@/lib/data'; // Main data still used for some sections
 import Footer from '@/components/layout/footer';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Button } from '@/components/ui/button';
@@ -33,42 +33,118 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ContactFormServicePage from '@/components/forms/contact-form-service-page';
 import { ArrowLeft, CheckCircle, ChevronRight, Home, Award as AwardIcon, Users, MessageSquare, MapPinIcon, ThumbsUp, Star, Timer, HelpCircle, BuildingIcon as DefaultBuildingIcon, DollarSign, FileSearch, Handshake, FileText as LucideFileText, Loader2 } from 'lucide-react';
 
+// Define types for fetched data on this page
+export interface ServicePageAdvocate {
+  id: string;
+  name: string;
+  title: string;
+  image: string;
+  dataAiHint: string;
+}
+
+export interface ServiceLocationItem {
+  id: string;
+  slug: string;
+  name: string;
+  // image: string; // Not needed for this display, only name/slug
+  // dataAiHint: string;
+}
+
 
 export default function ServiceDetailPage() {
   const params = useParams();
   const serviceSlug = typeof params.serviceSlug === 'string' ? params.serviceSlug : '';
-  const [serviceData, setServiceData] = useState<WhoWeHelpItem | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  
+  const [serviceData, setServiceData] = React.useState<WhoWeHelpItem | null>(null);
+  const [advocates, setAdvocates] = React.useState<ServicePageAdvocate[]>([]);
+  const [locations, setLocations] = React.useState<ServiceLocationItem[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (serviceSlug) {
-      setIsLoading(true);
       const data = whoWeHelpData.find(s => s.slug === serviceSlug);
-      if (data) {
-        setServiceData(data);
-      }
-      setIsLoading(false);
-      window.scrollTo(0, 0);
+      setServiceData(data || null); // Set to null if not found to trigger notFound()
     }
   }, [serviceSlug]);
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col min-h-screen">
-        <main className="flex-grow flex items-center justify-center bg-background">
-          <Loader2 className="h-16 w-16 animate-spin text-primary" />
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  React.useEffect(() => {
+    if (!serviceSlug) { // If no slug, don't attempt to fetch.
+        setIsLoading(false);
+        return;
+    }
+    if (!serviceData && serviceSlug) { // If serviceData is null after slug check, means slug is invalid
+        setIsLoading(false); // Stop loading, notFound will handle it.
+        return;
+    }
 
-  if (!serviceData) {
+
+    const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const [advocatesRes, locationsRes] = await Promise.all([
+          fetch('/api/team/advocates'),
+          fetch('/api/locations')
+        ]);
+
+        if (!advocatesRes.ok) throw new Error('Failed to fetch advocates');
+        const advocatesData: ServicePageAdvocate[] = await advocatesRes.json();
+        setAdvocates(advocatesData.slice(0,12)); // Limit to 12 as before
+
+        if (!locationsRes.ok) throw new Error('Failed to fetch locations');
+        const locationsData: ServiceLocationItem[] = await locationsRes.json();
+        setLocations(locationsData.slice(0,8)); // Limit to 8 as before
+
+      } catch (err: any) {
+        setError(err.message || "Could not load page data.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    // Only fetch if serviceData is valid (slug was found in whoWeHelpData)
+    if (serviceData) {
+        fetchData();
+        window.scrollTo(0, 0);
+    } else if (serviceSlug) { // If slug exists but no serviceData, means it's an invalid slug.
+        setIsLoading(false); // Stop loading so notFound() can trigger.
+    }
+
+
+  }, [serviceSlug, serviceData]); // Depend on serviceData to ensure it's resolved first
+
+  if (serviceSlug && !serviceData && !isLoading) { // If slug exists, but serviceData is null and not loading.
     notFound();
     return null;
   }
 
-  const currentServiceAdvocates = servicePageAdvocates.slice(0, 12); 
+  if (!serviceData && !serviceSlug) { // Handle case where slug is initially undefined
+    return ( // Or some other placeholder/error. This might be brief.
+        <div className="flex flex-col min-h-screen">
+            <main className="flex-grow flex items-center justify-center bg-background">
+            <Loader2 className="h-16 w-16 animate-spin text-primary" />
+            </main>
+            <Footer />
+        </div>
+    );
+  }
+  
+  // This check ensures serviceData is available before rendering content that depends on it.
+  if (!serviceData) { 
+    // If still loading, the outer isLoading check will catch it. 
+    // If not loading and still no serviceData, implies an issue (like invalid slug)
+    // which should be caught by notFound() above. But as a fallback:
+    return ( 
+        <div className="flex flex-col min-h-screen">
+             <main className="flex-grow flex items-center justify-center bg-background">
+                 <p>Service data is unavailable.</p>
+             </main>
+             <Footer />
+        </div>
+    );
+  }
+
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
@@ -166,19 +242,28 @@ export default function ServiceDetailPage() {
             <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary text-center mb-10">
               Our Award Winning Buyers' Advocates
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-              {currentServiceAdvocates.map(advocate => (
-                <Card key={advocate.id} className="text-center shadow-md hover:shadow-lg transition-shadow bg-card">
-                  <CardContent className="p-4">
-                    <div className="relative w-full aspect-[4/5] mb-3 rounded overflow-hidden">
-                        <Image src={advocate.image} alt={advocate.name} fill style={{objectFit: 'cover', objectPosition: 'top'}} data-ai-hint={advocate.dataAiHint} sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 16vw" />
-                    </div>
-                    <h3 className="font-semibold text-primary text-sm">{advocate.name}</h3>
-                    <p className="text-xs text-muted-foreground">{advocate.title}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            {isLoading && !error && (
+                 <div className="flex justify-center items-center py-10">
+                    <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                 </div>
+            )}
+            {!isLoading && error && <p className="text-center text-destructive">Failed to load advocates.</p>}
+            {!isLoading && !error && advocates.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                {advocates.map(advocate => (
+                  <Card key={advocate.id} className="text-center shadow-md hover:shadow-lg transition-shadow bg-card">
+                    <CardContent className="p-4">
+                      <div className="relative w-full aspect-[4/5] mb-3 rounded overflow-hidden">
+                          <Image src={advocate.image} alt={advocate.name} fill style={{objectFit: 'cover', objectPosition: 'top'}} data-ai-hint={advocate.dataAiHint} sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 16vw" />
+                      </div>
+                      <h3 className="font-semibold text-primary text-sm">{advocate.name}</h3>
+                      <p className="text-xs text-muted-foreground">{advocate.title}</p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+             {!isLoading && !error && advocates.length === 0 && <p className="text-center text-muted-foreground">Advocate information coming soon.</p>}
           </AnimatedSection>
 
           {/* Where We Service Section */}
@@ -186,16 +271,25 @@ export default function ServiceDetailPage() {
             <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary text-center mb-10">
               Where We Service
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6 justify-center">
-              {serviceLocationsData.slice(0, 8).map(location => ( 
-                <Link key={location.id} href={`/locations/${location.slug}`} passHref className="group block text-center">
-                    <Button variant="ghost" className="h-auto p-2 flex flex-col items-center space-y-1 hover:bg-primary/5">
-                        <MapPinIcon className="h-6 w-6 text-accent mb-1 group-hover:text-primary transition-colors" />
-                        <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">{location.name}</span>
-                    </Button>
-                </Link>
-              ))}
-            </div>
+            {isLoading && !error && (
+                 <div className="flex justify-center items-center py-10">
+                    <Loader2 className="h-10 w-10 animate-spin text-primary" />
+                 </div>
+            )}
+            {!isLoading && error && <p className="text-center text-destructive">Failed to load service locations.</p>}
+            {!isLoading && !error && locations.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-6 justify-center">
+                {locations.map(location => ( 
+                  <Link key={location.id} href={`/locations/${location.slug}`} passHref className="group block text-center">
+                      <Button variant="ghost" className="h-auto p-2 flex flex-col items-center space-y-1 hover:bg-primary/5">
+                          <MapPinIcon className="h-6 w-6 text-accent mb-1 group-hover:text-primary transition-colors" />
+                          <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">{location.name}</span>
+                      </Button>
+                  </Link>
+                ))}
+              </div>
+            )}
+            {!isLoading && !error && locations.length === 0 && <p className="text-center text-muted-foreground">Service location details coming soon.</p>}
           </AnimatedSection>
 
           {/* "Are you interested..." & "Benefits..." Text Sections */}
@@ -360,4 +454,3 @@ export default function ServiceDetailPage() {
     </div>
   );
 }
-
