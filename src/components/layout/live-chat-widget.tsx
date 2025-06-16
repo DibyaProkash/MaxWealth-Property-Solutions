@@ -17,7 +17,8 @@ export default function LiveChatWidget() {
         size="lg"
         // This button is visible by default (on small screens)
         // and becomes hidden on medium (md) screens and larger.
-        className="fixed bottom-6 right-6 rounded-full shadow-xl p-4 h-16 w-16 z-50 transform transition-all hover:scale-110 md:hidden"
+        // Adjusted bottom from bottom-6 to bottom-20 to avoid overlapping hero content
+        className="fixed bottom-20 right-6 rounded-full shadow-xl p-4 h-16 w-16 z-50 transform transition-all hover:scale-110 md:hidden"
         onClick={openChat}
         aria-label="Open financial advisor chat"
       >
