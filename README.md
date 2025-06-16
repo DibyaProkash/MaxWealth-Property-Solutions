@@ -73,7 +73,7 @@ MaxWealth PS is a modern, responsive web application designed to assist users wi
     Example `.env` content:
     ```
     # For Genkit with Google AI (Gemini) - obtain from Google AI Studio or Google Cloud
-    # GOOGLE_API_KEY=your_google_api_key_here
+    GOOGLE_API_KEY=your_google_api_key_here
     ```
     *Note: For local Genkit development, ensure your environment is authenticated if the key isn't directly in `.env` (e.g., via `gcloud auth application-default login`).*
 

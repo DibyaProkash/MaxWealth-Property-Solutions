@@ -3,7 +3,7 @@
 
 import type { ReactNode } from 'react';
 import React, { createContext, useState, useContext, useCallback } from 'react';
-// Removed Genkit import: import { financialAdvisorChatbot, type FinancialAdvisorChatbotInput, type FinancialAdvisorChatbotOutput } from '@/ai/flows/financial-advisor-chatbot';
+import { financialAdvisorChatbot, type FinancialAdvisorChatbotInput, type FinancialAdvisorChatbotOutput } from '@/ai/flows/financial-advisor-chatbot';
 
 export interface Message {
   id: string;
@@ -52,31 +52,17 @@ export const ChatWidgetProvider: React.FC<{ children: ReactNode }> = ({ children
     setIsChatLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ question: inputText }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || `API request failed with status ${response.status}`);
-      }
-
-      const data = await response.json();
-      const aiMessage: Message = { id: (Date.now() + 1).toString(), type: 'ai', text: data.answer };
+      const inputForAI: FinancialAdvisorChatbotInput = { question: inputText };
+      const result: FinancialAdvisorChatbotOutput = await financialAdvisorChatbot(inputForAI);
+      
+      const aiMessage: Message = { id: (Date.now() + 1).toString(), type: 'ai', text: result.answer };
       setMessages((prev) => [...prev, aiMessage]);
     } catch (error: any) {
-      console.error('Error fetching AI response:', error);
-      const errorMessageText = error.message && error.message.includes("OpenAI API key not configured")
-        ? "Sorry, the AI chatbot is not configured correctly. Please contact support."
-        : "Sorry, I encountered an error. Please try again later.";
+      console.error('Error fetching AI response from Genkit:', error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         type: 'ai',
-        text: errorMessageText,
+        text: "Sorry, I encountered an error processing your request with Genkit. Please try again later.",
       };
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
