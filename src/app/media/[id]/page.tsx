@@ -1,38 +1,134 @@
 
-import { articlesData, type Article, mediaTypeIcons } from '@/lib/data';
+"use client"; // Required for useEffect and useState
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation'; // useParams for client component
 import { Badge } from '@/components/ui/badge';
-import { CalendarDays, UserCircle, Tag, MessageSquare, Clock, Eye, Type } from 'lucide-react';
+import { CalendarDays, UserCircle, Tag, MessageSquare, Clock, Eye, Type, Loader2, AlertTriangle } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Footer from '@/components/layout/footer';
+import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types'; // Import from new location
 
-interface MediaPageProps {
-  params: {
-    id: string;
-  };
+// Define Article type for this page, matching API response
+interface ArticleForPage {
+  id: string;
+  title: string;
+  description: string;
+  fullContent?: string;
+  image: string;
+  dataAiHint: string;
+  type: MediaType;
+  category: string;
+  date: string;
+  author?: string;
+  tags?: string[];
+  readTime?: string;
+  views?: string;
 }
 
+// This function is for static generation, if you still want to use it.
+// It needs to fetch from the API.
 export async function generateStaticParams() {
-  return articlesData.map((article) => ({
-    id: article.id,
-  }));
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/articles`);
+    if (!res.ok) {
+      console.error("Failed to fetch articles for static params:", res.status, await res.text());
+      return [];
+    }
+    const articles: ArticleForPage[] = await res.json();
+    return articles.map((article) => ({
+      id: article.id,
+    }));
+  } catch (error) {
+    console.error("Error in generateStaticParams for media/[id]:", error);
+    return [];
+  }
 }
 
-export default function MediaPage({ params }: MediaPageProps) {
-  const article = articlesData.find((a) => a.id === params.id);
 
-  if (!article) {
-    notFound();
+export default function MediaPage() {
+  const params = useParams();
+  const articleId = typeof params.id === 'string' ? params.id : undefined;
+
+  const [article, setArticle] = useState<ArticleForPage | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!articleId) {
+      setError("Article ID is missing.");
+      setIsLoading(false);
+      return;
+    }
+
+    const fetchArticle = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(`/api/articles/${articleId}`);
+        if (!res.ok) {
+          if (res.status === 404) {
+            notFound(); // Trigger Next.js notFound behavior
+            return;
+          }
+          throw new Error(`Failed to fetch article: ${res.statusText}`);
+        }
+        const data: ArticleForPage = await res.json();
+        setArticle(data);
+      } catch (err: any) {
+        console.error("Error fetching article:", err);
+        setError(err.message || "Could not load the article.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchArticle();
+  }, [articleId]);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow bg-background flex items-center justify-center">
+          <Loader2 className="h-16 w-16 animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
+    );
   }
+
+  if (error) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow bg-background flex flex-col items-center justify-center text-center p-4">
+          <AlertTriangle className="h-12 w-12 text-destructive mb-4" />
+          <h1 className="text-2xl font-bold text-destructive mb-2">Error Loading Article</h1>
+          <p className="text-muted-foreground mb-4">{error}</p>
+          <Button asChild variant="outline">
+            <Link href="/media">Back to All Media</Link>
+          </Button>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  
+  if (!article) {
+    // This case should ideally be handled by notFound() triggered in useEffect
+    // or if generateStaticParams returns an empty array for this ID.
+    // But as a fallback:
+    notFound();
+    return null; 
+  }
+
 
   const contentToDisplay = article.fullContent || article.description;
   const MediaTypeIcon = mediaTypeIcons[article.type] || Type;
-
 
   return (
     <div className="flex flex-col min-h-screen">

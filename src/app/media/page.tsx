@@ -4,11 +4,10 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation'; // Added useSearchParams
-import { articlesData, type Article, type MediaType, mediaTypeIcons } from '@/lib/data';
+import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ArrowLeft, Newspaper, ListFilter, ArrowDownUp, Mail, Eye, CalendarDays, User, Search as SearchIcon, Clock, BookText, Clapperboard, Video as VideoIcon } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Newspaper, ListFilter, ArrowDownUp, Eye, CalendarDays, User, Search as SearchIcon, Clock, Loader2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Input } from '@/components/ui/input';
@@ -16,11 +15,28 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import Footer from '@/components/layout/footer';
+import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types'; // Import from new location
+
+// Define Article type for this page, matching API response (no icon component)
+export interface ArticleForPage {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  dataAiHint: string;
+  type: MediaType;
+  category: string;
+  date: string;
+  author?: string;
+  tags?: string[];
+  readTime?: string;
+  views?: string;
+}
 
 type SortOption = 'date-desc' | 'date-asc' | 'category-asc' | 'type-asc';
 
 export default function AllMediaPage() {
-  const searchParams = useSearchParams(); // Get search params
+  const searchParams = useSearchParams();
   const initialQueryFromUrl = searchParams.get('q');
 
   const [sortOption, setSortOption] = React.useState<SortOption>('date-desc');
@@ -28,37 +44,57 @@ export default function AllMediaPage() {
   const [selectedType, setSelectedType] = React.useState<MediaType | 'All'>('All');
   const [searchTerm, setSearchTerm] = React.useState<string>(initialQueryFromUrl || '');
 
+  const [allArticles, setAllArticles] = React.useState<ArticleForPage[]>([]);
+  const [isLoadingData, setIsLoadingData] = React.useState(true);
+  const [fetchError, setFetchError] = React.useState<string | null>(null);
+
+
   React.useEffect(() => {
-    // Update searchTerm if the query parameter changes
     const queryParam = searchParams.get('q');
     if (queryParam !== null && queryParam !== searchTerm) {
       setSearchTerm(queryParam);
     }
-    // If you want to clear search when q is removed from URL:
-    // else if (queryParam === null && searchTerm !== '') {
-    //   setSearchTerm('');
-    // }
   }, [searchParams, searchTerm]);
 
+  React.useEffect(() => {
+    const fetchArticles = async () => {
+      setIsLoadingData(true);
+      setFetchError(null);
+      try {
+        const response = await fetch('/api/articles');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch articles: ${response.statusText}`);
+        }
+        const data: ArticleForPage[] = await response.json();
+        setAllArticles(data);
+      } catch (error: any) {
+        console.error("Error fetching articles:", error);
+        setFetchError(error.message || 'Could not load articles. Please try again later.');
+      } finally {
+        setIsLoadingData(false);
+      }
+    };
+    fetchArticles();
+  }, []);
 
   const categories = React.useMemo(() => {
-    const counts: { [key: string]: number } = { 'All': 0 }; 
-    articlesData.forEach(article => {
+    const counts: { [key: string]: number } = { 'All': 0 };
+    allArticles.forEach(article => {
       counts[article.category] = (counts[article.category] || 0) + 1;
     });
-    counts['All'] = articlesData.length;
+    counts['All'] = allArticles.length;
     return Object.entries(counts).map(([name, count]) => ({ name, count }))
       .sort((a, b) => a.name === 'All' ? -1 : b.name === 'All' ? 1 : a.name.localeCompare(b.name));
-  }, []);
+  }, [allArticles]);
 
   const availableTypes = React.useMemo(() => {
-    const types = new Set<MediaType>(articlesData.map(article => article.type));
+    const types = new Set<MediaType>(allArticles.map(article => article.type));
     return ['All', ...Array.from(types).sort()] as (MediaType | 'All')[];
-  }, []);
+  }, [allArticles]);
 
 
   const displayedArticles = React.useMemo(() => {
-    let processedArticles = [...articlesData];
+    let processedArticles = [...allArticles];
 
     if (selectedCategory !== 'All') {
       processedArticles = processedArticles.filter(article => article.category === selectedCategory);
@@ -92,7 +128,35 @@ export default function AllMediaPage() {
         break;
     }
     return processedArticles;
-  }, [sortOption, selectedCategory, selectedType, searchTerm]);
+  }, [sortOption, selectedCategory, selectedType, searchTerm, allArticles]);
+
+  if (isLoadingData) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow bg-muted flex items-center justify-center">
+          <Loader2 className="h-16 w-16 animate-spin text-primary" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+  
+  if (fetchError) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow bg-muted flex flex-col items-center justify-center text-center p-4">
+           <Newspaper className="mx-auto h-12 w-12 mb-4 text-destructive/50" />
+           <p className="text-lg text-destructive mb-2">{fetchError}</p>
+           <p className="text-muted-foreground">Please try refreshing the page or check back later.</p>
+           <Button variant="outline" asChild className="mt-4">
+             <Link href="/">Go Home</Link>
+           </Button>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -110,7 +174,6 @@ export default function AllMediaPage() {
           </AnimatedSection>
 
           <div className="grid md:grid-cols-12 gap-8">
-            {/* Sidebar */}
             <aside className="md:col-span-3 space-y-8">
               <AnimatedSection delay="delay-50">
                 <Card className="shadow-md bg-card">
@@ -151,8 +214,7 @@ export default function AllMediaPage() {
               </AnimatedSection>
             </aside>
 
-            {/* Main Content */}
-            <div className="md:col-span-9"> 
+            <div className="md:col-span-9">
               <AnimatedSection delay="delay-150">
                 <div className="mb-8">
                   <h1 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">

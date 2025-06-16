@@ -4,22 +4,25 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, NewspaperIcon, TrendingUp } from 'lucide-react'; // Changed Newspaper to NewspaperIcon
-import { articlesData, type Article } from '@/lib/data';
+import { ArrowRight, NewspaperIcon, TrendingUp, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import type { MediaType } from '@/lib/data/media-types'; // Import MediaType
 
-const getFeaturedStories = () => {
-  const stories = [];
-  if (articlesData.length > 0) stories.push(articlesData[0]); 
-  if (articlesData.length > 1) stories.push(articlesData[1]); 
-  if (articlesData.length > 2) stories.push(articlesData[2]); 
-  return stories;
-};
+// Define Article type for this component, matching API response
+interface ArticleForSection {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  dataAiHint: string;
+  type: MediaType;
+  author?: string;
+}
 
 interface StoryCardProps {
-  article: Article;
+  article: ArticleForSection;
   className?: string;
   large?: boolean;
 }
@@ -56,7 +59,31 @@ const StoryCard: React.FC<StoryCardProps> = ({ article, className, large = false
 
 
 export default function ContentSection() {
-  const featuredStories = getFeaturedStories();
+  const [featuredStories, setFeaturedStories] = React.useState<ArticleForSection[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const fetchFeaturedArticles = async () => {
+      setIsLoading(true);
+      try {
+        const response = await fetch('/api/articles?limit=3'); // Assuming API can take a limit
+        if (!response.ok) throw new Error('Failed to fetch articles');
+        let articles: ArticleForSection[] = await response.json();
+        // If API doesn't support limit, slice here.
+        if (!response.url.includes('limit=3')) {
+            articles = articles.slice(0, 3);
+        }
+        setFeaturedStories(articles);
+      } catch (error) {
+        console.error("Error fetching featured articles:", error);
+        // Optionally set an error state to display to user
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchFeaturedArticles();
+  }, []);
+
   const storyTopLeft = featuredStories[0];
   const storyBottomLeft = featuredStories[1];
   const storyRightLarge = featuredStories[2];
@@ -71,9 +98,12 @@ export default function ContentSection() {
           </p>
         </div>
 
-        {featuredStories.length >= 3 ? (
+        {isLoading ? (
+          <div className="flex justify-center items-center py-10">
+            <Loader2 className="h-12 w-12 animate-spin text-primary" />
+          </div>
+        ) : featuredStories.length >= 3 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
-            {/* Left Column */}
             <div className="md:col-span-1 flex flex-col gap-6 md:gap-8">
               {storyTopLeft && (
                 <StoryCard article={storyTopLeft} className="aspect-[4/3]" />
@@ -101,7 +131,6 @@ export default function ContentSection() {
               </Card>
             </div>
 
-            {/* Right Column */}
             <div className="md:col-span-2">
               {storyRightLarge && (
                 <StoryCard article={storyRightLarge} className="h-full min-h-[300px] md:min-h-full aspect-[4/3] md:aspect-auto" large />

@@ -1,35 +1,125 @@
 
-import { articlesData, type Article } from '@/lib/data';
+"use client"; // Required for useEffect and useState
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, useParams } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { CalendarDays, UserCircle, Tag, MessageSquare } from 'lucide-react';
+import { CalendarDays, UserCircle, Tag, MessageSquare, Type, Loader2, AlertTriangle } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types'; // Import from new location
+import Footer from '@/components/layout/footer'; // Assuming Footer is needed
 
-interface InsightPageProps {
-  params: {
-    id: string;
-  };
+// Define Article type for this page, matching API response
+interface ArticleForPage {
+  id: string;
+  title: string;
+  description: string;
+  fullContent?: string;
+  image: string;
+  dataAiHint: string;
+  type: MediaType;
+  category: string;
+  date: string;
+  author?: string;
+  tags?: string[];
+  readTime?: string;
+  views?: string;
 }
 
+// This function is for static generation, if you still want to use it.
+// It needs to fetch from the API.
 export async function generateStaticParams() {
-  return articlesData.map((article) => ({
-    id: article.id,
-  }));
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/articles`);
+    if (!res.ok) {
+      console.error("Failed to fetch articles for static params (insights):", res.status, await res.text());
+      return [];
+    }
+    const articles: ArticleForPage[] = await res.json();
+    return articles.map((article) => ({
+      id: article.id,
+    }));
+  } catch (error) {
+    console.error("Error in generateStaticParams for insights/[id]:", error);
+    return [];
+  }
 }
 
-export default function InsightPage({ params }: InsightPageProps) {
-  const article = articlesData.find((a) => a.id === params.id);
+export default function InsightPage() {
+  const params = useParams();
+  const articleId = typeof params.id === 'string' ? params.id : undefined;
+
+  const [article, setArticle] = useState<ArticleForPage | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!articleId) {
+      setError("Article ID is missing.");
+      setIsLoading(false);
+      return;
+    }
+
+    const fetchArticle = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const res = await fetch(`/api/articles/${articleId}`);
+        if (!res.ok) {
+          if (res.status === 404) {
+            notFound();
+            return;
+          }
+          throw new Error(`Failed to fetch insight: ${res.statusText}`);
+        }
+        const data: ArticleForPage = await res.json();
+        setArticle(data);
+      } catch (err: any) {
+        console.error("Error fetching insight:", err);
+        setError(err.message || "Could not load the insight.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchArticle();
+  }, [articleId]);
+
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-6 py-8 md:py-16 max-w-4xl bg-background flex items-center justify-center" style={{minHeight: 'calc(100vh - 200px)'}}>
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (error) {
+     return (
+      <div className="container mx-auto px-6 py-8 md:py-16 max-w-4xl bg-background flex flex-col items-center justify-center text-center" style={{minHeight: 'calc(100vh - 200px)'}}>
+        <AlertTriangle className="h-12 w-12 text-destructive mb-4" />
+        <h1 className="text-2xl font-bold text-destructive mb-2">Error Loading Insight</h1>
+        <p className="text-muted-foreground mb-4">{error}</p>
+        <Button asChild variant="outline">
+          <Link href="/insights">Back to All Insights</Link>
+        </Button>
+      </div>
+    );
+  }
 
   if (!article) {
     notFound();
+    return null;
   }
 
   const contentToDisplay = article.fullContent || article.description;
+  const ArticleTypeIcon = mediaTypeIcons[article.type] || Type;
+
 
   return (
     <div className="container mx-auto px-6 py-8 md:py-16 max-w-4xl bg-background">
@@ -48,7 +138,9 @@ export default function InsightPage({ params }: InsightPageProps) {
             <CalendarDays className="mr-1.5 h-4 w-4" />
             <span>Published: {new Date(article.date).toLocaleDateString()}</span>
           </div>
-          <Badge variant="secondary" className="capitalize">{article.type}</Badge>
+          <Badge variant="secondary" className="capitalize flex items-center">
+            <ArticleTypeIcon className="mr-1.5 h-3.5 w-3.5" /> {article.type}
+          </Badge>
           {article.author && (
             <div className="flex items-center">
               <UserCircle className="mr-1.5 h-4 w-4" />
@@ -83,7 +175,7 @@ export default function InsightPage({ params }: InsightPageProps) {
       )}
 
       <article className="prose dark:prose-invert prose-lg max-w-none font-body text-foreground leading-relaxed">
-        {contentToDisplay.split('\n').map((paragraph, index) => (
+        {contentToDisplay.split('\\n').map((paragraph, index) => (
           paragraph.trim() !== '' && <p key={index}>{paragraph}</p>
         ))}
       </article>

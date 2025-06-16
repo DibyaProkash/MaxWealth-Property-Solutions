@@ -4,16 +4,33 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { articlesData, type Article } from '@/lib/data';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ArrowLeft, Newspaper, Search as SearchIcon, ListFilter, ArrowDownUp } from 'lucide-react';
+import { ArrowRight, ArrowLeft, Newspaper, Search as SearchIcon, ListFilter, ArrowDownUp, Loader2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types'; // Import from new location
+import Footer from '@/components/layout/footer'; // Assuming Footer is needed
+
+// Define Article type for this page, matching API response (no icon component)
+export interface ArticleForPage {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  dataAiHint: string;
+  type: MediaType;
+  category: string;
+  date: string;
+  author?: string;
+  tags?: string[];
+  readTime?: string;
+  views?: string;
+}
 
 type SortOption = 'date-desc' | 'date-asc' | 'type-asc';
 type FilterType = string; 
@@ -23,18 +40,44 @@ export default function AllInsightsPage() {
   const [filterType, setFilterType] = React.useState<FilterType>('all');
   const [searchTerm, setSearchTerm] = React.useState<string>('');
 
+  const [allArticles, setAllArticles] = React.useState<ArticleForPage[]>([]);
+  const [isLoadingData, setIsLoadingData] = React.useState(true);
+  const [fetchError, setFetchError] = React.useState<string | null>(null);
+
+
+  React.useEffect(() => {
+    const fetchArticles = async () => {
+      setIsLoadingData(true);
+      setFetchError(null);
+      try {
+        const response = await fetch('/api/articles');
+        if (!response.ok) {
+            throw new Error(`Failed to fetch insights: ${response.statusText}`);
+        }
+        const data: ArticleForPage[] = await response.json();
+        setAllArticles(data);
+      } catch (error: any) {
+        console.error("Error fetching insights:", error);
+        setFetchError(error.message || 'Could not load insights. Please try again later.');
+      } finally {
+        setIsLoadingData(false);
+      }
+    };
+    fetchArticles();
+  }, []);
+
   const availableTypes = React.useMemo(() => {
     const types = new Set<string>(['all']);
-    articlesData.forEach(article => types.add(article.type));
+    allArticles.forEach(article => types.add(article.type));
     return Array.from(types).sort((a, b) => {
       if (a === 'all') return -1;
       if (b === 'all') return 1;
       return a.localeCompare(b);
     });
-  }, []);
+  }, [allArticles]);
 
   const displayedArticles = React.useMemo(() => {
-    let processedArticles = [...articlesData];
+    let processedArticles = [...allArticles];
 
     if (searchTerm.trim() !== '') {
       const lowerSearchTerm = searchTerm.toLowerCase();
@@ -61,7 +104,26 @@ export default function AllInsightsPage() {
         break;
     }
     return processedArticles;
-  }, [sortOption, filterType, searchTerm]);
+  }, [sortOption, filterType, searchTerm, allArticles]);
+
+  if (isLoadingData) {
+    return (
+      <div className="container mx-auto px-6 py-8 md:py-16 bg-background flex items-center justify-center" style={{minHeight: 'calc(100vh - 200px)'}}> {/* Adjust minHeight as needed */}
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (fetchError) {
+     return (
+      <div className="container mx-auto px-6 py-8 md:py-16 bg-background flex flex-col items-center justify-center text-center" style={{minHeight: 'calc(100vh - 200px)'}}>
+        <Newspaper className="mx-auto h-12 w-12 mb-4 text-destructive/50" />
+        <p className="text-lg text-destructive mb-2">{fetchError}</p>
+        <p className="text-muted-foreground">Please try refreshing the page.</p>
+      </div>
+    );
+  }
+
 
   return (
     <div className="container mx-auto px-6 py-8 md:py-16 bg-background">
@@ -138,7 +200,9 @@ export default function AllInsightsPage() {
 
       {displayedArticles.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {displayedArticles.map((article) => (
+          {displayedArticles.map((article) => {
+            const ArticleIcon = mediaTypeIcons[article.type] || Newspaper;
+            return (
             <AnimatedSection key={article.id} delay="delay-100">
               <div className="h-full">
                 <Card className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full bg-card">
@@ -153,7 +217,7 @@ export default function AllInsightsPage() {
                         data-ai-hint={article.dataAiHint}
                       />
                       <Badge variant="secondary" className="absolute top-2 right-2 capitalize flex items-center bg-secondary text-secondary-foreground">
-                        <article.icon className="w-4 h-4 mr-1.5" />
+                        <ArticleIcon className="w-4 h-4 mr-1.5" />
                         {article.type}
                       </Badge>
                     </div>
@@ -176,7 +240,8 @@ export default function AllInsightsPage() {
                 </Card>
               </div>
             </AnimatedSection>
-          ))}
+          );
+        })}
         </div>
       ) : (
         <div className="text-center py-10">

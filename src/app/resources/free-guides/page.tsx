@@ -1,17 +1,54 @@
 
 "use client";
 
+import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { guidesData, type Guide } from '@/lib/data';
+// import { guidesData, type Guide } from '@/lib/data'; // Removed direct import
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Download, ArrowLeft, FileText, BookMarked } from 'lucide-react';
+import { Download, ArrowLeft, FileText, BookMarked, Loader2 } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Badge } from '@/components/ui/badge';
 import Footer from '@/components/layout/footer';
 
+// Define Guide type for this page
+export interface Guide {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  dataAiHint: string;
+  downloadLink?: string;
+  category: string;
+}
+
+
 export default function FreeGuidesPage() {
+  const [guides, setGuides] = React.useState<Guide[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    const fetchGuides = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await fetch('/api/guides');
+        if (!response.ok) {
+          throw new Error('Failed to fetch guides');
+        }
+        const data: Guide[] = await response.json();
+        setGuides(data);
+      } catch (err: any) {
+        setError(err.message || 'Could not load guides.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchGuides();
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background">
@@ -38,9 +75,23 @@ export default function FreeGuidesPage() {
             </div>
           </AnimatedSection>
 
-          {guidesData.length > 0 ? (
+          {isLoading && (
+            <div className="flex justify-center items-center py-10">
+              <Loader2 className="h-12 w-12 animate-spin text-primary" />
+            </div>
+          )}
+
+          {error && (
+            <div className="text-center py-10 text-destructive">
+              <FileText className="mx-auto h-12 w-12 mb-4 opacity-50" />
+              <p className="text-lg font-semibold">Error Loading Guides</p>
+              <p>{error}</p>
+            </div>
+          )}
+
+          {!isLoading && !error && guides.length > 0 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {guidesData.map((guide) => (
+              {guides.map((guide) => (
                 <AnimatedSection key={guide.id} delay="delay-100">
                   <div className="h-full">
                     <Card className="flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full bg-card">
@@ -67,7 +118,7 @@ export default function FreeGuidesPage() {
                         <Button 
                             variant="default" 
                             className="w-full bg-accent text-accent-foreground hover:bg-accent/90" 
-                            asChild={!!guide.downloadLink && guide.downloadLink !== '#'} // Only use asChild if it's a real link
+                            asChild={!!guide.downloadLink && guide.downloadLink !== '#'}
                             onClick={!guide.downloadLink || guide.downloadLink === '#' ? () => alert('Download link coming soon!') : undefined}
                         >
                           {guide.downloadLink && guide.downloadLink !== '#' ? (
@@ -86,8 +137,10 @@ export default function FreeGuidesPage() {
                 </AnimatedSection>
               ))}
             </div>
-          ) : (
-            <AnimatedSection>
+          )}
+
+          {!isLoading && !error && guides.length === 0 && (
+             <AnimatedSection>
                 <div className="text-center py-10">
                 <FileText className="mx-auto h-12 w-12 mb-4 text-primary/50" />
                 <p className="text-lg text-muted-foreground">No guides or e-books available at the moment.</p>
