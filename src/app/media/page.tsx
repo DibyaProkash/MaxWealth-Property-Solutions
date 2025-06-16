@@ -4,6 +4,7 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation'; // Added useSearchParams
 import { articlesData, type Article, type MediaType, mediaTypeIcons } from '@/lib/data';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -19,13 +20,29 @@ import Footer from '@/components/layout/footer';
 type SortOption = 'date-desc' | 'date-asc' | 'category-asc' | 'type-asc';
 
 export default function AllMediaPage() {
+  const searchParams = useSearchParams(); // Get search params
+  const initialQueryFromUrl = searchParams.get('q');
+
   const [sortOption, setSortOption] = React.useState<SortOption>('date-desc');
   const [selectedCategory, setSelectedCategory] = React.useState<string>('All');
   const [selectedType, setSelectedType] = React.useState<MediaType | 'All'>('All');
-  const [searchTerm, setSearchTerm] = React.useState<string>('');
+  const [searchTerm, setSearchTerm] = React.useState<string>(initialQueryFromUrl || '');
+
+  React.useEffect(() => {
+    // Update searchTerm if the query parameter changes
+    const queryParam = searchParams.get('q');
+    if (queryParam !== null && queryParam !== searchTerm) {
+      setSearchTerm(queryParam);
+    }
+    // If you want to clear search when q is removed from URL:
+    // else if (queryParam === null && searchTerm !== '') {
+    //   setSearchTerm('');
+    // }
+  }, [searchParams, searchTerm]);
+
 
   const categories = React.useMemo(() => {
-    const counts: { [key: string]: number } = { 'All': 0 }; // Will sum all articles for "All"
+    const counts: { [key: string]: number } = { 'All': 0 }; 
     articlesData.forEach(article => {
       counts[article.category] = (counts[article.category] || 0) + 1;
     });
@@ -135,7 +152,7 @@ export default function AllMediaPage() {
             </aside>
 
             {/* Main Content */}
-            <div className="md:col-span-9"> {/* Changed from main to div */}
+            <div className="md:col-span-9"> 
               <AnimatedSection delay="delay-150">
                 <div className="mb-8">
                   <h1 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">

@@ -16,7 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { ThemeToggle } from '@/components/theme-toggle';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation'; // Added useRouter
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
@@ -34,7 +34,6 @@ interface NavLinkItem {
   description?: string;
 }
 
-// Keep resourceSubItems defined here or move to data.ts as preferred
 const localResourceSubItems: NavLinkItem[] = [
   { href: '/resources/ai-tools', label: 'AI-Powered Tools', icon: BrainCircuit, description: 'Leverage intelligent financial tools.' },
   { href: '/resources/free-guides', label: 'Free Guides & E-Books', icon: Download, description: 'Access valuable downloadable resources.' },
@@ -71,8 +70,12 @@ const homepageSectionIds = navLinksData
 
 export default function Navbar() {
   const pathname = usePathname();
+  const router = useRouter(); // Added for navigation
   const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
   const [isMounted, setIsMounted] = React.useState(false);
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [isSearchPopoverOpen, setIsSearchPopoverOpen] = React.useState(false);
+
 
   React.useEffect(() => {
     setIsMounted(true);
@@ -85,9 +88,23 @@ export default function Navbar() {
     return `/${href}`;
   };
 
+  const handleSearchSubmit = () => {
+    if (searchQuery.trim()) {
+      router.push(`/media?q=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchPopoverOpen(false); // Close popover
+      setSearchQuery(''); // Clear search input
+    }
+  };
+  
+  const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSearchSubmit();
+    }
+  };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/40 backdrop-blur-lg shadow-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-primary/30 backdrop-blur-lg shadow-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
           <Briefcase className="h-7 w-7 text-foreground" />
@@ -154,7 +171,7 @@ export default function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
           
-          <Popover>
+          <Popover open={isSearchPopoverOpen} onOpenChange={setIsSearchPopoverOpen}>
             <PopoverTrigger asChild>
               <Button
                 variant="ghost"
@@ -170,14 +187,20 @@ export default function Navbar() {
                 <div className="space-y-2">
                   <h4 className="font-medium leading-none">Search Site</h4>
                   <p className="text-sm text-muted-foreground">
-                    Enter keywords to search the website.
+                    Enter keywords to search articles, vlogs, and more.
                   </p>
                 </div>
                 <Input
                   id="search-navbar"
                   placeholder="e.g. Mortgage rates..."
                   className="col-span-2 h-8"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleSearchKeyDown}
                 />
+                <Button onClick={handleSearchSubmit} size="sm" className="w-full">
+                  Search
+                </Button>
               </div>
             </PopoverContent>
           </Popover>
