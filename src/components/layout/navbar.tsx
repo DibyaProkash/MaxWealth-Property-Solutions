@@ -4,7 +4,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow, Search as SearchIconLucide } from 'lucide-react';
 import {
   NavigationMenu,
@@ -22,7 +22,7 @@ import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge'; // Added Badge import
+import { Badge } from '@/components/ui/badge'; 
 
 interface NavLinkItem {
   href: string;
@@ -37,7 +37,7 @@ interface NavLinkItem {
 const aboutUsSubItems: NavLinkItem[] = [
   { href: '/about/our-company', label: 'Our Company', icon: Building, description: 'Learn about our mission, vision, and values.' },
   { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth PS.' },
-  { href: '/about/our-services', label: 'Our Services', icon: MessageSquare, description: 'Explore the services we offer.' }, // Changed icon to MessageSquare for variety
+  { href: '/about/our-services', label: 'Our Services', icon: MessageSquare, description: 'Explore the services we offer.' }, 
   { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
 ];
 
@@ -53,19 +53,19 @@ const localResourceSubItems: NavLinkItem[] = [
 const navLinksData: NavLinkItem[] = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
   {
-    href: '/about', // Main link for "About Us" itself
+    href: '/about', 
     label: 'About Us',
     icon: Building,
-    id: 'aboutPage', // ID for highlighting based on /about/*
+    id: 'aboutPage', 
     subItems: aboutUsSubItems,
     description: "Learn more about our company, team, and services."
   },
   { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
   {
-    href: '/resources', // Main link for "Resources" itself
+    href: '/resources', 
     label: 'Resources',
     icon: BookOpen,
-    id: 'resourcesPage', // ID for highlighting based on /resources/*
+    id: 'resourcesPage', 
     subItems: localResourceSubItems,
     description: "Access tools, guides, and FAQs."
   },
@@ -146,7 +146,7 @@ export default function Navbar() {
                           <ListItem
                             key={`${link.label}-overview`}
                             title={`Explore ${link.label}`}
-                            href={link.href} // Main link for the section overview
+                            href={link.href} 
                             icon={link.icon}
                             className={isMounted && pathname === link.href ? "bg-accent/10 text-accent" : ""}
                           >
@@ -237,6 +237,9 @@ export default function Navbar() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[280px] sm:w-[320px] bg-sidebar text-sidebar-foreground">
+                <SheetHeader>
+                  <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+                </SheetHeader>
                 <div className="flex flex-col space-y-1 p-4">
                   <SheetClose asChild>
                     <Link href="/" className="flex items-center space-x-2 mb-4">
@@ -255,7 +258,7 @@ export default function Navbar() {
                         <React.Fragment key={link.label}>
                            <SheetClose asChild>
                             <Link
-                                href={link.href} // Main link for the section overview
+                                href={link.href} 
                                 className={cn(
                                 "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                                 isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
@@ -350,4 +353,3 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-
