@@ -5,7 +5,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow } from 'lucide-react';
+import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow, Search } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,6 +22,8 @@ import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
 import { resourceSubItems } from '@/lib/data'; 
 import { aboutUsSubItems } from '@/lib/data'; 
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Input } from '@/components/ui/input';
 
 interface NavLinkItem {
   href: string;
@@ -85,11 +87,11 @@ export default function Navbar() {
 
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-primary text-primary-foreground shadow-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-background/80 backdrop-blur-md shadow-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
-          <Briefcase className="h-7 w-7 text-primary-foreground" />
-          <span className="font-headline text-2xl font-bold text-primary-foreground">MaxWealth PS</span>
+          <Briefcase className="h-7 w-7 text-foreground" />
+          <span className="font-headline text-2xl font-bold text-foreground">MaxWealth PS</span>
         </Link>
 
         <div className="flex items-center space-x-2 sm:space-x-4">
@@ -107,8 +109,8 @@ export default function Navbar() {
                       <Link href={link.href} passHref legacyBehavior={false} asChild>
                         <NavigationMenuTrigger
                           className={cn(navigationMenuTriggerStyle(),
-                            "bg-transparent text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10",
-                            isActive && "text-primary-foreground font-semibold bg-primary-foreground/10"
+                            "bg-transparent text-foreground/70 hover:text-foreground hover:bg-foreground/10 focus:bg-foreground/10 focus:text-foreground",
+                            isActive && "text-foreground font-semibold bg-foreground/10"
                           )}
                         >
                           {link.label}
@@ -139,7 +141,7 @@ export default function Navbar() {
                           href={getLinkHref(link.href)}
                            className={cn(navigationMenuTriggerStyle(),
                              "bg-transparent",
-                             isMounted && isActive ? "text-primary-foreground font-semibold bg-primary-foreground/10" : "text-primary-foreground/70 hover:text-primary-foreground hover:bg-primary-foreground/10"
+                             isMounted && isActive ? "text-foreground font-semibold bg-foreground/10" : "text-foreground/70 hover:text-foreground hover:bg-foreground/10 focus:bg-foreground/10 focus:text-foreground"
                           )}
                         >
                           {link.label}
@@ -151,6 +153,36 @@ export default function Navbar() {
               })}
             </NavigationMenuList>
           </NavigationMenu>
+          
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-foreground hover:bg-foreground/10 hover:text-foreground focus-visible:ring-foreground"
+              >
+                <Search className="h-5 w-5" />
+                <span className="sr-only">Search</span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <div className="grid gap-4">
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">Search Site</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Enter keywords to search the website.
+                  </p>
+                </div>
+                <Input
+                  id="search-navbar"
+                  placeholder="e.g. Mortgage rates..."
+                  className="col-span-2 h-8"
+                />
+                {/* Add a search button if needed, or trigger search on enter */}
+                {/* <Button variant="outline" size="sm">Search</Button> */}
+              </div>
+            </PopoverContent>
+          </Popover>
 
           <ThemeToggle />
 
@@ -160,7 +192,7 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground focus-visible:ring-primary-foreground"
+                  className="text-foreground hover:bg-foreground/10 hover:text-foreground focus-visible:ring-foreground"
                 >
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Toggle Navigation</span>
@@ -258,7 +290,7 @@ const ListItem = React.forwardRef<
           ref={ref}
           className={cn(
             "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground focus:bg-primary-foreground/10 focus:text-primary-foreground",
-            className
+            className // Dropdown items will retain their original color scheme from within the primary-bg dropdown
           )}
           {...props}
         >
@@ -275,5 +307,4 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-
     
