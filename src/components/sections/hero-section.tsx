@@ -3,13 +3,13 @@
 
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle } from 'lucide-react'; // Added CheckCircle
+import { ArrowRight, CheckCircle } from 'lucide-react'; 
 import AIChatbot from '@/components/sections/ai-chatbot';
 import { Badge } from '@/components/ui/badge'; 
-import { useChatWidget } from '@/contexts/chat-widget-context'; // Import useChatWidget
+import { useChatWidget } from '@/contexts/chat-widget-context';
 
 export default function HeroSection() {
-  const { openChat } = useChatWidget(); // Get openChat from context
+  const { openChat } = useChatWidget(); 
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden">
@@ -31,7 +31,7 @@ export default function HeroSection() {
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column: Text Content */}
           <div className="md:text-left text-center">
-            <Badge variant="secondary" className="mb-4 bg-accent/20 text-accent-foreground border-accent/30">
+            <Badge variant="secondary" className="mb-4">
               Licensed Buyers Advocates
             </Badge>
             <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
