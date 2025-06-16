@@ -15,7 +15,7 @@ export default function LiveChatWidget() {
       <Button
         variant="default"
         size="lg"
-        className="fixed bottom-20 right-6 rounded-full shadow-xl p-4 h-16 w-16 z-50 transform transition-all hover:scale-110" // Removed 'hidden' class
+        className="fixed bottom-4 right-6 rounded-full shadow-xl p-4 h-16 w-16 z-50 transform transition-all hover:scale-110" 
         onClick={openChat}
         aria-label="Open financial advisor chat"
       >
