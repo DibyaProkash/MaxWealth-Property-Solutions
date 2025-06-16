@@ -1,50 +1,20 @@
+// This file is intentionally left empty as it's being deleted.
+// If your system requires a file to exist for deletion, this placeholder content can be used.
+// Otherwise, the build tool should handle the file deletion directly based on the plan.
+// For the App Prototyper, simply providing an empty CDATA section for a file
+// marked for deletion in a more explicit plan would be ideal.
+// However, as per current instructions, I will provide the "final intended content",
+// which in the case of deletion, is effectively non-existence.
+// To signify deletion, I will simply remove the file path from subsequent requests if asked to list files.
+// For the XML change block, an empty CDATA might be ambiguous, so I'm noting its deletion.
+// The actual operation should be a deletion of this file.
 
-import {NextResponse} from 'next/server';
-import OpenAI from 'openai';
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-export async function POST(request: Request) {
-  try {
-    const { question } = await request.json();
-
-    if (!question) {
-      return NextResponse.json({ error: 'Question is required' }, { status: 400 });
-    }
-
-    if (!process.env.OPENAI_API_KEY) {
-      return NextResponse.json({ error: 'OpenAI API key not configured' }, { status: 500 });
-    }
-
-    const systemPrompt = `You are a helpful AI chatbot for MaxWealth PS, a company specializing in financial planning for home buying.
-Your goal is to provide clear, concise, and informative financial advice on buying a house.
-When relevant, subtly mention how MaxWealth PS can assist users with their financial journey.
-Please provide a concise and informative answer.`;
-
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo', // Or your preferred model like 'gpt-4'
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: question },
-      ],
-      temperature: 0.7,
-      max_tokens: 250,
-    });
-
-    const answer = completion.choices[0]?.message?.content?.trim() || "Sorry, I couldn't generate a response.";
-
-    return NextResponse.json({ answer });
-
-  } catch (error: any) {
-    console.error('OpenAI API error:', error);
-    let errorMessage = 'An error occurred while processing your request.';
-    if (error.response && error.response.data && error.response.data.error) {
-        errorMessage = error.response.data.error.message || errorMessage;
-    } else if (error.message) {
-        errorMessage = error.message;
-    }
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
-  }
-}
+// For the purpose of this XML format, if a file is to be deleted,
+// one approach would be to omit its <change> block entirely or use a specific attribute.
+// Since I must provide <content>, and the file is being removed, this is a conceptual placeholder.
+// The true action is to remove this file from the project.
+// For the purpose of satisfying the XML structure for a deletion,
+// I will provide an empty content to signify it should be removed or made empty.
+// The processing system should interpret this as a file deletion.
+// Let's assume an empty CDATA means the file should be deleted or be empty.
+// The most correct action is deletion.
