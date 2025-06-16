@@ -19,11 +19,11 @@ import { Badge } from "@/components/ui/badge";
 import type { TeamMemberDetailed } from '@/lib/data/team'; // Updated import path
 
 const founderData = {
-  name: 'Jyoti Poul Motra',
+  name: 'Jyoti Poul Mitra',
   title: 'Founder & Buyers Advocate',
-  bio: "Jyoti Poul Motra, the visionary Founder of MaxWealth PS, brings extensive experience as a Buyers Advocate. With a deep understanding of property markets, Jyoti is dedicated to helping clients navigate the complexities of real estate investment and home buying, focusing on delivering tailored strategies and exceptional outcomes. Jyoti's expertise spans across residential and investment properties, ensuring clients achieve their property aspirations.",
-  image: '/founder-jyoti-poul-motra.jpeg', // Updated image path
-  dataAiHint: 'man professional casual', // Updated AI hint
+  bio: "Jyoti Poul Mitra, the visionary Founder of MaxWealth PS, brings extensive experience as a Buyers Advocate. With a deep understanding of property markets, Jyoti is dedicated to helping clients navigate the complexities of real estate investment and home buying, focusing on delivering tailored strategies and exceptional outcomes. Jyoti's expertise spans across residential and investment properties, ensuring clients achieve their property aspirations.",
+  image: '/founder-jyoti-poul-mitra.jpeg', // Corrected image path
+  dataAiHint: 'man professional casual',
 };
 
 export default function OurTeamPage() {
@@ -186,7 +186,7 @@ export default function OurTeamPage() {
                 align: "start",
                 loop: canAutoplay,
                 }}
-                plugins={autoplayPlugin.current && canAutoplay ? [autoplayPlugin.current] : []}
+                plugins={canAutoplay && autoplayPlugin.current ? [autoplayPlugin.current] : []}
                 onMouseEnter={() => { if (canAutoplay && autoplayPlugin.current) autoplayPlugin.current.stop(); }}
                 onMouseLeave={() => { if (canAutoplay && autoplayPlugin.current) autoplayPlugin.current.play(); }}
                 className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
