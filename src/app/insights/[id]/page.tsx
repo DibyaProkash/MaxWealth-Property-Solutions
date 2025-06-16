@@ -31,24 +31,7 @@ interface ArticleForPage {
   views?: string;
 }
 
-// This function is for static generation, if you still want to use it.
-// It needs to fetch from the API.
-export async function generateStaticParams() {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/api/articles`);
-    if (!res.ok) {
-      console.error("Failed to fetch articles for static params (insights):", res.status, await res.text());
-      return [];
-    }
-    const articles: ArticleForPage[] = await res.json();
-    return articles.map((article) => ({
-      id: article.id,
-    }));
-  } catch (error) {
-    console.error("Error in generateStaticParams for insights/[id]:", error);
-    return [];
-  }
-}
+// generateStaticParams removed as this is a client component
 
 export default function InsightPage() {
   const params = useParams();
