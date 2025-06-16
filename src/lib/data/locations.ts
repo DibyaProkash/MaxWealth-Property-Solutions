@@ -1,8 +1,9 @@
 
-import React, { type SVGProps } from 'react';
-import type { LucideIcon } from 'lucide-react';
-import { MapPin, Landmark, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles, Target, Scale, Handshake, Lightbulb, Info } from 'lucide-react';
-import { BusIcon, CameraIcon } from '@/components/icons/custom-icons';
+// src/lib/data/locations.ts
+
+// No React or LucideIcon imports needed here as iconName is a string.
+// Custom icon components like BusIcon, CameraIcon are defined in custom-icons.tsx
+// and resolved in the UI component layer (e.g., CityLocationPage).
 
 export interface ServiceLocationItem {
   id: string;
@@ -148,7 +149,7 @@ export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(lo
       `With our deep local knowledge and extensive network in ${loc.name}, we uncover off-market deals and provide you with a competitive edge. Let us make your property journey in ${loc.name} a success.`
     ],
     amenities: generatePlaceholderAmenities(loc.name),
-    touristLink: '#', // Placeholder for other cities
+    touristLink: '#', 
     heroImage: loc.heroImage,
     heroImageAiHint: loc.heroImageAiHint,
   };
