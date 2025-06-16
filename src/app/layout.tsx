@@ -28,11 +28,21 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet" />
+        
+        {/* Inline script to define initMap callback and ready flag */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              function initMap() {
+                window.googleMapsApiInitialized = true;
+                window.dispatchEvent(new CustomEvent('google-maps-api-ready'));
+              }
+            `,
+          }}
+        />
         {/* Google Maps API Script using Next.js Script component for better handling */}
-        {/* IMPORTANT: The API key is taken directly from your example. For production, 
-            consider environment variables and key restrictions. */}
         <Script
-          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeHnRLEkdqvAFtfed89oQOIgZemP8FSEM&callback=console.debug&libraries=maps,marker&v=beta"
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeHnRLEkdqvAFtfed89oQOIgZemP8FSEM&callback=initMap&libraries=maps,marker&v=beta"
           strategy="beforeInteractive" // Load before page is interactive
         />
       </head>
