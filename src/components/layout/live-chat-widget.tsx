@@ -12,18 +12,16 @@ export default function LiveChatWidget() {
 
   return (
     <>
-      {/* This button is now always hidden, as mobile access is via Hero section */}
       <Button
         variant="default"
         size="lg"
-        className="hidden fixed bottom-20 right-6 rounded-full shadow-xl p-4 h-16 w-16 z-50 transform transition-all hover:scale-110"
+        className="fixed bottom-20 right-6 rounded-full shadow-xl p-4 h-16 w-16 z-50 transform transition-all hover:scale-110" // Removed 'hidden' class
         onClick={openChat}
         aria-label="Open financial advisor chat"
       >
         <MessageSquare className="h-7 w-7" />
       </Button>
 
-      {/* The Dialog remains to be controlled by the context for when openChat is called elsewhere */}
       <Dialog open={isChatOpen} onOpenChange={setChatOpen}>
         <DialogContent className="sm:max-w-lg p-0">
           <DialogHeader className="sr-only">
@@ -35,3 +33,4 @@ export default function LiveChatWidget() {
     </>
   );
 }
+
