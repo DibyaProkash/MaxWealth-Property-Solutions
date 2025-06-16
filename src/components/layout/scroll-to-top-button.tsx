@@ -10,10 +10,12 @@ export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
-    if (window.scrollY > 300) {
-      setIsVisible(true);
-    } else {
-      setIsVisible(false);
+    if (typeof window !== 'undefined') { // Ensure window is available
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
     }
   };
 
@@ -25,11 +27,16 @@ export default function ScrollToTopButton() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisibility);
-    return () => {
-      window.removeEventListener('scroll', toggleVisibility);
-    };
-  }, []);
+    // Ensure window is defined
+    if (typeof window !== 'undefined') {
+        window.addEventListener('scroll', toggleVisibility);
+        // Call it once to set initial state based on current scroll position
+        toggleVisibility(); 
+        return () => {
+            window.removeEventListener('scroll', toggleVisibility);
+        };
+    }
+  }, []); // Empty dependency array, runs once on mount
 
   return (
     <Button
@@ -37,7 +44,7 @@ export default function ScrollToTopButton() {
       size="icon"
       onClick={scrollToTop}
       className={cn(
-        'fixed bottom-24 right-6 z-50 transition-all duration-300 ease-in-out rounded-full shadow-lg hover:shadow-xl',
+        'fixed bottom-24 right-6 z-[51] transition-all duration-300 ease-in-out rounded-full shadow-lg hover:shadow-xl', // Changed z-50 to z-[51]
         'hover:bg-primary/10',
         isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'
       )}
