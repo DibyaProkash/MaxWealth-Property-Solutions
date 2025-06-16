@@ -1,7 +1,7 @@
 
 "use client";
 
-import GoogleMapEmbed from '@/components/layout/google-map-embed'; // Import the map component
+import Image from 'next/image'; // Added Image import
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,8 +12,8 @@ import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Youtube, X as Twitt
 import { maxWealthDifferenceData, type DifferencePoint } from '@/lib/data';
 
 export default function ContactUsPage() {
-  const officeLatitude = -27.470600128173828;
-  const officeLongitude = 153.02474975585938;
+  // const officeLatitude = -27.470600128173828; // Removed
+  // const officeLongitude = 153.02474975585938; // Removed
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -70,15 +70,16 @@ export default function ContactUsPage() {
                   </div>
                   
                   <div className="aspect-[4/3] bg-muted rounded-lg overflow-hidden shadow-md">
-                    {/* Replace Image with GoogleMapEmbed */}
-                    <GoogleMapEmbed
-                        latitude={officeLatitude}
-                        longitude={officeLongitude}
-                        zoom={14}
-                        className="w-full h-full" // Ensure map fills this div
+                    <Image
+                        src="https://placehold.co/600x450.png" 
+                        alt="Office Location Placeholder"
+                        width={600}
+                        height={450}
+                        className="w-full h-full object-cover"
+                        data-ai-hint="office map location" 
                     />
                   </div>
-                   {/* Removed placeholder text for map */}
+                  <p className="text-xs text-center text-muted-foreground mt-2">Map placeholder - office location would be displayed here.</p>
                 </div>
               </div>
             </Card>

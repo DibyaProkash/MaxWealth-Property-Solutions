@@ -113,10 +113,5 @@ body {
     @apply bg-background text-foreground;
     font-feature-settings: "liga" 1, "calt" 1; 
   }
-  /* Ensure gmp-map fills its container */
-  gmp-map {
-    display: block; /* Or inline-block if preferred within flow */
-    width: 100%;
-    height: 100%;
-  }
+  /* Removed gmp-map CSS rule */
 }
