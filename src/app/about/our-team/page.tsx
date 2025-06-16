@@ -18,13 +18,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import type { TeamMemberDetailed } from '@/lib/data/team'; // Updated import path
 
-const founderData = { 
-  name: 'Jacqueline Dwyer',
-  title: 'CEO & Founder & Buyers Advocate',
-  bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas including Sydney's Eastern Suburbs, North Shore, and Northern Beaches, and nationally with offices servicing Melbourne, Brisbane and Gold Coast. Jacqueline has a keen focus on development sites, commercial properties, and investment markets Australia-wide.",
-  image: 'https://placehold.co/400x450.png', 
-  dataAiHint: 'woman professional portrait',
-  logoText: 'MAXWEALTH PS',
+const founderData = {
+  name: 'Jyoti Poul Motra',
+  title: 'Founder & Buyers Advocate',
+  bio: "Jyoti Poul Motra, the visionary Founder of MaxWealth PS, brings extensive experience as a Buyers Advocate. With a deep understanding of property markets, Jyoti is dedicated to helping clients navigate the complexities of real estate investment and home buying, focusing on delivering tailored strategies and exceptional outcomes. Jyoti's expertise spans across residential and investment properties, ensuring clients achieve their property aspirations.",
+  image: '/founder-jyoti-poul-motra.jpeg', // Updated image path
+  dataAiHint: 'man professional casual', // Updated AI hint
 };
 
 export default function OurTeamPage() {
@@ -138,17 +137,17 @@ export default function OurTeamPage() {
                     <div className="grid md:grid-cols-5">
                         <div className="md:col-span-3 p-8 md:p-12">
                             <h2 className="font-headline text-3xl sm:text-4xl font-bold mb-1">
-                                CEO &amp; FOUNDER
+                                {founderData.name}
                             </h2>
                             <h3 className="font-headline text-2xl sm:text-3xl text-accent mb-6">
-                                &amp; BUYERS ADVOCATE
+                                {founderData.title}
                             </h3>
                             <p className="font-body text-primary-foreground/80 mb-6 leading-relaxed text-sm sm:text-base">
                                 {founderData.bio}
                             </p>
                             <div className="mt-auto">
-                            <p className="font-headline text-xl font-semibold text-primary-foreground/90">{founderData.logoText}</p>
-                            <p className="text-sm text-primary-foreground/70">{founderData.title.split('&')[1].trim()} &amp; {founderData.title.split('&')[2].trim()}</p>
+                                <p className="font-headline text-xl font-semibold text-primary-foreground/90">{founderData.title}</p>
+                                <p className="text-sm text-primary-foreground/70">With {founderData.name}</p>
                             </div>
                         </div>
                         <div className="md:col-span-2 relative min-h-[300px] md:min-h-0">
@@ -188,8 +187,8 @@ export default function OurTeamPage() {
                 loop: canAutoplay,
                 }}
                 plugins={autoplayPlugin.current && canAutoplay ? [autoplayPlugin.current] : []}
-                onMouseEnter={() => { if (canAutoplay) autoplayPlugin.current?.stop(); }}
-                onMouseLeave={() => { if (canAutoplay) autoplayPlugin.current?.play(); }}
+                onMouseEnter={() => { if (canAutoplay && autoplayPlugin.current) autoplayPlugin.current.stop(); }}
+                onMouseLeave={() => { if (canAutoplay && autoplayPlugin.current) autoplayPlugin.current.play(); }}
                 className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
               >
                 <CarouselContent className="-ml-4">
