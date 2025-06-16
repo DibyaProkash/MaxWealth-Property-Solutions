@@ -1,7 +1,7 @@
 
 "use client";
 
-import Image from 'next/image';
+import GoogleMapEmbed from '@/components/layout/google-map-embed'; // Import the map component
 import Link from 'next/link';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +12,9 @@ import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Youtube, X as Twitt
 import { maxWealthDifferenceData, type DifferencePoint } from '@/lib/data';
 
 export default function ContactUsPage() {
+  const officeLatitude = -27.470600128173828;
+  const officeLongitude = 153.02474975585938;
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background text-foreground">
@@ -67,18 +70,15 @@ export default function ContactUsPage() {
                   </div>
                   
                   <div className="aspect-[4/3] bg-muted rounded-lg overflow-hidden shadow-md">
-                    <Image
-                      src="https://placehold.co/800x600.png"
-                      alt="Map showing MaxWealth PS National Head Office"
-                      width={800}
-                      height={600}
-                      className="w-full h-full object-cover"
-                      data-ai-hint="city office map"
+                    {/* Replace Image with GoogleMapEmbed */}
+                    <GoogleMapEmbed
+                        latitude={officeLatitude}
+                        longitude={officeLongitude}
+                        zoom={14}
+                        className="w-full h-full" // Ensure map fills this div
                     />
-                     {/* Placeholder for actual Google Map Embed */}
-                     {/* For a real map, you'd replace this Image with Google Maps iframe or SDK integration */}
                   </div>
-                   <p className="text-xs text-muted-foreground mt-2 text-center">Map placeholder: Actual Google Maps integration would go here.</p>
+                   {/* Removed placeholder text for map */}
                 </div>
               </div>
             </Card>

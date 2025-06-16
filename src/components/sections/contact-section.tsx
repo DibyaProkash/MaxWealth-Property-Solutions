@@ -1,7 +1,7 @@
 
 "use client";
 
-import Image from 'next/image';
+import GoogleMapEmbed from '@/components/layout/google-map-embed'; // Import the map component
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -49,6 +49,9 @@ export default function ContactSection() {
     });
     form.reset();
   }
+  
+  const officeLatitude = -27.470600128173828;
+  const officeLongitude = 153.02474975585938;
 
   return (
     <section id="contact" className="py-16 md:py-24 bg-background">
@@ -150,13 +153,12 @@ export default function ContactSection() {
                 <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors">info@maxwealthps.com</a>
               </div>
               <div className="relative rounded-lg overflow-hidden shadow-md aspect-video">
-                <Image
-                  src="https://placehold.co/800x600.png"
-                  alt="Map showing office location"
-                  fill
-                  style={{ objectFit: "cover" }}
-                  className="w-full h-full"
-                  data-ai-hint="city map"
+                {/* Replace Image with GoogleMapEmbed */}
+                <GoogleMapEmbed
+                  latitude={officeLatitude}
+                  longitude={officeLongitude}
+                  zoom={14}
+                  className="w-full h-full" // Ensure map fills this div
                 />
               </div>
             </CardContent>
