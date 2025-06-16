@@ -20,10 +20,9 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
-import { resourceSubItems } from '@/lib/data';
-import { aboutUsSubItems } from '@/lib/data';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge'; // Added Badge import
 
 interface NavLinkItem {
   href: string;
@@ -34,6 +33,15 @@ interface NavLinkItem {
   description?: string;
 }
 
+// Data for About Us sub-menu
+const aboutUsSubItems: NavLinkItem[] = [
+  { href: '/about/our-company', label: 'Our Company', icon: Building, description: 'Learn about our mission, vision, and values.' },
+  { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth PS.' },
+  { href: '/about/our-services', label: 'Our Services', icon: MessageSquare, description: 'Explore the services we offer.' }, // Changed icon to MessageSquare for variety
+  { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
+];
+
+// Data for Resources sub-menu
 const localResourceSubItems: NavLinkItem[] = [
   { href: '/resources/ai-tools', label: 'AI-Powered Tools', icon: BrainCircuit, description: 'Leverage intelligent financial tools.' },
   { href: '/resources/free-guides', label: 'Free Guides & E-Books', icon: Download, description: 'Access valuable downloadable resources.' },
@@ -45,19 +53,19 @@ const localResourceSubItems: NavLinkItem[] = [
 const navLinksData: NavLinkItem[] = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
   {
-    href: '/about',
+    href: '/about', // Main link for "About Us" itself
     label: 'About Us',
     icon: Building,
-    id: 'aboutPage',
+    id: 'aboutPage', // ID for highlighting based on /about/*
     subItems: aboutUsSubItems,
     description: "Learn more about our company, team, and services."
   },
   { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
   {
-    href: '/resources',
+    href: '/resources', // Main link for "Resources" itself
     label: 'Resources',
     icon: BookOpen,
-    id: 'resourcesPage',
+    id: 'resourcesPage', // ID for highlighting based on /resources/*
     subItems: localResourceSubItems,
     description: "Access tools, guides, and FAQs."
   },
@@ -117,7 +125,7 @@ export default function Navbar() {
           <NavigationMenu className="hidden md:flex">
             <NavigationMenuList>
               {navLinksData.map((link) => {
-                const isCurrentPageRoot = link.id && (pathname === link.href || pathname.startsWith(link.href + '/'));
+                const isCurrentPageRoot = link.id && (pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href + '/')));
                 const isActive =
                   (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
                   (!link.href.startsWith('#') && isMounted && isCurrentPageRoot);
@@ -138,7 +146,7 @@ export default function Navbar() {
                           <ListItem
                             key={`${link.label}-overview`}
                             title={`Explore ${link.label}`}
-                            href={link.href}
+                            href={link.href} // Main link for the section overview
                             icon={link.icon}
                             className={isMounted && pathname === link.href ? "bg-accent/10 text-accent" : ""}
                           >
@@ -237,7 +245,7 @@ export default function Navbar() {
                     </Link>
                   </SheetClose>
                   {navLinksData.map((link) => {
-                     const isCurrentPageRoot = link.id && (pathname === link.href || pathname.startsWith(link.href + '/'));
+                     const isCurrentPageRoot = link.id && (pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href + '/')));
                      const isActive =
                         (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
                         (!link.href.startsWith('#') && isMounted && isCurrentPageRoot);
@@ -247,7 +255,7 @@ export default function Navbar() {
                         <React.Fragment key={link.label}>
                            <SheetClose asChild>
                             <Link
-                                href={link.href}
+                                href={link.href} // Main link for the section overview
                                 className={cn(
                                 "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                                 isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
@@ -273,6 +281,9 @@ export default function Navbar() {
                                   >
                                     <subItem.icon className="h-4 w-4" />
                                     <span>{subItem.label}</span>
+                                    {subItem.label === 'AI-Powered Tools' && (
+                                      <Badge variant="outline" className="ml-auto text-[10px] px-1 py-0 text-destructive border-destructive/50 bg-transparent">BETA</Badge>
+                                    )}
                                   </Link>
                                 </SheetClose>
                               );
@@ -326,6 +337,9 @@ const ListItem = React.forwardRef<
           <div className="flex items-center space-x-2">
             {Icon && <Icon className="h-5 w-5" />}
             <div className="text-sm font-medium leading-none">{title}</div>
+            {title === 'AI-Powered Tools' && (
+              <Badge variant="outline" className="ml-1.5 text-[10px] px-1 py-0 text-destructive border-destructive/50">BETA</Badge>
+            )}
           </div>
           <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
             {children}
