@@ -60,10 +60,10 @@ export default function ContactFormServicePage({ serviceName }: ContactFormServi
 
   async function onSubmit(values: z.infer<typeof formSchemaServicePage>) {
     await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("Service Page Form Submitted:", values);
+    console.log("Service Page Form Submitted:", values, "// In a real app, this data would be processed and emailed to info@maxwealthps.com");
     toast({
       title: "Consultation Request Sent!",
-      description: `Thank you for your interest in our ${serviceName} services. We'll be in touch shortly.`,
+      description: `Thank you! Your request regarding our ${serviceName} services has been noted and would typically be directed to info@maxwealthps.com.`,
       variant: "default",
     });
     form.reset({

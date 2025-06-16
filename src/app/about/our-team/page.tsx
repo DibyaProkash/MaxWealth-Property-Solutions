@@ -238,7 +238,7 @@ export default function OurTeamPage() {
                                 <div className="flex flex-wrap gap-1">
                                   {member.specialties.slice(0,3).map(spec => 
                                     <Badge key={spec} variant="secondary" className="text-[0.65rem] px-1.5 py-0.5 font-normal bg-secondary/70 text-secondary-foreground/80">{spec}</Badge>
-                                  ))}
+                                  )}
                                 </div>
                               </div>
                             )}

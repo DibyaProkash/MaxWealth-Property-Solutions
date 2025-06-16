@@ -15,9 +15,9 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import Footer from '@/components/layout/footer';
-import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types'; // Import from new location
+import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types';
+import { useToast } from "@/hooks/use-toast"; // Added useToast
 
-// Define Article type for this page, matching API response (no icon component)
 export interface ArticleForPage {
   id: string;
   title: string;
@@ -38,11 +38,13 @@ type SortOption = 'date-desc' | 'date-asc' | 'category-asc' | 'type-asc';
 export default function AllMediaPage() {
   const searchParams = useSearchParams();
   const initialQueryFromUrl = searchParams.get('q');
+  const { toast } = useToast(); // Initialize useToast
 
   const [sortOption, setSortOption] = React.useState<SortOption>('date-desc');
   const [selectedCategory, setSelectedCategory] = React.useState<string>('All');
   const [selectedType, setSelectedType] = React.useState<MediaType | 'All'>('All');
   const [searchTerm, setSearchTerm] = React.useState<string>(initialQueryFromUrl || '');
+  const [subscribeEmail, setSubscribeEmail] = React.useState<string>(''); // State for subscribe email
 
   const [allArticles, setAllArticles] = React.useState<ArticleForPage[]>([]);
   const [isLoadingData, setIsLoadingData] = React.useState(true);
@@ -130,6 +132,27 @@ export default function AllMediaPage() {
     return processedArticles;
   }, [sortOption, selectedCategory, selectedType, searchTerm, allArticles]);
 
+  const handleSubscribeSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!subscribeEmail.trim() || !/\S+@\S+\.\S+/.test(subscribeEmail)) {
+        toast({
+            title: "Invalid Email",
+            description: "Please enter a valid email address to subscribe.",
+            variant: "destructive",
+        });
+        return;
+    }
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 500));
+    console.log("Subscription Request:", { email: subscribeEmail }, "// In a real app, this email would be added to a mailing list, and a notification might be sent to info@maxwealthps.com");
+    toast({
+      title: "Subscribed!",
+      description: `Thank you for subscribing with ${subscribeEmail}. Your request has been noted.`,
+      variant: "default",
+    });
+    setSubscribeEmail(""); // Clear the input
+  };
+
   if (isLoadingData) {
     return (
       <div className="flex flex-col min-h-screen">
@@ -202,10 +225,17 @@ export default function AllMediaPage() {
                 <Card className="shadow-md bg-card p-6">
                   <h3 className="font-headline text-lg text-primary mb-2">Stay Informed</h3>
                   <p className="text-sm text-muted-foreground mb-4">Get weekly market insights and property tips delivered to your inbox.</p>
-                  <form className="space-y-3">
+                  <form onSubmit={handleSubscribeSubmit} className="space-y-3">
                     <div>
                       <Label htmlFor="subscribeEmailMedia" className="sr-only">Your email address</Label>
-                      <Input type="email" id="subscribeEmailMedia" placeholder="Your email address" className="bg-background" />
+                      <Input 
+                        type="email" 
+                        id="subscribeEmailMedia" 
+                        placeholder="Your email address" 
+                        className="bg-background" 
+                        value={subscribeEmail}
+                        onChange={(e) => setSubscribeEmail(e.target.value)}
+                      />
                     </div>
                     <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/80">Subscribe</Button>
                   </form>

@@ -20,11 +20,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Briefcase, Info } from "lucide-react";
+import { ArrowLeft, BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Briefcase, Info, Loader2 } from "lucide-react";
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 import { memberLogos } from '@/lib/data';
-import FeeStructureSection from '@/components/sections/fee-structure-section'; // Added import
+import FeeStructureSection from '@/components/sections/fee-structure-section';
 
 
 const formSchema = z.object({
@@ -52,10 +52,10 @@ export default function FeesExplainedPage() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("Strategy Call Request:", values);
+    console.log("Strategy Call Request:", values, "// In a real app, this data would be processed and emailed to info@maxwealthps.com");
     toast({
       title: "Strategy Call Booked!",
-      description: "Thank you! We've received your request and will be in touch shortly to confirm your 30-minute chat.",
+      description: "Thank you! Your request has been received and would typically be directed to info@maxwealthps.com.",
     });
     form.reset();
   }
@@ -267,7 +267,7 @@ export default function FeesExplainedPage() {
                             </svg>
                           </div>
                           <Button type="submit" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" disabled={form.formState.isSubmitting}>
-                            {form.formState.isSubmitting ? "Booking..." : "Yes, Book My Chat with MaxWealth PS Now"}
+                            {form.formState.isSubmitting ? ( <> <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Booking... </>) : "Yes, Book My Chat with MaxWealth PS Now"}
                           </Button>
                           <p className="text-xs text-muted-foreground text-center">*Average response time is 45 minutes. Your information is secure.</p>
                         </form>

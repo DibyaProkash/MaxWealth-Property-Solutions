@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
-import { buyerTypesData } from "@/lib/data"; // Assuming you'll add buyerTypesData to data.ts
+import { buyerTypesData } from "@/lib/data";
 
 const detailedContactFormSchema = z.object({
   firstName: z.string().min(1, { message: "First name is required." }),
@@ -47,11 +47,11 @@ export default function DetailedContactForm() {
   });
 
   async function onSubmit(values: z.infer<typeof detailedContactFormSchema>) {
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-    console.log("Detailed Contact Form Submitted:", values);
+    await new Promise(resolve => setTimeout(resolve, 1000)); 
+    console.log("Detailed Contact Form Submitted:", values, "// In a real app, this data would be processed and emailed to info@maxwealthps.com");
     toast({
       title: "Consultation Request Sent!",
-      description: "Thank you! We've received your request and will be in touch shortly.",
+      description: "Thank you! Your request has been received and would typically be directed to info@maxwealthps.com.",
       variant: "default",
     });
     form.reset();

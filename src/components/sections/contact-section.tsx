@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -41,10 +41,10 @@ export default function ContactSection() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log(values);
+    console.log("Homepage Contact Form Submitted:", values, "// In a real app, this data would be processed and emailed to info@maxwealthps.com");
     toast({
       title: "Message Sent!",
-      description: "Thank you for contacting us. We'll get back to you shortly.",
+      description: "Thank you for contacting us. Your message has been noted and would typically be directed to info@maxwealthps.com.",
       variant: "default",
     });
     form.reset();
@@ -76,7 +76,7 @@ export default function ContactSection() {
                       <FormItem>
                         <FormLabel>Full Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="John Doe" {...field} />
+                          <Input placeholder="John Doe" {...field} disabled={form.formState.isSubmitting} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -89,7 +89,7 @@ export default function ContactSection() {
                       <FormItem>
                         <FormLabel>Email Address</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="you@example.com" {...field} />
+                          <Input type="email" placeholder="you@example.com" {...field} disabled={form.formState.isSubmitting} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -102,7 +102,7 @@ export default function ContactSection() {
                       <FormItem>
                         <FormLabel>Subject</FormLabel>
                         <FormControl>
-                          <Input placeholder="Inquiry about mortgages" {...field} />
+                          <Input placeholder="Inquiry about mortgages" {...field} disabled={form.formState.isSubmitting} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -115,7 +115,7 @@ export default function ContactSection() {
                       <FormItem>
                         <FormLabel>Your Message</FormLabel>
                         <FormControl>
-                          <Textarea placeholder="Tell us more about your needs..." {...field} rows={5} />
+                          <Textarea placeholder="Tell us more about your needs..." {...field} rows={5} disabled={form.formState.isSubmitting} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -125,7 +125,7 @@ export default function ContactSection() {
                     reCAPTCHA placeholder: This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
                   </div>
                   <Button type="submit" size="lg" className="w-full shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90" disabled={form.formState.isSubmitting}>
-                    {form.formState.isSubmitting ? "Sending..." : "Send Message"}
+                    {form.formState.isSubmitting ? ( <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> ) : "Send Message"}
                   </Button>
                 </form>
               </Form>

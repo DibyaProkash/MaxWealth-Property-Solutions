@@ -45,10 +45,10 @@ export default function ContactFormCityPage({ cityName }: ContactFormCityPagePro
   async function onSubmit(values: z.infer<typeof formSchemaCityPage>) {
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log("City Page Form Submitted:", values);
+    console.log("City Page Form Submitted:", values, "// In a real app, this data would be processed and emailed to info@maxwealthps.com");
     toast({
       title: "Inquiry Sent!",
-      description: `Thank you for your interest in ${cityName}. We'll be in touch shortly.`,
+      description: `Thank you for your interest in ${cityName}. Your query has been noted and would typically be directed to info@maxwealthps.com.`,
       variant: "default",
     });
     form.reset({
