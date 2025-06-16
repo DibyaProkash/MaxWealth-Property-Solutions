@@ -3,6 +3,7 @@ import Footer from '@/components/layout/footer';
 import HeroSection from '@/components/sections/hero-section';
 import AchievementsSection from '@/components/sections/achievements-section'; 
 import AboutUsSection from '@/components/sections/about-us-section';
+import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services'; // Added import
 import ContentSection from '@/components/sections/content-section';
 // import CalculatorsSection from '@/components/sections/calculators-section'; // Removed
 // import RoadmapSection from '@/components/sections/roadmap-section'; // Removed
@@ -27,6 +28,13 @@ export default function HomePage() {
 
         <AnimatedSection delay="delay-100" id="about">
           <AboutUsSection />
+        </AnimatedSection>
+        
+        {/* Added ComprehensivePropertyServices section here */}
+        <AnimatedSection delay="delay-100">
+          <div className="bg-secondary"> {/* Optional: Add a distinct background for this section on the homepage */}
+            <ComprehensivePropertyServices />
+          </div>
         </AnimatedSection>
         
         {articlesData.length > 0 && (
