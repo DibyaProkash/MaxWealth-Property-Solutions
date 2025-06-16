@@ -60,8 +60,7 @@ export default function HeroSection() {
               </Button>
               <Button
                 size="lg"
-                variant="outline"
-                className="shadow-lg transform transition-transform hover:scale-105 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 md:hidden"
+                className="shadow-lg transform transition-transform hover:scale-105 block md:hidden bg-[hsl(var(--background))/50] hover:bg-[hsl(var(--background))/70] backdrop-blur-sm text-primary-foreground border border-primary-foreground/30"
                 onClick={openChat}
                 aria-label="Open financial advisor chat"
               >
