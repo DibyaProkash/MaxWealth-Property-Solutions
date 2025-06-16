@@ -928,3 +928,49 @@ export const maxWealthDifferenceData: DifferencePoint[] = [
     icon: SearchCode, // Represents research, tech, AI
   },
 ];
+
+export interface ComprehensiveServiceItem {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+export const comprehensiveServicesData: ComprehensiveServiceItem[] = [
+  {
+    id: 'cs1',
+    icon: SearchCode,
+    title: 'Property Search & Selection',
+    description: 'Access to off-market properties and comprehensive market analysis across all major Australian cities.',
+  },
+  {
+    id: 'cs2',
+    icon: FileSearch,
+    title: 'Due Diligence & Inspections',
+    description: 'Thorough property evaluations, building inspections, and legal compliance checks.',
+  },
+  {
+    id: 'cs3',
+    icon: Handshake,
+    title: 'Negotiation & Purchase',
+    description: 'Expert negotiation to secure the best price and terms for your property purchase.',
+  },
+  {
+    id: 'cs4',
+    icon: TrendingUp,
+    title: 'Investment Analysis',
+    description: 'Comprehensive market analysis and investment potential assessment for each property.',
+  },
+  {
+    id: 'cs5',
+    icon: Award,
+    title: 'Auction Bidding',
+    description: 'Professional auction representation to secure your dream property at competitive prices.',
+  },
+  {
+    id: 'cs6',
+    icon: Briefcase,
+    title: 'Settlement Support',
+    description: 'Complete settlement coordination and post-purchase support services.',
+  },
+];

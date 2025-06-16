@@ -11,6 +11,7 @@ import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { whoWeHelpData, serviceLocationsData } from '@/lib/data';
 import { cn } from '@/lib/utils';
+import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services';
 
 export default function OurServicesPage() {
   return (
@@ -43,6 +44,11 @@ export default function OurServicesPage() {
                 Discover the range of expert services MaxWealth PS offers to make your property journey seamless and successful.
               </p>
             </header>
+          </AnimatedSection>
+
+          {/* New Comprehensive Property Buyer Services Section */}
+          <AnimatedSection delay="delay-50">
+            <ComprehensivePropertyServices />
           </AnimatedSection>
 
           {/* Who We Help Section */}
