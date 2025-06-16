@@ -58,7 +58,7 @@ export default function HeroSection() {
               </Button>
               {/* AI Advisor Button for Mobile */}
               <Button
-                className="h-10 px-4 text-sm bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105 block md:hidden"
+                className="h-10 px-4 text-sm bg-[hsl(var(--background))/50] hover:bg-[hsl(var(--background))/70] backdrop-blur-sm text-primary-foreground border border-primary-foreground/30 shadow-lg transform transition-transform hover:scale-105 block md:hidden"
                 onClick={openChat}
                 aria-label="Open financial advisor chat"
               >
