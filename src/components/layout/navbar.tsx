@@ -1,11 +1,10 @@
-
 "use client";
 
 import * as React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
-import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow, Search } from 'lucide-react';
+import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow, Search as SearchIconLucide } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -90,7 +89,7 @@ export default function Navbar() {
 
   const handleSearchSubmit = () => {
     if (searchQuery.trim()) {
-      router.push(`/media?q=${encodeURIComponent(searchQuery.trim())}`);
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setIsSearchPopoverOpen(false); 
       setSearchQuery(''); 
     }
@@ -178,7 +177,7 @@ export default function Navbar() {
                 size="icon"
                 className="text-foreground hover:bg-foreground/10 hover:text-foreground focus-visible:ring-foreground"
               >
-                <Search className="h-5 w-5" />
+                <SearchIconLucide className="h-5 w-5" />
                 <span className="sr-only">Search</span>
               </Button>
             </PopoverTrigger>
@@ -187,7 +186,7 @@ export default function Navbar() {
                 <div className="space-y-2">
                   <h4 className="font-medium leading-none">Search Site</h4>
                   <p className="text-sm text-muted-foreground">
-                    Enter keywords to search articles, vlogs, and more.
+                    Enter keywords to search articles, pages, and more.
                   </p>
                 </div>
                 <Input
@@ -328,6 +327,3 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-    
-
-    

@@ -1,6 +1,6 @@
 
-import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus } from 'lucide-react';
-import type { SVGProps } from 'react';
+import React, { type SVGProps } from 'react';
+import { Newspaper, Video, type LucideIcon, BookText, Clapperboard, Briefcase, SearchCheck, TrendingUp, Handshake, Users, Workflow, Building, Building2, Settings, CalculatorIcon, HelpCircle, BrainCircuit, Download, ListChecks, ConciergeBell, Home, Gem, Hotel, ShieldCheck, MapPin, BuildingIcon as DefaultBuildingIcon, Percent, Landmark, Plane, Utensils, Train, Sailboat, ShoppingCart, Trees, Sparkles, Lightbulb, BarChart2, Users2, Target, Scale, CheckCircle, ThumbsUp, Clock, Calendar, Award, MessageCircle, BookOpenCheck, FileSearch, Brain, Timer, Star, Camera as LucideCamera, Bus as LucideBus, DollarSign, FileText as LucideFileText, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, Zap, BarChartBig, BadgePercent, Network, UserCog, SearchCode, Search as SearchIconLucide } from 'lucide-react';
 
 
 // Helper icon component (if not directly from lucide-react or if a specific one is needed)
@@ -125,7 +125,7 @@ export const articlesData: Article[] = [
     id: '1',
     title: 'Understanding Mortgage Rates in 2024',
     description: 'A deep dive into current mortgage trends and how they affect your buying power. This article explores various factors influencing rates.',
-    fullContent: 'The 2024 mortgage market presents a dynamic environment for prospective homebuyers. Several key factors are influencing interest rates. Firstly, the Federal Reserve\'s monetary policy plays a pivotal role. Any adjustments to the federal funds rate can create ripple effects across the lending industry, impacting mortgage rates directly.\n\nSecondly, inflation trends continue to be a significant determinant. High inflation often leads to higher interest rates as lenders seek to protect the real value of their returns. Conversely, if inflation cools, we might see some stabilization or even a slight decrease in rates. Economic growth, unemployment figures, and overall market sentiment also contribute to the complex equation of mortgage rate fluctuations. For instance, a robust economy might lead to increased demand for housing and potentially higher rates, while economic uncertainty could have the opposite effect.\n\nIt\'s also crucial to consider the type of mortgage. Fixed-rate mortgages offer stability over the loan term, locking in a rate regardless of market changes. Adjustable-rate mortgages (ARMs) typically start with a lower rate but can change periodically based on market indexes. Understanding the nuances of each can help buyers make informed decisions. We advise consulting with a financial advisor to navigate these complexities and find the best mortgage product for your specific situation.',
+    fullContent: 'The 2024 mortgage market presents a dynamic environment for prospective homebuyers. Several key factors are influencing interest rates. Firstly, the Federal Reserve\\\'s monetary policy plays a pivotal role. Any adjustments to the federal funds rate can create ripple effects across the lending industry, impacting mortgage rates directly.\\n\\nSecondly, inflation trends continue to be a significant determinant. High inflation often leads to higher interest rates as lenders seek to protect the real value of their returns. Conversely, if inflation cools, we might see some stabilization or even a slight decrease in rates. Economic growth, unemployment figures, and overall market sentiment also contribute to the complex equation of mortgage rate fluctuations. For instance, a robust economy might lead to increased demand for housing and potentially higher rates, while economic uncertainty could have the opposite effect.\\n\\nIt\\\'s also crucial to consider the type of mortgage. Fixed-rate mortgages offer stability over the loan term, locking in a rate regardless of market changes. Adjustable-rate mortgages (ARMs) typically start with a lower rate but can change periodically based on market indexes. Understanding the nuances of each can help buyers make informed decisions. We advise consulting with a financial advisor to navigate these complexities and find the best mortgage product for your specific situation.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'finance graph',
     type: 'Article',
@@ -141,11 +141,11 @@ export const articlesData: Article[] = [
     id: '2',
     title: 'First-Time Home Buyer? Watch This First!',
     description: 'Our latest vlog covers essential tips for navigating your first home purchase, from saving for a down payment to understanding closing.',
-    fullContent: 'Welcome, future homeowners! Buying your first home is a monumental step, and this vlog is designed to guide you through the essentials. We begin by emphasizing financial preparedness. This involves a thorough assessment of your current financial health – your income, expenses, debts, and most importantly, your credit score. A higher credit score generally unlocks better mortgage terms. We also discuss practical strategies for saving for a down payment, which can often seem like the biggest hurdle. Setting up a dedicated savings account and automating contributions are excellent starting points.\n\nNext, we dive into the pre-approval process. Obtaining a mortgage pre-approval before you start house hunting is crucial. It gives you a clear budget, shows sellers you\'re a serious buyer, and can expedite the offer process. Choosing the right real estate agent is another key topic. Look for an agent with experience in your desired area and a good understanding of first-time buyer needs. During the home search, we advise creating a list of "must-haves" versus "nice-to-haves" to stay focused. When you find "the one," making a competitive offer involves more than just the price; contingencies like inspection and financing are also vital. Finally, we demystify the closing process, explaining the various documents you\'ll sign and the costs involved. Our aim is to equip you with the knowledge to make this journey as smooth as possible.',
+    fullContent: 'Welcome, future homeowners! Buying your first home is a monumental step, and this vlog is designed to guide you through the essentials. We begin by emphasizing financial preparedness. This involves a thorough assessment of your current financial health – your income, expenses, debts, and most importantly, your credit score. A higher credit score generally unlocks better mortgage terms. We also discuss practical strategies for saving for a down payment, which can often seem like the biggest hurdle. Setting up a dedicated savings account and automating contributions are excellent starting points.\\n\\nNext, we dive into the pre-approval process. Obtaining a mortgage pre-approval before you start house hunting is crucial. It gives you a clear budget, shows sellers you\\\'re a serious buyer, and can expedite the offer process. Choosing the right real estate agent is another key topic. Look for an agent with experience in your desired area and a good understanding of first-time buyer needs. During the home search, we advise creating a list of "must-haves" versus "nice-to-haves" to stay focused. When you find "the one," making a competitive offer involves more than just the price; contingencies like inspection and financing are also vital. Finally, we demystify the closing process, explaining the various documents you\\\'ll sign and the costs involved. Our aim is to equip you with the knowledge to make this journey as smooth as possible.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'home keys',
     type: 'Vlog',
-    category: 'Buyer\'s Guide',
+    category: 'Buyer\\\'s Guide',
     date: '2024-07-10',
     icon: Video,
     author: 'MaxWealth PS Team',
@@ -157,7 +157,7 @@ export const articlesData: Article[] = [
     id: '3',
     title: 'Saving Strategies for Your Down Payment',
     description: 'Practical advice on building your down payment fund effectively. Learn about different savings accounts and goal-setting.',
-    fullContent: 'Saving for a down payment is often the first major financial challenge for aspiring homeowners. This article outlines effective strategies to build your fund. Start by setting a clear goal: determine how much you need based on typical home prices in your target area and the type of mortgage you might pursue. Once you have a target, create a detailed budget to track your income and expenses. Identify areas where you can reduce spending – dining out, subscriptions, or entertainment – and redirect those funds towards your down payment savings.\n\nConsider opening a high-yield savings account specifically for your down payment. These accounts often offer better interest rates than traditional savings accounts, helping your money grow faster. Automating your savings by setting up regular transfers from your checking account to your down payment fund can also be highly effective, ensuring consistency. Explore if your employer offers any programs or if there are government-backed down payment assistance programs you might qualify for. Sometimes, financial gifts from family can contribute, but be sure to understand any rules or tax implications. Remember, consistency and discipline are key. Even small, regular contributions can add up significantly over time.',
+    fullContent: 'Saving for a down payment is often the first major financial challenge for aspiring homeowners. This article outlines effective strategies to build your fund. Start by setting a clear goal: determine how much you need based on typical home prices in your target area and the type of mortgage you might pursue. Once you have a target, create a detailed budget to track your income and expenses. Identify areas where you can reduce spending – dining out, subscriptions, or entertainment – and redirect those funds towards your down payment savings.\\n\\nConsider opening a high-yield savings account specifically for your down payment. These accounts often offer better interest rates than traditional savings accounts, helping your money grow faster. Automating your savings by setting up regular transfers from your checking account to your down payment fund can also be highly effective, ensuring consistency. Explore if your employer offers any programs or if there are government-backed down payment assistance programs you might qualify for. Sometimes, financial gifts from family can contribute, but be sure to understand any rules or tax implications. Remember, consistency and discipline are key. Even small, regular contributions can add up significantly over time.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'savings money',
     type: 'Blog',
@@ -173,7 +173,7 @@ export const articlesData: Article[] = [
     id: '4',
     title: 'The Future of Real Estate Technology',
     description: 'Exploring how tech is shaping the home buying and selling process, from AI-powered searches to virtual tours.',
-    fullContent: 'The real estate industry is undergoing a significant transformation driven by technology. AI-powered search platforms are becoming increasingly sophisticated, offering personalized property recommendations based on user behavior and preferences, going beyond simple keyword searches. Virtual Reality (VR) and Augmented Reality (AR) are revolutionizing property viewings. VR tours allow potential buyers to explore homes remotely in immersive detail, saving time and effort, especially for out-of-town buyers. AR can help visualize renovations or furniture placements within a space.\n\nBlockchain technology is also emerging as a potential game-changer. Its proponents suggest it could streamline transactions, enhance security, and improve transparency in property records and ownership transfers, though widespread adoption is still in its early stages. Big data analytics are providing deeper insights into market trends, property valuations, and investment opportunities, empowering both consumers and professionals. Furthermore, mobile apps continue to offer convenient access to listings, mortgage calculators, and communication tools. As these technologies mature and integrate, the home buying and selling process is set to become more efficient, data-driven, and user-centric.',
+    fullContent: 'The real estate industry is undergoing a significant transformation driven by technology. AI-powered search platforms are becoming increasingly sophisticated, offering personalized property recommendations based on user behavior and preferences, going beyond simple keyword searches. Virtual Reality (VR) and Augmented Reality (AR) are revolutionizing property viewings. VR tours allow potential buyers to explore homes remotely in immersive detail, saving time and effort, especially for out-of-town buyers. AR can help visualize renovations or furniture placements within a space.\\n\\nBlockchain technology is also emerging as a potential game-changer. Its proponents suggest it could streamline transactions, enhance security, and improve transparency in property records and ownership transfers, though widespread adoption is still in its early stages. Big data analytics are providing deeper insights into market trends, property valuations, and investment opportunities, empowering both consumers and professionals. Furthermore, mobile apps continue to offer convenient access to listings, mortgage calculators, and communication tools. As these technologies mature and integrate, the home buying and selling process is set to become more efficient, data-driven, and user-centric.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'technology real estate',
     type: 'Article',
@@ -189,11 +189,11 @@ export const articlesData: Article[] = [
     id: '5',
     title: 'Navigating Closing Costs: A Complete Guide',
     description: 'Understand all the fees involved when you close on your new home in this comprehensive vlog.',
-    fullContent: 'Closing costs are a collection of fees paid at the final stage of a real estate transaction. They typically amount to 2-5% of the home\'s purchase price. This vlog provides a breakdown. Lender fees are a significant component, including loan origination fees (for processing the loan), underwriting fees (for assessing risk), and appraisal fees (to determine the property\'s market value). Title-related fees cover title searches (to ensure the seller has clear ownership) and title insurance (protecting the lender and buyer from future title disputes).\n\nEscrow fees are paid to a neutral third party that handles the funds and documents during the closing process. You\'ll also encounter recording fees, charged by local governments to record the sale publicly. Prepaid items are another category, often including upfront payments for property taxes and homeowners insurance, which are held in an escrow account by the lender. It\'s important to review your Loan Estimate carefully, which outlines these costs early in the process, and compare it to the Closing Disclosure you receive a few days before closing. Understanding these costs helps you budget effectively and avoid surprises on closing day. Don\'t hesitate to ask your lender or real estate agent to clarify any fees you don\'t understand.',
+    fullContent: 'Closing costs are a collection of fees paid at the final stage of a real estate transaction. They typically amount to 2-5% of the home\\\'s purchase price. This vlog provides a breakdown. Lender fees are a significant component, including loan origination fees (for processing the loan), underwriting fees (for assessing risk), and appraisal fees (to determine the property\\\'s market value). Title-related fees cover title searches (to ensure the seller has clear ownership) and title insurance (protecting the lender and buyer from future title disputes).\\n\\nEscrow fees are paid to a neutral third party that handles the funds and documents during the closing process. You\\\'ll also encounter recording fees, charged by local governments to record the sale publicly. Prepaid items are another category, often including upfront payments for property taxes and homeowners insurance, which are held in an escrow account by the lender. It\\\'s important to review your Loan Estimate carefully, which outlines these costs early in the process, and compare it to the Closing Disclosure you receive a few days before closing. Understanding these costs helps you budget effectively and avoid surprises on closing day. Don\\\'t hesitate to ask your lender or real estate agent to clarify any fees you don\\\'t understand.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'documents signature',
     type: 'Vlog',
-    category: 'Buyer\'s Guide',
+    category: 'Buyer\\\'s Guide',
     date: '2024-05-30',
     icon: Video,
     author: 'MaxWealth PS Finance Experts',
@@ -205,7 +205,7 @@ export const articlesData: Article[] = [
     id: '6',
     title: 'Market Update Q3: Trends to Watch',
     description: 'An overview of the real estate market performance in the third quarter and predictions for what lies ahead.',
-    fullContent: 'The third quarter of the year often provides critical insights into the real estate market\'s trajectory. Key trends we are observing include shifts in inventory levels. In many areas, while still historically low, inventory has seen a slight uptick, potentially offering buyers more choices. Median home prices continue to show resilience, though the pace of appreciation may be moderating compared to previous periods. Interest rates remain a dominant factor influencing buyer affordability and market activity. Days on market (DOM) figures are also important to watch; a decrease in DOM suggests a faster-moving market, while an increase might indicate a cooling trend.\n\nRegional variations are prominent. Some metropolitan areas might experience continued high demand, while others could see more balanced conditions. We are also monitoring the impact of broader economic factors such as employment rates and consumer confidence on housing demand. Looking ahead, these Q3 trends will likely shape market dynamics for the remainder of the year and into early next year. Buyers should stay informed about local conditions and be prepared to act decisively when opportunities arise. Sellers should work with experienced agents to price their homes competitively based on current market realities.',
+    fullContent: 'The third quarter of the year often provides critical insights into the real estate market\\\'s trajectory. Key trends we are observing include shifts in inventory levels. In many areas, while still historically low, inventory has seen a slight uptick, potentially offering buyers more choices. Median home prices continue to show resilience, though the pace of appreciation may be moderating compared to previous periods. Interest rates remain a dominant factor influencing buyer affordability and market activity. Days on market (DOM) figures are also important to watch; a decrease in DOM suggests a faster-moving market, while an increase might indicate a cooling trend.\\n\\nRegional variations are prominent. Some metropolitan areas might experience continued high demand, while others could see more balanced conditions. We are also monitoring the impact of broader economic factors such as employment rates and consumer confidence on housing demand. Looking ahead, these Q3 trends will likely shape market dynamics for the remainder of the year and into early next year. Buyers should stay informed about local conditions and be prepared to act decisively when opportunities arise. Sellers should work with experienced agents to price their homes competitively based on current market realities.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'market chart',
     type: 'Blog',
@@ -221,7 +221,7 @@ export const articlesData: Article[] = [
     id: '7',
     title: 'Impact of Credit Score on Mortgages (Vlog)',
     description: 'Learn how your credit score affects your mortgage options, interest rates, and overall borrowing power in this informative vlog.',
-    fullContent: 'Your credit score is a three-digit number that lenders use to assess your creditworthiness, essentially how likely you are to repay borrowed money. This vlog explains its profound impact on your mortgage journey. A higher credit score generally translates to lower interest rates, which can save you tens of thousands of dollars over the life of your loan. It can also mean access to a wider range of loan products and potentially lower down payment requirements.\n\nConversely, a lower credit score might result in higher interest rates, making your monthly payments more expensive, or it could even make it difficult to qualify for a mortgage at all with some lenders. We discuss the primary factors that influence your credit score: payment history (making payments on time is crucial), amounts owed (your credit utilization ratio), length of credit history, new credit (opening too many accounts quickly can be negative), and credit mix (having different types of credit). The vlog provides actionable advice on how to obtain your credit report (you\'re entitled to a free one annually from each major bureau), review it for errors, and strategies for improving your score over time. Building and maintaining good credit is a vital step towards favorable mortgage terms.',
+    fullContent: 'Your credit score is a three-digit number that lenders use to assess your creditworthiness, essentially how likely you are to repay borrowed money. This vlog explains its profound impact on your mortgage journey. A higher credit score generally translates to lower interest rates, which can save you tens of thousands of dollars over the life of your loan. It can also mean access to a wider range of loan products and potentially lower down payment requirements.\\n\\nConversely, a lower credit score might result in higher interest rates, making your monthly payments more expensive, or it could even make it difficult to qualify for a mortgage at all with some lenders. We discuss the primary factors that influence your credit score: payment history (making payments on time is crucial), amounts owed (your credit utilization ratio), length of credit history, new credit (opening too many accounts quickly can be negative), and credit mix (having different types of credit). The vlog provides actionable advice on how to obtain your credit report (you\\\'re entitled to a free one annually from each major bureau), review it for errors, and strategies for improving your score over time. Building and maintaining good credit is a vital step towards favorable mortgage terms.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'credit score',
     type: 'Video',
@@ -237,7 +237,7 @@ export const articlesData: Article[] = [
     id: '8',
     title: 'Investment Strategies for Real Estate',
     description: 'Explore different strategies for investing in real estate, from rental properties to REITs and flipping houses.',
-    fullContent: 'Investing in real estate can be a powerful way to build wealth, but it\'s important to choose the right strategy. This article explores several popular approaches. Direct ownership of rental properties involves buying a property and leasing it out to tenants. This can provide regular cash flow and long-term appreciation but also requires active management. Real Estate Investment Trusts (REITs) offer a more passive way to invest by allowing you to buy shares in companies that own and operate income-producing real estate. This provides diversification and liquidity, similar to stocks.\n\nHouse flipping involves buying undervalued properties, renovating them, and selling them for a profit. This strategy can offer quick returns but also carries higher risk and requires significant expertise in renovation and market timing. Real estate wholesaling is another strategy where an investor contracts a home with a seller, then finds an interested party to buy it without actually taking ownership of the property. Crowdfunding platforms have also emerged, allowing multiple investors to pool funds for larger real estate projects. Each strategy has its own risk-reward profile, capital requirements, and time commitment. It\'s crucial to research thoroughly and consider your financial goals and risk tolerance before diving in. Consulting with a financial advisor specializing in real estate can help you determine the best path for your investment journey.',
+    fullContent: 'Investing in real estate can be a powerful way to build wealth, but it\\\'s important to choose the right strategy. This article explores several popular approaches. Direct ownership of rental properties involves buying a property and leasing it out to tenants. This can provide regular cash flow and long-term appreciation but also requires active management. Real Estate Investment Trusts (REITs) offer a more passive way to invest by allowing you to buy shares in companies that own and operate income-producing real estate. This provides diversification and liquidity, similar to stocks.\\n\\nHouse flipping involves buying undervalued properties, renovating them, and selling them for a profit. This strategy can offer quick returns but also carries higher risk and requires significant expertise in renovation and market timing. Real estate wholesaling is another strategy where an investor contracts a home with a seller, then finds an interested party to buy it without actually taking ownership of the property. Crowdfunding platforms have also emerged, allowing multiple investors to pool funds for larger real estate projects. Each strategy has its own risk-reward profile, capital requirements, and time commitment. It\\\'s crucial to research thoroughly and consider your financial goals and risk tolerance before diving in. Consulting with a financial advisor specializing in real estate can help you determine the best path for your investment journey.',
     image: 'https://placehold.co/800x450.png',
     dataAiHint: 'investment strategy chart',
     type: 'Article',
@@ -257,7 +257,7 @@ export const articlesData: Article[] = [
     image: 'https://placehold.co/400x711.png',
     dataAiHint: 'mobile phone video',
     type: 'Reel',
-    category: 'Buyer\'s Guide',
+    category: 'Buyer\\\'s Guide',
     date: '2024-07-28',
     icon: Clapperboard,
     author: 'MaxWealth PS Shorts',
@@ -283,12 +283,12 @@ export const faqData: FaqItem[] = [
   {
     id: 'faq2',
     question: 'How much down payment do I need?',
-    answer: 'The traditional down payment is 20% of the home\'s purchase price, but many loan programs allow for much lower down payments, some as low as 3% or even 0% for certain government-backed loans like VA or USDA loans. We can explore options that fit your financial situation.'
+    answer: 'The traditional down payment is 20% of the home\\\'s purchase price, but many loan programs allow for much lower down payments, some as low as 3% or even 0% for certain government-backed loans like VA or USDA loans. We can explore options that fit your financial situation.'
   },
   {
     id: 'faq3',
     question: 'What are closing costs?',
-    answer: 'Closing costs are fees associated with finalizing your mortgage and purchasing the home. They typically range from 2% to 5% of the home\'s purchase price and can include expenses like appraisal fees, title insurance, loan origination fees, and pre-paid property taxes and insurance.'
+    answer: 'Closing costs are fees associated with finalizing your mortgage and purchasing the home. They typically range from 2% to 5% of the home\\\'s purchase price and can include expenses like appraisal fees, title insurance, loan origination fees, and pre-paid property taxes and insurance.'
   },
   {
     id: 'faq4',
@@ -298,7 +298,7 @@ export const faqData: FaqItem[] = [
   {
     id: 'faq5',
     question: 'Should I get pre-approved for a mortgage before looking for homes?',
-    answer: 'Yes, absolutely! Getting pre-approved gives you a clear idea of how much you can afford, shows sellers you are a serious buyer, and can speed up the closing process once you find a home. It\'s a crucial first step in the home buying journey.'
+    answer: 'Yes, absolutely! Getting pre-approved gives you a clear idea of how much you can afford, shows sellers you are a serious buyer, and can speed up the closing process once you find a home. It\\\'s a crucial first step in the home buying journey.'
   },
   {
     id: 'faq6',
@@ -320,7 +320,7 @@ export interface Guide {
 export const guidesData: Guide[] = [
   {
     id: 'guide1',
-    title: 'The Ultimate First-Time Home Buyer\'s Guide',
+    title: 'The Ultimate First-Time Home Buyer\\\'s Guide',
     description: 'Everything you need to know, from saving for a down payment to getting the keys. This comprehensive e-book walks you through each step of the journey.',
     image: 'https://placehold.co/400x300.png',
     dataAiHint: 'ebook cover house',
@@ -348,7 +348,7 @@ export const guidesData: Guide[] = [
   {
     id: 'guide4',
     title: 'Checklist: Home Buying Documents',
-    description: 'A handy checklist of all the documents you\'ll typically need when applying for a mortgage and purchasing a home.',
+    description: 'A handy checklist of all the documents you\\\'ll typically need when applying for a mortgage and purchasing a home.',
     image: 'https://placehold.co/400x300.png',
     dataAiHint: 'checklist documents',
     downloadLink: '#',
@@ -365,6 +365,12 @@ export interface TeamMemberDetailed {
   dataAiHint: string;
   bio: string;
   specialties?: string[];
+  socialLinks?: {
+    linkedin?: string;
+    email?: string;
+    twitter?: string;
+    instagram?: string;
+  };
 }
 
 export const teamMembersDetailedData: TeamMemberDetailed[] = [
@@ -372,10 +378,16 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     id: 'tm1',
     name: 'Jacqueline Dwyer',
     title: 'CEO & Founder, Lead Buyers Advocate',
-    image: 'https://placehold.co/400x450.png',
+    image: 'https://placehold.co/400x450.png', 
     dataAiHint: 'woman professional portrait',
     bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas. Jacqueline has a keen focus on development sites, commercial properties, and investment markets nationwide.",
-    specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis']
+    specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis'],
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:jacqueline.dwyer@example.com',
+      twitter: '#',
+      instagram: '#'
+    }
   },
   {
     id: 'tm2',
@@ -384,7 +396,13 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     image: 'https://placehold.co/300x300.png',
     dataAiHint: 'woman portrait smiling',
     bio: 'Alice has over 10 years of experience in financial planning, specializing in mortgage structuring and first-time home buyer programs. She is passionate about empowering clients to make sound financial decisions.',
-    specialties: ['Mortgage Planning', 'First-Time Home Buyers', 'Debt Management']
+    specialties: ['Mortgage Planning', 'First-Time Home Buyers', 'Debt Management'],
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:alice.johnson@example.com',
+      twitter: '#',
+      instagram: '#'
+    }
   },
   {
     id: 'tm3',
@@ -393,7 +411,13 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     image: 'https://placehold.co/300x300.png',
     dataAiHint: 'man portrait professional',
     bio: 'Bob is an expert in real estate investment analysis and portfolio growth. He helps clients identify high-potential properties and develop long-term investment strategies.',
-    specialties: ['Property Investment', 'Portfolio Management', 'Risk Assessment']
+    specialties: ['Property Investment', 'Portfolio Management', 'Risk Assessment'],
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:bob.williams@example.com',
+      twitter: '#',
+      instagram: '#'
+    }
   },
   {
     id: 'tm4',
@@ -402,7 +426,13 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     image: 'https://placehold.co/300x300.png',
     dataAiHint: 'person friendly portrait',
     bio: 'Carol ensures a smooth and positive experience for all MaxWealth PS clients. She manages client communications and oversees operational efficiency to deliver top-tier service.',
-    specialties: ['Client Servicing', 'Process Optimization', 'Team Coordination']
+    specialties: ['Client Servicing', 'Process Optimization', 'Team Coordination'],
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:carol.davis@example.com',
+      twitter: '#',
+      instagram: '#'
+    }
   }
 ];
 
@@ -560,13 +590,13 @@ export const serviceLocationsData: ServiceLocationItem[] = [
   { id: 'loc9', slug: 'hobart', name: 'Hobart', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hobart mount wellington', tagline: 'Historic charm and stunning natural beauty.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Hobart historic waterfront' },
 ];
 
-interface AmenityContentItem {
+export interface AmenityContentItem {
   subTitle?: string;
   text: string;
   icon?: LucideIcon;
 }
 
-interface AmenitySection {
+export interface AmenitySection {
   title: string;
   content: AmenityContentItem[];
   image: string;
@@ -594,7 +624,7 @@ const generatePlaceholderAmenities = (cityName: string): LocationDetail['ameniti
     title: "TRANSPORT",
     content: [
       { subTitle: "Train", text: `Discover convenient train routes connecting ${cityName} to major hubs. Efficient and scenic journeys await.`, icon: Train },
-      { subTitle: "Bus Network", text: `Extensive bus networks provide easy access across ${cityName} and surrounding areas. Local and regional services available.`, icon: BusIcon }, // Using the new BusIcon
+      { subTitle: "Bus Network", text: `Extensive bus networks provide easy access across ${cityName} and surrounding areas. Local and regional services available.`, icon: BusIcon },
       { text: `General public transport in ${cityName} is designed for accessibility and convenience, making it easy to explore the city and its attractions.`, icon: MapPin },
     ],
     image: 'https://placehold.co/600x450.png',
@@ -659,7 +689,7 @@ export const locationDetailsData: LocationDetail[] = serviceLocationsData.map(lo
           content: [
             { subTitle: "Beaches & Waterways", text: "The Central Coast is a beach lover's paradise with an 87-kilometre coastline and over 40 beaches. Finding a piece of beach and taking advantage of the ocean lifestyle—whether that means splashing around at Toowoon Bay with the kids, dipping into the water at The Entrance Ocean Baths, or exploring the rock pools at MacMasters Beach or Pearl Beach—is practically a given when on vacation.", icon: Sailboat },
             { subTitle: "Natural Beauty", text: "Between Sydney and Newcastle, NSW's second-largest city, is the Central Coast. The area is introduced in Kate Grenville's classic historical novel The Hidden River, which is located in Broken Bay near the mouth of the lovely Hawkesbury River.", icon: Trees },
-            { subTitle: "Local Attractions", text: "Pelican feeding time at Pelican Plaza, The Entrance, is a well-known sight on the Central Coast. At 3.30 pm every afternoon, Australia's largest aquatic birds, some with wingspans up to 2.8 meters, congregate here.", icon: CameraIcon }, // Using the new CameraIcon
+            { subTitle: "Local Attractions", text: "Pelican feeding time at Pelican Plaza, The Entrance, is a well-known sight on the Central Coast. At 3.30 pm every afternoon, Australia's largest aquatic birds, some with wingspans up to 2.8 meters, congregate here.", icon: CameraIcon },
             { subTitle: "Relaxation & Wellness", text: "At the cozy Bells Day Spa at Bells at Killcare, you may disconnect from your hectic schedule and re-establish a connection with the natural world by utilizing traditional goods and healing methods that were developed by indigenous Australians. The top-to-toe rituals are performed at the Vie Spa in the Pullman Magenta Beaches Resort using only organic, all-Australian products in a setting that exudes Japanese calm. Alternately, unwind in the opulent Roman Spa at Aztec Skin Clinic & Day Spa, complete with a fruit and cheese platter, before receiving a treatment with a Fijian influence.", icon: Sparkles }
           ],
           image: 'https://placehold.co/600x450.png',
@@ -748,22 +778,22 @@ export interface ServicePageAdvocate {
 
 export const servicePageAdvocates: ServicePageAdvocate[] = [
   { id: 'spa1', name: 'Rich Harvey', title: 'CEO & Founder', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait ceo' },
-  { id: 'spa2', name: 'Matt Corbett', title: 'PRINCIPAL - BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait professional' },
-  { id: 'spa3', name: 'Nick Taylor-Fick', title: 'PRINCIPAL - BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait smiling' },
+  { id: 'spa2', name: 'Matt Corbett', title: 'PRINCIPAL - BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait professional' },
+  { id: 'spa3', name: 'Nick Taylor-Fick', title: 'PRINCIPAL - BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait smiling' },
   { id: 'spa4', name: 'Munro Donen', title: 'DIRECTOR & PRINCIPAL, PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait director' },
-  { id: 'spa5', name: 'Niki McComb', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait senior' },
-  { id: 'spa6', name: 'Kevin Mason', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait advocate' },
-  { id: 'spa7', name: 'Anthony Knight', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait formal' },
-  { id: 'spa8', name: 'Glen Sainsbury', title: 'PRINCIPAL - BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait principal' },
-  { id: 'spa9', name: 'Robyn Toohey', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait experienced' },
-  { id: 'spa10', name: 'Angela Murray', title: 'SENIOR BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait friendly' },
-  { id: 'spa11', name: 'Amanda Jones', title: 'PRINCIPAL - BUYERS\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait leader' },
+  { id: 'spa5', name: 'Niki McComb', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait senior' },
+  { id: 'spa6', name: 'Kevin Mason', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait advocate' },
+  { id: 'spa7', name: 'Anthony Knight', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait formal' },
+  { id: 'spa8', name: 'Glen Sainsbury', title: 'PRINCIPAL - BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait principal' },
+  { id: 'spa9', name: 'Robyn Toohey', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait experienced' },
+  { id: 'spa10', name: 'Angela Murray', title: 'SENIOR BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait friendly' },
+  { id: 'spa11', name: 'Amanda Jones', title: 'PRINCIPAL - BUYERS\\\' ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait leader' },
   { id: 'spa12', name: 'Tass Pattas', title: 'SENIOR BUYERS ADVOCATE', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait confident' },
   { id: 'spa13', name: 'Michelle Derderyan', title: 'DIRECTOR OF OPERATIONS', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait operations' },
   { id: 'spa14', name: 'Peter Domjen', title: 'DIRECTOR, BUSINESS DEVELOPMENT & CLIENT STRATEGY', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait strategy' },
-  { id: 'spa15', name: 'Lisa Schapiro', title: 'BUYERS\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait associate' },
-  { id: 'spa16', name: 'Jodie Gottlieb', title: 'ASSOCIATE BUYERS\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait associate' },
-  { id: 'spa17', name: 'Stan Rosenberg', title: 'ASSOCIATE BUYERS\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait senior associate' },
+  { id: 'spa15', name: 'Lisa Schapiro', title: 'BUYERS\\\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'woman portrait associate' },
+  { id: 'spa16', name: 'Jodie Gottlieb', title: 'ASSOCIATE BUYERS\\\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'person portrait associate' },
+  { id: 'spa17', name: 'Stan Rosenberg', title: 'ASSOCIATE BUYERS\\\' ADVOCATE - PROPERTYBUYER EAST', image: 'https://placehold.co/200x250.png', dataAiHint: 'man portrait senior associate' },
 ];
 
 
@@ -795,7 +825,7 @@ export interface ServicePageCtaCardItem {
 }
 export const servicePageCtaCardsData: ServicePageCtaCardItem[] = [
   { id: 'cta1', title: 'UNSURE OF WHAT YOU WANT?', description: 'Are you feeling overwhelmed, frustrated, or simply tired of searching for real estate in the residential areas in Sydney, Brisbane, and other key locations?', icon: HelpCircle },
-  { id: 'cta2', title: 'DON\'T HAVE THE TIME?', description: 'Have biased real estate agents taken you to homes and apartments that are way off the mark? Have they tried to convince you that buying a home is easy?', icon: Timer },
+  { id: 'cta2', title: 'DON\\\'T HAVE THE TIME?', description: 'Have biased real estate agents taken you to homes and apartments that are way off the mark? Have they tried to convince you that buying a home is easy?', icon: Timer },
   { id: 'cta3', title: 'MISSED OUT AT AUCTIONS?', description: 'Have you had to try and cope at a property auction without any support? Have you missed out on several suitable homes for sale as a result?', icon: Award },
 ];
 
@@ -819,7 +849,7 @@ export interface HowWeHelpStep {
   icon: LucideIcon;
 }
 export const howWeHelpStepsData: HowWeHelpStep[] = [
-  { id: 'hwh1', title: 'HELP YOU BUILD YOUR BRIEF', description: 'What are your must haves and nice to haves, and what price guides will actually match your brief? Are you confused by typical price guides?', icon: FileText },
+  { id: 'hwh1', title: 'HELP YOU BUILD YOUR BRIEF', description: 'What are your must haves and nice to haves, and what price guides will actually match your brief? Are you confused by typical price guides?', icon: LucideFileText },
   { id: 'hwh2', title: 'RESEARCH, SHORT LIST & EVALUATE', description: 'Our buyers’ agents specialise in certain areas, for example, the main cities in NSW, VIC, and QLD. This means they can easily research the...', icon: FileSearch },
   { id: 'hwh3', title: 'HANDLE THE NEGOTIATIONS', description: 'How well do you rate your negotiation skills? Is it at an expert level? Do you like dealing with real estate agents? Our knowledge of the...', icon: Handshake },
 ];
@@ -842,3 +872,596 @@ export const memberLogos = [
   { id: 'ml5', hint: 'property institute logo' },
   { id: 'ml6', hint: 'certification program logo' },
 ];
+
+export const buyerTypesData = [
+  { value: "first_home_buyer", label: "First Home Buyer" },
+  { value: "investor", label: "Investor" },
+  { value: "upgrader", label: "Upgrader" },
+  { value: "downsizer", label: "Downsizer" },
+  { value: "commercial_buyer", label: "Commercial Buyer" },
+  { value: "other", label: "Other" },
+];
+
+
+export interface DifferencePoint {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+}
+
+export const maxWealthDifferenceData: DifferencePoint[] = [
+  {
+    id: 'diff1',
+    title: 'Deep Market Expertise',
+    description: 'Over two decades of navigating local markets, providing you unparalleled insights and successful outcomes.',
+    icon: Zap, // Represents energy, expertise
+  },
+  {
+    id: 'diff2',
+    title: 'Holistic Financial Strategy',
+    description: 'We cover all aspects of home financing, from initial planning to securing investment properties and commercial assets.',
+    icon: BarChartBig, // Represents comprehensive coverage/strategy
+  },
+  {
+    id: 'diff3',
+    title: 'Client-Centric Results',
+    description: 'Our commitment to service excellence ensures a stress-free journey tailored to your unique financial goals.',
+    icon: ThumbsUp, // Represents client satisfaction, positive results
+  },
+  {
+    id: 'diff4',
+    title: 'Precision Appraisals',
+    description: 'Leveraging cutting-edge data and local knowledge for highly accurate property valuations and informed decisions.',
+    icon: BadgePercent, // Represents accuracy, value
+  },
+  {
+    id: 'diff5',
+    title: 'Exclusive Network Access',
+    description: 'Gain an edge with our extensive database of agents and access to off-market opportunities.',
+    icon: Network, // Represents connections, network
+  },
+  {
+    id: 'diff6',
+    title: 'Advanced Research & AI Tools',
+    description: 'Utilizing our proprietary "Suburb Selector™", AI insights, and live data for the latest property intelligence.',
+    icon: SearchCode, // Represents research, tech, AI
+  },
+];
+
+export interface ComprehensiveServiceItem {
+  id: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+export const comprehensiveServicesData: ComprehensiveServiceItem[] = [
+  {
+    id: 'cs1',
+    icon: SearchCode,
+    title: 'Property Search & Selection',
+    description: 'Access to off-market properties and comprehensive market analysis across all major Australian cities.',
+  },
+  {
+    id: 'cs2',
+    icon: FileSearch,
+    title: 'Due Diligence & Inspections',
+    description: 'Thorough property evaluations, building inspections, and legal compliance checks.',
+  },
+  {
+    id: 'cs3',
+    icon: Handshake,
+    title: 'Negotiation & Purchase',
+    description: 'Expert negotiation to secure the best price and terms for your property purchase.',
+  },
+  {
+    id: 'cs4',
+    icon: TrendingUp,
+    title: 'Investment Analysis',
+    description: 'Comprehensive market analysis and investment potential assessment for each property.',
+  },
+  {
+    id: 'cs5',
+    icon: Award,
+    title: 'Auction Bidding',
+    description: 'Professional auction representation to secure your dream property at competitive prices.',
+  },
+  {
+    id: 'cs6',
+    icon: Briefcase,
+    title: 'Settlement Support',
+    description: 'Complete settlement coordination and post-purchase support services.',
+  },
+];
+
+export interface ProcessStepItem {
+  id: string;
+  stepNumber: string;
+  title: string;
+  description: string;
+}
+
+export const provenProcessStepsData: ProcessStepItem[] = [
+  {
+    id: 'step1',
+    stepNumber: '01',
+    title: 'Strategy Call',
+    description: 'Free consultation to understand your needs and budget',
+  },
+  {
+    id: 'step2',
+    stepNumber: '02',
+    title: 'Market Research',
+    description: 'Comprehensive analysis of target areas and properties',
+  },
+  {
+    id: 'step3',
+    stepNumber: '03',
+    title: 'Property Search',
+    description: 'Access to on and off-market opportunities',
+  },
+  {
+    id: 'step4',
+    stepNumber: '04',
+    title: 'Negotiation',
+    description: 'Expert negotiation to secure the best deal',
+  },
+  {
+    id: 'step5',
+    stepNumber: '05',
+    title: 'Settlement',
+    description: 'Complete settlement support and handover',
+  },
+];
+
+// Search Functionality Data
+export type SearchableContentType = 'Page' | 'Media' | 'Service Type' | 'Location' | 'Team Member' | 'Resource' | 'FAQ';
+
+export interface SearchResultItem {
+  id: string;
+  title: string;
+  description: string; // Snippet or description
+  href: string;
+  type: SearchableContentType;
+  keywords?: string[];
+  category?: string; // e.g., For Media: 'Market Analysis', 'Buyer\'s Guide'
+  icon?: LucideIcon; // Optional icon for the result type
+}
+
+const staticPageKeywords = {
+  home: ['home', 'main', 'landing page', 'maxwealth ps', 'financial planning', 'home buying'],
+  aboutOverview: ['about us', 'company overview', 'team', 'services offered', 'our process'],
+  ourCompany: ['mission', 'vision', 'values', 'company philosophy', 'about maxwealth ps'],
+  ourTeam: ['team members', 'experts', 'advisors', 'financial planners', 'buyers advocates', 'jacqueline dwyer'],
+  ourServices: ['services list', 'what we do', 'property buying services', 'investment services', 'commercial property help'],
+  ourProcess: ['how we work', 'client journey', '5-step process', 'buying process'],
+  media: ['articles', 'vlogs', 'videos', 'reels', 'blog', 'news', 'updates', 'insights'],
+  resourcesOverview: ['tools', 'guides', 'calculators', 'faq', 'home buying roadmap', 'ai tools'],
+  aiTools: ['ai document analyzer', 'personalized financial plan ai', 'ai market trend summarizer', 'home readiness quiz', 'artificial intelligence'],
+  freeGuides: ['e-books', 'downloadable guides', 'checklists', 'home buying resources'],
+  calculators: ['mortgage calculator', 'affordability calculator', 'closing cost estimator', 'financial tools'],
+  roadmap: ['home buying steps', 'interactive roadmap', 'property purchase guide'],
+  faq: ['frequently asked questions', 'common questions', 'answers', 'help'],
+  contact: ['contact us', 'get in touch', 'phone number', 'email address', 'office location', 'book consultation'],
+  feesExplained: ['our fees', 'pricing', 'buyers agent cost', 'service charges', 'consultation fee'],
+};
+
+export const siteSearchableContent: SearchResultItem[] = [
+  // Static Pages
+  { id: 's-home', title: 'MaxWealth PS Homepage', description: 'Your trusted partner in financial planning for home buying. Explore our services, resources, and expert team.', href: '/', type: 'Page', keywords: staticPageKeywords.home, icon: Home },
+  { id: 's-about', title: 'About MaxWealth PS', description: 'Discover MaxWealth PS: our company, dedicated team, comprehensive services, and proven process for client success.', href: '/about', type: 'Page', keywords: staticPageKeywords.aboutOverview, icon: Building },
+  { id: 's-our-company', title: 'Our Company', description: 'Learn about the mission, vision, and core values that drive MaxWealth PS in helping clients achieve their property goals.', href: '/about/our-company', type: 'Page', keywords: staticPageKeywords.ourCompany, icon: DefaultBuildingIcon },
+  { id: 's-our-team', title: 'Our Expert Team', description: 'Meet the experienced professionals and buyer\'s advocates at MaxWealth PS, led by CEO Jacqueline Dwyer.', href: '/about/our-team', type: 'Page', keywords: staticPageKeywords.ourTeam, icon: Users },
+  { id: 's-our-services', title: 'Our Comprehensive Services', description: 'Explore the range of property buying services offered by MaxWealth PS, including who we help and where we operate.', href: '/about/our-services', type: 'Page', keywords: staticPageKeywords.ourServices, icon: ConciergeBell },
+  { id: 's-our-process', title: 'Our Streamlined Process', description: 'Learn about MaxWealth PS\'s proven 5-step process designed to guide you through every step of the home buying journey.', href: '/about/our-process', type: 'Page', keywords: staticPageKeywords.ourProcess, icon: Workflow },
+  { id: 's-media', title: 'Media & Insights', description: 'Browse our collection of articles, vlogs, videos, and market updates on home financing and property trends.', href: '/media', type: 'Page', keywords: staticPageKeywords.media, icon: Newspaper },
+  { id: 's-resources', title: 'MaxWealth PS Resources', description: 'Access financial calculators, AI-powered tools, free guides, an interactive roadmap, and FAQs to empower your home buying decisions.', href: '/resources', type: 'Page', keywords: staticPageKeywords.resourcesOverview, icon: BookOpen },
+  { id: 's-ai-tools', title: 'AI-Powered Financial Tools', description: 'Utilize AI for document analysis, basic financial planning, market trend summaries, and home buying readiness assessment.', href: '/resources/ai-tools', type: 'Page', keywords: staticPageKeywords.aiTools, icon: BrainCircuit },
+  { id: 's-free-guides', title: 'Free Guides & E-Books', description: 'Download valuable e-books, checklists, and guides to help you navigate the home buying process with confidence.', href: '/resources/free-guides', type: 'Page', keywords: staticPageKeywords.freeGuides, icon: Download },
+  { id: 's-calculators', title: 'Financial Calculators', description: 'Estimate mortgage payments, home affordability, and closing costs with our straightforward financial calculators.', href: '/resources/calculators', type: 'Page', keywords: staticPageKeywords.calculators, icon: CalculatorIcon },
+  { id: 's-roadmap', title: 'Interactive Home Buying Roadmap', description: 'Follow our step-by-step guide to navigate the path to homeownership. Track your progress locally.', href: '/resources/roadmap', type: 'Page', keywords: staticPageKeywords.roadmap, icon: ListChecks },
+  { id: 's-faq-page', title: 'Frequently Asked Questions (FAQ)', description: 'Find answers to common questions about home financing, our services, and the property buying process.', href: '/resources/faq', type: 'Page', keywords: staticPageKeywords.faq, icon: HelpCircle },
+  { id: 's-contact', title: 'Contact MaxWealth PS', description: 'Get in touch for a free consultation with our buyer\'s agents. Find our office details and send us a message.', href: '/contact', type: 'Page', keywords: staticPageKeywords.contact, icon: MessageCircle },
+  { id: 's-fees', title: 'Our Fees Explained', description: 'Understand our transparent fee structure for buyer\'s agent services and book a free strategy call with Jacqueline Dwyer.', href: '/fees-explained', type: 'Page', keywords: staticPageKeywords.feesExplained, icon: DollarSign },
+
+  // Media Content (Articles, Vlogs, etc.)
+  ...articlesData.map(article => ({
+    id: `media-${article.id}`,
+    title: article.title,
+    description: article.description,
+    href: `/media/${article.id}`,
+    type: 'Media' as SearchableContentType,
+    keywords: [article.type.toLowerCase(), article.category.toLowerCase(), ...(article.tags || [])],
+    category: article.category,
+    icon: mediaTypeIcons[article.type] || Newspaper,
+  })),
+
+  // Service Types (Who We Help)
+  ...whoWeHelpData.map(service => ({
+    id: `service-type-${service.slug}`,
+    title: `${service.title} Buying Services`,
+    description: service.description,
+    href: `/services/${service.slug}`,
+    type: 'Service Type' as SearchableContentType,
+    keywords: [service.title.toLowerCase(), 'property buying', 'buyer agent', service.slug.replace('-', ' ')],
+    icon: service.icon,
+  })),
+
+  // Service Locations
+  ...serviceLocationsData.map(location => ({
+    id: `location-${location.slug}`,
+    title: `Property Buyers Agent in ${location.name}`,
+    description: location.tagline || `Expert buyer's agent services for ${location.name}. Discover properties in ${location.name}.`,
+    href: `/locations/${location.slug}`,
+    type: 'Location' as SearchableContentType,
+    keywords: [location.name.toLowerCase(), 'buyer agent', 'property', location.slug.replace('-', ' '), 'real estate'],
+    icon: MapPin,
+  })),
+  
+  // Team Members (Basic search on name and title)
+  ...teamMembersDetailedData.map(member => ({
+    id: `team-${member.id}`,
+    title: `${member.name} - ${member.title}`,
+    description: member.bio.substring(0, 150) + '...', // Snippet of bio
+    href: '/about/our-team', // Link to team page, could be individual if pages existed
+    type: 'Team Member' as SearchableContentType,
+    keywords: [member.name.toLowerCase(), member.title.toLowerCase(), 'team', 'advisor', 'advocate'],
+    icon: Users,
+  })),
+
+  // FAQs (Individual FAQs)
+  ...faqData.map(faq => ({
+    id: `faq-item-${faq.id}`,
+    title: faq.question,
+    description: faq.answer.substring(0,150) + '...',
+    href: '/resources/faq', // Or link to /resources/faq#${faq.id} if possible with deep linking
+    type: 'FAQ' as SearchableContentType,
+    keywords: ['faq', ...faq.question.toLowerCase().split(' ').slice(0,5)], // some keywords from question
+    icon: HelpCircle
+  }))
+];
+// Ensure all icons are imported if used here.
+// For example, if a SearchResultItem has icon: Home, ensure Home from lucide-react is imported.
+
+// Ensure all icons used in siteSearchableContent are imported.
+// Example, Home is used for the homepage search result.
+// Make sure it and others (Building, Users, ConciergeBell, etc.) are in the lucide-react import line.
+```
+</content>
+  </change>
+  <change>
+    <file>/src/components/layout/navbar.tsx</file>
+    <content><![CDATA[
+"use client";
+
+import * as React from 'react';
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow, Search as SearchIconLucide } from 'lucide-react';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+import { ThemeToggle } from '@/components/theme-toggle';
+import { usePathname, useRouter } from 'next/navigation'; 
+import { useScrollSpy } from '@/hooks/use-scroll-spy';
+import { cn } from '@/lib/utils';
+import type { LucideIcon } from 'lucide-react';
+import { resourceSubItems } from '@/lib/data'; 
+import { aboutUsSubItems } from '@/lib/data'; 
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Input } from '@/components/ui/input';
+
+interface NavLinkItem {
+  href: string;
+  label: string;
+  icon: LucideIcon;
+  id?: string;
+  subItems?: NavLinkItem[];
+  description?: string;
+}
+
+const localResourceSubItems: NavLinkItem[] = [
+  { href: '/resources/ai-tools', label: 'AI-Powered Tools', icon: BrainCircuit, description: 'Leverage intelligent financial tools.' },
+  { href: '/resources/free-guides', label: 'Free Guides & E-Books', icon: Download, description: 'Access valuable downloadable resources.' },
+  { href: '/resources/calculators', label: 'Financial Calculators', icon: CalculatorIcon, description: 'Estimate payments and affordability.' },
+  { href: '/resources/roadmap', label: 'Home Buying Roadmap', icon: ListChecks, description: 'Navigate your path to homeownership.' },
+  { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, description: 'Find answers to common questions.' },
+];
+
+const navLinksData: NavLinkItem[] = [
+  { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
+  {
+    href: '/about',
+    label: 'About Us',
+    icon: Building, 
+    id: 'aboutPage', 
+    subItems: aboutUsSubItems 
+  },
+  { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
+  {
+    href: '/resources',
+    label: 'Resources',
+    icon: BookOpen,
+    id: 'resourcesPage',
+    subItems: localResourceSubItems 
+  },
+  { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
+  { href: '/contact', label: 'Contact', icon: MessageSquare },
+];
+
+const homepageSectionIds = navLinksData
+  .filter(link => link.id && link.href.startsWith('#'))
+  .map(link => link.id as string);
+
+
+export default function Navbar() {
+  const pathname = usePathname();
+  const router = useRouter(); 
+  const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
+  const [isMounted, setIsMounted] = React.useState(false);
+  const [searchQuery, setSearchQuery] = React.useState('');
+  const [isSearchPopoverOpen, setIsSearchPopoverOpen] = React.useState(false);
+
+
+  React.useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const getLinkHref = (href: string) => {
+    if (pathname === '/' || !href.startsWith('#')) {
+      return href;
+    }
+    return `/${href}`;
+  };
+
+  const handleSearchSubmit = () => {
+    if (searchQuery.trim()) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setIsSearchPopoverOpen(false); 
+      setSearchQuery(''); 
+    }
+  };
+  
+  const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSearchSubmit();
+    }
+  };
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-white/40 backdrop-blur-lg shadow-md">
+      <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
+        <Link href="/" className="flex items-center space-x-2">
+          <Briefcase className="h-7 w-7 text-foreground" />
+          <span className="font-headline text-2xl font-bold text-foreground">MaxWealth PS</span>
+        </Link>
+
+        <div className="flex items-center space-x-2 sm:space-x-4">
+          <NavigationMenu className="hidden md:flex">
+            <NavigationMenuList>
+              {navLinksData.map((link) => {
+                const isCurrentPageRoot = link.id && (pathname === link.href || pathname.startsWith(link.href + '/'));
+                const isActive =
+                  (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
+                  (!link.href.startsWith('#') && isMounted && isCurrentPageRoot);
+
+                if (link.subItems) {
+                  return (
+                    <NavigationMenuItem key={link.label}>
+                      <Link href={link.href} passHref legacyBehavior={false} asChild>
+                        <NavigationMenuTrigger
+                          className={cn(navigationMenuTriggerStyle(),
+                            "bg-transparent text-foreground/70 hover:text-foreground hover:bg-foreground/10 focus:bg-foreground/10 focus:text-foreground",
+                            isActive && "text-foreground font-semibold bg-foreground/10"
+                          )}
+                        >
+                          {link.label}
+                        </NavigationMenuTrigger>
+                      </Link>
+                      <NavigationMenuContent>
+                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+                          {link.subItems.map((subItem) => (
+                             <ListItem
+                              key={subItem.label}
+                              title={subItem.label}
+                              href={subItem.href}
+                              icon={subItem.icon}
+                              className={isMounted && pathname === subItem.href ? "bg-accent/10 text-accent-foreground" : ""}
+                            >
+                              {subItem.description || ""}
+                            </ListItem>
+                          ))}
+                        </ul>
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  );
+                } else {
+                  return (
+                    <NavigationMenuItem key={link.label}>
+                      <NavigationMenuLink asChild>
+                         <Link
+                          href={getLinkHref(link.href)}
+                           className={cn(navigationMenuTriggerStyle(),
+                             "bg-transparent",
+                             isMounted && isActive ? "text-foreground font-semibold bg-foreground/10" : "text-foreground/70 hover:text-foreground hover:bg-foreground/10 focus:bg-foreground/10 focus:text-foreground"
+                          )}
+                        >
+                          {link.label}
+                        </Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  );
+                }
+              })}
+            </NavigationMenuList>
+          </NavigationMenu>
+          
+          <Popover open={isSearchPopoverOpen} onOpenChange={setIsSearchPopoverOpen}>
+            <PopoverTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-foreground hover:bg-foreground/10 hover:text-foreground focus-visible:ring-foreground"
+              >
+                <SearchIconLucide className="h-5 w-5" />
+                <span className="sr-only">Search</span>
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80">
+              <div className="grid gap-4">
+                <div className="space-y-2">
+                  <h4 className="font-medium leading-none">Search Site</h4>
+                  <p className="text-sm text-muted-foreground">
+                    Enter keywords to search articles, pages, and more.
+                  </p>
+                </div>
+                <Input
+                  id="search-navbar"
+                  placeholder="e.g. Mortgage rates..."
+                  className="col-span-2 h-8"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleSearchKeyDown}
+                />
+                <Button onClick={handleSearchSubmit} size="sm" className="w-full">
+                  Search
+                </Button>
+              </div>
+            </PopoverContent>
+          </Popover>
+
+          <ThemeToggle />
+
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-foreground hover:bg-foreground/10 hover:text-foreground focus-visible:ring-foreground"
+                >
+                  <Menu className="h-6 w-6" />
+                  <span className="sr-only">Toggle Navigation</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[280px] sm:w-[320px] bg-sidebar text-sidebar-foreground">
+                <div className="flex flex-col space-y-1 p-4">
+                  <SheetClose asChild>
+                    <Link href="/" className="flex items-center space-x-2 mb-4">
+                      <Briefcase className="h-7 w-7 text-sidebar-foreground" />
+                      <span className="font-headline text-xl font-bold text-sidebar-foreground">MaxWealth PS</span>
+                    </Link>
+                  </SheetClose>
+                  {navLinksData.map((link) => {
+                     const isCurrentPageRoot = link.id && (pathname === link.href || pathname.startsWith(link.href + '/'));
+                     const isActive =
+                        (link.id && link.href.startsWith('#') && activeSection === link.id && pathname === '/') ||
+                        (!link.href.startsWith('#') && isMounted && isCurrentPageRoot);
+
+                    if (link.subItems) {
+                      return (
+                        <React.Fragment key={link.label}>
+                           <SheetClose asChild>
+                            <Link
+                                href={link.href}
+                                className={cn(
+                                "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                                isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
+                                )}
+                            >
+                              <span className="flex items-center space-x-2">
+                                <link.icon className="h-5 w-5" />
+                                <span>{link.label}</span>
+                              </span>
+                                <ChevronDown className="h-4 w-4 opacity-70" />
+                            </Link>
+                           </SheetClose>
+                          <div className="flex flex-col space-y-1 pl-6">
+                            {link.subItems.map(subItem => {
+                              const isSubItemActive = isMounted && pathname === subItem.href;
+                              return (
+                                <SheetClose key={subItem.label} asChild>
+                                  <Link
+                                    href={subItem.href}
+                                    className={cn(
+                                      "flex items-center space-x-2 rounded-md p-2 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                                      isSubItemActive ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium" : "text-sidebar-foreground/80"
+                                    )}
+                                  >
+                                    <subItem.icon className="h-4 w-4" />
+                                    <span>{subItem.label}</span>
+                                  </Link>
+                                </SheetClose>
+                              );
+                            })}
+                          </div>
+                        </React.Fragment>
+                      );
+                    }
+
+                    return (
+                      <SheetClose key={link.label} asChild>
+                        <Link
+                          href={getLinkHref(link.href)}
+                          className={cn(
+                            "flex items-center space-x-2 rounded-md p-2 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                            isActive ? "bg-sidebar-accent text-sidebar-accent-foreground font-semibold" : "text-sidebar-foreground/80"
+                          )}
+                        >
+                          <link.icon className="h-5 w-5" />
+                          <span>{link.label}</span>
+                        </Link>
+                      </SheetClose>
+                    );
+                  })}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a"> & { title: string, icon?: LucideIcon }
+>(({ className, title, children, icon: Icon, href, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <Link
+          href={href || '/'}
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/10 hover:text-accent-foreground focus:bg-accent/10 focus:text-accent-foreground",
+            className 
+          )}
+          {...props}
+        >
+          <div className="flex items-center space-x-2">
+            {Icon && <Icon className="h-5 w-5" />}
+            <div className="text-sm font-medium leading-none">{title}</div>
+          </div>
+          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+            {children}
+          </p>
+        </Link>
+      </NavigationMenuLink>
+    </li>
+  )
+})
+ListItem.displayName = "ListItem"
+    
+
+    
