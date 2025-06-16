@@ -4,7 +4,8 @@ import HeroSection from '@/components/sections/hero-section';
 import AchievementsSection from '@/components/sections/achievements-section'; 
 import AboutUsSection from '@/components/sections/about-us-section';
 import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services';
-import ServiceLocationsHomepageSection from '@/components/sections/service-locations-homepage-section'; // New import
+import ProvenProcessSection from '@/components/sections/proven-process-section'; // New import
+import ServiceLocationsHomepageSection from '@/components/sections/service-locations-homepage-section';
 import ContentSection from '@/components/sections/content-section';
 // import CalculatorsSection from '@/components/sections/calculators-section'; // Removed
 // import RoadmapSection from '@/components/sections/roadmap-section'; // Removed
@@ -35,6 +36,10 @@ export default function HomePage() {
           <div className="bg-secondary"> 
             <ComprehensivePropertyServices />
           </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay="delay-100">
+          <ProvenProcessSection />
         </AnimatedSection>
 
         <AnimatedSection delay="delay-100">

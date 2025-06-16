@@ -974,3 +974,43 @@ export const comprehensiveServicesData: ComprehensiveServiceItem[] = [
     description: 'Complete settlement coordination and post-purchase support services.',
   },
 ];
+
+export interface ProcessStepItem {
+  id: string;
+  stepNumber: string;
+  title: string;
+  description: string;
+}
+
+export const provenProcessStepsData: ProcessStepItem[] = [
+  {
+    id: 'step1',
+    stepNumber: '01',
+    title: 'Strategy Call',
+    description: 'Free consultation to understand your needs and budget',
+  },
+  {
+    id: 'step2',
+    stepNumber: '02',
+    title: 'Market Research',
+    description: 'Comprehensive analysis of target areas and properties',
+  },
+  {
+    id: 'step3',
+    stepNumber: '03',
+    title: 'Property Search',
+    description: 'Access to on and off-market opportunities',
+  },
+  {
+    id: 'step4',
+    stepNumber: '04',
+    title: 'Negotiation',
+    description: 'Expert negotiation to secure the best deal',
+  },
+  {
+    id: 'step5',
+    stepNumber: '05',
+    title: 'Settlement',
+    description: 'Complete settlement support and handover',
+  },
+];
