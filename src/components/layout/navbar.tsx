@@ -16,12 +16,12 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { ThemeToggle } from '@/components/theme-toggle';
-import { usePathname, useRouter } from 'next/navigation'; 
+import { usePathname, useRouter } from 'next/navigation';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
-import { resourceSubItems } from '@/lib/data'; 
-import { aboutUsSubItems } from '@/lib/data'; 
+import { resourceSubItems } from '@/lib/data';
+import { aboutUsSubItems } from '@/lib/data';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Input } from '@/components/ui/input';
 
@@ -47,8 +47,8 @@ const navLinksData: NavLinkItem[] = [
   {
     href: '/about',
     label: 'About Us',
-    icon: Building, 
-    id: 'aboutPage', 
+    icon: Building,
+    id: 'aboutPage',
     subItems: aboutUsSubItems,
     description: "Learn more about our company, team, and services."
   },
@@ -72,7 +72,7 @@ const homepageSectionIds = navLinksData
 
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter(); 
+  const router = useRouter();
   const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
   const [isMounted, setIsMounted] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -93,11 +93,11 @@ export default function Navbar() {
   const handleSearchSubmit = () => {
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      setIsSearchPopoverOpen(false); 
-      setSearchQuery(''); 
+      setIsSearchPopoverOpen(false);
+      setSearchQuery('');
     }
   };
-  
+
   const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       event.preventDefault();
@@ -138,7 +138,7 @@ export default function Navbar() {
                           <ListItem
                             key={`${link.label}-overview`}
                             title={`Explore ${link.label}`}
-                            href={link.href} // Main link for the section overview
+                            href={link.href}
                             icon={link.icon}
                             className={isMounted && pathname === link.href ? "bg-accent/10 text-accent-foreground" : ""}
                           >
@@ -179,7 +179,7 @@ export default function Navbar() {
               })}
             </NavigationMenuList>
           </NavigationMenu>
-          
+
           <Popover open={isSearchPopoverOpen} onOpenChange={setIsSearchPopoverOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -245,10 +245,9 @@ export default function Navbar() {
                     if (link.subItems) {
                       return (
                         <React.Fragment key={link.label}>
-                           {/* For mobile, the main item itself can be a link to its overview page, then sub-items */}
                            <SheetClose asChild>
                             <Link
-                                href={link.href} // Main link for section overview
+                                href={link.href}
                                 className={cn(
                                 "flex items-center justify-between space-x-2 rounded-md p-2 font-semibold transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                                 isActive && "bg-sidebar-accent text-sidebar-accent-foreground"
@@ -258,7 +257,6 @@ export default function Navbar() {
                                 <link.icon className="h-5 w-5" />
                                 <span>{link.label}</span>
                               </span>
-                                {/* Optionally add a chevron or similar if you expand inline, or remove if it just links */}
                             </Link>
                            </SheetClose>
                           <div className="flex flex-col space-y-1 pl-6 border-l border-sidebar-border/50 ml-2">
@@ -320,8 +318,8 @@ const ListItem = React.forwardRef<
           href={href || '/'}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/10 hover:text-accent-foreground focus:bg-accent/10 focus:text-accent-foreground",
-            className 
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+            className
           )}
           {...props}
         >
@@ -338,6 +336,3 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-
-
-    
