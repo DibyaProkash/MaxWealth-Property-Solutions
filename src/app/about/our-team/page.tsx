@@ -6,34 +6,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, X as CloseIcon, Loader2 } from 'lucide-react';
+import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, X as CloseIcon, Loader2, MapPin, CheckCircle, Clock } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
-// import { teamMembersDetailedData, type TeamMemberDetailed } from '@/lib/data'; // Removed direct import
 import Footer from '@/components/layout/footer';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import type { TeamMemberDetailed } from '@/lib/data/team'; // Updated import path
 
-// Define TeamMemberDetailed type for this page
-export interface TeamMemberDetailed {
-  id: string;
-  name: string;
-  title: string;
-  image: string;
-  dataAiHint: string;
-  bio: string;
-  specialties?: string[];
-  socialLinks?: {
-    linkedin?: string;
-    email?: string;
-    twitter?: string;
-    instagram?: string;
-  };
-}
-
-const founderData = { // This can remain static or be fetched if it becomes dynamic
+const founderData = { 
   name: 'Jacqueline Dwyer',
   title: 'CEO & Founder & Buyers Advocate',
   bio: "Jacqueline, the esteemed CEO and Founder of MaxWealth PS, is more than a licensed financial advisor; she's a seasoned property investor and professional economist with over two decades of experience in the property industry. Her expertise extends to prestige real estate & luxury property in key metropolitan areas including Sydney's Eastern Suburbs, North Shore, and Northern Beaches, and nationally with offices servicing Melbourne, Brisbane and Gold Coast. Jacqueline has a keen focus on development sites, commercial properties, and investment markets Australia-wide.",
@@ -65,9 +50,7 @@ export default function OurTeamPage() {
               throw new Error('Failed to fetch team members');
             }
             const data: TeamMemberDetailed[] = await response.json();
-            // Filter out the founder if they are part of the general team data, to avoid duplication.
-            // Or, if founderData is always separate, this filter is not strictly needed.
-            setTeamMembers(data.filter(member => member.id !== 'tm1')); // Assuming 'tm1' is founder
+            setTeamMembers(data);
           } catch (err: any) {
             setError(err.message || 'Could not load team members.');
           } finally {
@@ -202,49 +185,88 @@ export default function OurTeamPage() {
               <Carousel
                 opts={{
                 align: "start",
-                loop: canAutoplay, // Use canAutoplay for loop condition
+                loop: canAutoplay,
                 }}
-                plugins={autoplayPlugin.current ? [autoplayPlugin.current] : []}
-                onMouseEnter={() => {
-                  if (canAutoplay && autoplayPlugin.current) {
-                    autoplayPlugin.current.stop();
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (canAutoplay && autoplayPlugin.current) {
-                    autoplayPlugin.current.play();
-                  }
-                }}
+                plugins={autoplayPlugin.current && canAutoplay ? [autoplayPlugin.current] : []}
+                onMouseEnter={() => { if (canAutoplay) autoplayPlugin.current?.stop(); }}
+                onMouseLeave={() => { if (canAutoplay) autoplayPlugin.current?.play(); }}
                 className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
               >
                 <CarouselContent className="-ml-4">
                 {teamMembers.map((member) => (
                     <CarouselItem key={member.id} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
                     <div className="p-1 h-full">
-                        <Card className="text-center shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card h-full flex flex-col">
-                        <div className="relative h-60 w-full">
-                            <Image
-                            src={member.image}
-                            alt={member.name}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            style={{ objectFit: 'cover' }}
-                            data-ai-hint={member.dataAiHint}
-                            />
-                        </div>
-                        <CardContent className="p-6 flex-grow">
-                            <Button variant="link" onClick={() => handleMemberClick(member)} className="p-0 h-auto font-headline text-xl text-primary hover:text-accent mb-1">
+                        <Card className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card h-full flex flex-col text-left">
+                          <CardContent className="p-5 flex flex-col flex-grow">
+                            <Avatar className="w-20 h-20 mx-auto mb-4 border-2 border-primary/10 shadow-md">
+                              <AvatarImage src={member.image} alt={member.name} data-ai-hint={member.dataAiHint} />
+                              <AvatarFallback className="text-2xl bg-muted text-muted-foreground">
+                                {member.name.split(' ').map(n => n[0]).join('')}
+                              </AvatarFallback>
+                            </Avatar>
+
+                            <Button variant="link" onClick={() => handleMemberClick(member)} className="p-0 h-auto font-headline text-xl text-primary hover:text-accent mb-0.5 text-center justify-center">
                                 {member.name}
                             </Button>
-                            <p className="text-accent">{member.title}</p>
-                        </CardContent>
+                            <p className="text-xs text-accent text-center mb-2">{member.title}</p>
+                            
+                            <div className="flex items-center justify-center text-xs text-muted-foreground mb-3">
+                              <MapPin className="mr-1 h-3 w-3 flex-shrink-0" /> {member.location}
+                            </div>
+
+                            <p className="text-xs text-muted-foreground mb-4 font-body leading-relaxed line-clamp-3 min-h-[4.5rem] flex-grow">
+                                {member.shortBio}
+                            </p>
+
+                            {member.credentials && member.credentials.length > 0 && (
+                              <div className="mb-3">
+                                <h4 className="text-[0.7rem] font-semibold text-primary/80 mb-1 uppercase tracking-wider">Credentials</h4>
+                                <ul className="space-y-0.5">
+                                  {member.credentials.slice(0,3).map(cred => ( // Limit to 3 for card
+                                    <li key={cred} className="flex items-center text-xs text-muted-foreground">
+                                      <CheckCircle className="mr-1.5 h-3 w-3 text-green-500 flex-shrink-0" /> {cred}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
+                            {member.specialties && member.specialties.length > 0 && (
+                              <div className="mb-4">
+                                <h4 className="text-[0.7rem] font-semibold text-primary/80 mb-1.5 uppercase tracking-wider">Specialties</h4>
+                                <div className="flex flex-wrap gap-1">
+                                  {member.specialties.slice(0,3).map(spec => ( // Limit to 3-4 for card
+                                    <Badge key={spec} variant="secondary" className="text-[0.65rem] px-1.5 py-0.5 font-normal bg-secondary/70 text-secondary-foreground/80">{spec}</Badge>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                            
+                            <div className="mt-auto pt-3 border-t border-border/30 flex justify-between items-center">
+                              <div className="flex items-center text-xs text-muted-foreground">
+                                <Clock className="mr-1.5 h-3 w-3" /> {member.yearsOfExperience}
+                              </div>
+                              <div className="flex space-x-2">
+                                {member.socialLinks?.linkedin && member.socialLinks.linkedin !== '#' && (
+                                    <Link href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${member.name} LinkedIn`}>
+                                        <Linkedin className="h-4 w-4 text-muted-foreground hover:text-primary transition-colors" />
+                                    </Link>
+                                )}
+                                {member.socialLinks?.email && (
+                                    <Link href={`mailto:${member.socialLinks.email}`} aria-label={`Email ${member.name}`}>
+                                        <Mail className="h-4 w-4 text-muted-foreground hover:text-primary transition-colors" />
+                                    </Link>
+                                )}
+                              </div>
+                            </div>
+                          </CardContent>
                         </Card>
                     </div>
                     </CarouselItem>
                 ))}
                 </CarouselContent>
-                {teamMembers.length > itemsPerView && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
-                {teamMembers.length > itemsPerView && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
+                {canAutoplay && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
+                {canAutoplay && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
               </Carousel>
             )}
             {!isLoading && !error && teamMembers.length === 0 && (
@@ -262,13 +284,13 @@ export default function OurTeamPage() {
                 <ScrollArea className="max-h-[70vh]">
                 <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="md:col-span-1">
-                    <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-md mb-4">
+                    <div className="relative aspect-square rounded-lg overflow-hidden shadow-md mb-4 mx-auto w-48 h-48 md:w-full md:h-auto md:aspect-[3/4]">
                       <Image
                         src={selectedMember.image}
                         alt={selectedMember.name}
                         fill
                         style={{ objectFit: 'cover' }}
-                        sizes="33vw"
+                        sizes="(max-width: 768px) 50vw, 33vw"
                         data-ai-hint={selectedMember.dataAiHint}
                       />
                     </div>
@@ -306,16 +328,31 @@ export default function OurTeamPage() {
                       )}
                   </div>
                   <div className="md:col-span-2">
-                    <h4 className="font-semibold text-primary mb-2">About {selectedMember.name.split(' ')[0]}</h4>
+                    <h4 className="font-semibold text-primary mb-1">About {selectedMember.name.split(' ')[0]}</h4>
+                    <div className="flex items-center text-sm text-muted-foreground mb-3">
+                        <MapPin className="mr-1.5 h-4 w-4 flex-shrink-0" /> {selectedMember.location}
+                        <span className="mx-2">|</span>
+                        <Clock className="mr-1.5 h-4 w-4 flex-shrink-0" /> {selectedMember.yearsOfExperience}
+                    </div>
                     <p className="text-sm text-muted-foreground mb-4 font-body leading-relaxed">
                       {selectedMember.bio}
                     </p>
+                    {selectedMember.credentials && selectedMember.credentials.length > 0 && (
+                      <div className="mb-4">
+                        <h4 className="font-semibold text-primary mb-2">Credentials:</h4>
+                        <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1 font-body">
+                          {selectedMember.credentials.map(cred => <li key={cred}>{cred}</li>)}
+                        </ul>
+                      </div>
+                    )}
                     {selectedMember.specialties && selectedMember.specialties.length > 0 && (
                       <div>
                         <h4 className="font-semibold text-primary mb-2">Specialties:</h4>
-                        <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1 font-body">
-                          {selectedMember.specialties.map(spec => <li key={spec}>{spec}</li>)}
-                        </ul>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedMember.specialties.map(spec => 
+                            <Badge key={spec} variant="secondary" className="font-normal">{spec}</Badge>
+                          )}
+                        </div>
                       </div>
                     )}
                   </div>
@@ -340,5 +377,3 @@ export default function OurTeamPage() {
     </div>
   );
 }
-
-    
