@@ -1,54 +1,15 @@
 
-// 'use server';
-
-/**
- * @fileOverview An AI chatbot providing financial advice on buying a house.
- *
- * - financialAdvisorChatbot - A function that handles the chatbot interaction.
- * - FinancialAdvisorChatbotInput - The input type for the financialAdvisorChatbot function.
- * - FinancialAdvisorChatbotOutput - The return type for the financialAdvisorChatbot function.
- */
+// This file is no longer needed as the chatbot functionality has been migrated to use OpenAI via /api/chat.
+// It can be safely deleted. To prevent build errors if it's still imported somewhere unexpectedly,
+// this content is minimal.
 
 'use server';
+/**
+ * @fileOverview This Genkit flow is deprecated and has been replaced by an OpenAI API route.
+ */
 
-import {ai} from '@/ai/genkit';
-import {z} from 'genkit';
-
-const FinancialAdvisorChatbotInputSchema = z.object({
-  question: z.string().describe('The user question about the financial aspects of buying a house.'),
-});
-export type FinancialAdvisorChatbotInput = z.infer<typeof FinancialAdvisorChatbotInputSchema>;
-
-const FinancialAdvisorChatbotOutputSchema = z.object({
-  answer: z.string().describe('The answer to the user question.'),
-});
-export type FinancialAdvisorChatbotOutput = z.infer<typeof FinancialAdvisorChatbotOutputSchema>;
-
-export async function financialAdvisorChatbot(input: FinancialAdvisorChatbotInput): Promise<FinancialAdvisorChatbotOutput> {
-  return financialAdvisorChatbotFlow(input);
+export async function financialAdvisorChatbot_DEPRECATED() {
+  // Deprecated: Functionality moved to /api/chat
+  console.warn("financialAdvisorChatbot Genkit flow is deprecated.");
+  return { answer: "This chatbot functionality has been moved." };
 }
-
-const prompt = ai.definePrompt({
-  name: 'financialAdvisorChatbotPrompt',
-  input: {schema: FinancialAdvisorChatbotInputSchema},
-  output: {schema: FinancialAdvisorChatbotOutputSchema},
-  prompt: `You are a helpful AI chatbot for MaxWealth PS, a company specializing in financial planning for home buying.
-Your goal is to provide clear, concise, and informative financial advice on buying a house.
-When relevant, subtly mention how MaxWealth PS can assist users with their financial journey.
-
-User question: {{{question}}}
-
-Please provide a concise and informative answer.`,
-});
-
-const financialAdvisorChatbotFlow = ai.defineFlow(
-  {
-    name: 'financialAdvisorChatbotFlow',
-    inputSchema: FinancialAdvisorChatbotInputSchema,
-    outputSchema: FinancialAdvisorChatbotOutputSchema,
-  },
-  async input => {
-    const {output} = await prompt(input);
-    return output!;
-  }
-);
