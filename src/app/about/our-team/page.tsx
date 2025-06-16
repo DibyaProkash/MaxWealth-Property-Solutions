@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, X as CloseIcon, Loader2, MapPin, CheckCircle, Clock } from 'lucide-react';
+import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, Loader2, MapPin, CheckCircle, Clock } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
@@ -121,10 +121,10 @@ export default function OurTeamPage() {
                   But here’s what really separates us from the rest…
                 </p>
                 <p>
-                  We’ve seen it all in 20+ years of real estate buying and selling—the wins, losses and competitive advantage that makes buying tough for the average individual with big dreams. 
+                  We’ve seen it all in 20+ years of real estate buying and selling—the wins, losses and competitive advantage that makes buying tough for the average individual with big dreams.
                 </p>
                 <p>
-                  Determined to shake things up, we set out to advocate exclusively for buyers, giving them the upper hand in real estate transactions. It’s our job (and pleasure) to step in, hunt and negotiate for buyers just like you who are strapped for time, dread ‘the chase’ and are anxious about paying too much. 
+                  Determined to shake things up, we set out to advocate exclusively for buyers, giving them the upper hand in real estate transactions. It’s our job (and pleasure) to step in, hunt and negotiate for buyers just like you who are strapped for time, dread ‘the chase’ and are anxious about paying too much.
                 </p>
                 <p>
                   Our A-team will strive to find and skillfully secure your next property, on time and within budget. With MaxWealth PS on your side, property buying can be simple, stress-free and enjoyable.
@@ -160,6 +160,7 @@ export default function OurTeamPage() {
                                 className="md:rounded-l-none"
                                 data-ai-hint={founderData.dataAiHint}
                                 sizes="(max-width: 768px) 100vw, 40vw"
+                                priority
                             />
                         </div>
                     </div>
@@ -373,3 +374,5 @@ export default function OurTeamPage() {
     </div>
   );
 }
+
+    
