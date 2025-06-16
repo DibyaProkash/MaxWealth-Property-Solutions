@@ -16,7 +16,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { ThemeToggle } from '@/components/theme-toggle';
-import { usePathname, useRouter } from 'next/navigation'; // Added useRouter
+import { usePathname, useRouter } from 'next/navigation'; 
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
@@ -70,7 +70,7 @@ const homepageSectionIds = navLinksData
 
 export default function Navbar() {
   const pathname = usePathname();
-  const router = useRouter(); // Added for navigation
+  const router = useRouter(); 
   const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
   const [isMounted, setIsMounted] = React.useState(false);
   const [searchQuery, setSearchQuery] = React.useState('');
@@ -91,8 +91,8 @@ export default function Navbar() {
   const handleSearchSubmit = () => {
     if (searchQuery.trim()) {
       router.push(`/media?q=${encodeURIComponent(searchQuery.trim())}`);
-      setIsSearchPopoverOpen(false); // Close popover
-      setSearchQuery(''); // Clear search input
+      setIsSearchPopoverOpen(false); 
+      setSearchQuery(''); 
     }
   };
   
@@ -104,7 +104,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-primary/30 backdrop-blur-lg shadow-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-white/40 backdrop-blur-lg shadow-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
           <Briefcase className="h-7 w-7 text-foreground" />
@@ -328,4 +328,6 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+    
+
     
