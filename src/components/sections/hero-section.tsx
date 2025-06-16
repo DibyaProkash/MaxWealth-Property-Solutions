@@ -3,13 +3,13 @@
 
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle } from 'lucide-react'; 
-import { Badge } from '@/components/ui/badge'; 
-// useChatWidget is not directly used here anymore for opening, AIChatbot is just embedded
+import { ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
+import { useChatWidget } from '@/contexts/chat-widget-context';
 
 export default function HeroSection() {
-  // const { openChat } = useChatWidget(); // Not needed if button is removed from hero for mobile
+  const { openChat } = useChatWidget();
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden">
@@ -40,26 +40,35 @@ export default function HeroSection() {
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl mx-auto md:mx-0">
               We secure the best properties at the right price across Sydney, Melbourne, Brisbane, Perth, and Adelaide. Save time, money, and stress with Australia's leading property buyer advocates.
             </p>
-            <div className="flex flex-row justify-center md:justify-start gap-4">
-              <Button 
-                size="lg" 
-                className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105" 
+            <div className="flex flex-row flex-wrap justify-center md:justify-start gap-3">
+              <Button
+                size="lg"
+                className="bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105"
                 asChild
               >
                 <a href="/contact">
                   Book Free Strategy Call <ArrowRight className="ml-2 h-5 w-5" />
                 </a>
               </Button>
-              <Button 
-                size="lg" 
-                variant="secondary" 
+              <Button
+                size="lg"
+                variant="secondary"
                 className="shadow-lg transform transition-transform hover:scale-105"
                 asChild
               >
                 <a href="/about/our-process">View Our Process</a>
               </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="shadow-lg transform transition-transform hover:scale-105 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 md:hidden"
+                onClick={openChat}
+                aria-label="Open financial advisor chat"
+              >
+                <MessageSquare className="mr-2 h-5 w-5" /> AI Advisor
+              </Button>
             </div>
-            
+
             {/* Trust Points */}
             <div className="mt-8 flex flex-row justify-center md:justify-start space-x-4 md:space-x-6">
               <div className="flex items-center justify-center md:justify-start">
@@ -75,7 +84,6 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: AI Chatbot for Desktop */}
-          {/* This div is hidden by default (on mobile) and becomes flex (visible) on md screens and up. */}
           <div className="hidden md:flex md:col-span-1 items-center justify-center">
             <AIChatbot />
           </div>
