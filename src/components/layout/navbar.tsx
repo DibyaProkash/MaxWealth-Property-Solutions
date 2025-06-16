@@ -59,7 +59,7 @@ const navLinksData: NavLinkItem[] = [
     subItems: localResourceSubItems 
   },
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
-  { href: '/contact', label: 'Contact', icon: MessageSquare }, // Updated href, removed id
+  { href: '/contact', label: 'Contact', icon: MessageSquare },
 ];
 
 const homepageSectionIds = navLinksData
@@ -86,7 +86,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-primary text-primary-foreground shadow-md">
-      <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
+      <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
           <Briefcase className="h-7 w-7 text-primary-foreground" />
           <span className="font-headline text-2xl font-bold text-primary-foreground">MaxWealth PS</span>
@@ -160,7 +160,7 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-primary-foreground border border-primary-foreground/30 hover:bg-primary-foreground/10 hover:text-primary-foreground focus-visible:ring-primary-foreground"
+                  className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground focus-visible:ring-primary-foreground"
                 >
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Toggle Navigation</span>

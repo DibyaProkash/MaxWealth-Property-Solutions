@@ -198,7 +198,7 @@ export default function OurTeamPage() {
                   <DialogDescription className="text-accent">{selectedMember.title}</DialogDescription>
                 </DialogHeader>
                 <ScrollArea className="max-h-[70vh]">
-                <div className="p-6 grid md:grid-cols-3 gap-6">
+                <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div className="md:col-span-1">
                     <div className="relative aspect-[3/4] rounded-lg overflow-hidden shadow-md mb-4">
                       <Image
@@ -276,3 +276,4 @@ export default function OurTeamPage() {
     </div>
   );
 }
+
