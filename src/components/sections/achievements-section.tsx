@@ -9,25 +9,18 @@ import { MapPin, Loader2 } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
 
-// Define types for this component
-interface CarouselCity {
-  id: string;
-  name: string;
-  region: string; 
-  imageSrc?: string; 
-  dataAiHint?: string;
-  slug: string; // Added slug for linking
-}
-
-// Define type for API response from /api/locations
+// Define type for API response from /api/locations (matches ServiceLocationItem in locations.ts)
 interface FetchedServiceLocationItem {
   id: string;
   slug: string;
   name: string;
-  // image and dataAiHint from FetchedServiceLocationItem are for detail pages, not this card.
+  image: string; // Image for the card
+  dataAiHint: string; // Hint for the card image
+  // tagline, heroImage, heroImageAiHint are part of ServiceLocationItem but not directly used in this card display
 }
 
 // Helper map for Australian states (can be expanded)
+// This map might be less crucial if region is part of the fetched data or derived differently
 const cityStateMap: Record<string, string> = {
   sydney: "NSW",
   melbourne: "VIC",
@@ -40,112 +33,66 @@ const cityStateMap: Record<string, string> = {
   hobart: "TAS"
 };
 
-const internationalCities: CarouselCity[] = [
-  { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/city-backgrounds/london.jpg', dataAiHint: 'london city', slug: 'london' },
-  { id: 'intl2', name: 'New York', region: 'USA', imageSrc: '/city-backgrounds/new-york.jpg', dataAiHint: 'new york city', slug: 'new-york' },
-  { id: 'intl3', name: 'Singapore', region: 'Singapore', imageSrc: '/city-backgrounds/singapore.jpg', dataAiHint: 'singapore city', slug: 'singapore' },
-  { id: 'intl4', name: 'Dubai', region: 'UAE', imageSrc: '/city-backgrounds/dubai.jpg', dataAiHint: 'dubai city', slug: 'dubai' },
-  { id: 'intl5', name: 'Paris', region: 'France', imageSrc: '/city-backgrounds/paris.jpg', dataAiHint: 'paris city', slug: 'paris' },
-];
-
 export default function AchievementsSection() {
   const autoplayPlugin = React.useRef(
     Autoplay({ delay: 2500, stopOnInteraction: true, stopOnMouseEnter: true })
   );
   
   const [itemsPerView, setItemsPerView] = React.useState(4);
-  const [allCities, setAllCities] = React.useState<CarouselCity[]>([]);
+  const [cities, setCities] = React.useState<FetchedServiceLocationItem[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const fetchAustralianCities = async () => {
+    const fetchCities = async () => {
       setIsLoading(true);
       setError(null);
       try {
         const response = await fetch('/api/locations');
         if (!response.ok) {
-          throw new Error('Failed to fetch Australian service locations');
+          throw new Error('Failed to fetch service locations');
         }
         const data: FetchedServiceLocationItem[] = await response.json();
-        const australianCitiesFormatted: CarouselCity[] = data.map(loc => {
-          let imageSrc: string | undefined = undefined;
-          let dataAiHint: string | undefined = undefined;
-
-          switch (loc.slug) {
-            case 'sydney':
-              imageSrc = '/city-backgrounds/sydney.jpg';
-              dataAiHint = 'sydney city';
-              break;
-            case 'melbourne':
-              imageSrc = '/city-backgrounds/melbourne.jpg';
-              dataAiHint = 'melbourne city';
-              break;
-            case 'brisbane':
-              imageSrc = '/city-backgrounds/brisbane.jpg';
-              dataAiHint = 'brisbane city';
-              break;
-            case 'gold-coast':
-              imageSrc = '/city-backgrounds/gold-coast.jpg';
-              dataAiHint = 'gold coast city';
-              break;
-            case 'sunshine-coast':
-              imageSrc = '/city-backgrounds/sunshine-coast.jpg';
-              dataAiHint = 'sunshine coast beach';
-              break;
-            case 'hobart':
-              imageSrc = '/city-backgrounds/hobart.jpg';
-              dataAiHint = 'hobart city';
-              break;
-            case 'central-coast':
-              imageSrc = '/city-backgrounds/central-coast.jpg';
-              dataAiHint = 'central coast nsw';
-              break;
-            case 'adelaide':
-              imageSrc = '/city-backgrounds/adelaide.jpg';
-              dataAiHint = 'adelaide city';
-              break;
-            case 'newcastle-hunter-valley':
-              imageSrc = '/city-backgrounds/newcastle-hunter-valley.jpg';
-              dataAiHint = 'newcastle hunter valley';
-              break;
-            // Add other specific cities from serviceLocationsData if needed
-          }
-          
-          return {
-            id: loc.id,
-            name: loc.name,
-            region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`,
-            imageSrc: imageSrc,
-            dataAiHint: dataAiHint || loc.name.toLowerCase().replace('&', '').replace(/\s+/g, ' '),
-            slug: loc.slug, // Ensure slug is passed
-          };
-        });
-        setAllCities([...australianCitiesFormatted, ...internationalCities]);
+        setCities(data); // Directly use the fetched data
       } catch (err: any) {
         console.error("Error fetching city data:", err);
         setError(err.message || 'Could not load city data.');
-        setAllCities(internationalCities); // Fallback to international only
       } finally {
         setIsLoading(false);
       }
     };
-    fetchAustralianCities();
+    fetchCities();
   }, []);
 
   React.useEffect(() => {
     const updateItems = () => {
-      if (window.innerWidth < 640) setItemsPerView(2); // sm
-      else if (window.innerWidth < 768) setItemsPerView(3); // md
-      else if (window.innerWidth < 1024) setItemsPerView(3); // lg
-      else setItemsPerView(4); // xl and up
+      if (window.innerWidth < 640) setItemsPerView(2); 
+      else if (window.innerWidth < 768) setItemsPerView(3); 
+      else if (window.innerWidth < 1024) setItemsPerView(3); 
+      else setItemsPerView(4); 
     };
     window.addEventListener('resize', updateItems);
     updateItems();
     return () => window.removeEventListener('resize', updateItems);
   }, []);
 
-  const canAutoplayAndShowControls = allCities.length > itemsPerView;
+  const canAutoplayAndShowControls = cities.length > itemsPerView;
+
+  const getRegionForCity = (slug: string): string => {
+    if (cityStateMap[slug]) {
+      return `${cityStateMap[slug]}, Australia`;
+    }
+    // For international cities, their region might be part of their name or tagline
+    // This logic can be expanded if more specific regions are needed for international cities here
+    const cityData = cities.find(c => c.slug === slug);
+    if (cityData?.name.toLowerCase().includes('singapore')) return 'Singapore';
+    if (cityData?.name.toLowerCase().includes('new york')) return 'USA';
+    if (cityData?.name.toLowerCase().includes('london')) return 'UK';
+    if (cityData?.name.toLowerCase().includes('paris')) return 'France';
+    if (cityData?.name.toLowerCase().includes('dubai')) return 'UAE'; // Assuming Dubai was added
+    return 'International'; // Default for other international
+  };
+
 
   return (
     <section>
@@ -164,11 +111,11 @@ export default function AchievementsSection() {
             <div className="flex justify-center items-center h-32">
               <Loader2 className="h-10 w-10 animate-spin text-primary" />
             </div>
-          ) : error && allCities.length === internationalCities.length ? ( 
-            <p className="text-center text-destructive">Could not load Australian cities. Showing international examples.</p>
+          ) : error ? ( 
+            <p className="text-center text-destructive">{error}</p>
           ) : null}
 
-          {!isLoading && allCities.length > 0 && (
+          {!isLoading && cities.length > 0 && (
             <Carousel
               opts={{
                 align: "start",
@@ -180,7 +127,7 @@ export default function AchievementsSection() {
               className="w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto"
             >
               <CarouselContent className="-ml-2 md:-ml-4">
-                {allCities.map((city) => (
+                {cities.map((city) => (
                   <CarouselItem 
                     key={city.id} 
                     className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/4"
@@ -188,10 +135,10 @@ export default function AchievementsSection() {
                     <div className="p-1 h-full">
                       <Link href={`/locations/${city.slug}`} passHref className="block h-full group">
                         <div className="bg-card shadow-md h-32 flex flex-col text-center rounded-lg transition-transform duration-300 group-hover:scale-105 overflow-hidden group-hover:shadow-xl">
-                          {city.imageSrc && (
+                          {city.image && ( // Check if image path exists
                             <div className="relative w-full h-20">
                               <Image
-                                src={city.imageSrc}
+                                src={city.image} // Use image from fetched data
                                 alt={`${city.name} card image`}
                                 fill
                                 style={{ objectFit: 'cover' }}
@@ -200,12 +147,12 @@ export default function AchievementsSection() {
                               />
                             </div>
                           )}
-                          <div className={`p-2 flex-grow flex flex-col items-center ${city.imageSrc ? 'justify-start pt-1' : 'justify-center'}`}>
+                          <div className={`p-2 flex-grow flex flex-col items-center ${city.image ? 'justify-start pt-1' : 'justify-center'}`}>
                             <h3 className="font-semibold text-primary text-sm md:text-base mb-0.5 group-hover:text-accent transition-colors">
                               {city.name}
                             </h3>
                             <p className="text-xs text-muted-foreground">
-                              {city.region}
+                              {getRegionForCity(city.slug)}
                             </p>
                           </div>
                         </div>
@@ -218,7 +165,7 @@ export default function AchievementsSection() {
               {canAutoplayAndShowControls && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
             </Carousel>
           )}
-          {!isLoading && allCities.length === 0 && !error && (
+          {!isLoading && cities.length === 0 && !error && (
              <p className="text-center text-muted-foreground">Service locations will be displayed here soon.</p>
           )}
         </Card>
@@ -226,3 +173,5 @@ export default function AchievementsSection() {
     </section>
   );
 }
+
+    

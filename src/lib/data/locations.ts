@@ -9,28 +9,144 @@ export interface ServiceLocationItem {
   id: string;
   slug: string;
   name: string;
-  image: string;
-  dataAiHint: string;
+  image: string; // This will be used for BOTH card and hero
+  dataAiHint: string; // For the image
   tagline?: string;
-  heroImage: string;
-  heroImageAiHint: string;
+  heroImage: string; // Will be identical to 'image'
+  heroImageAiHint: string; // Will be identical to 'dataAiHint'
 }
 
 export const serviceLocationsData: ServiceLocationItem[] = [
-  { id: 'loc1', slug: 'sydney', name: 'Sydney', image: 'https://placehold.co/400x300.png', dataAiHint: 'Sydney opera house', tagline: 'Iconic landmarks and vibrant city living.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Sydney harbour bridge' },
-  { id: 'loc2', slug: 'melbourne', name: 'Melbourne', image: 'https://placehold.co/400x300.png', dataAiHint: 'Melbourne city tram', tagline: 'Culture, coffee, and a cosmopolitan lifestyle.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Melbourne laneway art' },
-  { id: 'loc3', slug: 'brisbane', name: 'Brisbane', image: 'https://placehold.co/400x300.png', dataAiHint: 'Brisbane story bridge', tagline: 'Sunny skies and a relaxed urban atmosphere.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Brisbane river city' },
-  { id: 'loc4', slug: 'gold-coast', name: 'Gold Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Gold Coast surfers paradise', tagline: 'Famous beaches and a thriving entertainment scene.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Gold Coast beach aerial' },
-  { id: 'loc5', slug: 'adelaide', name: 'Adelaide', image: 'https://placehold.co/400x300.png', dataAiHint: 'Adelaide hills vineyard', tagline: 'Charming city with renowned wine regions nearby.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Adelaide city park' },
-  { id: 'loc6', slug: 'sunshine-coast', name: 'Sunshine Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Sunshine Coast glasshouse mountains', tagline: 'Pristine beaches and lush hinterland.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Sunshine Coast beach view' },
-  { id: 'loc7', slug: 'newcastle-hunter-valley', name: 'Newcastle & Hunter Valley', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hunter Valley wine tasting', tagline: 'Coastal city charm meets wine country elegance.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Newcastle beach sunrise' },
-  { id: 'loc8', slug: 'central-coast', name: 'Central Coast', image: 'https://placehold.co/400x300.png', dataAiHint: 'Central Coast beach town', tagline: 'Beautiful waterways and beaches north of Sydney.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Central Coast lake Macquarie' },
-  { id: 'loc9', slug: 'hobart', name: 'Hobart', image: 'https://placehold.co/400x300.png', dataAiHint: 'Hobart mount wellington', tagline: 'Historic charm and stunning natural beauty.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Hobart historic waterfront' },
-  // Adding international cities for consistency, though they might be hardcoded in AchievementsSection
-  { id: 'loc10', slug: 'singapore', name: 'Singapore', image: 'https://placehold.co/400x300.png', dataAiHint: 'Singapore city skyline', tagline: 'A global hub of innovation and luxury living.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Singapore skyline merlion' },
-  { id: 'loc11', slug: 'new-york', name: 'New York', image: 'https://placehold.co/400x300.png', dataAiHint: 'New York city skyline', tagline: 'The city that never sleeps, offering diverse properties.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'New York skyline statue liberty' },
-  { id: 'loc12', slug: 'london', name: 'London', image: 'https://placehold.co/400x300.png', dataAiHint: 'London city skyline', tagline: 'Historic charm meets modern sophistication.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'London skyline big ben' },
-  { id: 'loc13', slug: 'paris', name: 'Paris', image: 'https://placehold.co/400x300.png', dataAiHint: 'Paris city skyline', tagline: 'Experience elegance in the City of Lights.', heroImage: 'https://placehold.co/1200x400.png', heroImageAiHint: 'Paris skyline eiffel tower' },
+  { 
+    id: 'loc1', 
+    slug: 'sydney', 
+    name: 'Sydney', 
+    image: '/city-backgrounds/sydney.jpg', 
+    dataAiHint: 'sydney city opera', 
+    tagline: 'Iconic landmarks and vibrant city living.', 
+    heroImage: '/city-backgrounds/sydney.jpg', 
+    heroImageAiHint: 'sydney city opera' 
+  },
+  { 
+    id: 'loc2', 
+    slug: 'melbourne', 
+    name: 'Melbourne', 
+    image: '/city-backgrounds/melbourne.jpg', 
+    dataAiHint: 'melbourne city tram', 
+    tagline: 'Culture, coffee, and a cosmopolitan lifestyle.', 
+    heroImage: '/city-backgrounds/melbourne.jpg', 
+    heroImageAiHint: 'melbourne city tram' 
+  },
+  { 
+    id: 'loc3', 
+    slug: 'brisbane', 
+    name: 'Brisbane', 
+    image: '/city-backgrounds/brisbane.jpg', 
+    dataAiHint: 'brisbane story bridge', 
+    tagline: 'Sunny skies and a relaxed urban atmosphere.', 
+    heroImage: '/city-backgrounds/brisbane.jpg', 
+    heroImageAiHint: 'brisbane story bridge' 
+  },
+  { 
+    id: 'loc4', 
+    slug: 'gold-coast', 
+    name: 'Gold Coast', 
+    image: '/city-backgrounds/gold-coast.jpg', 
+    dataAiHint: 'gold coast surfers', 
+    tagline: 'Famous beaches and a thriving entertainment scene.', 
+    heroImage: '/city-backgrounds/gold-coast.jpg', 
+    heroImageAiHint: 'gold coast surfers' 
+  },
+  { 
+    id: 'loc5', 
+    slug: 'adelaide', 
+    name: 'Adelaide', 
+    image: '/city-backgrounds/adelaide.jpg', 
+    dataAiHint: 'adelaide hills wine', 
+    tagline: 'Charming city with renowned wine regions nearby.', 
+    heroImage: '/city-backgrounds/adelaide.jpg', 
+    heroImageAiHint: 'adelaide hills wine' 
+  },
+  { 
+    id: 'loc6', 
+    slug: 'sunshine-coast', 
+    name: 'Sunshine Coast', 
+    image: '/city-backgrounds/sunshine-coast.jpg', 
+    dataAiHint: 'sunshine coast beach', 
+    tagline: 'Pristine beaches and lush hinterland.', 
+    heroImage: '/city-backgrounds/sunshine-coast.jpg', 
+    heroImageAiHint: 'sunshine coast beach' 
+  },
+  { 
+    id: 'loc7', 
+    slug: 'newcastle-hunter-valley', 
+    name: 'Newcastle & Hunter Valley', 
+    image: '/city-backgrounds/newcastle-hunter-valley.jpg', 
+    dataAiHint: 'hunter valley vineyard', 
+    tagline: 'Coastal city charm meets wine country elegance.', 
+    heroImage: '/city-backgrounds/newcastle-hunter-valley.jpg', 
+    heroImageAiHint: 'hunter valley vineyard' 
+  },
+  { 
+    id: 'loc8', 
+    slug: 'central-coast', 
+    name: 'Central Coast', 
+    image: '/city-backgrounds/central-coast.jpg', 
+    dataAiHint: 'central coast nsw', 
+    tagline: 'Beautiful waterways and beaches north of Sydney.', 
+    heroImage: '/city-backgrounds/central-coast.jpg', 
+    heroImageAiHint: 'central coast nsw' 
+  },
+  { 
+    id: 'loc9', 
+    slug: 'hobart', 
+    name: 'Hobart', 
+    image: '/city-backgrounds/hobart.jpg', 
+    dataAiHint: 'hobart mount wellington', 
+    tagline: 'Historic charm and stunning natural beauty.', 
+    heroImage: '/city-backgrounds/hobart.jpg', 
+    heroImageAiHint: 'hobart mount wellington' 
+  },
+  { 
+    id: 'loc10', 
+    slug: 'singapore', 
+    name: 'Singapore', 
+    image: '/city-backgrounds/singapore.jpg', 
+    dataAiHint: 'singapore city skyline', 
+    tagline: 'A global hub of innovation and luxury living.', 
+    heroImage: '/city-backgrounds/singapore.jpg', 
+    heroImageAiHint: 'singapore city skyline' 
+  },
+  { 
+    id: 'loc11', 
+    slug: 'new-york', 
+    name: 'New York', 
+    image: '/city-backgrounds/new-york.jpg', 
+    dataAiHint: 'new york city', 
+    tagline: 'The city that never sleeps, offering diverse properties.', 
+    heroImage: '/city-backgrounds/new-york.jpg', 
+    heroImageAiHint: 'new york city' 
+  },
+  { 
+    id: 'loc12', 
+    slug: 'london', 
+    name: 'London', 
+    image: '/city-backgrounds/london.jpg', 
+    dataAiHint: 'london city big ben', 
+    tagline: 'Historic charm meets modern sophistication.', 
+    heroImage: '/city-backgrounds/london.jpg', 
+    heroImageAiHint: 'london city big ben' 
+  },
+  { 
+    id: 'loc13', 
+    slug: 'paris', 
+    name: 'Paris', 
+    image: '/city-backgrounds/paris.jpg', 
+    dataAiHint: 'paris eiffel tower', 
+    tagline: 'Experience elegance in the City of Lights.', 
+    heroImage: '/city-backgrounds/paris.jpg', 
+    heroImageAiHint: 'paris eiffel tower' 
+  },
 ];
 
 export interface AmenityContentItem {
@@ -70,8 +186,8 @@ const generatePlaceholderAmenities = (cityName: string): LocationDetail['ameniti
       { subTitle: "Connectivity", text: `Extensive networks provide easy access across ${cityName} and surrounding areas. Local and regional services available.`, iconName: "BusIcon" },
       { text: `General public transport in ${cityName} is designed for accessibility and convenience, making it easy to explore the city and its attractions.`, iconName: "MapPin" },
     ],
-    image: 'https://placehold.co/600x450.png',
-    imageAiHint: `transport ${cityName.toLowerCase()}`,
+    image: 'https://placehold.co/600x450.png', // Standard placeholder, can be customized per city if needed
+    imageAiHint: `transport ${cityName.toLowerCase().replace(/\s+/g, ' ')}`,
   },
   shopsAndRestaurants: {
     title: "SHOPS & RESTAURANTS",
@@ -80,7 +196,7 @@ const generatePlaceholderAmenities = (cityName: string): LocationDetail['ameniti
       { subTitle: "Culinary Delights", text: `Explore diverse culinary delights, with a wide array of cafes, casual eateries, and fine dining restaurants catering to all tastes in ${cityName}.`, iconName: "Utensils" },
     ],
     image: 'https://placehold.co/600x450.png',
-    imageAiHint: `shopping ${cityName.toLowerCase()}`,
+    imageAiHint: `shopping ${cityName.toLowerCase().replace(/\s+/g, ' ')}`,
   },
   leisure: {
     title: "LEISURE & ATTRACTIONS",
@@ -90,7 +206,7 @@ const generatePlaceholderAmenities = (cityName: string): LocationDetail['ameniti
       { subTitle: "Events & Entertainment", text: `The city offers a lively calendar of events, festivals, and entertainment options for all ages.`, iconName: "Sparkles" },
     ],
     image: 'https://placehold.co/600x450.png',
-    imageAiHint: `leisure ${cityName.toLowerCase()}`,
+    imageAiHint: `leisure ${cityName.toLowerCase().replace(/\s+/g, ' ')}`,
   },
 });
 
@@ -139,95 +255,41 @@ const baseLocationDetails = serviceLocationsData.map(loc => {
         }
       },
       touristLink: 'https://www.visitnsw.com/destinations/central-coast',
-      heroImage: loc.heroImage,
-      heroImageAiHint: loc.heroImageAiHint,
+      heroImage: loc.heroImage, // Uses the image from ServiceLocationItem
+      heroImageAiHint: loc.heroImageAiHint, // Uses the hint from ServiceLocationItem
     };
   }
-  // Generic generation for other Australian cities based on serviceLocationsData
-  if (['sydney', 'melbourne', 'brisbane', 'gold-coast', 'adelaide', 'sunshine-coast', 'newcastle-hunter-valley', 'hobart'].includes(loc.slug)) {
-    return {
-      slug: loc.slug,
-      name: loc.name,
-      pageIntro: `Unlock Your Dream Property in ${loc.name}`,
-      tagline: loc.tagline,
-      specificIntroParagraphs: [
-        `Looking to buy a home or investment property in ${loc.name}? This vibrant region offers a unique blend of lifestyle and opportunity. Our expert buyers' agents at MaxWealth Property Services are ready to guide you.`,
-        `${loc.name} features diverse suburbs, from bustling city centers to serene ${loc.slug.includes('coast') || loc.slug.includes('sydney') || loc.slug.includes('melbourne') ? 'coastal retreats' : 'natural landscapes'}. We can help you find the perfect match for your needs.`,
-        `With our deep local knowledge and extensive network in ${loc.name}, we uncover off-market deals and provide you with a competitive edge. Let us make your property journey in ${loc.name} a success.`
-      ],
-      amenities: generatePlaceholderAmenities(loc.name),
-      touristLink: '#', 
-      heroImage: loc.heroImage,
-      heroImageAiHint: loc.heroImageAiHint,
-    };
-  }
-  return null; // For international cities, we'll add them explicitly below
-}).filter(Boolean) as LocationDetail[];
+  return {
+    slug: loc.slug,
+    name: loc.name,
+    pageIntro: `Unlock Your Dream Property in ${loc.name}`,
+    tagline: loc.tagline,
+    specificIntroParagraphs: [
+      `Looking to buy a home or investment property in ${loc.name}? This vibrant region offers a unique blend of lifestyle and opportunity. Our expert buyers' agents at MaxWealth Property Services are ready to guide you.`,
+      `${loc.name} features diverse suburbs, from bustling city centers to serene ${loc.slug.includes('coast') || loc.slug.includes('sydney') || loc.slug.includes('melbourne') ? 'coastal retreats' : 'natural landscapes'}. We can help you find the perfect match for your needs.`,
+      `With our deep local knowledge and extensive network in ${loc.name}, we uncover off-market deals and provide you with a competitive edge. Let us make your property journey in ${loc.name} a success.`
+    ],
+    amenities: generatePlaceholderAmenities(loc.name),
+    touristLink: loc.slug === 'sydney' ? 'https://www.sydney.com/' : 
+                 loc.slug === 'melbourne' ? 'https://www.visitmelbourne.com/' :
+                 loc.slug === 'brisbane' ? 'https://www.visitbrisbane.com.au/' :
+                 loc.slug === 'gold-coast' ? 'https://www.destinationgoldcoast.com/' :
+                 loc.slug === 'adelaide' ? 'https://southaustralia.com/destinations/adelaide' :
+                 loc.slug === 'sunshine-coast' ? 'https://www.visitsunshinecoast.com/' :
+                 loc.slug === 'newcastle-hunter-valley' ? 'https://www.visitnsw.com/destinations/hunter/hunter-valley' : // Or Newcastle specific
+                 loc.slug === 'hobart' ? 'https://www.discovertasmania.com.au/places/hobart-and-south/' :
+                 loc.slug === 'singapore' ? 'https://www.visitsingapore.com/' :
+                 loc.slug === 'new-york' ? 'https://www.nycgo.com/' :
+                 loc.slug === 'london' ? 'https://www.visitlondon.com/' :
+                 loc.slug === 'paris' ? 'https://en.parisinfo.com/' : '#',
+    heroImage: loc.heroImage,
+    heroImageAiHint: loc.heroImageAiHint,
+  };
+});
 
-
-export const locationDetailsData: LocationDetail[] = [
-  ...baseLocationDetails,
-  {
-    slug: "singapore",
-    name: "Singapore",
-    pageIntro: "Unlock Your Dream Property in Singapore",
-    tagline: "A global hub of innovation, culture, and luxury living.",
-    specificIntroParagraphs: [
-      "Discover the vibrant property market of Singapore, a city-state renowned for its economic dynamism, world-class infrastructure, and lush green spaces. MaxWealth Property Services offers expert guidance for navigating this unique and competitive market.",
-      "Whether you're seeking a modern condominium in the bustling city center, a landed property in a serene residential enclave, or a strategic investment opportunity, our team provides tailored solutions to meet your aspirations in Singapore.",
-      "With our in-depth local knowledge and international network, we help clients secure premium properties, understand complex regulations, and maximize their investments in one of Asia's most desirable locations."
-    ],
-    amenities: generatePlaceholderAmenities("Singapore"),
-    heroImage: 'https://placehold.co/1200x400.png',
-    heroImageAiHint: "Singapore skyline merlion",
-    touristLink: 'https://www.visitsingapore.com'
-  },
-  {
-    slug: "new-york",
-    name: "New York",
-    pageIntro: "Unlock Your Dream Property in New York",
-    tagline: "The city that never sleeps, offering unparalleled property diversity.",
-    specificIntroParagraphs: [
-      "Explore the iconic real estate landscape of New York City with MaxWealth Property Services. From chic Manhattan apartments to charming Brooklyn brownstones and luxurious Hamptons retreats, we provide expert assistance.",
-      "Navigating the New York property market requires specialized knowledge. Our team offers insights into neighborhood dynamics, market trends, and investment potential to help you find your perfect property.",
-      "Whether you're a local buyer or an international investor, we streamline the purchasing process, ensuring a smooth transaction for your dream home or investment in the Big Apple."
-    ],
-    amenities: generatePlaceholderAmenities("New York"),
-    heroImage: 'https://placehold.co/1200x400.png',
-    heroImageAiHint: "New York skyline statue liberty",
-    touristLink: 'https://www.nycgo.com'
-  },
-  {
-    slug: "london",
-    name: "London",
-    pageIntro: "Unlock Your Dream Property in London",
-    tagline: "Historic charm meets modern sophistication in this global capital.",
-    specificIntroParagraphs: [
-      "MaxWealth Property Services guides you through London's diverse and prestigious property market. From historic townhouses in Kensington to contemporary apartments in Canary Wharf, we cater to all preferences.",
-      "Understanding the nuances of London's various boroughs and market conditions is key. Our experienced consultants provide personalized advice and access to exclusive listings.",
-      "Whether for primary residence, investment, or a pied-à-terre, we assist clients in securing their ideal London property, navigating one of the world's most dynamic real estate environments."
-    ],
-    amenities: generatePlaceholderAmenities("London"),
-    heroImage: 'https://placehold.co/1200x400.png',
-    heroImageAiHint: "London skyline big ben",
-    touristLink: 'https://www.visitlondon.com'
-  },
-  {
-    slug: "paris",
-    name: "Paris",
-    pageIntro: "Unlock Your Dream Property in Paris",
-    tagline: "Experience the epitome of elegance and romance in the City of Lights.",
-    specificIntroParagraphs: [
-      "Discover the enchanting Parisian property market with MaxWealth Property Services. From classic Haussmannian apartments to charming artist studios and luxurious hôtels particuliers, we offer bespoke assistance.",
-      "Our team provides expert insights into the arrondissements of Paris, helping you find properties that match your lifestyle and investment goals in this timeless city.",
-      "Let us help you navigate the French real estate process, ensuring a seamless acquisition of your dream Parisian home or investment, embracing the unique charm and sophistication of Paris."
-    ],
-    amenities: generatePlaceholderAmenities("Paris"),
-    heroImage: 'https://placehold.co/1200x400.png',
-    heroImageAiHint: "Paris skyline eiffel tower",
-    touristLink: 'https://en.parisinfo.com'
-  }
-];
+// Filter out any nulls if some slugs in serviceLocationsData didn't match the detailed criteria above
+// This ensures all entries in locationDetailsData are valid LocationDetail objects
+export const locationDetailsData: LocationDetail[] = baseLocationDetails.filter(Boolean) as LocationDetail[];
 
 
 export interface WhyChooseUsItem {
@@ -276,3 +338,4 @@ export const whyChooseUsData: WhyChooseUsItem[] = [
   },
 ];
 
+    
