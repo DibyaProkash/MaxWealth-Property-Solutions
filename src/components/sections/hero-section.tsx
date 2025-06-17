@@ -17,7 +17,7 @@ export default function HeroSection() {
       {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0 h-full w-full">
         <Image
-          src="/sydney-2.jpg" // Using local sydney-2.jpg
+          src="/sydney-2.jpg" // Single static background image
           alt="Sydney cityscape background"
           fill
           style={{ objectFit: 'cover' }}
@@ -37,7 +37,7 @@ export default function HeroSection() {
               Licensed Real Estate Consultants
             </Badge>
             <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Your Trusted Property Purchase Consultants in <span className="text-white [text-shadow:0_0_5px_rgba(0,0,0,0.7)]">Australia and Abroad</span>
+              Your Trusted Property Purchase Consultants in <span className="text-yellow-300 [text-shadow:0_0_5px_rgba(0,0,0,0.7)]">Australia and Abroad</span>
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl mx-auto md:mx-0">
               Secure the world's finest properties at the right price, from vibrant city centers to serene international havens. Our expert purchase consultants transform the buying experience, saving you valuable time and resources while eliminating stress. Elevate your property journey with our global expertise—let's discuss your aspirations.
