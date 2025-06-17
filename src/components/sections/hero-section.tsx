@@ -11,7 +11,7 @@ import AIChatbot from '@/components/sections/ai-chatbot';
 import { useChatWidget } from '@/contexts/chat-widget-context'; 
 
 export default function HeroSection() {
-  const { isChatOpen, openChat } = useChatWidget(); 
+  const { openChat } = useChatWidget(); 
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[85vh] flex items-center">
@@ -91,30 +91,7 @@ export default function HeroSection() {
               >
                 <MessageSquare className="mr-2 h-5 w-5" /> AI Advisor
               </Button>
-              
-              {isChatOpen && (
-                <>
-                  <Button 
-                    variant="secondary" 
-                    className="w-full h-12 text-base"
-                    asChild
-                  >
-                    <Link href="/resources/ai-tools">
-                      <BrainCircuit className="mr-2 h-5 w-5" /> AI-Powered Tools
-                      <Badge variant="destructive" className="ml-auto text-xs px-1.5 py-0.5">BETA</Badge>
-                    </Link>
-                  </Button>
-                  <Button 
-                    variant="secondary"
-                    className="w-full h-12 text-base"
-                    asChild
-                  >
-                    <Link href="/resources/calculators">
-                      <CalculatorIcon className="mr-2 h-5 w-5" /> Financial Calculators
-                    </Link>
-                  </Button>
-                </>
-              )}
+              {/* "AI-Powered Tools" and "Financial Calculators" buttons removed from here for mobile view */}
             </div>
 
             {/* Trust Points - Shown on all sizes */}

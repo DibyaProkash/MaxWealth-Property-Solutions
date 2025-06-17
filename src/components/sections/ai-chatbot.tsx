@@ -3,15 +3,18 @@
 
 import { useRef, useEffect, useState, type ChangeEvent } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Bot, User, Loader2, Send, MessageSquare, UploadCloud, XCircle, Paperclip } from 'lucide-react';
+import { Bot, User, Loader2, Send, MessageSquare, UploadCloud, XCircle, Paperclip, BrainCircuit, CalculatorIcon } from 'lucide-react';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { useChatWidget, type FilePayload } from '@/contexts/chat-widget-context';
 import { useToast } from '@/hooks/use-toast';
 import type { PDFDocumentProxy } from 'pdfjs-dist';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Badge } from '@/components/ui/badge';
 
 let pdfjsLib: any = null;
 if (typeof window !== 'undefined') {
@@ -51,6 +54,7 @@ export default function AIChatbot() {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+  const isMobile = useIsMobile();
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [processedFileData, setProcessedFileData] = useState<FilePayload | null>(null);
@@ -211,6 +215,24 @@ export default function AIChatbot() {
         </ScrollArea>
       </CardContent>
       <CardFooter className="border-t pt-3 pb-3 flex flex-col items-start gap-2">
+        {isMobile && (
+          <div className="w-full flex flex-col gap-2 mb-2">
+            <Button variant="outline" asChild className="w-full justify-start text-sm">
+              <Link href="/resources/ai-tools">
+                <BrainCircuit className="mr-2 h-4 w-4" />
+                AI-Powered Tools
+                <Badge variant="destructive" className="ml-auto text-xs px-1.5 py-0.5">BETA</Badge>
+              </Link>
+            </Button>
+            <Button variant="outline" asChild className="w-full justify-start text-sm">
+              <Link href="/resources/calculators">
+                <CalculatorIcon className="mr-2 h-4 w-4" />
+                Financial Calculators
+              </Link>
+            </Button>
+          </div>
+        )}
+
         {selectedFile && (
           <div className="w-full p-2 text-xs bg-muted rounded-md flex justify-between items-center">
             <div className="flex items-center gap-2 overflow-hidden">
