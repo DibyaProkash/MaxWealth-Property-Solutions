@@ -119,7 +119,7 @@ export default function AboutUsSection() {
             </div>
             <div>
               <h3 className="font-headline text-3xl md:text-4xl font-bold text-accent mb-6">
-                MaxWealth PS: Your Trusted Financial Partner
+                MaxWealth Property Services: Your Trusted Property Purchase Consultants
               </h3>
               <p className="text-lg text-muted-foreground mb-8 font-body">
                 We make achieving your property goals simple — offering expert guidance, tailored solutions, and exclusive access to financial opportunities. Trust our award-winning team to find the financial plan that fits your lifestyle and goals, minus the overwhelm. Our KPIs reflect extensive experience, billions in successfully financed properties, and a deep understanding of market dynamics.
@@ -164,5 +164,7 @@ export default function AboutUsSection() {
 
 
 
+
+    
 
     
