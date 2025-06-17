@@ -1,28 +1,81 @@
 
 'use client';
 
+import * as React from 'react'; // Imported React for useRef
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
 import { useChatWidget } from '@/contexts/chat-widget-context';
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
+// Define structure for background items
+interface BackgroundItem {
+  id: string;
+  url: string;
+  altText: string;
+  dataAiHint: string;
+}
+
+const cityBackgrounds: BackgroundItem[] = [
+  {
+    id: 'sydney',
+    url: 'https://placehold.co/1920x1080.png',
+    altText: 'Animated view of Sydney cityscape',
+    dataAiHint: 'Sydney cityscape GIF',
+  },
+  {
+    id: 'london',
+    url: 'https://placehold.co/1920x1080.png',
+    altText: 'Animated view of London at night',
+    dataAiHint: 'London night GIF',
+  },
+  {
+    id: 'newyork',
+    url: 'https://placehold.co/1920x1080.png',
+    altText: 'Animated timelapse of New York City traffic',
+    dataAiHint: 'NewYork traffic GIF',
+  },
+  {
+    id: 'paris',
+    url: 'https://placehold.co/1920x1080.png',
+    altText: 'Animated view of Paris Eiffel Tower',
+    dataAiHint: 'Paris Eiffel GIF',
+  },
+];
 
 export default function HeroSection() {
   const { openChat } = useChatWidget();
+  const autoplayPlugin = React.useRef(Autoplay({ delay: 15000, stopOnInteraction: false }));
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden">
-      {/* Background Image and Overlay */}
+      {/* Background Carousel and Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="https://ugc.same-assets.com/jCVVeBWy4B84ONocCwkNBlVMGmuggCHq.jpeg"
-          alt="Modern cityscape background"
-          layout="fill"
-          objectFit="cover"
-          priority
-          data-ai-hint="cityscape building"
-        />
+        <Carousel
+          opts={{ loop: true }}
+          plugins={[autoplayPlugin.current]}
+          className="w-full h-full"
+        >
+          <CarouselContent className="h-full">
+            {cityBackgrounds.map((item) => (
+              <CarouselItem key={item.id} className="h-full">
+                <div className="relative w-full h-full">
+                  <Image
+                    src={item.url}
+                    alt={item.altText}
+                    layout="fill"
+                    objectFit="cover"
+                    priority={item.id === cityBackgrounds[0].id} // Prioritize loading the first image
+                    data-ai-hint={item.dataAiHint}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
         <div className="absolute inset-0 bg-black/60"></div> {/* Overlay for text contrast */}
       </div>
 
