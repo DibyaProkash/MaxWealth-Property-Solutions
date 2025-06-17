@@ -44,7 +44,7 @@ export default function HeroSection() {
               Secure the world's finest properties at the right price, from vibrant city centers to serene international havens. Our expert purchase consultants transform the buying experience, saving you valuable time and resources while eliminating stress. Elevate your property journey with our global expertise—let's discuss your aspirations.
             </p>
             
-            {/* Desktop: Main CTAs (Book Call, View Process) - These are not shown on mobile due to md:flex */}
+            {/* Desktop: Main CTAs (Book Call, View Process) */}
             <div className="hidden md:flex flex-row flex-wrap justify-start gap-3">
                 <Button
                   className="h-10 px-4 text-sm md:h-11 md:px-8 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105"
@@ -65,59 +65,49 @@ export default function HeroSection() {
                 </Button>
             </div>
 
-            {/* Mobile Buttons Container - This whole div is hidden on md screens and up */}
-            <div className="md:hidden flex flex-col items-center gap-4 mt-8">
-              {/* Main three buttons for mobile */}
-              <div className="flex flex-row flex-wrap justify-center gap-3">
-                <Button
-                  className="h-10 px-4 text-sm bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg"
-                  asChild
-                >
-                  <Link href="/contact">
-                    Book Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="h-10 px-4 text-sm shadow-lg"
-                  asChild
-                >
-                  <Link href="/about/our-process">
-                    View Our Process
-                  </Link>
-                </Button>
-                <Button
-                  variant="secondary"
-                  onClick={openChat}
-                  className="h-10 px-4 text-sm shadow-lg"
-                >
-                  <MessageSquare className="mr-2 h-5 w-5" /> AI Advisor
-                </Button>
-              </div>
-
-              {/* Conditionally shown "AI Tools" & "Calculators" buttons on mobile when chat is open */}
+            {/* Mobile Buttons Container - Stacked Vertically */}
+            <div className="md:hidden flex flex-col items-center gap-3 w-full max-w-xs mx-auto mt-8">
+              <Button
+                className="w-full h-12 text-base bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg"
+                asChild
+              >
+                <Link href="/contact">
+                  Book Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button
+                variant="secondary"
+                className="w-full h-12 text-base shadow-lg"
+                asChild
+              >
+                <Link href="/about/our-process">
+                  View Our Process
+                </Link>
+              </Button>
+              
+              {/* Conditionally shown "AI Tools" & "Calculators" buttons on mobile when chat is open, stacked below */}
               {isChatOpen && (
-                <div className="mt-4 flex flex-col gap-3 w-full max-w-xs">
+                <>
                   <Button 
-                    variant="secondary" // Changed variant
-                    className="w-full" // Simplified className
+                    variant="secondary" 
+                    className="w-full h-12 text-base mt-1" // Added mt-1 for slight separation
                     asChild
                   >
                     <Link href="/resources/ai-tools">
                       <BrainCircuit className="mr-2 h-5 w-5" /> AI-Powered Tools
-                      <Badge variant="destructive" className="ml-2 text-xs px-1.5 py-0.5">BETA</Badge>
+                      <Badge variant="destructive" className="ml-auto text-xs px-1.5 py-0.5">BETA</Badge>
                     </Link>
                   </Button>
                   <Button 
-                    variant="secondary" // Changed variant
-                    className="w-full" // Simplified className
+                    variant="secondary"
+                    className="w-full h-12 text-base"
                     asChild
                   >
                     <Link href="/resources/calculators">
                       <CalculatorIcon className="mr-2 h-5 w-5" /> Financial Calculators
                     </Link>
                   </Button>
-                </div>
+                </>
               )}
             </div>
 
@@ -135,28 +125,28 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: AI Chatbot & Resource Buttons for Desktop ONLY */}
-          <div className="hidden md:flex md:col-span-1 flex-col items-center justify-center gap-6">
+          <div className="hidden md:flex md:col-span-1 flex-col items-center justify-center">
             <AIChatbot />
-            <div className="flex flex-row flex-wrap justify-center gap-3 mt-4 w-full">
+            <div className="flex flex-row flex-wrap justify-center gap-3 mt-6 w-full">
               <Button
-                variant="secondary" // Kept secondary variant for desktop
-                className="h-11 px-6"
+                variant="secondary"
+                className="h-11 px-5 text-sm" // Adjusted padding for better fit
                 asChild
               >
                 <Link href="/resources/ai-tools">
                   <BrainCircuit className="mr-2 h-5 w-5" />
                   AI-Powered Tools
-                  <Badge variant="destructive" className="ml-2 text-xs px-1.5 py-0.5">BETA</Badge>
+                  <Badge variant="destructive" className="ml-1.5 text-xs px-1 py-0.5">BETA</Badge> 
                 </Link>
               </Button>
               <Button
-                variant="secondary" // Kept secondary variant for desktop
-                className="h-11 px-6"
+                variant="secondary"
+                className="h-11 px-5 text-sm" // Adjusted padding
                 asChild
               >
                 <Link href="/resources/calculators">
                   <CalculatorIcon className="mr-2 h-5 w-5" />
-                  Financial Calculators
+                  Calculators
                 </Link>
               </Button>
             </div>
