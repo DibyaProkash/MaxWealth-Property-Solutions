@@ -8,10 +8,10 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, BrainCircuit, CalculatorIcon, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
-import { useChatWidget } from '@/contexts/chat-widget-context'; // Added
+import { useChatWidget } from '@/contexts/chat-widget-context'; 
 
 export default function HeroSection() {
-  const { isChatOpen, openChat } = useChatWidget(); // Added
+  const { isChatOpen, openChat } = useChatWidget(); 
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[85vh] flex items-center">
@@ -44,7 +44,7 @@ export default function HeroSection() {
               Secure the world's finest properties at the right price, from vibrant city centers to serene international havens. Our expert purchase consultants transform the buying experience, saving you valuable time and resources while eliminating stress. Elevate your property journey with our global expertise—let's discuss your aspirations.
             </p>
             
-            {/* Desktop: Main CTAs (Book Call, View Process) */}
+            {/* Desktop: Main CTAs (Book Call, View Process) - These are not shown on mobile due to md:flex */}
             <div className="hidden md:flex flex-row flex-wrap justify-start gap-3">
                 <Button
                   className="h-10 px-4 text-sm md:h-11 md:px-8 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105"
@@ -65,7 +65,7 @@ export default function HeroSection() {
                 </Button>
             </div>
 
-            {/* Mobile Buttons Container */}
+            {/* Mobile Buttons Container - This whole div is hidden on md screens and up */}
             <div className="md:hidden flex flex-col items-center gap-4 mt-8">
               {/* Main three buttons for mobile */}
               <div className="flex flex-row flex-wrap justify-center gap-3">
@@ -99,8 +99,8 @@ export default function HeroSection() {
               {isChatOpen && (
                 <div className="mt-4 flex flex-col gap-3 w-full max-w-xs">
                   <Button 
-                    variant="outline" 
-                    className="border-primary-foreground/50 text-primary-foreground/90 hover:bg-primary-foreground/20 w-full" 
+                    variant="secondary" // Changed variant
+                    className="w-full" // Simplified className
                     asChild
                   >
                     <Link href="/resources/ai-tools">
@@ -109,8 +109,8 @@ export default function HeroSection() {
                     </Link>
                   </Button>
                   <Button 
-                    variant="outline" 
-                    className="border-primary-foreground/50 text-primary-foreground/90 hover:bg-primary-foreground/20 w-full" 
+                    variant="secondary" // Changed variant
+                    className="w-full" // Simplified className
                     asChild
                   >
                     <Link href="/resources/calculators">
@@ -121,7 +121,7 @@ export default function HeroSection() {
               )}
             </div>
 
-            {/* Trust Points */}
+            {/* Trust Points - Shown on all sizes */}
             <div className="mt-8 flex flex-row justify-center md:justify-start space-x-4 md:space-x-6">
               <div className="flex items-center justify-center md:justify-start">
                 <CheckCircle className="h-5 w-5 text-green-400 mr-2" />
@@ -139,7 +139,7 @@ export default function HeroSection() {
             <AIChatbot />
             <div className="flex flex-row flex-wrap justify-center gap-3 mt-4 w-full">
               <Button
-                variant="secondary"
+                variant="secondary" // Kept secondary variant for desktop
                 className="h-11 px-6"
                 asChild
               >
@@ -150,7 +150,7 @@ export default function HeroSection() {
                 </Link>
               </Button>
               <Button
-                variant="secondary"
+                variant="secondary" // Kept secondary variant for desktop
                 className="h-11 px-6"
                 asChild
               >
