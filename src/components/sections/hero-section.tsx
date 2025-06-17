@@ -8,10 +8,8 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, BrainCircuit, CalculatorIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
-// Removed useChatWidget import as openChat is no longer directly called from a button in this component
 
 export default function HeroSection() {
-  // const { openChat } = useChatWidget(); // Retained if needed for other parts, but direct button removed
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[85vh] flex items-center"> {/* Increased min-h slightly for more space */}
@@ -66,7 +64,6 @@ export default function HeroSection() {
                   </Link>
                 </Button>
               </div>
-              {/* Resource buttons previously here are now moved to the right column for desktop */}
             </div>
 
             {/* Trust Points */}
@@ -83,8 +80,8 @@ export default function HeroSection() {
              {/* Buttons for mobile view - these stack below text */}
             <div className="md:hidden flex flex-col items-center gap-3 mt-8">
               <Button
-                variant="outline"
-                className="h-11 px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full max-w-xs"
+                variant="secondary" // Changed from outline for better background
+                className="h-11 px-6 w-full max-w-xs" // Removed border and text color overrides
                 asChild
               >
                 <Link href="/resources/ai-tools">
@@ -94,8 +91,8 @@ export default function HeroSection() {
                 </Link>
               </Button>
               <Button
-                variant="outline"
-                className="h-11 px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full max-w-xs"
+                variant="secondary" // Changed from outline for better background
+                className="h-11 px-6 w-full max-w-xs" // Removed border and text color overrides
                 asChild
               >
                 <Link href="/resources/calculators">
@@ -107,13 +104,13 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: AI Chatbot for Desktop + New Buttons */}
-          <div className="hidden md:flex md:col-span-1 flex-col items-center justify-center gap-6"> {/* Changed to flex-col and added gap */}
+          <div className="hidden md:flex md:col-span-1 flex-col items-center justify-center gap-6">
             <AIChatbot />
-            {/* New Resource Buttons Container for Desktop */}
-            <div className="flex flex-col gap-3 mt-4 w-full max-w-xs"> {/* Added mt-4 for spacing & width constraints */}
+            {/* New Resource Buttons Container for Desktop - side-by-side */}
+            <div className="flex flex-row flex-wrap justify-center gap-3 mt-4 w-full">
               <Button
-                variant="outline"
-                className="h-11 px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full" // w-full for consistent width
+                variant="secondary" // Changed from outline for better background
+                className="h-11 px-6" // Removed w-full to allow side-by-side flow
                 asChild
               >
                 <Link href="/resources/ai-tools">
@@ -123,8 +120,8 @@ export default function HeroSection() {
                 </Link>
               </Button>
               <Button
-                variant="outline"
-                className="h-11 px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full" // w-full
+                variant="secondary" // Changed from outline for better background
+                className="h-11 px-6" // Removed w-full
                 asChild
               >
                 <Link href="/resources/calculators">
