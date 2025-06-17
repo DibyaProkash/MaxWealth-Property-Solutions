@@ -2,18 +2,20 @@
 "use client";
 
 import * as React from 'react';
+import Image from 'next/image'; // Import next/image
+import Link from 'next/link'; // Keep Link if you plan to make cards clickable later
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, Loader2 } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from "embla-carousel-autoplay";
-// Removed serviceLocationsData import, will fetch
-// import { serviceLocationsData, type ServiceLocationItem as FetchedServiceLocationItem } from '@/lib/data/locations';
 
 // Define types for this component
 interface CarouselCity {
   id: string;
   name: string;
   region: string; // e.g., "NSW, Australia" or "London, UK"
+  imageSrc?: string; // Optional: Path to the image for the card
+  dataAiHint?: string; // Optional: AI hint for the image
 }
 
 // Define type for API response from /api/locations
@@ -21,7 +23,7 @@ interface FetchedServiceLocationItem {
   id: string;
   slug: string;
   name: string;
-  // image and dataAiHint are not used in this component
+  // image and dataAiHint from FetchedServiceLocationItem are for detail pages, not this card.
 }
 
 // Helper map for Australian states (can be expanded)
@@ -38,7 +40,7 @@ const cityStateMap: Record<string, string> = {
 };
 
 const internationalCities: CarouselCity[] = [
-  { id: 'intl1', name: 'London', region: 'UK' },
+  { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/london-card.jpg', dataAiHint: 'london city' },
   { id: 'intl2', name: 'New York', region: 'USA' },
   { id: 'intl3', name: 'Singapore', region: 'Singapore' },
   { id: 'intl4', name: 'Dubai', region: 'UAE' },
@@ -68,14 +70,15 @@ export default function AchievementsSection() {
         const australianCitiesFormatted: CarouselCity[] = data.map(loc => ({
           id: loc.id,
           name: loc.name,
-          region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`
+          region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`,
+          imageSrc: loc.slug === 'sydney' ? '/sydney-card.jpg' : undefined,
+          dataAiHint: loc.slug === 'sydney' ? 'sydney city' : undefined,
         }));
         setAllCities([...australianCitiesFormatted, ...internationalCities]);
       } catch (err: any) {
         console.error("Error fetching city data:", err);
         setError(err.message || 'Could not load city data.');
-        // Fallback to just international cities if fetch fails
-        setAllCities(internationalCities);
+        setAllCities(internationalCities); // Fallback to international only
       } finally {
         setIsLoading(false);
       }
@@ -114,7 +117,7 @@ export default function AchievementsSection() {
             <div className="flex justify-center items-center h-32">
               <Loader2 className="h-10 w-10 animate-spin text-primary" />
             </div>
-          ) : error && allCities.length === internationalCities.length ? ( // Only show error if Australian cities failed and only intl are shown
+          ) : error && allCities.length === internationalCities.length ? (
             <p className="text-center text-destructive">Could not load Australian cities. Showing international examples.</p>
           ) : null}
 
@@ -136,16 +139,27 @@ export default function AchievementsSection() {
                     className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/4"
                   >
                     <div className="p-1 h-full">
-                      {/* Card is not clickable as per requirement */}
-                      <div className="bg-secondary/40 shadow-md h-32 flex flex-col justify-center items-center p-3 text-center rounded-lg transition-transform duration-300 hover:scale-105">
-                        <CardContent className="p-0">
+                      <div className="bg-card shadow-md h-32 flex flex-col text-center rounded-lg transition-transform duration-300 hover:scale-105 overflow-hidden">
+                        {city.imageSrc && (
+                          <div className="relative w-full h-20">
+                            <Image
+                              src={city.imageSrc}
+                              alt={`${city.name} card image`}
+                              fill
+                              style={{ objectFit: 'cover' }}
+                              data-ai-hint={city.dataAiHint || city.name.toLowerCase()}
+                              sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+                            />
+                          </div>
+                        )}
+                        <div className={`p-2 flex-grow flex flex-col items-center ${city.imageSrc ? 'justify-start pt-1' : 'justify-center'}`}>
                           <h3 className="font-semibold text-primary text-sm md:text-base mb-0.5">
                             {city.name}
                           </h3>
                           <p className="text-xs text-muted-foreground">
                             {city.region}
                           </p>
-                        </CardContent>
+                        </div>
                       </div>
                     </div>
                   </CarouselItem>
@@ -163,5 +177,3 @@ export default function AchievementsSection() {
     </section>
   );
 }
-
-  
