@@ -181,7 +181,13 @@ export default function OurServicesPage() {
               <div className="grid md:grid-cols-2 gap-8 items-stretch">
                 <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-primary text-primary-foreground p-6 md:p-10 rounded-lg flex flex-col justify-between items-center text-center relative overflow-hidden">
                   <div className="absolute inset-0">
-                    <Image src="https://placehold.co/600x400.png" alt="Residential Property" fill style={{objectFit: 'cover'}} className="opacity-20" data-ai-hint="modern house family"/>
+                    <Image
+                      src="https://placehold.co/600x400.png"
+                      alt="Residential Property"
+                      fill style={{objectFit: 'cover'}}
+                      className="opacity-20"
+                      data-ai-hint="modern house family"
+                      sizes="(max-width: 768px) 100vw, 50vw" />
                   </div>
                   <div className="relative z-10 flex flex-col items-center h-full">
                     <h3 className="font-headline text-2xl md:text-3xl font-bold mb-3">Looking for Residential Property?</h3>
@@ -198,7 +204,13 @@ export default function OurServicesPage() {
 
                 <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-accent text-accent-foreground p-6 md:p-10 rounded-lg flex flex-col justify-between items-center text-center relative overflow-hidden">
                    <div className="absolute inset-0">
-                    <Image src="https://placehold.co/600x400.png" alt="Commercial Property" fill style={{objectFit: 'cover'}} className="opacity-20" data-ai-hint="office building city"/>
+                    <Image
+                      src="https://placehold.co/600x400.png"
+                      alt="Commercial Property"
+                      fill style={{objectFit: 'cover'}}
+                      className="opacity-20"
+                      data-ai-hint="office building city"
+                      sizes="(max-width: 768px) 100vw, 50vw" />
                   </div>
                   <div className="relative z-10 flex flex-col items-center h-full">
                     <h3 className="font-headline text-2xl md:text-3xl font-bold mb-3">Looking for Commercial Property?</h3>

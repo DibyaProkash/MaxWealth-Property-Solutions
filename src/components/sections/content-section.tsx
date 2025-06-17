@@ -39,6 +39,7 @@ const StoryCard: React.FC<StoryCardProps> = ({ article, className, large = false
           fill
           sizes={large ? "(max-width: 768px) 100vw, 66vw" : "(max-width: 768px) 100vw, 33vw"}
           style={{ objectFit: 'cover' }}
+          priority={large} // Add priority if it's the large image
           className="group-hover:scale-105 transition-transform duration-500 ease-in-out"
           data-ai-hint={article.dataAiHint}
         />
