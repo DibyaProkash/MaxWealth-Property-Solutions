@@ -5,18 +5,20 @@ import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, BrainCircuit, CalculatorIcon } from 'lucide-react';
+import { ArrowRight, CheckCircle, BrainCircuit, CalculatorIcon, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
+import { useChatWidget } from '@/contexts/chat-widget-context'; // Added
 
 export default function HeroSection() {
+  const { isChatOpen, openChat } = useChatWidget(); // Added
 
   return (
-    <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[85vh] flex items-center"> {/* Increased min-h slightly for more space */}
+    <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[85vh] flex items-center">
       {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0 h-full w-full">
         <Image
-          src="/city-backgrounds/sydney-2.jpg" // Single static background image
+          src="/city-backgrounds/sydney-2.jpg"
           alt="Sydney cityscape background"
           fill
           style={{ objectFit: 'cover' }}
@@ -24,7 +26,7 @@ export default function HeroSection() {
           data-ai-hint="Sydney cityscape photo"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/60"></div> {/* Overlay for text contrast */}
+        <div className="absolute inset-0 bg-black/60"></div>
       </div>
 
       {/* Content */}
@@ -42,10 +44,8 @@ export default function HeroSection() {
               Secure the world's finest properties at the right price, from vibrant city centers to serene international havens. Our expert purchase consultants transform the buying experience, saving you valuable time and resources while eliminating stress. Elevate your property journey with our global expertise—let's discuss your aspirations.
             </p>
             
-            {/* Button Group Container - Main CTAs */}
-            <div className="flex flex-col items-center md:items-start gap-4">
-              {/* Main CTAs */}
-              <div className="flex flex-row flex-wrap justify-center md:justify-start gap-3">
+            {/* Desktop: Main CTAs (Book Call, View Process) */}
+            <div className="hidden md:flex flex-row flex-wrap justify-start gap-3">
                 <Button
                   className="h-10 px-4 text-sm md:h-11 md:px-8 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105"
                   asChild
@@ -63,7 +63,62 @@ export default function HeroSection() {
                     View Our Process
                   </Link>
                 </Button>
+            </div>
+
+            {/* Mobile Buttons Container */}
+            <div className="md:hidden flex flex-col items-center gap-4 mt-8">
+              {/* Main three buttons for mobile */}
+              <div className="flex flex-row flex-wrap justify-center gap-3">
+                <Button
+                  className="h-10 px-4 text-sm bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg"
+                  asChild
+                >
+                  <Link href="/contact">
+                    Book Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="h-10 px-4 text-sm shadow-lg"
+                  asChild
+                >
+                  <Link href="/about/our-process">
+                    View Our Process
+                  </Link>
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={openChat}
+                  className="h-10 px-4 text-sm shadow-lg"
+                >
+                  <MessageSquare className="mr-2 h-5 w-5" /> AI Advisor
+                </Button>
               </div>
+
+              {/* Conditionally shown "AI Tools" & "Calculators" buttons on mobile when chat is open */}
+              {isChatOpen && (
+                <div className="mt-4 flex flex-col gap-3 w-full max-w-xs">
+                  <Button 
+                    variant="outline" 
+                    className="border-primary-foreground/50 text-primary-foreground/90 hover:bg-primary-foreground/20 w-full" 
+                    asChild
+                  >
+                    <Link href="/resources/ai-tools">
+                      <BrainCircuit className="mr-2 h-5 w-5" /> AI-Powered Tools
+                      <Badge variant="destructive" className="ml-2 text-xs px-1.5 py-0.5">BETA</Badge>
+                    </Link>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="border-primary-foreground/50 text-primary-foreground/90 hover:bg-primary-foreground/20 w-full" 
+                    asChild
+                  >
+                    <Link href="/resources/calculators">
+                      <CalculatorIcon className="mr-2 h-5 w-5" /> Financial Calculators
+                    </Link>
+                  </Button>
+                </div>
+              )}
             </div>
 
             {/* Trust Points */}
@@ -77,40 +132,15 @@ export default function HeroSection() {
                 <span className="text-sm text-primary-foreground/90">12+ Years of Experience</span>
               </div>
             </div>
-             {/* Buttons for mobile view - these stack below text */}
-            <div className="md:hidden flex flex-col items-center gap-3 mt-8">
-              <Button
-                variant="secondary" // Changed from outline for better background
-                className="h-11 px-6 w-full max-w-xs" // Removed border and text color overrides
-                asChild
-              >
-                <Link href="/resources/ai-tools">
-                  <BrainCircuit className="mr-2 h-5 w-5" />
-                  AI-Powered Tools
-                  <Badge variant="destructive" className="ml-2 text-xs px-1.5 py-0.5">BETA</Badge>
-                </Link>
-              </Button>
-              <Button
-                variant="secondary" // Changed from outline for better background
-                className="h-11 px-6 w-full max-w-xs" // Removed border and text color overrides
-                asChild
-              >
-                <Link href="/resources/calculators">
-                  <CalculatorIcon className="mr-2 h-5 w-5" />
-                  Financial Calculators
-                </Link>
-              </Button>
-            </div>
           </div>
 
-          {/* Right Column: AI Chatbot for Desktop + New Buttons */}
+          {/* Right Column: AI Chatbot & Resource Buttons for Desktop ONLY */}
           <div className="hidden md:flex md:col-span-1 flex-col items-center justify-center gap-6">
             <AIChatbot />
-            {/* New Resource Buttons Container for Desktop - side-by-side */}
             <div className="flex flex-row flex-wrap justify-center gap-3 mt-4 w-full">
               <Button
-                variant="secondary" // Changed from outline for better background
-                className="h-11 px-6" // Removed w-full to allow side-by-side flow
+                variant="secondary"
+                className="h-11 px-6"
                 asChild
               >
                 <Link href="/resources/ai-tools">
@@ -120,8 +150,8 @@ export default function HeroSection() {
                 </Link>
               </Button>
               <Button
-                variant="secondary" // Changed from outline for better background
-                className="h-11 px-6" // Removed w-full
+                variant="secondary"
+                className="h-11 px-6"
                 asChild
               >
                 <Link href="/resources/calculators">
