@@ -1,7 +1,7 @@
 
 'use client';
 
-import * as React from 'react'; // Imported React for useRef
+import * as React from 'react';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
@@ -11,10 +11,9 @@ import { useChatWidget } from '@/contexts/chat-widget-context';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
-// Define structure for background items
 interface BackgroundItem {
   id: string;
-  url: string;
+  url: string; // e.g., "/sydney.jpg"
   altText: string;
   dataAiHint: string;
 }
@@ -22,25 +21,25 @@ interface BackgroundItem {
 const cityBackgrounds: BackgroundItem[] = [
   {
     id: 'sydney',
-    url: '/sydney.jpg', // Changed from GIF to JPG
+    url: '/sydney.jpg', // Expects public/sydney.jpg
     altText: 'Panoramic view of Sydney cityscape',
     dataAiHint: 'Sydney cityscape photo',
   },
   {
     id: 'london',
-    url: '/london.jpg', // Changed from GIF to JPG
+    url: '/london.jpg', // Expects public/london.jpg
     altText: 'View of London city at dusk',
     dataAiHint: 'London city photo',
   },
   {
     id: 'newyork',
-    url: '/newyork.jpg', // Changed to JPG, ensure newyork.jpg exists in /public
-    altText: 'Timelapse of New York City traffic',
+    url: '/newyork.jpg', // Expects public/newyork.jpg
+    altText: 'New York City skyline',
     dataAiHint: 'NewYork city photo',
   },
   {
     id: 'paris',
-    url: '/paris.jpg', // Changed to JPG, ensure paris.jpg exists in /public
+    url: '/paris.jpg', // Expects public/paris.jpg
     altText: 'View of Paris Eiffel Tower and cityscape',
     dataAiHint: 'Paris city photo',
   },
@@ -60,17 +59,16 @@ export default function HeroSection() {
           className="w-full h-full"
         >
           <CarouselContent className="h-full">
-            {cityBackgrounds.map((item) => (
+            {cityBackgrounds.map((item, index) => (
               <CarouselItem key={item.id} className="h-full">
-                <div className="relative w-full h-full">
+                <div className="relative w-full h-full"> {/* This div MUST have position:relative for fill to work */}
                   <Image
                     src={item.url}
                     alt={item.altText}
-                    layout="fill"
-                    objectFit="cover"
-                    priority={item.id === cityBackgrounds[0].id} 
+                    fill // Use the fill prop
+                    style={{ objectFit: 'cover' }} // Apply object-fit via style prop
+                    priority={index === 0} // Load the first image with priority
                     data-ai-hint={item.dataAiHint}
-                    // unoptimized prop removed as it's mainly for GIFs or external non-optimized images
                   />
                 </div>
               </CarouselItem>
