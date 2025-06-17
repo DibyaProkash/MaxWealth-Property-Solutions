@@ -84,13 +84,19 @@ export default function HeroSection() {
                   View Our Process
                 </Link>
               </Button>
+              <Button
+                variant="secondary"
+                className="w-full h-12 text-base shadow-lg"
+                onClick={openChat}
+              >
+                <MessageSquare className="mr-2 h-5 w-5" /> AI Advisor
+              </Button>
               
-              {/* Conditionally shown "AI Tools" & "Calculators" buttons on mobile when chat is open, stacked below */}
               {isChatOpen && (
                 <>
                   <Button 
                     variant="secondary" 
-                    className="w-full h-12 text-base mt-1" // Added mt-1 for slight separation
+                    className="w-full h-12 text-base"
                     asChild
                   >
                     <Link href="/resources/ai-tools">
@@ -130,7 +136,7 @@ export default function HeroSection() {
             <div className="flex flex-row flex-wrap justify-center gap-3 mt-6 w-full">
               <Button
                 variant="secondary"
-                className="h-11 px-5 text-sm" // Adjusted padding for better fit
+                className="h-11 px-5 text-sm" 
                 asChild
               >
                 <Link href="/resources/ai-tools">
@@ -141,7 +147,7 @@ export default function HeroSection() {
               </Button>
               <Button
                 variant="secondary"
-                className="h-11 px-5 text-sm" // Adjusted padding
+                className="h-11 px-5 text-sm" 
                 asChild
               >
                 <Link href="/resources/calculators">
