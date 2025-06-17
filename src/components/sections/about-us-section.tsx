@@ -61,10 +61,10 @@ export default function AboutUsSection() {
             Tailored and Streamlined Solutions for Every Property Purchase
           </h3>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4 font-body">
-            Navigating the path to property ownership can be complex, but at MaxWealth PS, we transform it into a clear and achievable journey. Our seasoned advisors leverage innovative financial strategies, meticulously aligned with your unique aspirations. Whether you're stepping onto the property ladder for the first time, seeking strategic investment opportunities, or optimizing your current mortgage, we provide proactive, expert guidance to illuminate every step forward.
+            Navigating the path to property ownership can be complex, but at MaxWealth Property Services, we transform it into a clear and achievable journey. Our seasoned advisors leverage innovative financial strategies, meticulously aligned with your unique aspirations. Whether you're stepping onto the property ladder for the first time, seeking strategic investment opportunities, or optimizing your current mortgage, we provide proactive, expert guidance to illuminate every step forward.
           </p>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-12 font-body">
-            Our profound market understanding and access to an extensive array of financial products empower us to craft bespoke plans that precisely fit your circumstances. MaxWealth PS excels in structuring optimal financing solutions, always prioritizing your long-term value and success. We are committed to delivering a seamless, personalized experience that demystifies the financial landscape, minimizes stress, and maximizes your outcomes, regardless of your property goals.
+            Our profound market understanding and access to an extensive array of financial products empower us to craft bespoke plans that precisely fit your circumstances. MaxWealth Property Services excels in structuring optimal financing solutions, always prioritizing your long-term value and success. We are committed to delivering a seamless, personalized experience that demystifies the financial landscape, minimizes stress, and maximizes your outcomes, regardless of your property goals.
           </p>
         </div>
 
@@ -163,3 +163,6 @@ export default function AboutUsSection() {
 
 
 
+
+
+    
