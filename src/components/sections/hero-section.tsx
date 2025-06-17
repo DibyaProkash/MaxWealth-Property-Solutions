@@ -17,7 +17,7 @@ export default function HeroSection() {
       {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0 h-full w-full">
         <Image
-          src="/sydney-2.jpg" // Single static background image
+          src="/city-backgrounds/sydney-2.jpg" // Single static background image
           alt="Sydney cityscape background"
           fill
           style={{ objectFit: 'cover' }}

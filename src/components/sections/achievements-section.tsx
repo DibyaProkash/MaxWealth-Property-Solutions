@@ -42,8 +42,8 @@ const cityStateMap: Record<string, string> = {
 const internationalCities: CarouselCity[] = [
   { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/city-backgrounds/london-card.jpg', dataAiHint: 'london city' },
   { id: 'intl2', name: 'New York', region: 'USA', imageSrc: '/city-backgrounds/new-york.jpg', dataAiHint: 'new york city' },
-  { id: 'intl3', name: 'Singapore', region: 'Singapore' },
-  { id: 'intl4', name: 'Dubai', region: 'UAE' },
+  { id: 'intl3', name: 'Singapore', region: 'Singapore', imageSrc: '/city-backgrounds/singapore.jpg', dataAiHint: 'singapore city' },
+  { id: 'intl4', name: 'Dubai', region: 'UAE', imageSrc: '/city-backgrounds/dubai.jpg', dataAiHint: 'dubai city' },
   { id: 'intl5', name: 'Paris', region: 'France', imageSrc: '/city-backgrounds/paris.jpg', dataAiHint: 'paris city' },
 ];
 
@@ -67,14 +67,54 @@ export default function AchievementsSection() {
           throw new Error('Failed to fetch Australian service locations');
         }
         const data: FetchedServiceLocationItem[] = await response.json();
-        const australianCitiesFormatted: CarouselCity[] = data.map(loc => ({
-          id: loc.id,
-          name: loc.name,
-          region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`,
-          // Updated Sydney image source here
-          imageSrc: loc.slug === 'sydney' ? '/city-backgrounds/sydney.jpg' : undefined,
-          dataAiHint: loc.slug === 'sydney' ? 'sydney city' : undefined,
-        }));
+        const australianCitiesFormatted: CarouselCity[] = data.map(loc => {
+          let imageSrc: string | undefined = undefined;
+          let dataAiHint: string | undefined = undefined;
+
+          switch (loc.slug) {
+            case 'sydney':
+              imageSrc = '/city-backgrounds/sydney.jpg';
+              dataAiHint = 'sydney city';
+              break;
+            case 'melbourne':
+              imageSrc = '/city-backgrounds/melbourne.jpg';
+              dataAiHint = 'melbourne city';
+              break;
+            case 'brisbane':
+              imageSrc = '/city-backgrounds/brisbane.jpg';
+              dataAiHint = 'brisbane city';
+              break;
+            case 'gold-coast':
+              imageSrc = '/city-backgrounds/gold-coast.jpg';
+              dataAiHint = 'gold coast city';
+              break;
+            case 'sunshine-coast':
+              imageSrc = '/city-backgrounds/sunshine-coast.jpg';
+              dataAiHint = 'sunshine coast beach';
+              break;
+            case 'hobart':
+              imageSrc = '/city-backgrounds/hobart.jpg';
+              dataAiHint = 'hobart city';
+              break;
+            case 'central-coast':
+              imageSrc = '/city-backgrounds/central-coast.jpg';
+              dataAiHint = 'central coast nsw';
+              break;
+            case 'adelaide':
+              imageSrc = '/city-backgrounds/adelaide.jpg';
+              dataAiHint = 'adelaide city';
+              break;
+            // Add other specific cities from serviceLocationsData if needed
+          }
+          
+          return {
+            id: loc.id,
+            name: loc.name,
+            region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`,
+            imageSrc: imageSrc,
+            dataAiHint: dataAiHint,
+          };
+        });
         setAllCities([...australianCitiesFormatted, ...internationalCities]);
       } catch (err: any) {
         console.error("Error fetching city data:", err);
@@ -178,4 +218,3 @@ export default function AchievementsSection() {
     </section>
   );
 }
-
