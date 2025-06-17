@@ -6,7 +6,7 @@ import AgencyStrengthSection from '@/components/sections/agency-strength-section
 import AboutUsSection from '@/components/sections/about-us-section'; // This is now the modified one
 import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services';
 import ProvenProcessSection from '@/components/sections/proven-process-section';
-import ServiceLocationsHomepageSection from '@/components/sections/service-locations-homepage-section';
+// import ServiceLocationsHomepageSection from '@/components/sections/service-locations-homepage-section';
 import ContentSection from '@/components/sections/content-section';
 // import CalculatorsSection from '@/components/sections/calculators-section'; // Removed
 // import RoadmapSection from '@/components/sections/roadmap-section'; // Removed
@@ -49,9 +49,11 @@ export default function HomePage() {
           <ProvenProcessSection />
         </AnimatedSection>
 
+        {/*
         <AnimatedSection delay="delay-100">
           <ServiceLocationsHomepageSection />
         </AnimatedSection>
+        */}
         
         {articlesData.length > 0 && (
           <AnimatedSection delay="delay-100" id="content">
