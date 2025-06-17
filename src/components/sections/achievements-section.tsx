@@ -71,7 +71,8 @@ export default function AchievementsSection() {
           id: loc.id,
           name: loc.name,
           region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`,
-          imageSrc: loc.slug === 'sydney' ? '/city-backgrounds/sydney-card.jpg' : undefined,
+          // Updated Sydney image source here
+          imageSrc: loc.slug === 'sydney' ? '/city-backgrounds/sydney.jpg' : undefined,
           dataAiHint: loc.slug === 'sydney' ? 'sydney city' : undefined,
         }));
         setAllCities([...australianCitiesFormatted, ...internationalCities]);
@@ -177,3 +178,4 @@ export default function AchievementsSection() {
     </section>
   );
 }
+
