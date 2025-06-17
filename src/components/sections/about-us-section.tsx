@@ -2,15 +2,12 @@
 "use client";
 
 import * as React from 'react';
-import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { Users, Target, Eye, Award, Home, TrendingUp, Repeat, DollarSign, Briefcase, UserCircle } from 'lucide-react';
-
-// FounderData and teamMembers carousel are removed from here and will be managed in /about/our-team page.
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Target, Eye, Award, Home, TrendingUp, Repeat } from 'lucide-react';
 
 export default function AboutUsSection() {
   return (
-    <section id="about-company" className="py-16 md:py-24 bg-background"> {/* Changed id for clarity */}
+    <section id="about-company" className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">MaxWealth Property Services</h2>
@@ -102,69 +99,8 @@ export default function AboutUsSection() {
             <a href="#contact" className="text-sm font-medium text-accent hover:underline">Learn more</a>
           </Card>
         </div>
-        {/* Tailored Financial Solutions Sub-section END */}
-
-        {/* Agency Strength Sub-section START */}
-        <div className="mt-16 md:mt-24">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-xl">
-              <Image 
-                src="https://placehold.co/600x450.png" 
-                alt="MaxWealth PS Team Collaboration" 
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                style={{ objectFit: 'cover' }}
-                data-ai-hint="team meeting"
-              />
-            </div>
-            <div>
-              <h3 className="font-headline text-3xl md:text-4xl font-bold text-accent mb-6">
-                MaxWealth Property Services: Your Trusted Property Purchase Consultants
-              </h3>
-              <p className="text-lg text-muted-foreground mb-8 font-body">
-                We make achieving your property goals simple — offering expert guidance, tailored solutions, and exclusive access to financial opportunities. Trust our award-winning team to find the financial plan that fits your lifestyle and goals, minus the overwhelm. Our KPIs reflect extensive experience, billions in successfully financed properties, and a deep understanding of market dynamics.
-              </p>
-              <div className="grid sm:grid-cols-2 gap-6">
-                <div className="flex items-start space-x-3">
-                  <div className="p-2.5 bg-primary/10 rounded-md mt-1">
-                    <Award className="h-7 w-7 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-headline text-xl font-semibold text-primary mb-1">Proven Track Record</h4>
-                    <p className="text-sm text-muted-foreground font-body">Years of success helping clients secure their dream homes and investments.</p>
-                  </div>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="p-2.5 bg-primary/10 rounded-md mt-1">
-                    <DollarSign className="h-7 w-7 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-headline text-xl font-semibold text-primary mb-1">Exclusive Financial Insights</h4>
-                    <p className="text-sm text-muted-foreground font-body">Access to comprehensive market analysis and tailored financial strategies.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* Agency Strength Sub-section END */}
-
-        {/* Founder Showcase and Team Carousel are removed from this component */}
-
+        {/* Agency Strength Sub-section was here, now removed */}
       </div>
     </section>
   );
 }
-    
-
-    
-
-    
-
-
-
-
-
-    
-
-    

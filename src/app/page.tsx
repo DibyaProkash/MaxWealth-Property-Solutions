@@ -2,9 +2,10 @@
 import Footer from '@/components/layout/footer';
 import HeroSection from '@/components/sections/hero-section';
 import AchievementsSection from '@/components/sections/achievements-section'; 
-import AboutUsSection from '@/components/sections/about-us-section';
+import AgencyStrengthSection from '@/components/sections/agency-strength-section'; // New import
+import AboutUsSection from '@/components/sections/about-us-section'; // This is now the modified one
 import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services';
-import ProvenProcessSection from '@/components/sections/proven-process-section'; // New import
+import ProvenProcessSection from '@/components/sections/proven-process-section';
 import ServiceLocationsHomepageSection from '@/components/sections/service-locations-homepage-section';
 import ContentSection from '@/components/sections/content-section';
 // import CalculatorsSection from '@/components/sections/calculators-section'; // Removed
@@ -28,7 +29,13 @@ export default function HomePage() {
           <AchievementsSection />
         </AnimatedSection>
 
-        <AnimatedSection delay="delay-100" id="about">
+        {/* "About" content starts with Agency Strength */}
+        <AnimatedSection delay="delay-100" id="about"> 
+          <AgencyStrengthSection />
+        </AnimatedSection>
+        
+        {/* Rest of the AboutUs content (Mission, Vision, Values, Tailored Solutions) */}
+        <AnimatedSection delay="delay-100"> {/* No id here as "about" points to AgencyStrength above */}
           <AboutUsSection />
         </AnimatedSection>
         
