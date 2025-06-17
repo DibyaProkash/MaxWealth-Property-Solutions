@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'i.gifer.com',
+        hostname: 'i.gifer.com', // Added this entry
         port: '',
         pathname: '/**',
       },
