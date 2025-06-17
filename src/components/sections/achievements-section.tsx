@@ -3,7 +3,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { Card } from '@/components/ui/card';
-import { Award, Star, Home, Percent } from 'lucide-react'; // Example icons
+import { Award, Star, Home, Percent, Clock } from 'lucide-react'; // Added Clock icon
 import type { LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -17,7 +17,7 @@ interface AchievementStat {
 const achievementsData: AchievementStat[] = [
   { value: 315, label: 'Five-Star Google Reviews', suffix: '+', icon: Star },
   { value: 45, label: 'Industry Awards', suffix: '+', icon: Award },
-  { value: 4500, label: 'Property Purchased', suffix: '+', icon: Home },
+  { value: 12, label: 'Years of Experience', suffix: '+', icon: Clock }, // Changed this line
   { value: 96, label: 'Purchase Rate', suffix: '%', icon: Percent },
 ];
 
