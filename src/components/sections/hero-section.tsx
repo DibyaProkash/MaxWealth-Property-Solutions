@@ -22,27 +22,27 @@ interface BackgroundItem {
 const cityBackgrounds: BackgroundItem[] = [
   {
     id: 'sydney',
-    url: '/Sydney.gif', // Updated to local path
-    altText: 'Animated view of Sydney cityscape',
-    dataAiHint: 'Sydney cityscape GIF',
+    url: '/sydney.jpg', // Changed from GIF to JPG
+    altText: 'Panoramic view of Sydney cityscape',
+    dataAiHint: 'Sydney cityscape photo',
   },
   {
     id: 'london',
-    url: 'https://placehold.co/1920x1080.png', // Placeholder, to be replaced with actual GIF if desired
-    altText: 'Animated view of London at night',
-    dataAiHint: 'London night GIF',
+    url: '/london.jpg', // Changed from GIF to JPG
+    altText: 'View of London city at dusk',
+    dataAiHint: 'London city photo',
   },
   {
     id: 'newyork',
-    url: 'https://placehold.co/1920x1080.png', // Placeholder
-    altText: 'Animated timelapse of New York City traffic',
-    dataAiHint: 'NewYork traffic GIF',
+    url: '/newyork.jpg', // Changed to JPG, ensure newyork.jpg exists in /public
+    altText: 'Timelapse of New York City traffic',
+    dataAiHint: 'NewYork city photo',
   },
   {
     id: 'paris',
-    url: 'https://placehold.co/1920x1080.png', // Placeholder
-    altText: 'Animated view of Paris Eiffel Tower',
-    dataAiHint: 'Paris Eiffel GIF',
+    url: '/paris.jpg', // Changed to JPG, ensure paris.jpg exists in /public
+    altText: 'View of Paris Eiffel Tower and cityscape',
+    dataAiHint: 'Paris city photo',
   },
 ];
 
@@ -70,7 +70,7 @@ export default function HeroSection() {
                     objectFit="cover"
                     priority={item.id === cityBackgrounds[0].id} 
                     data-ai-hint={item.dataAiHint}
-                    unoptimized={item.url.endsWith('.gif')} // Add unoptimized for GIFs if using next/image < v12 or for general compatibility
+                    // unoptimized prop removed as it's mainly for GIFs or external non-optimized images
                   />
                 </div>
               </CarouselItem>
