@@ -2,8 +2,8 @@
 "use client";
 
 import * as React from 'react';
-import Image from 'next/image'; // Import next/image
-import Link from 'next/link'; // Keep Link if you plan to make cards clickable later
+import Image from 'next/image'; 
+import Link from 'next/link'; 
 import { Card, CardContent } from '@/components/ui/card';
 import { MapPin, Loader2 } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
@@ -13,9 +13,10 @@ import Autoplay from "embla-carousel-autoplay";
 interface CarouselCity {
   id: string;
   name: string;
-  region: string; // e.g., "NSW, Australia" or "London, UK"
-  imageSrc?: string; // Optional: Path to the image for the card
-  dataAiHint?: string; // Optional: AI hint for the image
+  region: string; 
+  imageSrc?: string; 
+  dataAiHint?: string;
+  slug: string; // Added slug for linking
 }
 
 // Define type for API response from /api/locations
@@ -40,11 +41,11 @@ const cityStateMap: Record<string, string> = {
 };
 
 const internationalCities: CarouselCity[] = [
-  { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/city-backgrounds/london.jpg', dataAiHint: 'london city' },
-  { id: 'intl2', name: 'New York', region: 'USA', imageSrc: '/city-backgrounds/new-york.jpg', dataAiHint: 'new york city' },
-  { id: 'intl3', name: 'Singapore', region: 'Singapore', imageSrc: '/city-backgrounds/singapore.jpg', dataAiHint: 'singapore city' },
-  { id: 'intl4', name: 'Dubai', region: 'UAE', imageSrc: '/city-backgrounds/dubai.jpg', dataAiHint: 'dubai city' },
-  { id: 'intl5', name: 'Paris', region: 'France', imageSrc: '/city-backgrounds/paris.jpg', dataAiHint: 'paris city' },
+  { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/city-backgrounds/london.jpg', dataAiHint: 'london city', slug: 'london' },
+  { id: 'intl2', name: 'New York', region: 'USA', imageSrc: '/city-backgrounds/new-york.jpg', dataAiHint: 'new york city', slug: 'new-york' },
+  { id: 'intl3', name: 'Singapore', region: 'Singapore', imageSrc: '/city-backgrounds/singapore.jpg', dataAiHint: 'singapore city', slug: 'singapore' },
+  { id: 'intl4', name: 'Dubai', region: 'UAE', imageSrc: '/city-backgrounds/dubai.jpg', dataAiHint: 'dubai city', slug: 'dubai' },
+  { id: 'intl5', name: 'Paris', region: 'France', imageSrc: '/city-backgrounds/paris.jpg', dataAiHint: 'paris city', slug: 'paris' },
 ];
 
 export default function AchievementsSection() {
@@ -117,6 +118,7 @@ export default function AchievementsSection() {
             region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`,
             imageSrc: imageSrc,
             dataAiHint: dataAiHint || loc.name.toLowerCase().replace('&', '').replace(/\s+/g, ' '),
+            slug: loc.slug, // Ensure slug is passed
           };
         });
         setAllCities([...australianCitiesFormatted, ...internationalCities]);
@@ -162,7 +164,7 @@ export default function AchievementsSection() {
             <div className="flex justify-center items-center h-32">
               <Loader2 className="h-10 w-10 animate-spin text-primary" />
             </div>
-          ) : error && allCities.length === internationalCities.length ? ( // Check if only international are shown due to error
+          ) : error && allCities.length === internationalCities.length ? ( 
             <p className="text-center text-destructive">Could not load Australian cities. Showing international examples.</p>
           ) : null}
 
@@ -184,28 +186,30 @@ export default function AchievementsSection() {
                     className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/4"
                   >
                     <div className="p-1 h-full">
-                      <div className="bg-card shadow-md h-32 flex flex-col text-center rounded-lg transition-transform duration-300 hover:scale-105 overflow-hidden">
-                        {city.imageSrc && (
-                          <div className="relative w-full h-20">
-                            <Image
-                              src={city.imageSrc}
-                              alt={`${city.name} card image`}
-                              fill
-                              style={{ objectFit: 'cover' }}
-                              data-ai-hint={city.dataAiHint || city.name.toLowerCase().replace('&', '').replace(/\s+/g, ' ')}
-                              sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
-                            />
+                      <Link href={`/locations/${city.slug}`} passHref className="block h-full group">
+                        <div className="bg-card shadow-md h-32 flex flex-col text-center rounded-lg transition-transform duration-300 group-hover:scale-105 overflow-hidden group-hover:shadow-xl">
+                          {city.imageSrc && (
+                            <div className="relative w-full h-20">
+                              <Image
+                                src={city.imageSrc}
+                                alt={`${city.name} card image`}
+                                fill
+                                style={{ objectFit: 'cover' }}
+                                data-ai-hint={city.dataAiHint || city.name.toLowerCase().replace('&', '').replace(/\s+/g, ' ')}
+                                sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
+                              />
+                            </div>
+                          )}
+                          <div className={`p-2 flex-grow flex flex-col items-center ${city.imageSrc ? 'justify-start pt-1' : 'justify-center'}`}>
+                            <h3 className="font-semibold text-primary text-sm md:text-base mb-0.5 group-hover:text-accent transition-colors">
+                              {city.name}
+                            </h3>
+                            <p className="text-xs text-muted-foreground">
+                              {city.region}
+                            </p>
                           </div>
-                        )}
-                        <div className={`p-2 flex-grow flex flex-col items-center ${city.imageSrc ? 'justify-start pt-1' : 'justify-center'}`}>
-                          <h3 className="font-semibold text-primary text-sm md:text-base mb-0.5">
-                            {city.name}
-                          </h3>
-                          <p className="text-xs text-muted-foreground">
-                            {city.region}
-                          </p>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   </CarouselItem>
                 ))}
