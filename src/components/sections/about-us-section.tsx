@@ -7,19 +7,12 @@ import { Home, TrendingUp, Repeat } from 'lucide-react'; // Removed Target, Eye,
 
 export default function AboutUsSection() {
   return (
-    <section id="about-company" className="py-16 md:py-24 bg-background">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">MaxWealth Property Services</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We are dedicated to empowering individuals and families to achieve their homeownership dreams through expert financial guidance and unwavering support.
-          </p>
-        </div>
-
-        {/* Mission, Vision, Values cards removed from here */}
+        {/* The introductory heading and paragraph previously here has been removed */}
 
         {/* Tailored Financial Solutions Sub-section START */}
-        <div className="mt-16 md:mt-24 text-center">
+        <div className="mt-16 md:mt-24 text-center"> {/* Adjusted margin-top as the intro above is removed */}
           <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-6">
             Tailored and Streamlined Solutions for Every Property Purchase
           </h3>
