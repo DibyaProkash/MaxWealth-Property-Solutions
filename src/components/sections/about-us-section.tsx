@@ -28,7 +28,7 @@ export default function AboutUsSection() {
               <CardTitle className="font-headline text-xl text-center text-primary">Our Mission</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-muted-foreground">
-              Strategic advocacy for your confident property success.
+            Strategic advocacy for your confident property success.
             </CardContent>
           </Card>
           <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
@@ -39,7 +39,7 @@ export default function AboutUsSection() {
               <CardTitle className="font-headline text-xl text-center text-primary">Our Vision</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-muted-foreground">
-              Australia's leading buyer's agency, building client wealth through property.
+            Australia's leading buyer's agency, building client wealth through property.
             </CardContent>
           </Card>
           <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
@@ -50,28 +50,7 @@ export default function AboutUsSection() {
               <CardTitle className="font-headline text-xl text-center text-primary">Our Values</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-muted-foreground">
-              <ul className="space-y-3 text-sm">
-                <li>
-                  <strong className="block font-semibold text-primary">Client Focus</strong>
-                  <span className="text-xs text-muted-foreground">Your Success, Our Priority.</span>
-                </li>
-                <li>
-                  <strong className="block font-semibold text-primary">Integrity</strong>
-                  <span className="text-xs text-muted-foreground">Transparent & Ethical.</span>
-                </li>
-                <li>
-                  <strong className="block font-semibold text-primary">Expertise</strong>
-                  <span className="text-xs text-muted-foreground">Market Mastery.</span>
-                </li>
-                <li>
-                  <strong className="block font-semibold text-primary">Empowerment</strong>
-                  <span className="text-xs text-muted-foreground">Confident Choices.</span>
-                </li>
-                <li>
-                  <strong className="block font-semibold text-primary">Partnership</strong>
-                  <span className="text-xs text-muted-foreground">Trusted Collaboration.</span>
-                </li>
-              </ul>
+              <p>Integrity, Client-Focus, Expertise, Empowerment, and Collaboration guide everything we do.</p>
             </CardContent>
           </Card>
         </div>
@@ -181,3 +160,4 @@ export default function AboutUsSection() {
     
 
     
+
