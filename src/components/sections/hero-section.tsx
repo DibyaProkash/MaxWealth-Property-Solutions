@@ -1,4 +1,3 @@
-
 'use client';
 
 import * as React from 'react';
@@ -18,41 +17,42 @@ interface CityBackground {
   dataAiHint: string;
 }
 
-// Ensure these paths match your files in public/city-backgrounds/
+// Updated to use specific local filenames.
+// Ensure these files exist in `public/city-backgrounds/`
 const cityBackgrounds: CityBackground[] = [
-  { id: 'sydney', url: '/city-backgrounds/sydney.jpg', altText: 'Sydney cityscape background', dataAiHint: 'Sydney cityscape photo' },
-  { id: 'london', url: '/city-backgrounds/london.jpg', altText: 'London cityscape background', dataAiHint: 'London cityscape photo' },
-  { id: 'newyork', url: '/city-backgrounds/newyork.jpg', altText: 'New York cityscape background', dataAiHint: 'New York cityscape photo' },
-  { id: 'paris', url: '/city-backgrounds/paris.jpg', altText: 'Paris cityscape background', dataAiHint: 'Paris cityscape photo' },
+  { id: 'sydney', url: '/city-backgrounds/australia-1.webp', altText: 'Sydney cityscape background', dataAiHint: 'Sydney cityscape photo' },
+  { id: 'london', url: '/city-backgrounds/london-1.webp', altText: 'London cityscape background', dataAiHint: 'London cityscape photo' },
+  { id: 'newyork', url: '/city-backgrounds/newyork-1.webp', altText: 'New York cityscape background', dataAiHint: 'New York cityscape photo' },
+  { id: 'paris', url: '/city-backgrounds/paris-1.webp', altText: 'Paris cityscape background', dataAiHint: 'Paris cityscape photo' },
 ];
 
 export default function HeroSection() {
   const { openChat } = useChatWidget();
   const autoplayPlugin = React.useRef(
-    Autoplay({ delay: 15000, stopOnInteraction: false, stopOnMouseEnter: false })
+    Autoplay({ delay: 15000, stopOnInteraction: false, stopOnMouseEnter: false, loop: true })
   );
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[80vh] flex items-center">
       {/* Background Carousel and Overlay */}
-      <div className="absolute inset-0 z-0 h-full">
+      <div className="absolute inset-0 z-0 h-full w-full">
         <Carousel
-          opts={{ loop: true }}
+          opts={{ loop: true, align: "start" }}
           plugins={[autoplayPlugin.current]}
-          className="w-full h-full" // Carousel takes full height
+          className="w-full h-full" 
         >
-          <CarouselContent className="h-full"> {/* CarouselContent takes full height */}
+          <CarouselContent className="h-full"> 
             {cityBackgrounds.map((item, index) => (
-              <CarouselItem key={item.id} className="h-full"> {/* CarouselItem takes full height */}
+              <CarouselItem key={item.id} className="h-full"> 
                 <div className="relative w-full h-full"> {/* This div MUST have position:relative and full dimensions */}
                   <Image
                     src={item.url}
                     alt={item.altText}
-                    fill
+                    fill 
                     style={{ objectFit: 'cover' }}
-                    priority={index === 0} // Prioritize loading the first image
+                    priority={index === 0} 
                     data-ai-hint={item.dataAiHint}
-                    sizes="100vw" // The image will be 100% of the viewport width
+                    sizes="100vw" 
                   />
                 </div>
               </CarouselItem>
