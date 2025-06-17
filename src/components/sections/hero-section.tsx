@@ -22,25 +22,25 @@ interface BackgroundItem {
 const cityBackgrounds: BackgroundItem[] = [
   {
     id: 'sydney',
-    url: 'https://i.gifer.com/SbIH.gif',
+    url: '/Sydney.gif', // Updated to local path
     altText: 'Animated view of Sydney cityscape',
     dataAiHint: 'Sydney cityscape GIF',
   },
   {
     id: 'london',
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://placehold.co/1920x1080.png', // Placeholder, to be replaced with actual GIF if desired
     altText: 'Animated view of London at night',
     dataAiHint: 'London night GIF',
   },
   {
     id: 'newyork',
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://placehold.co/1920x1080.png', // Placeholder
     altText: 'Animated timelapse of New York City traffic',
     dataAiHint: 'NewYork traffic GIF',
   },
   {
     id: 'paris',
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://placehold.co/1920x1080.png', // Placeholder
     altText: 'Animated view of Paris Eiffel Tower',
     dataAiHint: 'Paris Eiffel GIF',
   },
@@ -68,8 +68,9 @@ export default function HeroSection() {
                     alt={item.altText}
                     layout="fill"
                     objectFit="cover"
-                    priority={item.id === cityBackgrounds[0].id} // Prioritize loading the first image
+                    priority={item.id === cityBackgrounds[0].id} 
                     data-ai-hint={item.dataAiHint}
+                    unoptimized={item.url.endsWith('.gif')} // Add unoptimized for GIFs if using next/image < v12 or for general compatibility
                   />
                 </div>
               </CarouselItem>
