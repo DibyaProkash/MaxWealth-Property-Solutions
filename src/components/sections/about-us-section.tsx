@@ -58,7 +58,7 @@ export default function AboutUsSection() {
         {/* Tailored Financial Solutions Sub-section START */}
         <div className="mt-16 md:mt-24 text-center">
           <h3 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-6">
-            Tailored Financial Solutions for Every Home Buyer
+            Tailored and Streamlined Solutions for Every Property Purchase
           </h3>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-4 font-body">
             At MaxWealth PS, we simplify the journey to homeownership with smart, successful financial strategies, combining innovative thinking with a clear focus on your goals. Whether you're a first-time home buyer, looking to invest, or refinancing your current property, our expert advisors are here to guide you every step of the way.
@@ -84,7 +84,7 @@ export default function AboutUsSection() {
             <div className="mb-4 inline-block p-3 bg-primary/10 rounded-full">
               <TrendingUp className="h-10 w-10 text-primary" />
             </div>
-            <h4 className="font-headline text-xl font-semibold text-primary mb-2">Experienced Buyers &amp; Investors</h4>
+            <h4 className="font-headline text-xl font-semibold text-primary mb-2">Experienced Buyers & Investors</h4>
             <p className="text-muted-foreground text-sm mb-4 font-body">
               Maximize long-term returns with strategic financing for your property investments.
             </p>
@@ -160,4 +160,5 @@ export default function AboutUsSection() {
     
 
     
+
 
