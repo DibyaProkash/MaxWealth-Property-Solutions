@@ -1,19 +1,21 @@
 
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
-// import { getAuth, type Auth } from "firebase/auth"; // Removed
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// Make sure NOT to import getAuth or initialize it if Auth is not being used
+// or if it's causing configuration issues.
 
 // Your web app's Firebase configuration
-// IMPORTANT: Replace these with your actual Firebase project configuration values!
+// IMPORTANT: These should be your actual Firebase project configuration values if using Firebase services.
+// If these are placeholders and you are still getting Firebase related errors,
+// it might be due to an API key being picked up from environment variables that
+// is misconfigured for the specific Firebase service (like Identity Toolkit for Auth).
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_AUTH_DOMAIN",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_STORAGE_BUCKET",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "YOUR_API_KEY", // Replace with your actual API key
+  authDomain: "YOUR_AUTH_DOMAIN", // Replace with your actual Auth Domain
+  projectId: "YOUR_PROJECT_ID", // Replace with your actual Project ID
+  storageBucket: "YOUR_STORAGE_BUCKET", // Replace with your actual Storage Bucket
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Replace with your actual Messaging Sender ID
+  appId: "YOUR_APP_ID" // Replace with your actual App ID
 };
 
 // Initialize Firebase
@@ -24,10 +26,8 @@ if (getApps().length === 0) {
   app = getApps()[0];
 }
 
-// const auth: Auth = getAuth(app); // Removed
-
-// If you want to use other Firebase services like Firestore, initialize them here
+// Example: If you were to use Firestore
 // import { getFirestore } from "firebase/firestore";
 // const db = getFirestore(app);
 
-export { app /*, db */ }; // Removed auth from export
+export { app /*, db */ };
