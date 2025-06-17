@@ -28,7 +28,7 @@ export default function AboutUsSection() {
               <CardTitle className="font-headline text-xl text-center text-primary">Our Mission</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-muted-foreground">
-              To provide transparent, personalized financial strategies that make home buying accessible and stress-free.
+              To empower our clients with expert advocacy and strategic insights, navigating the complexities of the property market to secure their ideal home or investment with confidence and ease.
             </CardContent>
           </Card>
           <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
@@ -39,7 +39,7 @@ export default function AboutUsSection() {
               <CardTitle className="font-headline text-xl text-center text-primary">Our Vision</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-muted-foreground">
-              To be the leading financial advisory firm recognized for integrity, expertise, and client success in the real estate market.
+              To be the leading and most trusted buyer's agency in Australia, recognized for delivering exceptional results, personalized service, and building lasting wealth for our clients through property.
             </CardContent>
           </Card>
           <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
@@ -50,7 +50,13 @@ export default function AboutUsSection() {
               <CardTitle className="font-headline text-xl text-center text-primary">Our Values</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-muted-foreground">
-              Integrity, Client-Focus, Expertise, Empowerment, and Collaboration guide everything we do.
+              <ul className="space-y-1">
+                <li>Client Success: Our clients' goals are our primary focus.</li>
+                <li>Unwavering Integrity: Operating with transparency and ethics.</li>
+                <li>Expert Navigation: Providing deep market knowledge.</li>
+                <li>Empowered Decisions: Equipping clients for confident choices.</li>
+                <li>Collaborative Partnership: Building trust and communication.</li>
+              </ul>
             </CardContent>
           </Card>
         </div>
@@ -155,4 +161,6 @@ export default function AboutUsSection() {
     </section>
   );
 }
+    
+
     
