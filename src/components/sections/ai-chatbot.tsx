@@ -151,11 +151,12 @@ export default function AIChatbot() {
       <CardContent className="p-0">
         <ScrollArea className="h-80 p-4" ref={scrollAreaRef}>
           {messages.length === 0 && !selectedFile && (
-            <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
-              <MessageSquareIcon className="w-12 h-12 mb-2" />
-              <p>Ask me anything about financing a house!</p>
-              <p className="text-xs">e.g., "What is a good credit score for a mortgage?"</p>
-              <p className="text-xs mt-1">Or upload a document for analysis.</p>
+            <div className="flex flex-col items-center justify-center h-full text-muted-foreground text-center">
+              <MessageSquareIcon className="w-12 h-12 mb-3" />
+              <p className="font-medium mb-1">Welcome to your AI Home Buying Advisor!</p>
+              <p className="text-sm mb-1">How can I assist with your property purchase today?</p>
+              <p className="text-xs">e.g., "What should I look for in a first home?" or "Analyze my loan estimate."</p>
+              <p className="text-xs mt-1">You can also upload a document (PDF/Image) for discussion.</p>
             </div>
           )}
           {messages.map((message) => (
