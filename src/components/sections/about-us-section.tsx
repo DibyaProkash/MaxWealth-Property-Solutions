@@ -51,11 +51,11 @@ export default function AboutUsSection() {
             </CardHeader>
             <CardContent className="text-center text-muted-foreground">
               <ul className="space-y-1 text-sm">
-                <li>Client Focus: Your goals, our priority.</li>
-                <li>Integrity First: Transparent and ethical.</li>
-                <li>Market Mastery: Expert insights & navigation.</li>
-                <li>Empowered Choices: Informed client decisions.</li>
-                <li>Trusted Partnership: Built on communication.</li>
+                <li>Client Focus: Your Success, Our Priority.</li>
+                <li>Integrity: Transparent & Ethical.</li>
+                <li>Expertise: Market Mastery.</li>
+                <li>Empowerment: Confident Choices.</li>
+                <li>Partnership: Trusted Collaboration.</li>
               </ul>
             </CardContent>
           </Card>
