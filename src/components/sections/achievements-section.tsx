@@ -104,6 +104,10 @@ export default function AchievementsSection() {
               imageSrc = '/city-backgrounds/adelaide.jpg';
               dataAiHint = 'adelaide city';
               break;
+            case 'newcastle-hunter-valley':
+              imageSrc = '/city-backgrounds/newcastle-hunter-valley.jpg';
+              dataAiHint = 'newcastle hunter valley';
+              break;
             // Add other specific cities from serviceLocationsData if needed
           }
           
@@ -188,7 +192,7 @@ export default function AchievementsSection() {
                               alt={`${city.name} card image`}
                               fill
                               style={{ objectFit: 'cover' }}
-                              data-ai-hint={city.dataAiHint || city.name.toLowerCase()}
+                              data-ai-hint={city.dataAiHint || city.name.toLowerCase().replace('&', '').replace(/\s+/g, ' ')}
                               sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, 25vw"
                             />
                           </div>
@@ -218,3 +222,4 @@ export default function AchievementsSection() {
     </section>
   );
 }
+
