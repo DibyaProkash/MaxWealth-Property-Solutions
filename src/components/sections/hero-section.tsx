@@ -35,7 +35,7 @@ export default function HeroSection() {
               Licensed Real Estate Consultants
             </Badge>
             <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Your Trusted Property Buyer Advocates in <span className="text-accent">Australia</span>
+              Your Trusted Property Purchase Consultants in <span className="text-accent">Australia and Abroad</span>
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl mx-auto md:mx-0">
               We secure the best properties at the right price across Sydney, Melbourne, Brisbane, Perth, and Adelaide. Save time, money, and stress with Australia's leading property buyer advocates.
@@ -58,7 +58,7 @@ export default function HeroSection() {
               </Button>
               {/* AI Advisor Button for Mobile */}
               <Button
-                className="h-10 px-4 text-sm bg-[hsl(var(--background))/50] hover:bg-[hsl(var(--background))/70] backdrop-blur-sm text-primary-foreground border border-primary-foreground/30 shadow-lg transform transition-transform hover:scale-105 block md:hidden"
+                className="h-10 px-4 text-sm shadow-lg transform transition-transform hover:scale-105 block md:hidden bg-[hsl(var(--background))/50] hover:bg-[hsl(var(--background))/70] backdrop-blur-sm text-primary-foreground border border-primary-foreground/30"
                 onClick={openChat}
                 aria-label="Open financial advisor chat"
               >
