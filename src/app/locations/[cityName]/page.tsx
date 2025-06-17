@@ -5,13 +5,12 @@ import { useEffect, useState } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-// import { locationDetailsData, whyChooseUsData, type LocationDetail } from '@/lib/data'; // Removed direct import
-import type { LucideIcon } from 'lucide-react'; // Import LucideIcon
+import type { LucideIcon } from 'lucide-react'; 
 import Footer from '@/components/layout/footer';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowLeft, MapPin, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles } from 'lucide-react';
+import { ArrowLeft, MapPin, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles, HomeIcon } from 'lucide-react'; // Added HomeIcon
 import ContactFormCityPage from '@/components/forms/contact-form-city-page'; 
 import { BusIcon, CameraIcon } from '@/components/icons/custom-icons';
 
@@ -174,6 +173,7 @@ export default function CityLocationPage() {
               priority
               className="group-hover:scale-105 transition-transform duration-700 ease-in-out"
               data-ai-hint={heroImageAiHint}
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent flex flex-col items-center justify-end text-center p-6 md:p-12">
               <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 shadow-lg">
@@ -186,13 +186,19 @@ export default function CityLocationPage() {
 
         <div className="container mx-auto px-6 py-8 md:py-12">
           <AnimatedSection delay="delay-50">
-            <div className="mb-10">
-              <Button variant="outline" asChild>
-                <Link href="/about/our-services#where-we-service">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to All Service Locations
-                </Link>
-              </Button>
+            <div className="mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <Button variant="outline" asChild>
+                  <Link href="/about/our-services#where-we-service">
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Back to Service Locations
+                  </Link>
+                </Button>
+                <Button variant="outline" asChild>
+                  <Link href="/">
+                    <HomeIcon className="mr-2 h-4 w-4" />
+                    Back to Home
+                  </Link>
+                </Button>
             </div>
           </AnimatedSection>
 
@@ -333,3 +339,4 @@ export default function CityLocationPage() {
     </div>
   );
 }
+
