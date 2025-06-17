@@ -21,25 +21,25 @@ interface BackgroundItem {
 const cityBackgrounds: BackgroundItem[] = [
   {
     id: 'sydney',
-    url: '/sydney.jpg', // Expects public/sydney.jpg
+    url: 'https://cdn.bluent.com/images/australia-1.webp', 
     altText: 'Panoramic view of Sydney cityscape',
     dataAiHint: 'Sydney cityscape photo',
   },
   {
     id: 'london',
-    url: '/london.jpg', // Expects public/london.jpg
+    url: '/london.jpg',
     altText: 'View of London city at dusk',
     dataAiHint: 'London city photo',
   },
   {
     id: 'newyork',
-    url: '/newyork.jpg', // Expects public/newyork.jpg
+    url: '/newyork.jpg', 
     altText: 'New York City skyline',
     dataAiHint: 'NewYork city photo',
   },
   {
     id: 'paris',
-    url: '/paris.jpg', // Expects public/paris.jpg
+    url: '/paris.jpg', 
     altText: 'View of Paris Eiffel Tower and cityscape',
     dataAiHint: 'Paris city photo',
   },

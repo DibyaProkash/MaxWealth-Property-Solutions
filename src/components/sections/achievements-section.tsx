@@ -40,7 +40,7 @@ const cityStateMap: Record<string, string> = {
 };
 
 const internationalCities: CarouselCity[] = [
-  { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/london-card.jpg', dataAiHint: 'london city' },
+  { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/london.jpg', dataAiHint: 'london city' },
   { id: 'intl2', name: 'New York', region: 'USA' },
   { id: 'intl3', name: 'Singapore', region: 'Singapore' },
   { id: 'intl4', name: 'Dubai', region: 'UAE' },
@@ -71,7 +71,7 @@ export default function AchievementsSection() {
           id: loc.id,
           name: loc.name,
           region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`,
-          imageSrc: loc.slug === 'sydney' ? '/sydney-card.jpg' : undefined,
+          imageSrc: loc.slug === 'sydney' ? '/sydney.jpg' : undefined,
           dataAiHint: loc.slug === 'sydney' ? 'sydney city' : undefined,
         }));
         setAllCities([...australianCitiesFormatted, ...internationalCities]);

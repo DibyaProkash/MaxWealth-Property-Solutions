@@ -25,10 +25,16 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'i.gifer.com', // Added this entry
+        hostname: 'i.gifer.com',
         port: '',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.bluent.com', // Added this entry
+        port: '',
+        pathname: '/**',
+      }
     ],
   },
 };
