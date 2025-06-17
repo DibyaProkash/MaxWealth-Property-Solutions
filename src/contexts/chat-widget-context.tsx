@@ -9,6 +9,13 @@ export interface Message {
   id: string;
   type: 'user' | 'ai';
   text: string;
+  fileName?: string; // Optional: to display if a file was part of the user message
+}
+
+export interface FilePayload {
+  type: 'pdf' | 'image';
+  content: string; // text for PDF, dataURI for image
+  name: string;
 }
 
 interface ChatWidgetContextType {
@@ -20,7 +27,7 @@ interface ChatWidgetContextType {
   currentInput: string;
   isChatLoading: boolean;
   setCurrentInputText: (text: string) => void;
-  handleSendMessage: (inputText: string) => Promise<void>;
+  handleSendMessage: (inputText: string, filePayload?: FilePayload) => Promise<void>;
 }
 
 const ChatWidgetContext = createContext<ChatWidgetContextType | undefined>(undefined);
@@ -43,16 +50,31 @@ export const ChatWidgetProvider: React.FC<{ children: ReactNode }> = ({ children
     setChatOpenState(false);
   }, []);
 
-  const handleSendMessage = useCallback(async (inputText: string) => {
-    if (!inputText.trim() || isChatLoading) return;
+  const handleSendMessage = useCallback(async (inputText: string, filePayload?: FilePayload) => {
+    if (!inputText.trim() && !filePayload) return; // Need either text or a file
+    if (isChatLoading) return;
 
-    const userMessage: Message = { id: Date.now().toString(), type: 'user', text: inputText };
+    const userMessageText = inputText.trim() || (filePayload ? `Uploaded: ${filePayload.name}` : "Analyzing document...");
+    const userMessage: Message = { 
+      id: Date.now().toString(), 
+      type: 'user', 
+      text: userMessageText,
+      fileName: filePayload?.name
+    };
     setMessages((prev) => [...prev, userMessage]);
     setCurrentInputText(''); 
     setIsChatLoading(true);
 
     try {
-      const inputForAI: FinancialAdvisorChatbotInput = { question: inputText };
+      const inputForAI: FinancialAdvisorChatbotInput = { question: inputText.trim() };
+      if (filePayload) {
+        if (filePayload.type === 'pdf') {
+          inputForAI.documentText = filePayload.content;
+        } else if (filePayload.type === 'image') {
+          inputForAI.photoDataUri = filePayload.content;
+        }
+      }
+      
       const result: FinancialAdvisorChatbotOutput = await financialAdvisorChatbot(inputForAI);
       
       const aiMessage: Message = { id: (Date.now() + 1).toString(), type: 'ai', text: result.answer };
