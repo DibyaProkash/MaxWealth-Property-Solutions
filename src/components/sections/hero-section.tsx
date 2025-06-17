@@ -32,7 +32,7 @@ export default function HeroSection() {
           {/* Left Column: Text Content */}
           <div className="md:text-left text-center">
             <Badge variant="secondary" className="mb-4">
-              Licensed Buyers Advocates
+              Licensed Real Estate Consultants
             </Badge>
             <h1 className="font-headline text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Your Trusted Property Buyer Advocates in <span className="text-accent">Australia</span>
