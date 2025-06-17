@@ -18,6 +18,7 @@ interface CityBackground {
   dataAiHint: string;
 }
 
+// Ensure these paths match your files in public/city-backgrounds/
 const cityBackgrounds: CityBackground[] = [
   { id: 'sydney', url: '/city-backgrounds/sydney.jpg', altText: 'Sydney cityscape background', dataAiHint: 'Sydney cityscape photo' },
   { id: 'london', url: '/city-backgrounds/london.jpg', altText: 'London cityscape background', dataAiHint: 'London cityscape photo' },
@@ -34,21 +35,21 @@ export default function HeroSection() {
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[80vh] flex items-center">
       {/* Background Carousel and Overlay */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 h-full">
         <Carousel
           opts={{ loop: true }}
           plugins={[autoplayPlugin.current]}
-          className="w-full h-full"
+          className="w-full h-full" // Carousel takes full height
         >
-          <CarouselContent className="h-full">
+          <CarouselContent className="h-full"> {/* CarouselContent takes full height */}
             {cityBackgrounds.map((item, index) => (
-              <CarouselItem key={item.id} className="h-full">
-                <div className="relative w-full h-full"> {/* This div MUST have position:relative for fill to work */}
+              <CarouselItem key={item.id} className="h-full"> {/* CarouselItem takes full height */}
+                <div className="relative w-full h-full"> {/* This div MUST have position:relative and full dimensions */}
                   <Image
                     src={item.url}
                     alt={item.altText}
-                    fill // Use the fill prop
-                    style={{ objectFit: 'cover' }} // Ensures the image covers the div
+                    fill
+                    style={{ objectFit: 'cover' }}
                     priority={index === 0} // Prioritize loading the first image
                     data-ai-hint={item.dataAiHint}
                     sizes="100vw" // The image will be 100% of the viewport width
