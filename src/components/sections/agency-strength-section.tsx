@@ -11,12 +11,12 @@ export default function AgencyStrengthSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-xl">
             <Image 
-              src="https://placehold.co/600x450.png" 
-              alt="MaxWealth PS Team Collaboration" 
+              src="/australian-image.jpg" 
+              alt="MaxWealth PS Team Collaboration in Australia" 
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               style={{ objectFit: 'cover' }}
-              data-ai-hint="team meeting"
+              data-ai-hint="australian landscape team"
             />
           </div>
           <div>
