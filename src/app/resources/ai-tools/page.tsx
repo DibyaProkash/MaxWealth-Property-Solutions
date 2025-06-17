@@ -2,6 +2,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input as ShadcnInput } from "@/components/ui/input"; 
@@ -15,7 +16,7 @@ import { summarizeMarketTrends, type MarketTrendSummarizerInput, type MarketTren
 import QuizSection from '@/components/sections/quiz-section';
 import AnimatedSection from '@/components/layout/animated-section';
 import Link from "next/link";
-import { ArrowLeft, FileText, BrainCircuit, TrendingUp, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, AlertTriangle } from "lucide-react";
+import { ArrowLeft, FileText, BrainCircuit, TrendingUp, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, AlertTriangle, Image as ImageIcon } from "lucide-react";
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import Footer from '@/components/layout/footer';
 
@@ -41,8 +42,9 @@ export default function AiToolsPage() {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [extractedPdfText, setExtractedPdfText] = useState<string | null>(null);
-  const [pdfProcessingError, setPdfProcessingError] = useState<string | null>(null);
-  const [isProcessingPdf, setIsProcessingPdf] = useState(false);
+  const [imageDataUri, setImageDataUri] = useState<string | null>(null);
+  const [fileProcessingError, setFileProcessingError] = useState<string | null>(null);
+  const [isProcessingFile, setIsProcessingFile] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -56,65 +58,78 @@ export default function AiToolsPage() {
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file && file.type === "application/pdf") {
+    if (file) {
       setSelectedFile(file);
       setExtractedPdfText(null);
+      setImageDataUri(null);
       setAnalysisResult(null);
-      setPdfProcessingError(null);
-      setIsProcessingPdf(true);
-      try {
-        if (!pdfjsLib) {
-          throw new Error("PDF library not loaded yet. Please try again in a moment.");
+      setFileProcessingError(null);
+      setIsProcessingFile(true);
+
+      if (file.type === "application/pdf") {
+        try {
+          if (!pdfjsLib) {
+            throw new Error("PDF library not loaded yet. Please try again in a moment.");
+          }
+          const arrayBuffer = await file.arrayBuffer();
+          const pdf: PDFDocumentProxy = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+          let fullText = "";
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const textContent = await page.getTextContent();
+            fullText += textContent.items.map((item: any) => item.str).join(" ") + "\n";
+          }
+          setExtractedPdfText(fullText);
+          toast({ title: "PDF Processed", description: "PDF content extracted. Ready to analyze." });
+        } catch (error: any) {
+          console.error("Error processing PDF:", error);
+          setFileProcessingError(`Failed to process PDF: ${error.message || "Unknown error"}. Please ensure it's a valid PDF.`);
+          toast({ title: "PDF Processing Error", description: `Could not process PDF. ${error.message || "Unknown error"}`, variant: "destructive" });
         }
-        const arrayBuffer = await file.arrayBuffer();
-        const pdf: PDFDocumentProxy = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-        let fullText = "";
-        for (let i = 1; i <= pdf.numPages; i++) {
-          const page = await pdf.getPage(i);
-          const textContent = await page.getTextContent();
-          fullText += textContent.items.map((item: any) => item.str).join(" ") + "\n";
-        }
-        setExtractedPdfText(fullText);
-        toast({
-          title: "PDF Processed",
-          description: "PDF content extracted. Ready to analyze.",
-        });
-      } catch (error: any) {
-        console.error("Error processing PDF:", error);
-        setPdfProcessingError(`Failed to process PDF: ${error.message || "Unknown error"}. Please ensure it's a valid PDF.`);
-        toast({
-          title: "PDF Processing Error",
-          description: `Could not process PDF. ${error.message || "Unknown error"}`,
-          variant: "destructive",
-        });
-      } finally {
-        setIsProcessingPdf(false);
+      } else if (['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImageDataUri(reader.result as string);
+          toast({ title: "Image Loaded", description: "Image loaded successfully. Ready to analyze." });
+        };
+        reader.onerror = () => {
+          setFileProcessingError("Failed to read image file.");
+          toast({ title: "Image Read Error", description: "Could not read the image file.", variant: "destructive" });
+        };
+        reader.readAsDataURL(file);
+      } else {
+        setFileProcessingError("Unsupported file type. Please upload a PDF or an image (JPG, PNG, WEBP).");
+        toast({ title: "Invalid File Type", description: "Please select a PDF or a supported image file.", variant: "destructive" });
+        setSelectedFile(null); // Clear invalid file
       }
+      setIsProcessingFile(false);
     } else {
-      setSelectedFile(null);
-      setExtractedPdfText(null);
-      setPdfProcessingError(file ? "Please select a valid PDF file." : null);
-      if (file) {
-        toast({ title: "Invalid File", description: "Please select a PDF file.", variant: "destructive"});
-      }
+      // No file selected or selection cancelled
+      handleRemoveFile();
     }
   };
 
   const handleAnalyzeDocument = async () => {
-    if (!extractedPdfText && !selectedFile) {
-      toast({ title: "Input Required", description: "Please select a PDF file to analyze.", variant: "destructive"});
+    if (!extractedPdfText && !imageDataUri && !selectedFile) {
+      toast({ title: "Input Required", description: "Please upload a PDF or image file to analyze.", variant: "destructive"});
       return;
     }
-    if (!extractedPdfText && selectedFile && !isProcessingPdf) {
-        toast({ title: "Processing Error", description: "PDF text not extracted. Please re-select the file or check for errors.", variant: "destructive"});
+    if ((!extractedPdfText && !imageDataUri) && selectedFile && !isProcessingFile) {
+        toast({ title: "Processing Error", description: "File not processed correctly. Please re-upload or check for errors.", variant: "destructive"});
         return;
     }
-    if (!extractedPdfText) return;
+    if (!extractedPdfText && !imageDataUri) return;
 
     setIsAnalyzing(true);
     setAnalysisResult(null);
     try {
-      const input: DocumentAnalyzerInput = { documentText: extractedPdfText };
+      const input: DocumentAnalyzerInput = {};
+      if (imageDataUri) {
+        input.photoDataUri = imageDataUri;
+      } else if (extractedPdfText) {
+        input.documentText = extractedPdfText;
+      }
+      
       const result: DocumentAnalyzerOutput = await analyzeDocument(input);
       setAnalysisResult(result.analysis);
       toast({ title: "Analysis Complete", description: "Document analysis finished successfully."});
@@ -127,15 +142,16 @@ export default function AiToolsPage() {
     }
   };
 
-  const handleRemovePdf = () => {
+  const handleRemoveFile = () => {
     setSelectedFile(null);
     setExtractedPdfText(null);
+    setImageDataUri(null);
     setAnalysisResult(null);
-    setPdfProcessingError(null);
+    setFileProcessingError(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
-    toast({ title: "PDF Cleared", description: "The selected PDF and its analysis have been cleared."});
+    toast({ title: "File Cleared", description: "The selected file and its analysis have been cleared."});
   };
 
   const handleGeneratePlan = async () => {
@@ -210,21 +226,26 @@ export default function AiToolsPage() {
                       <Badge variant="outline" className="border-destructive text-destructive">BETA</Badge>
                   </CardHeader>
                   <CardContent className="space-y-3 flex-grow flex flex-col">
-                      <CardDescription className="mb-3 flex-shrink-0">Upload a PDF document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.</CardDescription>
+                      <CardDescription className="mb-1 flex-shrink-0">Upload a PDF or Image (JPG, PNG, WEBP) of a document (e.g., redacted loan estimate) to get an AI-powered summary and explanation of key terms.</CardDescription>
                       <div className="space-y-1.5 flex-shrink-0">
                       <div className="flex items-center gap-2">
-                          <Button asChild variant="outline" size="sm" className="flex-grow justify-start text-muted-foreground hover:text-primary"><label htmlFor="pdf-upload" className="cursor-pointer flex items-center gap-2"><UploadCloud className="h-5 w-5" />{selectedFile ? `Selected: ${selectedFile.name.substring(0,15)}${selectedFile.name.length > 15 ? '...' : ''}` : "Upload PDF"}</label></Button>
-                          {selectedFile && (<Button variant="ghost" size="icon" onClick={handleRemovePdf} aria-label="Remove PDF" className="text-destructive hover:bg-destructive/10"><XCircle className="h-5 w-5" /></Button>)}
+                          <Button asChild variant="outline" size="sm" className="flex-grow justify-start text-muted-foreground hover:text-primary"><label htmlFor="file-upload" className="cursor-pointer flex items-center gap-2"><UploadCloud className="h-5 w-5" />{selectedFile ? `Selected: ${selectedFile.name.substring(0,15)}${selectedFile.name.length > 15 ? '...' : ''}` : "Upload PDF or Image"}</label></Button>
+                          {selectedFile && (<Button variant="ghost" size="icon" onClick={handleRemoveFile} aria-label="Remove File" className="text-destructive hover:bg-destructive/10"><XCircle className="h-5 w-5" /></Button>)}
                       </div>
-                      <ShadcnInput id="pdf-upload" ref={fileInputRef} type="file" accept=".pdf" onChange={handleFileChange} className="hidden" disabled={isProcessingPdf || isAnalyzing}/>
-                      <div className="text-xs text-muted-foreground">For example: loan estimates, disclosures, etc. Max 5MB.</div>
+                      <ShadcnInput id="file-upload" ref={fileInputRef} type="file" accept=".pdf,image/jpeg,image/png,image/webp" onChange={handleFileChange} className="hidden" disabled={isProcessingFile || isAnalyzing}/>
+                      <div className="text-xs text-muted-foreground">Max 5MB. Supported: PDF, JPG, PNG, WEBP.</div>
                       </div>
-                      {selectedFile && !isProcessingPdf && !pdfProcessingError && !extractedPdfText && (<p className="text-xs text-primary/80 flex-shrink-0">File selected. Click "Analyze" to process.</p>)}
-                      {isProcessingPdf && <p className="text-xs text-primary flex items-center flex-shrink-0"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing PDF...</p>}
-                      {pdfProcessingError && (<p className="text-xs text-destructive flex-shrink-0">{pdfProcessingError}</p>)}
+                      {imageDataUri && !isProcessingFile && (
+                        <div className="flex-shrink-0 my-2 p-2 border rounded-md bg-muted/30 flex items-center justify-center">
+                          <Image src={imageDataUri} alt="Uploaded image preview" width={100} height={100} className="max-h-24 w-auto object-contain rounded" />
+                        </div>
+                      )}
+                      {selectedFile && !isProcessingFile && !fileProcessingError && !extractedPdfText && !imageDataUri && (<p className="text-xs text-primary/80 flex-shrink-0">File selected. Click "Analyze" to process.</p>)}
+                      {isProcessingFile && <p className="text-xs text-primary flex items-center flex-shrink-0"><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing file...</p>}
+                      {fileProcessingError && (<p className="text-xs text-destructive flex-shrink-0">{fileProcessingError}</p>)}
                       <div className="flex-grow mt-auto">{analysisResult && (<ScrollArea className="h-32 rounded-md border p-3 bg-muted/30 text-sm"><pre className="whitespace-pre-wrap break-words font-body">{analysisResult}</pre></ScrollArea>)}</div>
                   </CardContent>
-                  <div className="p-6 pt-0 mt-auto"><Button onClick={handleAnalyzeDocument} disabled={isAnalyzing || isProcessingPdf || !extractedPdfText || !!pdfProcessingError} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">{isAnalyzing ? <Loader2 className="animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}Analyze Document</Button></div>
+                  <div className="p-6 pt-0 mt-auto"><Button onClick={handleAnalyzeDocument} disabled={isAnalyzing || isProcessingFile || (!extractedPdfText && !imageDataUri) || !!fileProcessingError} className="w-full bg-accent text-accent-foreground hover:bg-accent/90">{isAnalyzing ? <Loader2 className="animate-spin" /> : <Wand2 className="mr-2 h-4 w-4" />}Analyze Document</Button></div>
                   </Card>
 
                   <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col bg-card">
@@ -273,3 +294,5 @@ export default function AiToolsPage() {
     </div>
   );
 }
+
+    
