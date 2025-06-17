@@ -12,7 +12,7 @@ import ContentSection from '@/components/sections/content-section';
 // import RoadmapSection from '@/components/sections/roadmap-section'; // Removed
 import TestimonialsSection from '@/components/sections/testimonials-section';
 import PartnersSection from '@/components/sections/partners-section';
-import BookingSection from '@/components/sections/booking-section';
+// import BookingSection from '@/components/sections/booking-section';
 import ContactSection from '@/components/sections/contact-section';
 import AnimatedSection from '@/components/layout/animated-section';
 import { articlesData, partnersData, testimonialsData } from '@/lib/data';
@@ -76,9 +76,11 @@ export default function HomePage() {
           </AnimatedSection>
         )}
         
+        {/*
         <AnimatedSection delay="delay-100">
           <BookingSection />
         </AnimatedSection>
+        */}
         <AnimatedSection delay="delay-100" id="contact">
           <ContactSection />
         </AnimatedSection>
