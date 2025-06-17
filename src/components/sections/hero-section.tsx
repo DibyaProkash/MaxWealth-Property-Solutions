@@ -3,14 +3,15 @@
 
 import * as React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
+import { ArrowRight, CheckCircle, MessageSquare, BrainCircuit, CalculatorIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
 import { useChatWidget } from '@/contexts/chat-widget-context';
 
 export default function HeroSection() {
-  const { openChat } = useChatWidget();
+  const { openChat } = useChatWidget(); // Retained if needed for other parts, but direct button removed
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[80vh] flex items-center">
@@ -42,31 +43,54 @@ export default function HeroSection() {
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl mx-auto md:mx-0">
               Secure the world's finest properties at the right price, from vibrant city centers to serene international havens. Our expert purchase consultants transform the buying experience, saving you valuable time and resources while eliminating stress. Elevate your property journey with our global expertise—let's discuss your aspirations.
             </p>
-            <div className="flex flex-row justify-center md:justify-start gap-3">
-              <Button
-                className="h-10 px-4 text-sm md:h-11 md:px-8 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105"
-                asChild
-              >
-                <a href="/contact">
-                  Book Free Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button
-                variant="secondary"
-                className="h-10 px-4 text-sm md:h-11 md:px-8 shadow-lg transform transition-transform hover:scale-105"
-                asChild
-              >
-                <a href="/about/our-process">View Our Process</a>
-              </Button>
-              {/* AI Advisor Button for Mobile */}
-              <Button
-                className="h-10 px-4 text-sm bg-[hsl(var(--background))/50] hover:bg-[hsl(var(--background))/70] backdrop-blur-sm text-primary-foreground border border-primary-foreground/30 shadow-lg transform transition-transform hover:scale-105 block md:hidden"
-                onClick={openChat}
-                aria-label="Open financial advisor chat"
-              >
-                <MessageSquare className="h-4 w-4 mr-1" />
-                <span>AI Advisor</span>
-              </Button>
+            
+            {/* Button Group Container */}
+            <div className="flex flex-col items-center md:items-start gap-4">
+              {/* Main CTAs */}
+              <div className="flex flex-row flex-wrap justify-center md:justify-start gap-3">
+                <Button
+                  className="h-10 px-4 text-sm md:h-11 md:px-8 bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg transform transition-transform hover:scale-105"
+                  asChild
+                >
+                  <Link href="/contact">
+                    Book Free Strategy Call <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button
+                  variant="secondary"
+                  className="h-10 px-4 text-sm md:h-11 md:px-8 shadow-lg transform transition-transform hover:scale-105"
+                  asChild
+                >
+                  <Link href="/about/our-process">
+                    View Our Process
+                  </Link>
+                </Button>
+              </div>
+
+              {/* New Resource Buttons */}
+              <div className="flex flex-row flex-wrap justify-center md:justify-start gap-3">
+                <Button
+                  variant="outline"
+                  className="h-10 px-4 text-sm md:h-11 md:px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                  asChild
+                >
+                  <Link href="/resources/ai-tools">
+                    <BrainCircuit className="mr-2 h-4 w-4" />
+                    AI-Powered Tools
+                    <Badge variant="destructive" className="ml-2 text-xs px-1.5 py-0.5">BETA</Badge>
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  className="h-10 px-4 text-sm md:h-11 md:px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
+                  asChild
+                >
+                  <Link href="/resources/calculators">
+                    <CalculatorIcon className="mr-2 h-4 w-4" />
+                    Financial Calculators
+                  </Link>
+                </Button>
+              </div>
             </div>
 
             {/* Trust Points */}
