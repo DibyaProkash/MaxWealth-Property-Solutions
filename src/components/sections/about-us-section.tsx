@@ -50,12 +50,27 @@ export default function AboutUsSection() {
               <CardTitle className="font-headline text-xl text-center text-primary">Our Values</CardTitle>
             </CardHeader>
             <CardContent className="text-center text-muted-foreground">
-              <ul className="space-y-1 text-sm">
-                <li>Client Focus: Your Success, Our Priority.</li>
-                <li>Integrity: Transparent & Ethical.</li>
-                <li>Expertise: Market Mastery.</li>
-                <li>Empowerment: Confident Choices.</li>
-                <li>Partnership: Trusted Collaboration.</li>
+              <ul className="space-y-3 text-sm">
+                <li>
+                  <strong className="block font-semibold text-primary">Client Focus</strong>
+                  <span className="text-xs text-muted-foreground">Your Success, Our Priority.</span>
+                </li>
+                <li>
+                  <strong className="block font-semibold text-primary">Integrity</strong>
+                  <span className="text-xs text-muted-foreground">Transparent & Ethical.</span>
+                </li>
+                <li>
+                  <strong className="block font-semibold text-primary">Expertise</strong>
+                  <span className="text-xs text-muted-foreground">Market Mastery.</span>
+                </li>
+                <li>
+                  <strong className="block font-semibold text-primary">Empowerment</strong>
+                  <span className="text-xs text-muted-foreground">Confident Choices.</span>
+                </li>
+                <li>
+                  <strong className="block font-semibold text-primary">Partnership</strong>
+                  <span className="text-xs text-muted-foreground">Trusted Collaboration.</span>
+                </li>
               </ul>
             </CardContent>
           </Card>
