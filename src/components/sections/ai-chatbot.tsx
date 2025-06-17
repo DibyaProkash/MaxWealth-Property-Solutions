@@ -56,7 +56,7 @@ export default function AIChatbot() {
       <CardHeader className="border-b">
         <CardTitle className="flex items-center font-headline text-xl">
           <Bot className="mr-2 h-6 w-6 text-primary" />
-          Financial Home Buying Advisor
+          AI-powered Home Buying Advisor
         </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
