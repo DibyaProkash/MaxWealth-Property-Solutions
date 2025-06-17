@@ -75,7 +75,7 @@ export default function HeroSection() {
               </div>
               <div className="flex items-center justify-center md:justify-start">
                 <CheckCircle className="h-5 w-5 text-green-400 mr-2" />
-                <span className="text-sm text-primary-foreground/90">500+ Properties Secured</span>
+                <span className="text-sm text-primary-foreground/90">12+ Years of Experience</span>
               </div>
             </div>
 
