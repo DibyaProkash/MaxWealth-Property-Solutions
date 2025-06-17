@@ -20,8 +20,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Input } from '@/components/ui/input';
+// import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+// import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge'; 
 
 interface NavLinkItem {
@@ -83,8 +83,8 @@ export default function Navbar() {
   const router = useRouter();
   const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
   const [isMounted, setIsMounted] = React.useState(false);
-  const [searchQuery, setSearchQuery] = React.useState('');
-  const [isSearchPopoverOpen, setIsSearchPopoverOpen] = React.useState(false);
+  // const [searchQuery, setSearchQuery] = React.useState('');
+  // const [isSearchPopoverOpen, setIsSearchPopoverOpen] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -98,6 +98,7 @@ export default function Navbar() {
     return `/${href}`;
   };
 
+  /*
   const handleSearchSubmit = () => {
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
@@ -112,6 +113,7 @@ export default function Navbar() {
       handleSearchSubmit();
     }
   };
+  */
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-white/40 backdrop-blur-lg shadow-md">
@@ -188,6 +190,7 @@ export default function Navbar() {
             </NavigationMenuList>
           </NavigationMenu>
 
+          {/*
           <Popover open={isSearchPopoverOpen} onOpenChange={setIsSearchPopoverOpen}>
             <PopoverTrigger asChild>
               <Button
@@ -221,6 +224,7 @@ export default function Navbar() {
               </div>
             </PopoverContent>
           </Popover>
+          */}
 
           <ThemeToggle />
 
@@ -353,3 +357,4 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
+
