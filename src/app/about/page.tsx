@@ -18,7 +18,7 @@ export default function AboutLandingPage() {
                 <Building className="h-10 w-10 text-primary" />
               </div>
               <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
-                About MaxWealth PS
+                MaxWealth Property Services
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Discover more about our company, our dedicated team, the services we offer, and our proven process for client success.

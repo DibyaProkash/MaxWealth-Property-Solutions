@@ -211,7 +211,7 @@ const staticPageKeywords = {
 
 export const siteSearchableContent: SearchResultItem[] = [
   { id: 's-home', title: 'MaxWealth PS Homepage', description: 'Your trusted partner in financial planning for home buying. Explore our services, resources, and expert team.', href: '/', type: 'Page', keywords: staticPageKeywords.home, icon: Home },
-  { id: 's-about', title: 'About MaxWealth PS', description: 'Discover MaxWealth PS: our company, dedicated team, comprehensive services, and proven process for client success.', href: '/about', type: 'Page', keywords: staticPageKeywords.aboutOverview, icon: Building },
+  { id: 's-about', title: 'MaxWealth Property Services', description: 'Discover MaxWealth PS: our company, dedicated team, comprehensive services, and proven process for client success.', href: '/about', type: 'Page', keywords: staticPageKeywords.aboutOverview, icon: Building },
   { id: 's-our-company', title: 'Our Company', description: 'Learn about the mission, vision, and core values that drive MaxWealth PS in helping clients achieve their property goals.', href: '/about/our-company', type: 'Page', keywords: staticPageKeywords.ourCompany, icon: DefaultBuildingIcon },
   { id: 's-our-team', title: 'Our Expert Team', description: 'Meet the experienced professionals and buyer\'s advocates at MaxWealth PS, led by CEO Jacqueline Dwyer.', href: '/about/our-team', type: 'Page', keywords: staticPageKeywords.ourTeam, icon: Users },
   { id: 's-our-services', title: 'Our Comprehensive Services', description: 'Explore the range of property buying services offered by MaxWealth PS, including who we help and where we operate.', href: '/about/our-services', type: 'Page', keywords: staticPageKeywords.ourServices, icon: ConciergeBell },
@@ -277,3 +277,12 @@ export const siteSearchableContent: SearchResultItem[] = [
     icon: HelpCircle
   }))
 ];
+// Ensure all icons are imported if used here.
+// For example, if a SearchResultItem has icon: Home, ensure Home from lucide-react is imported.
+// Make sure all icons used in siteSearchableContent are imported.
+// Example, Home is used for the homepage search result.
+// Make sure it and others (Building, Users, ConciergeBell, etc.) are in the lucide-react import line.
+
+
+
+

@@ -13,7 +13,7 @@ export default function AboutUsSection() {
     <section id="about-company" className="py-16 md:py-24 bg-background"> {/* Changed id for clarity */}
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">About MaxWealth PS</h2>
+          <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">MaxWealth Property Services</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             We are dedicated to empowering individuals and families to achieve their homeownership dreams through expert financial guidance and unwavering support.
           </p>
