@@ -170,7 +170,7 @@ export default function CityLocationPage() {
               alt={`${name} panoramic view`}
               fill
               style={{ objectFit: 'cover' }}
-              priority
+              priority // Added priority prop here
               className="group-hover:scale-105 transition-transform duration-700 ease-in-out"
               data-ai-hint={heroImageAiHint}
               sizes="100vw"
