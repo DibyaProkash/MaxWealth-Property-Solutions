@@ -41,10 +41,10 @@ const cityStateMap: Record<string, string> = {
 
 const internationalCities: CarouselCity[] = [
   { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/city-backgrounds/london-card.jpg', dataAiHint: 'london city' },
-  { id: 'intl2', name: 'New York', region: 'USA', imageSrc: '/city-backgrounds/newyork-card.jpg', dataAiHint: 'new york city' },
+  { id: 'intl2', name: 'New York', region: 'USA', imageSrc: '/city-backgrounds/new-york.jpg', dataAiHint: 'new york city' },
   { id: 'intl3', name: 'Singapore', region: 'Singapore' },
   { id: 'intl4', name: 'Dubai', region: 'UAE' },
-  { id: 'intl5', name: 'Paris', region: 'France', imageSrc: '/city-backgrounds/paris-card.jpg', dataAiHint: 'paris city' },
+  { id: 'intl5', name: 'Paris', region: 'France', imageSrc: '/city-backgrounds/paris.jpg', dataAiHint: 'paris city' },
 ];
 
 export default function AchievementsSection() {
