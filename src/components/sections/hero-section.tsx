@@ -5,16 +5,16 @@ import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle, MessageSquare, BrainCircuit, CalculatorIcon } from 'lucide-react';
+import { ArrowRight, CheckCircle, BrainCircuit, CalculatorIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
-import { useChatWidget } from '@/contexts/chat-widget-context';
+// Removed useChatWidget import as openChat is no longer directly called from a button in this component
 
 export default function HeroSection() {
-  const { openChat } = useChatWidget(); // Retained if needed for other parts, but direct button removed
+  // const { openChat } = useChatWidget(); // Retained if needed for other parts, but direct button removed
 
   return (
-    <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[80vh] flex items-center">
+    <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[85vh] flex items-center"> {/* Increased min-h slightly for more space */}
       {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0 h-full w-full">
         <Image
@@ -44,7 +44,7 @@ export default function HeroSection() {
               Secure the world's finest properties at the right price, from vibrant city centers to serene international havens. Our expert purchase consultants transform the buying experience, saving you valuable time and resources while eliminating stress. Elevate your property journey with our global expertise—let's discuss your aspirations.
             </p>
             
-            {/* Button Group Container */}
+            {/* Button Group Container - Main CTAs */}
             <div className="flex flex-col items-center md:items-start gap-4">
               {/* Main CTAs */}
               <div className="flex flex-row flex-wrap justify-center md:justify-start gap-3">
@@ -66,31 +66,7 @@ export default function HeroSection() {
                   </Link>
                 </Button>
               </div>
-
-              {/* New Resource Buttons */}
-              <div className="flex flex-row flex-wrap justify-center md:justify-start gap-3">
-                <Button
-                  variant="outline"
-                  className="h-10 px-4 text-sm md:h-11 md:px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-                  asChild
-                >
-                  <Link href="/resources/ai-tools">
-                    <BrainCircuit className="mr-2 h-4 w-4" />
-                    AI-Powered Tools
-                    <Badge variant="destructive" className="ml-2 text-xs px-1.5 py-0.5">BETA</Badge>
-                  </Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  className="h-10 px-4 text-sm md:h-11 md:px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground"
-                  asChild
-                >
-                  <Link href="/resources/calculators">
-                    <CalculatorIcon className="mr-2 h-4 w-4" />
-                    Financial Calculators
-                  </Link>
-                </Button>
-              </div>
+              {/* Resource buttons previously here are now moved to the right column for desktop */}
             </div>
 
             {/* Trust Points */}
@@ -104,12 +80,59 @@ export default function HeroSection() {
                 <span className="text-sm text-primary-foreground/90">12+ Years of Experience</span>
               </div>
             </div>
-
+             {/* Buttons for mobile view - these stack below text */}
+            <div className="md:hidden flex flex-col items-center gap-3 mt-8">
+              <Button
+                variant="outline"
+                className="h-11 px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full max-w-xs"
+                asChild
+              >
+                <Link href="/resources/ai-tools">
+                  <BrainCircuit className="mr-2 h-5 w-5" />
+                  AI-Powered Tools
+                  <Badge variant="destructive" className="ml-2 text-xs px-1.5 py-0.5">BETA</Badge>
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                className="h-11 px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full max-w-xs"
+                asChild
+              >
+                <Link href="/resources/calculators">
+                  <CalculatorIcon className="mr-2 h-5 w-5" />
+                  Financial Calculators
+                </Link>
+              </Button>
+            </div>
           </div>
 
-          {/* Right Column: AI Chatbot for Desktop */}
-          <div className="hidden md:flex md:col-span-1 items-center justify-center">
+          {/* Right Column: AI Chatbot for Desktop + New Buttons */}
+          <div className="hidden md:flex md:col-span-1 flex-col items-center justify-center gap-6"> {/* Changed to flex-col and added gap */}
             <AIChatbot />
+            {/* New Resource Buttons Container for Desktop */}
+            <div className="flex flex-col gap-3 mt-4 w-full max-w-xs"> {/* Added mt-4 for spacing & width constraints */}
+              <Button
+                variant="outline"
+                className="h-11 px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full" // w-full for consistent width
+                asChild
+              >
+                <Link href="/resources/ai-tools">
+                  <BrainCircuit className="mr-2 h-5 w-5" />
+                  AI-Powered Tools
+                  <Badge variant="destructive" className="ml-2 text-xs px-1.5 py-0.5">BETA</Badge>
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                className="h-11 px-6 border-primary-foreground/50 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground w-full" // w-full
+                asChild
+              >
+                <Link href="/resources/calculators">
+                  <CalculatorIcon className="mr-2 h-5 w-5" />
+                  Financial Calculators
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
