@@ -40,7 +40,7 @@ const cityStateMap: Record<string, string> = {
 };
 
 const internationalCities: CarouselCity[] = [
-  { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/city-backgrounds/london-card.jpg', dataAiHint: 'london city' },
+  { id: 'intl1', name: 'London', region: 'UK', imageSrc: '/city-backgrounds/london.jpg', dataAiHint: 'london city' },
   { id: 'intl2', name: 'New York', region: 'USA', imageSrc: '/city-backgrounds/new-york.jpg', dataAiHint: 'new york city' },
   { id: 'intl3', name: 'Singapore', region: 'Singapore', imageSrc: '/city-backgrounds/singapore.jpg', dataAiHint: 'singapore city' },
   { id: 'intl4', name: 'Dubai', region: 'UAE', imageSrc: '/city-backgrounds/dubai.jpg', dataAiHint: 'dubai city' },
@@ -116,7 +116,7 @@ export default function AchievementsSection() {
             name: loc.name,
             region: `${cityStateMap[loc.slug] || 'Australia'}, Australia`,
             imageSrc: imageSrc,
-            dataAiHint: dataAiHint,
+            dataAiHint: dataAiHint || loc.name.toLowerCase().replace('&', '').replace(/\s+/g, ' '),
           };
         });
         setAllCities([...australianCitiesFormatted, ...internationalCities]);
@@ -222,4 +222,3 @@ export default function AchievementsSection() {
     </section>
   );
 }
-
