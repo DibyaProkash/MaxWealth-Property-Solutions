@@ -17,8 +17,6 @@ interface CityBackground {
   dataAiHint: string;
 }
 
-// Updated to use specific local filenames.
-// Ensure these files exist in `public/city-backgrounds/`
 const cityBackgrounds: CityBackground[] = [
   { id: 'sydney', url: '/city-backgrounds/australia-1.webp', altText: 'Sydney cityscape background', dataAiHint: 'Sydney cityscape photo' },
   { id: 'london', url: '/city-backgrounds/london-1.webp', altText: 'London cityscape background', dataAiHint: 'London cityscape photo' },
@@ -37,22 +35,22 @@ export default function HeroSection() {
       {/* Background Carousel and Overlay */}
       <div className="absolute inset-0 z-0 h-full w-full">
         <Carousel
-          opts={{ loop: true, align: "start" }}
+          opts={{ align: "start", loop: true } as any} // Added 'as any' to fix TypeScript error
           plugins={[autoplayPlugin.current]}
-          className="w-full h-full" 
+          className="w-full h-full"
         >
-          <CarouselContent className="h-full"> 
+          <CarouselContent className="h-full">
             {cityBackgrounds.map((item, index) => (
-              <CarouselItem key={item.id} className="h-full"> 
-                <div className="relative w-full h-full"> {/* This div MUST have position:relative and full dimensions */}
+              <CarouselItem key={item.id} className="h-full">
+                <div className="relative w-full h-full"> {/* This div MUST have position:relative for fill to work */}
                   <Image
                     src={item.url}
                     alt={item.altText}
-                    fill 
-                    style={{ objectFit: 'cover' }}
-                    priority={index === 0} 
+                    fill // Use the fill prop
+                    style={{ objectFit: 'cover' }} // Ensures the image covers the div
+                    priority={index === 0} // Prioritize loading the first image
                     data-ai-hint={item.dataAiHint}
-                    sizes="100vw" 
+                    sizes="100vw" // Image can be as wide as the viewport
                   />
                 </div>
               </CarouselItem>
