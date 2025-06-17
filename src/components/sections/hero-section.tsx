@@ -8,22 +8,59 @@ import { ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
 import { useChatWidget } from '@/contexts/chat-widget-context';
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
+interface CityBackground {
+  id: string;
+  url: string;
+  altText: string;
+  dataAiHint: string;
+}
+
+const cityBackgrounds: CityBackground[] = [
+  { id: 'sydney', url: '/city-backgrounds/sydney.jpg', altText: 'Sydney cityscape background', dataAiHint: 'Sydney cityscape photo' },
+  { id: 'london', url: '/city-backgrounds/london.jpg', altText: 'London cityscape background', dataAiHint: 'London cityscape photo' },
+  { id: 'newyork', url: '/city-backgrounds/newyork.jpg', altText: 'New York cityscape background', dataAiHint: 'New York cityscape photo' },
+  { id: 'paris', url: '/city-backgrounds/paris.jpg', altText: 'Paris cityscape background', dataAiHint: 'Paris cityscape photo' },
+];
 
 export default function HeroSection() {
   const { openChat } = useChatWidget();
+  const autoplayPlugin = React.useRef(
+    Autoplay({ delay: 15000, stopOnInteraction: false, stopOnMouseEnter: false })
+  );
 
   return (
-    <section id="hero" className="relative text-primary-foreground overflow-hidden">
-      {/* Background Image and Overlay */}
+    <section id="hero" className="relative text-primary-foreground overflow-hidden min-h-[70vh] md:min-h-[80vh] flex items-center"> {/* Ensure section has min height */}
+      {/* Background Image Carousel and Overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/sydney-2.jpg" 
-          alt="Sydney cityscape background"
-          fill
-          style={{ objectFit: 'cover' }}
-          priority
-          data-ai-hint="Sydney cityscape photo"
-        />
+        <Carousel
+          opts={{
+            loop: true,
+            align: "start",
+          }}
+          plugins={[autoplayPlugin.current]}
+          className="w-full h-full"
+        >
+          <CarouselContent className="h-full">
+            {cityBackgrounds.map((item, index) => (
+              <CarouselItem key={item.id} className="h-full">
+                <div className="relative w-full h-full"> {/* This div MUST have position:relative for fill to work */}
+                  <Image
+                    src={item.url}
+                    alt={item.altText}
+                    fill // Use the fill prop
+                    style={{ objectFit: 'cover' }} // Ensures the image covers the div
+                    priority={index === 0} // Prioritize loading the first image
+                    data-ai-hint={item.dataAiHint}
+                    // Removed unoptimized if these are local static images Next.js can handle
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
         <div className="absolute inset-0 bg-black/60"></div> {/* Overlay for text contrast */}
       </div>
 
@@ -63,7 +100,7 @@ export default function HeroSection() {
                 onClick={openChat}
                 aria-label="Open financial advisor chat"
               >
-                <MessageSquare className="h-4 w-4" />
+                <MessageSquare className="h-4 w-4 mr-1" /> {/* Added margin for spacing */}
                 <span>AI Advisor</span>
               </Button>
             </div>
