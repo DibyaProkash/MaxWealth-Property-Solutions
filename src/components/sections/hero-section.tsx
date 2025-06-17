@@ -8,24 +8,20 @@ import { ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
 import { useChatWidget } from '@/contexts/chat-widget-context';
-// Removed Carousel imports as they are no longer used
-
-// Removed cityBackgrounds array and Autoplay plugin ref
 
 export default function HeroSection() {
   const { openChat } = useChatWidget();
-  // Removed autoplayPlugin ref
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden">
       {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://cdn.bluent.com/images/australia-1.webp" // Using a single, previously configured external image
-          alt="Sydney cityscape"
+          src="/sydney-2.jpg" 
+          alt="Sydney cityscape background"
           fill
           style={{ objectFit: 'cover' }}
-          priority // This is the only background image now
+          priority
           data-ai-hint="Sydney cityscape photo"
         />
         <div className="absolute inset-0 bg-black/60"></div> {/* Overlay for text contrast */}
