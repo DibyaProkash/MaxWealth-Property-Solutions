@@ -22,7 +22,7 @@ interface BackgroundItem {
 const cityBackgrounds: BackgroundItem[] = [
   {
     id: 'sydney',
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://i.gifer.com/SbIH.gif',
     altText: 'Animated view of Sydney cityscape',
     dataAiHint: 'Sydney cityscape GIF',
   },
