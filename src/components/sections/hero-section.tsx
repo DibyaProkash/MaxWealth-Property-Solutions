@@ -8,73 +8,26 @@ import { ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AIChatbot from '@/components/sections/ai-chatbot';
 import { useChatWidget } from '@/contexts/chat-widget-context';
-import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+// Removed Carousel imports as they are no longer used
 
-interface BackgroundItem {
-  id: string;
-  url: string; // e.g., "/sydney.jpg"
-  altText: string;
-  dataAiHint: string;
-}
-
-const cityBackgrounds: BackgroundItem[] = [
-  {
-    id: 'sydney',
-    url: 'https://cdn.bluent.com/images/australia-1.webp', 
-    altText: 'Panoramic view of Sydney cityscape',
-    dataAiHint: 'Sydney cityscape photo',
-  },
-  {
-    id: 'london',
-    url: '/london.jpg',
-    altText: 'View of London city at dusk',
-    dataAiHint: 'London city photo',
-  },
-  {
-    id: 'newyork',
-    url: '/newyork.jpg', 
-    altText: 'New York City skyline',
-    dataAiHint: 'NewYork city photo',
-  },
-  {
-    id: 'paris',
-    url: '/paris.jpg', 
-    altText: 'View of Paris Eiffel Tower and cityscape',
-    dataAiHint: 'Paris city photo',
-  },
-];
+// Removed cityBackgrounds array and Autoplay plugin ref
 
 export default function HeroSection() {
   const { openChat } = useChatWidget();
-  const autoplayPlugin = React.useRef(Autoplay({ delay: 15000, stopOnInteraction: false }));
+  // Removed autoplayPlugin ref
 
   return (
     <section id="hero" className="relative text-primary-foreground overflow-hidden">
-      {/* Background Carousel and Overlay */}
+      {/* Background Image and Overlay */}
       <div className="absolute inset-0 z-0">
-        <Carousel
-          opts={{ loop: true }}
-          plugins={[autoplayPlugin.current]}
-          className="w-full h-full"
-        >
-          <CarouselContent className="h-full">
-            {cityBackgrounds.map((item, index) => (
-              <CarouselItem key={item.id} className="h-full">
-                <div className="relative w-full h-full"> {/* This div MUST have position:relative for fill to work */}
-                  <Image
-                    src={item.url}
-                    alt={item.altText}
-                    fill // Use the fill prop
-                    style={{ objectFit: 'cover' }} // Apply object-fit via style prop
-                    priority={index === 0} // Load the first image with priority
-                    data-ai-hint={item.dataAiHint}
-                  />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        <Image
+          src="https://cdn.bluent.com/images/australia-1.webp" // Using a single, previously configured external image
+          alt="Sydney cityscape"
+          fill
+          style={{ objectFit: 'cover' }}
+          priority // This is the only background image now
+          data-ai-hint="Sydney cityscape photo"
+        />
         <div className="absolute inset-0 bg-black/60"></div> {/* Overlay for text contrast */}
       </div>
 
