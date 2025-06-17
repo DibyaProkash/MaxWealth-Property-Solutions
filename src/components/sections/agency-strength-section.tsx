@@ -2,7 +2,8 @@
 "use client";
 
 import Image from 'next/image';
-import { Award, DollarSign } from 'lucide-react';
+import { Award, DollarSign, Target, Eye } from 'lucide-react'; // Added Target, Eye
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'; // Added Card components
 
 export default function AgencyStrengthSection() {
   return (
@@ -26,26 +27,48 @@ export default function AgencyStrengthSection() {
             <p className="text-lg text-muted-foreground mb-8 font-body">
               We make achieving your property goals simple — offering expert guidance, tailored solutions, and exclusive access to financial opportunities. Trust our award-winning team to find the financial plan that fits your lifestyle and goals, minus the overwhelm. Our KPIs reflect extensive experience, billions in successfully financed properties, and a deep understanding of market dynamics.
             </p>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="flex items-start space-x-3">
-                <div className="p-2.5 bg-primary/10 rounded-md mt-1">
-                  <Award className="h-7 w-7 text-primary" />
+            {/* Removed Proven Track Record and Exclusive Financial Insights */}
+          </div>
+        </div>
+
+        {/* NEW: Mission, Vision, Values section */}
+        <div className="mt-16 md:mt-24">
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
+              <CardHeader className="items-center">
+                <div className="p-3 bg-primary/10 rounded-full mb-2">
+                  <Target className="h-8 w-8 text-primary" />
                 </div>
-                <div>
-                  <h4 className="font-headline text-xl font-semibold text-primary mb-1">Proven Track Record</h4>
-                  <p className="text-sm text-muted-foreground font-body">Years of success helping clients secure their dream homes and investments.</p>
+                <CardTitle className="font-headline text-xl text-center text-primary">Our Mission</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Strategic advocacy for your confident property success.
+              </CardContent>
+            </Card>
+            
+            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
+              <CardHeader className="items-center">
+                <div className="p-3 bg-primary/10 rounded-full mb-2">
+                  <Eye className="h-8 w-8 text-primary" />
                 </div>
-              </div>
-              <div className="flex items-start space-x-3">
-                <div className="p-2.5 bg-primary/10 rounded-md mt-1">
-                  <DollarSign className="h-7 w-7 text-primary" />
+                <CardTitle className="font-headline text-xl text-center text-primary">Our Vision</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Australia's leading buyer's agency, building client wealth through property.
+              </CardContent>
+            </Card>
+            
+            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
+              <CardHeader className="items-center">
+                <div className="p-3 bg-primary/10 rounded-full mb-2">
+                   <Award className="h-8 w-8 text-primary" />
                 </div>
-                <div>
-                  <h4 className="font-headline text-xl font-semibold text-primary mb-1">Exclusive Financial Insights</h4>
-                  <p className="text-sm text-muted-foreground font-body">Access to comprehensive market analysis and tailored financial strategies.</p>
-                </div>
-              </div>
-            </div>
+                <CardTitle className="font-headline text-xl text-center text-primary">Our Values</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center text-muted-foreground">
+                Integrity, Client-Focus, Expertise, Empowerment, and Collaboration guide everything we do.
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Target, Eye, Award, Home, TrendingUp, Repeat } from 'lucide-react';
+import { Home, TrendingUp, Repeat } from 'lucide-react'; // Removed Target, Eye, Award
 
 export default function AboutUsSection() {
   return (
@@ -16,41 +16,7 @@ export default function AboutUsSection() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
-            <CardHeader className="items-center">
-              <div className="p-3 bg-primary/10 rounded-full mb-2">
-                <Target className="h-8 w-8 text-primary" />
-              </div>
-              <CardTitle className="font-headline text-xl text-center text-primary">Our Mission</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center text-muted-foreground">
-            Strategic advocacy for your confident property success.
-            </CardContent>
-          </Card>
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
-            <CardHeader className="items-center">
-              <div className="p-3 bg-primary/10 rounded-full mb-2">
-                <Eye className="h-8 w-8 text-primary" />
-              </div>
-              <CardTitle className="font-headline text-xl text-center text-primary">Our Vision</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center text-muted-foreground">
-            Australia's leading buyer's agency, building client wealth through property.
-            </CardContent>
-          </Card>
-          <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
-            <CardHeader className="items-center">
-              <div className="p-3 bg-primary/10 rounded-full mb-2">
-                 <Award className="h-8 w-8 text-primary" />
-              </div>
-              <CardTitle className="font-headline text-xl text-center text-primary">Our Values</CardTitle>
-            </CardHeader>
-            <CardContent className="text-center text-muted-foreground">
-              <p>Integrity, Client-Focus, Expertise, Empowerment, and Collaboration guide everything we do.</p>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Mission, Vision, Values cards removed from here */}
 
         {/* Tailored Financial Solutions Sub-section START */}
         <div className="mt-16 md:mt-24 text-center">
@@ -99,7 +65,6 @@ export default function AboutUsSection() {
             <a href="#contact" className="text-sm font-medium text-accent hover:underline">Learn more</a>
           </Card>
         </div>
-        {/* Agency Strength Sub-section was here, now removed */}
       </div>
     </section>
   );
