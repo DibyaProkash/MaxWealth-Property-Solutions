@@ -11,9 +11,6 @@ import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Youtube, X as Twitt
 import { maxWealthDifferenceData, type DifferencePoint } from '@/lib/data';
 
 export default function ContactUsPage() {
-  // const officeLatitude = -27.470600128173828; // Removed
-  // const officeLongitude = 153.02474975585938; // Removed
-
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow bg-background text-foreground">
@@ -79,41 +76,19 @@ export default function ContactUsPage() {
                     />
                   </div>
                   <p className="text-xs text-center text-muted-foreground mt-2">Map placeholder - office location would be displayed here.</p>
+                  
+                  <div className="mt-8 pt-6 border-t border-border">
+                    <h4 className="font-headline text-xl text-primary text-center mb-3">Business Hours</h4>
+                    <div className="space-y-1 text-md text-muted-foreground font-body text-center">
+                        <p><strong>Monday - Friday:</strong> 9:00 AM - 6:00 PM</p>
+                        <p><strong>Saturday:</strong> 10:00 AM - 2:00 PM (By Appointment)</p>
+                        <p><strong>Sunday:</strong> Closed</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Card>
           </AnimatedSection>
-
-          {/* MaxWealth PS Advantage Section - Temporarily Hidden */}
-          {/*
-          <AnimatedSection delay="delay-200">
-            <section className="py-16 md:py-24">
-              <div className="text-center mb-12 md:mb-16">
-                <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-3">
-                  The <span className="text-accent">MaxWealth PS</span> Advantage
-                </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                  Discover what sets us apart and how we deliver exceptional value to our clients.
-                </p>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {maxWealthDifferenceData.map((point) => {
-                  const Icon = point.icon;
-                  return (
-                    <Card key={point.id} className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-secondary/50 text-center p-6 flex flex-col items-center">
-                      <div className="p-4 bg-primary/10 rounded-full mb-5 inline-block">
-                        <Icon className="h-10 w-10 text-primary" />
-                      </div>
-                      <CardTitle className="font-headline text-xl text-primary mb-3">{point.title}</CardTitle>
-                      <CardDescription className="text-sm text-muted-foreground flex-grow">{point.description}</CardDescription>
-                    </Card>
-                  );
-                })}
-              </div>
-            </section>
-          </AnimatedSection>
-          */}
-
         </div>
       </main>
       <Footer />
