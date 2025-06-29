@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ArrowLeft, Newspaper, Search as SearchIcon, ListFilter, ArrowDownUp, Loader2 } from 'lucide-react';
+import { ArrowRight, Newspaper, Search as SearchIcon, ListFilter, ArrowDownUp, Loader2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Input } from '@/components/ui/input';
@@ -15,6 +15,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types'; // Import from new location
 import Footer from '@/components/layout/footer'; // Assuming Footer is needed
+import BackButton from '@/components/layout/back-button';
 
 // Define Article type for this page, matching API response (no icon component)
 export interface ArticleForPage {
@@ -128,22 +129,21 @@ export default function AllInsightsPage() {
   return (
     <div className="container mx-auto px-6 py-8 md:py-16 bg-background">
       <AnimatedSection>
-        <div className="mb-12 text-center">
-          <Link href="/" passHref>
-            <Button variant="outline" className="mb-6 float-left">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to Home
-            </Button>
-          </Link>
-          <div className="inline-block p-3 bg-primary/10 rounded-full mb-4 clear-both">
-              <Newspaper className="h-10 w-10 text-primary" />
+        <div className="mb-12">
+          <div className="mb-6">
+            <BackButton />
           </div>
-          <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
-            All Financial Insights & Updates
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Browse our collection of articles, guides, and company news on home financing.
-          </p>
+          <div className="text-center">
+            <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
+                <Newspaper className="h-10 w-10 text-primary" />
+            </div>
+            <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
+              All Financial Insights & Updates
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Browse our collection of articles, guides, and company news on home financing.
+            </p>
+          </div>
         </div>
       </AnimatedSection>
 

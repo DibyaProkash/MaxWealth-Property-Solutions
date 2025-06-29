@@ -7,12 +7,11 @@ import { notFound, useParams } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { CalendarDays, UserCircle, Tag, MessageSquare, Type, Loader2, AlertTriangle } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types'; // Import from new location
 import Footer from '@/components/layout/footer'; // Assuming Footer is needed
+import BackButton from '@/components/layout/back-button';
 
 // Define Article type for this page, matching API response
 interface ArticleForPage {
@@ -88,9 +87,7 @@ export default function InsightPage() {
         <AlertTriangle className="h-12 w-12 text-destructive mb-4" />
         <h1 className="text-2xl font-bold text-destructive mb-2">Error Loading Insight</h1>
         <p className="text-muted-foreground mb-4">{error}</p>
-        <Button asChild variant="outline">
-          <Link href="/insights">Back to All Insights</Link>
-        </Button>
+        <BackButton />
       </div>
     );
   }
@@ -107,12 +104,9 @@ export default function InsightPage() {
   return (
     <div className="container mx-auto px-6 py-8 md:py-16 max-w-4xl bg-background">
       <div className="mb-8">
-        <Link href="/insights" passHref>
-          <Button variant="outline" className="mb-6">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to All Insights
-          </Button>
-        </Link>
+        <div className="mb-6">
+          <BackButton />
+        </div>
         <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
           {article.title}
         </h1>

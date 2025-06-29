@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, Loader2, MapPin, CheckCircle, Clock } from 'lucide-react';
+import { HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram as InstagramIcon, Loader2, MapPin, CheckCircle, Clock } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
@@ -15,7 +15,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import type { TeamMemberDetailed } from '@/lib/data/team';
-import FeeStructureSection from '@/components/sections/fee-structure-section';
+import BackButton from '@/components/layout/back-button';
 
 const founderData = {
   name: 'Jay Mitra',
@@ -63,19 +63,8 @@ export default function OurTeamPage() {
       <main className="flex-grow bg-background text-foreground">
         <div className="container mx-auto px-6 py-8 md:py-16">
           <AnimatedSection>
-            <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <Link href="/about" passHref>
-                <Button variant="outline">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to About Overview
-                </Button>
-              </Link>
-              <Link href="/" passHref>
-                <Button variant="outline">
-                  <HomeIcon className="mr-2 h-4 w-4" />
-                  Back to Home
-                </Button>
-              </Link>
+            <div className="mb-8">
+              <BackButton />
             </div>
             <header className="text-center mb-12 md:mb-16">
               <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
@@ -326,12 +315,9 @@ export default function OurTeamPage() {
           <AnimatedSection delay="delay-250">
             <ServicesSectionHighlights />
           </AnimatedSection>
-
-          <FeeStructureSection />
         </div>
       </main>
       <Footer />
     </div>
   );
 }
-

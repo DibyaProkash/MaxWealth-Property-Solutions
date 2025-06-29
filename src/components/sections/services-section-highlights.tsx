@@ -37,7 +37,7 @@ export default function ServicesSectionHighlights() {
                 </CardContent>
                 <div className="p-6 pt-0 mt-auto">
                     <Button variant="outline" className="w-full mt-4 border-accent text-accent hover:bg-accent hover:text-accent-foreground" asChild>
-                    <Link href="/fees-explained">VIEW OUR FEES</Link>
+                    <Link href="/fees-explained#feesContactFormContainer">Book Free Strategy Call</Link>
                     </Button>
                 </div>
                 </Card>

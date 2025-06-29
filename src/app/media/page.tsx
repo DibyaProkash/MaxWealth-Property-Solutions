@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, ArrowLeft, Newspaper, ListFilter, ArrowDownUp, Eye, CalendarDays, User, Search as SearchIcon, Clock, Loader2 } from 'lucide-react';
+import { ArrowRight, Newspaper, ListFilter, ArrowDownUp, Eye, CalendarDays, User, Search as SearchIcon, Clock, Loader2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Input } from '@/components/ui/input';
@@ -17,6 +17,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import Footer from '@/components/layout/footer';
 import { mediaTypeIcons, type MediaType } from '@/lib/data/media-types';
 import { useToast } from "@/hooks/use-toast"; // Added useToast
+import BackButton from '@/components/layout/back-button';
 
 export interface ArticleForPage {
   id: string;
@@ -187,12 +188,7 @@ export default function AllMediaPage() {
         <div className="container mx-auto px-6 py-8 md:py-12">
           <AnimatedSection>
             <div className="mb-8">
-              <Link href="/" passHref>
-                <Button variant="outline" className="mb-6 bg-card hover:bg-card/90">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Home
-                </Button>
-              </Link>
+              <BackButton />
             </div>
           </AnimatedSection>
 

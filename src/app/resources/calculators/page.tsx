@@ -6,11 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import MortgageCalculator from "@/components/calculators/mortgage-calculator";
 import AffordabilityCalculator from "@/components/calculators/affordability-calculator";
 import ClosingCostEstimator from "@/components/calculators/closing-cost-estimator";
-import Link from 'next/link';
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Calculator } from "lucide-react";
+import { Calculator } from "lucide-react";
 import AnimatedSection from "@/components/layout/animated-section";
 import Footer from '@/components/layout/footer';
+import BackButton from '@/components/layout/back-button';
 
 export default function CalculatorsPage() {
   return (
@@ -19,12 +18,9 @@ export default function CalculatorsPage() {
         <div className="container mx-auto px-6">
           <AnimatedSection>
             <div className="mb-12">
-              <Button variant="outline" className="mb-6" asChild>
-                <Link href="/resources">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Resources
-                </Link>
-              </Button>
+              <div className="mb-6">
+                <BackButton />
+              </div>
               <div className="text-center">
                   <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                   <Calculator className="h-10 w-10 text-primary" />

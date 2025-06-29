@@ -8,7 +8,6 @@ import { Progress } from '@/components/ui/progress';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from '@/components/ui/dialog';
-import Link from 'next/link';
 import {
   Wallet,
   FileText,
@@ -21,13 +20,13 @@ import {
   ListChecks,
   Lightbulb,
   Save,
-  ArrowLeft,
   type LucideIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
+import BackButton from '@/components/layout/back-button';
 
 interface RoadmapStep {
   id: string;
@@ -180,12 +179,9 @@ export default function RoadmapPage() {
         <div className="container mx-auto px-6">
           <AnimatedSection>
               <div className="mb-12">
-                  <Button variant="outline" className="mb-6" asChild>
-                    <Link href="/resources">
-                      <ArrowLeft className="mr-2 h-4 w-4" />
-                      Back to Resources
-                    </Link>
-                  </Button>
+                  <div className="mb-6">
+                    <BackButton />
+                  </div>
                   <div className="text-center">
                       <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                           <ListChecks className="h-10 w-10 text-primary" />

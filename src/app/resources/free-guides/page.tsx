@@ -4,13 +4,13 @@
 import * as React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-// import { guidesData, type Guide } from '@/lib/data'; // Removed direct import
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Download, ArrowLeft, FileText, BookMarked, Loader2 } from 'lucide-react';
+import { Download, FileText, BookMarked, Loader2 } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Badge } from '@/components/ui/badge';
 import Footer from '@/components/layout/footer';
+import BackButton from '@/components/layout/back-button';
 
 // Define Guide type for this page
 export interface Guide {
@@ -55,12 +55,9 @@ export default function FreeGuidesPage() {
         <div className="container mx-auto px-6 py-8 md:py-16">
           <AnimatedSection>
             <div className="mb-12">
-                <Button variant="outline" className="mb-6" asChild>
-                    <Link href="/resources">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Resources
-                    </Link>
-                </Button>
+                <div className="mb-6">
+                  <BackButton />
+                </div>
                 <div className="text-center">
                     <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                         <BookMarked className="h-10 w-10 text-primary" />

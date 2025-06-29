@@ -10,9 +10,10 @@ import Footer from '@/components/layout/footer';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ArrowLeft, MapPin, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles, HomeIcon } from 'lucide-react'; // Added HomeIcon
+import { MapPin, BuildingIcon, ExternalLink, Info, Users2, Loader2, Landmark, Target, Scale, Handshake, Lightbulb, Train, Sailboat, Plane, Utensils, ShoppingCart, Trees, Sparkles } from 'lucide-react';
 import ContactFormCityPage from '@/components/forms/contact-form-city-page'; 
 import { BusIcon, CameraIcon } from '@/components/icons/custom-icons';
+import BackButton from '@/components/layout/back-button';
 
 
 export interface AmenityContentItem {
@@ -186,19 +187,8 @@ export default function CityLocationPage() {
 
         <div className="container mx-auto px-6 py-8 md:py-12">
           <AnimatedSection delay="delay-50">
-            <div className="mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <Button variant="outline" asChild>
-                  <Link href="/about/our-services#where-we-service">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to Service Locations
-                  </Link>
-                </Button>
-                <Button variant="outline" asChild>
-                  <Link href="/">
-                    <HomeIcon className="mr-2 h-4 w-4" />
-                    Back to Home
-                  </Link>
-                </Button>
+            <div className="mb-10">
+                <BackButton />
             </div>
           </AnimatedSection>
 
@@ -339,4 +329,3 @@ export default function CityLocationPage() {
     </div>
   );
 }
-

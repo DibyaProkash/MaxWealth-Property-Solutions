@@ -15,10 +15,10 @@ import { generateFinancialPlan, type PersonalizedFinancialPlanInput, type Person
 import { summarizeMarketTrends, type MarketTrendSummarizerInput, type MarketTrendSummarizerOutput } from "@/ai/flows/market-trend-summarizer-flow";
 import QuizSection from '@/components/sections/quiz-section';
 import AnimatedSection from '@/components/layout/animated-section';
-import Link from "next/link";
-import { ArrowLeft, FileText, BrainCircuit, TrendingUp, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, AlertTriangle, Image as ImageIcon } from "lucide-react";
+import { FileText, BrainCircuit, TrendingUp, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, AlertTriangle, Image as ImageIcon } from "lucide-react";
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import Footer from '@/components/layout/footer';
+import BackButton from '@/components/layout/back-button';
 
 let pdfjsLib: any = null;
 if (typeof window !== 'undefined') {
@@ -197,12 +197,9 @@ export default function AiToolsPage() {
         <div className="container mx-auto px-6">
           <AnimatedSection>
             <div className="mb-12">
-              <Button variant="outline" className="mb-6" asChild>
-                <Link href="/resources">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Resources
-                </Link>
-              </Button>
+              <div className="mb-6">
+                <BackButton />
+              </div>
               <div className="text-center">
                   <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                   <BrainCircuit className="h-10 w-10 text-primary" />
@@ -294,5 +291,3 @@ export default function AiToolsPage() {
     </div>
   );
 }
-
-    

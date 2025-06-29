@@ -20,11 +20,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Briefcase, Info, Loader2 } from "lucide-react";
+import { BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Briefcase, Info, Loader2 } from "lucide-react";
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 import { memberLogos } from '@/lib/data';
-import FeeStructureSection from '@/components/sections/fee-structure-section';
+import BackButton from '@/components/layout/back-button';
 
 
 const formSchema = z.object({
@@ -65,19 +65,8 @@ export default function FeesExplainedPage() {
       <main className="flex-grow">
         <div className="container mx-auto px-6 py-8 md:py-16">
           <AnimatedSection>
-            <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-              <Link href="/about/our-team" passHref>
-                <Button variant="outline">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Our Team
-                </Button>
-              </Link>
-              <Link href="/" passHref>
-                <Button variant="outline">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Home
-                </Button>
-              </Link>
+            <div className="mb-8">
+              <BackButton />
             </div>
           </AnimatedSection>
 
@@ -279,7 +268,6 @@ export default function FeesExplainedPage() {
             </div>
           </AnimatedSection>
           
-          <FeeStructureSection />
 
           <AnimatedSection delay="delay-300">
             <div className="mt-12 md:mt-20 text-center">

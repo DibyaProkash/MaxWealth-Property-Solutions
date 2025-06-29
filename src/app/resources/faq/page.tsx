@@ -3,12 +3,10 @@
 
 import * as React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-// import { faqData, type FaqItem } from '@/lib/data'; // Removed direct import
 import AnimatedSection from '@/components/layout/animated-section';
-import { HelpCircle, ArrowLeft, Loader2 } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { HelpCircle, Loader2 } from "lucide-react";
 import Footer from '@/components/layout/footer';
+import BackButton from '@/components/layout/back-button';
 
 // Define FaqItem type for this page
 export interface FaqItem {
@@ -86,12 +84,9 @@ export default function FaqPage() {
         <div className="container mx-auto px-6">
           <AnimatedSection>
             <div className="mb-12">
-              <Button variant="outline" className="mb-6" asChild>
-                <Link href="/resources">
-                  <ArrowLeft className="mr-2 h-4 w-4" />
-                  Back to Resources
-                </Link>
-              </Button>
+              <div className="mb-6">
+                <BackButton />
+              </div>
               <div className="text-center">
                 <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
                   <HelpCircle className="h-10 w-10 text-primary" />

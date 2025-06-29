@@ -5,7 +5,7 @@ import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ConciergeBell, HomeIcon, ArrowRight, Loader2 } from 'lucide-react';
+import { ConciergeBell, ArrowRight, Loader2 } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import Footer from '@/components/layout/footer';
@@ -13,7 +13,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { whoWeHelpData, type WhoWeHelpItem } from '@/lib/data';
 import { cn } from '@/lib/utils';
 import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services';
-import FeeStructureSection from '@/components/sections/fee-structure-section'; // Added import
+import BackButton from '@/components/layout/back-button';
 
 export interface ServiceLocationItem {
   id: string;
@@ -53,19 +53,8 @@ export default function OurServicesPage() {
       <main className="flex-grow bg-background text-foreground">
         <div className="container mx-auto px-6 py-8 md:py-16">
           <AnimatedSection>
-            <div className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                <Link href="/about" passHref>
-                <Button variant="outline">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to About Overview
-                </Button>
-                </Link>
-                <Link href="/" passHref>
-                <Button variant="outline">
-                    <HomeIcon className="mr-2 h-4 w-4" />
-                    Back to Home
-                </Button>
-                </Link>
+            <div className="mb-8">
+              <BackButton />
             </div>
             <header className="text-center mb-12 md:mb-16">
               <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
@@ -231,8 +220,6 @@ export default function OurServicesPage() {
           <AnimatedSection delay="delay-250">
             <ServicesSectionHighlights />
           </AnimatedSection>
-
-          <FeeStructureSection /> 
         </div>
       </main>
       <Footer />
