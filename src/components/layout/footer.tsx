@@ -1,5 +1,6 @@
 
-import { Briefcase, Facebook, Linkedin, Youtube, Instagram } from 'lucide-react';
+import Image from 'next/image';
+import { Facebook, Linkedin, Youtube, Instagram } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,8 +10,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
-              <Briefcase className="h-8 w-8 text-primary-foreground" /> 
-              <span className="font-headline text-2xl font-bold text-primary-foreground">MaxWealth PS</span> 
+              <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={32} height={32} />
+              <span className="font-headline text-xl font-bold text-primary-foreground">MaxWealth Property Services</span> 
             </div>
             <p className="text-sm text-primary-foreground/80">
               Your trusted partner in financial planning for home buying.
@@ -36,7 +37,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="text-center text-sm text-primary-foreground/70 pt-8 border-t border-primary-foreground/20">
-          <p>&copy; {currentYear} MaxWealth PS. All rights reserved.</p>
+          <p>&copy; {currentYear} MaxWealth Property Services. All rights reserved.</p>
           <p className="mt-1">Designed by Dibya Prokash Sarkar.</p>
         </div>
       </div>
