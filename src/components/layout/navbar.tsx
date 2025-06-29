@@ -3,6 +3,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow, Search as SearchIconLucide } from 'lucide-react';
@@ -119,7 +120,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-white/40 backdrop-blur-lg shadow-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
-          <Briefcase className="h-7 w-7 text-foreground" />
+          <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={32} height={32} />
           <span className="font-headline text-2xl font-bold text-foreground">MaxWealth PS</span>
         </Link>
 
@@ -247,7 +248,7 @@ export default function Navbar() {
                 <div className="flex flex-col space-y-1 p-4">
                   <SheetClose asChild>
                     <Link href="/" className="flex items-center space-x-2 mb-4">
-                      <Briefcase className="h-7 w-7 text-sidebar-foreground" />
+                      <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={32} height={32} />
                       <span className="font-headline text-xl font-bold text-sidebar-foreground">MaxWealth PS</span>
                     </Link>
                   </SheetClose>
@@ -357,4 +358,3 @@ const ListItem = React.forwardRef<
   )
 })
 ListItem.displayName = "ListItem"
-
