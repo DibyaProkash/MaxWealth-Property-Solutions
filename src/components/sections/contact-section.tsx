@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image'; // Added Image import
@@ -168,22 +167,6 @@ export default function ContactSection() {
                     <p><strong>Saturday:</strong> 10:00 AM - 2:00 PM (By Appointment)</p>
                     <p><strong>Sunday:</strong> Closed</p>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card">
-              <CardHeader>
-                <CardTitle className="font-headline text-xl text-primary">Getting to Our Office</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3 text-muted-foreground">
-                <div>
-                  <h4 className="font-semibold text-primary mb-1">Accessibility & Parking</h4>
-                  <p>Our office is easily accessible by public transport and has ample parking available. We are located in the heart of the financial district, near major landmarks.</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-primary mb-1">Appointments</h4>
-                  <p>We recommend booking an appointment in advance to ensure our advisors can dedicate ample time to your needs.</p>
                 </div>
               </CardContent>
             </Card>
