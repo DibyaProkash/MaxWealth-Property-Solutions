@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image'; // Added Image import
@@ -150,15 +151,18 @@ export default function ContactSection() {
                   <a href="mailto:info@maxwealthps.com" className="text-muted-foreground hover:text-primary transition-colors">info@maxwealthps.com</a>
                 </div>
                 <div className="relative rounded-lg overflow-hidden shadow-md aspect-video">
-                  <Image
-                      src="https://placehold.co/800x450.png" 
-                      alt="Office Location Map Placeholder"
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      data-ai-hint="office map location" 
-                  />
+                  <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9426.127535344827!2d153.02308776305853!3d-27.466444148579136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b9159f65704ffab%3A0x8e6de954790d7e7c!2sWoolworths%20Metro%20Spring%20Hill!5e0!3m2!1sen!2sca!4v1751235219947!5m2!1sen!2sca"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Google Map of Office Location"
+                  ></iframe>
                 </div>
-                <p className="text-xs text-center text-muted-foreground mt-1">Map of office location will be displayed here.</p>
+                <p className="text-xs text-center text-muted-foreground mt-1">Our head office location in Brisbane.</p>
 
                 <div className="pt-4 border-t border-border">
                   <h4 className="font-headline text-lg font-semibold text-primary mb-2">Business Hours</h4>

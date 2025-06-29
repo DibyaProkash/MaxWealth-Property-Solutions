@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image'; // Added Image import
@@ -66,16 +67,18 @@ export default function ContactUsPage() {
                   </div>
                   
                   <div className="aspect-[4/3] bg-muted rounded-lg overflow-hidden shadow-md">
-                    <Image
-                        src="https://placehold.co/600x450.png" 
-                        alt="Office Location Placeholder"
-                        width={600}
-                        height={450}
-                        className="w-full h-full object-cover"
-                        data-ai-hint="office map location" 
-                    />
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9426.127535344827!2d153.02308776305853!3d-27.466444148579136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b9159f65704ffab%3A0x8e6de954790d7e7c!2sWoolworths%20Metro%20Spring%20Hill!5e0!3m2!1sen!2sca!4v1751235219947!5m2!1sen!2sca"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        allowFullScreen={true}
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title="Google Map of Office Location"
+                    ></iframe>
                   </div>
-                  <p className="text-xs text-center text-muted-foreground mt-2">Map placeholder - office location would be displayed here.</p>
+                  <p className="text-xs text-center text-muted-foreground mt-2">Our head office is located in Brisbane.</p>
                   
                   <div className="mt-8 pt-6 border-t border-border">
                     <h4 className="font-headline text-xl text-primary text-center mb-3">Business Hours</h4>
