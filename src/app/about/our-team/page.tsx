@@ -164,7 +164,7 @@ export default function OurTeamPage() {
                         <Card className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card h-full flex flex-col text-left">
                           <CardContent className="p-5 flex flex-col flex-grow">
                             <Avatar className="w-20 h-20 mx-auto mb-4 border-2 border-primary/10 shadow-md">
-                              <AvatarImage src={member.image} alt={member.name} data-ai-hint={member.dataAiHint} />
+                              <AvatarImage src={member.image} alt={member.name} data-ai-hint={member.dataAiHint} className="object-cover" />
                               <AvatarFallback className="text-2xl bg-muted text-muted-foreground">
                                 {member.name.split(' ').map(n => n[0]).join('')}
                               </AvatarFallback>
