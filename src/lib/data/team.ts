@@ -30,19 +30,37 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     dataAiHint: 'man professional portrait',
     bio: "Jay, the esteemed CEO and Founder of MaxWealth Property Services, is more than a licensed financial advisor; he's a seasoned property investor and professional economist with over two decades of experience in the property industry. His expertise extends to prestige real estate & luxury property in key metropolitan areas. Jay has a keen focus on development sites, commercial properties, and investment markets nationwide.",
     shortBio: "Jay leads our operations with over 20 years in premium property markets. He's secured over $100M in properties for clients.",
-    location: "Sydney & NSW",
+    location: "Brisbane, Australia",
     credentials: ["Licensed Real Estate Agent", "Certified Property Investment Adviser", "Member - REBAA", "Professional Economist"],
     specialties: ['Prestige Real Estate', 'Investment Strategy', 'Negotiation', 'Market Analysis', 'Development Sites'],
     yearsOfExperience: "20+ Years",
     socialLinks: {
       linkedin: '#',
-      email: 'mailto:jacqueline.dwyer@example.com',
+      email: 'mailto:jay.mitra@example.com',
       twitter: '#',
       instagram: '#'
     }
   },
   {
     id: 'tm2',
+    name: 'Dibya Prokash Sarkar',
+    title: 'Web Developer',
+    image: 'https://placehold.co/300x300.png',
+    dataAiHint: 'man developer portrait',
+    bio: "Dibya is the creative and technical force behind the MaxWealth Property Services website. With a passion for clean code and user-centric design, he specializes in building modern, responsive web applications using Next.js and the latest web technologies. He ensures the platform is fast, reliable, and easy to use for all clients.",
+    shortBio: "Dibya is the skilled web developer responsible for building and maintaining the MaxWealth Property Services online platform.",
+    location: "British Columbia, Canada",
+    credentials: ["B.Tech in Computer Science", "Certified React Developer"],
+    specialties: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'UI/UX Design'],
+    yearsOfExperience: "5+ Years",
+    socialLinks: {
+      linkedin: '#',
+      email: 'mailto:dibya.sarkar@example.com'
+    }
+  },
+  /*
+  {
+    id: 'tm3',
     name: 'Alice Johnson',
     title: 'Senior Financial Advisor',
     image: 'https://placehold.co/300x300.png',
@@ -61,7 +79,7 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     }
   },
   {
-    id: 'tm3',
+    id: 'tm4',
     name: 'Bob Williams',
     title: 'Investment Portfolio Manager',
     image: 'https://placehold.co/300x300.png',
@@ -80,7 +98,7 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     }
   },
   {
-    id: 'tm4',
+    id: 'tm5',
     name: 'Carol Davis',
     title: 'Client Relations & Operations Lead',
     image: 'https://placehold.co/300x300.png',
@@ -98,6 +116,7 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
       instagram: '#'
     }
   }
+  */
 ];
 
 
