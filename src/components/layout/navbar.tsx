@@ -120,8 +120,7 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-white/40 backdrop-blur-lg shadow-md">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
-          <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={32} height={32} />
-          <span className="font-headline text-2xl font-bold text-foreground">MaxWealth PS</span>
+          <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={40} height={40} />
         </Link>
 
         <div className="flex items-center space-x-2 sm:space-x-4">
@@ -248,8 +247,7 @@ export default function Navbar() {
                 <div className="flex flex-col space-y-1 p-4">
                   <SheetClose asChild>
                     <Link href="/" className="flex items-center space-x-2 mb-4">
-                      <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={32} height={32} />
-                      <span className="font-headline text-xl font-bold text-sidebar-foreground">MaxWealth PS</span>
+                      <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={40} height={40} />
                     </Link>
                   </SheetClose>
                   {navLinksData.map((link) => {
