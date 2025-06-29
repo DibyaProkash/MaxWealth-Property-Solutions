@@ -12,7 +12,7 @@ import LiveChatWidget from '@/components/layout/live-chat-widget';
 import { ChatWidgetProvider } from '@/contexts/chat-widget-context';
 
 export const metadata: Metadata = {
-  title: 'MaxWealth PS',
+  title: 'MaxWealth Property Services',
   description: 'Your trusted partner in financial planning for home buying.',
 };
 
