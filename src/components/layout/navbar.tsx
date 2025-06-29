@@ -121,6 +121,7 @@ export default function Navbar() {
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between px-6">
         <Link href="/" className="flex items-center space-x-2">
           <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={40} height={40} />
+          <span className="font-headline text-lg font-bold text-primary hidden sm:inline-block">MaxWealth Property Services</span>
         </Link>
 
         <div className="flex items-center space-x-2 sm:space-x-4">
@@ -248,6 +249,7 @@ export default function Navbar() {
                   <SheetClose asChild>
                     <Link href="/" className="flex items-center space-x-2 mb-4">
                       <Image src="/logo/logo.png" alt="MaxWealth PS Logo" width={40} height={40} />
+                      <span className="font-headline text-lg font-bold text-sidebar-primary">MaxWealth Property Services</span>
                     </Link>
                   </SheetClose>
                   {navLinksData.map((link) => {
