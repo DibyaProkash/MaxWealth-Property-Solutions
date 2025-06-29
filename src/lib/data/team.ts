@@ -45,7 +45,7 @@ export const teamMembersDetailedData: TeamMemberDetailed[] = [
     id: 'tm2',
     name: 'Dibya Prokash Sarkar',
     title: 'Web Developer',
-    image: 'https://placehold.co/300x300.png',
+    image: '/dibya_prokash.jpg',
     dataAiHint: 'man developer portrait',
     bio: "Dibya is the creative and technical force behind the MaxWealth Property Services website. With a passion for clean code and user-centric design, he specializes in building modern, responsive web applications using Next.js and the latest web technologies. He ensures the platform is fast, reliable, and easy to use for all clients.",
     shortBio: "Dibya is the skilled web developer responsible for building and maintaining the MaxWealth Property Services online platform.",
