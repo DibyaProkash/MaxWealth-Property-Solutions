@@ -50,9 +50,9 @@ export default function ContactUsPage() {
                 <div className="lg:col-span-2">
                   <h3 className="font-headline text-2xl md:text-3xl mb-6 text-primary">NATIONAL HEAD OFFICE</h3>
                   <div className="space-y-3 text-md text-muted-foreground font-body mb-6">
+                    <p><strong className="text-foreground">LOCATION:</strong> Brisbane, Australia</p>
                     <p><strong className="text-foreground">EMAIL:</strong> <a href="mailto:info@maxwealthps.com" className="hover:text-accent">info@maxwealthps.com</a></p>
-                    <p><strong className="text-foreground">PHONE:</strong> <a href="tel:1300655615" className="hover:text-accent">1300 655 615</a></p>
-                    <p><strong className="text-foreground">INTERNATIONAL PHONE:</strong> <a href="tel:+61299753311" className="hover:text-accent">(+61 2) 9975 3311</a></p>
+                    <p><strong className="text-foreground">PHONE:</strong> <a href="tel:+61432341008" className="hover:text-accent">+61432341008</a></p>
                   </div>
                   <div className="flex space-x-4 mb-8">
                     {[

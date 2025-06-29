@@ -142,11 +142,11 @@ export default function ContactSection() {
             <CardContent className="space-y-4">
               <div className="flex items-center space-x-3">
                 <MapPin className="h-6 w-6 text-accent" />
-                <p className="text-muted-foreground">123 Finance Avenue, Suite 400, Prosperity City, FS 54321</p>
+                <p className="text-muted-foreground">Brisbane, Australia</p>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-6 w-6 text-accent" />
-                <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">(123) 456-7890</a>
+                <a href="tel:+61432341008" className="text-muted-foreground hover:text-primary transition-colors">+61432341008</a>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-6 w-6 text-accent" />
