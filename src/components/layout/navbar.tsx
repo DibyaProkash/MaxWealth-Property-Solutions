@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetHeader, SheetTitle } from '@/components/ui/sheet';
-import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow, Search as SearchIconLucide } from 'lucide-react';
+import { Menu, Home, Users, Star, MessageSquare, Briefcase, CalculatorIcon, HelpCircle, BookOpen, BrainCircuit, Download, ListChecks, ChevronDown, ArrowLeft, TrendingUp, NewspaperIcon, Building, Workflow, Search as SearchIconLucide, ConciergeBell } from 'lucide-react';
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -21,9 +21,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useScrollSpy } from '@/hooks/use-scroll-spy';
 import { cn } from '@/lib/utils';
 import type { LucideIcon } from 'lucide-react';
-// import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-// import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge'; 
+import { aboutUsSubItems } from '@/lib/data';
 
 interface NavLinkItem {
   href: string;
@@ -34,14 +33,6 @@ interface NavLinkItem {
   description?: string;
 }
 
-// Data for About Us sub-menu
-const aboutUsSubItems: NavLinkItem[] = [
-  { href: '/about/our-company', label: 'Our Company', icon: Building, description: 'Learn about our mission, vision, and values.' },
-  { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth Property Services.' },
-  { href: '/about/our-services', label: 'Our Services', icon: MessageSquare, description: 'Explore the services we offer.' }, 
-  { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
-];
-
 const navLinksData: NavLinkItem[] = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
   {
@@ -50,8 +41,9 @@ const navLinksData: NavLinkItem[] = [
     icon: Building,
     id: 'aboutPage', 
     subItems: aboutUsSubItems,
-    description: "Learn more about our company, team, and services."
+    description: "Learn more about our company and team."
   },
+  { href: '/process-and-services', label: 'Process & Services', icon: ConciergeBell, id: 'processServicesPage' },
   { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
   { href: '/testimonials', label: 'Testimonials', icon: Star, id: 'testimonialsPage' },
   { href: '/faq', label: 'FAQ', icon: HelpCircle, id: 'faqPage' },
@@ -68,8 +60,6 @@ export default function Navbar() {
   const router = useRouter();
   const activeSection = useScrollSpy({ sectionIds: homepageSectionIds, rootMargin: "-40% 0px -60% 0px" });
   const [isMounted, setIsMounted] = React.useState(false);
-  // const [searchQuery, setSearchQuery] = React.useState('');
-  // const [isSearchPopoverOpen, setIsSearchPopoverOpen] = React.useState(false);
 
 
   React.useEffect(() => {
@@ -82,23 +72,6 @@ export default function Navbar() {
     }
     return `/${href}`;
   };
-
-  /*
-  const handleSearchSubmit = () => {
-    if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
-      setIsSearchPopoverOpen(false);
-      setSearchQuery('');
-    }
-  };
-
-  const handleSearchKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      handleSearchSubmit();
-    }
-  };
-  */
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-white/40 backdrop-blur-lg shadow-md">
@@ -130,7 +103,7 @@ export default function Navbar() {
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
                         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                          <ListItem
+                          {/* <ListItem
                             key={`${link.label}-overview`}
                             title={`Explore ${link.label}`}
                             href={link.href} 
@@ -138,7 +111,7 @@ export default function Navbar() {
                             className={isMounted && pathname === link.href ? "bg-accent/10 text-accent" : ""}
                           >
                             {link.description || `Visit the main ${link.label} page.`}
-                          </ListItem>
+                          </ListItem> */}
                           {link.subItems.map((subItem) => (
                              <ListItem
                               key={subItem.label}
@@ -174,42 +147,6 @@ export default function Navbar() {
               })}
             </NavigationMenuList>
           </NavigationMenu>
-
-          {/*
-          <Popover open={isSearchPopoverOpen} onOpenChange={setIsSearchPopoverOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-foreground hover:bg-foreground/10 hover:text-foreground focus-visible:ring-foreground"
-              >
-                <SearchIconLucide className="h-5 w-5" />
-                <span className="sr-only">Search</span>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="grid gap-4">
-                <div className="space-y-2">
-                  <h4 className="font-medium leading-none">Search Site</h4>
-                  <p className="text-sm text-muted-foreground">
-                    Enter keywords to search articles, pages, and more.
-                  </p>
-                </div>
-                <Input
-                  id="search-navbar"
-                  placeholder="e.g. Mortgage rates..."
-                  className="col-span-2 h-8"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={handleSearchKeyDown}
-                />
-                <Button onClick={handleSearchSubmit} size="sm" className="w-full">
-                  Search
-                </Button>
-              </div>
-            </PopoverContent>
-          </Popover>
-          */}
 
           <ThemeToggle />
 

@@ -44,8 +44,6 @@ export const partnersData: Partner[] = [
 export const aboutUsSubItems = [
   { href: '/about/our-company', label: 'Our Company', icon: DefaultBuildingIcon, description: 'Learn about our mission, vision, and values.' },
   { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth Property Services.' },
-  { href: '/about/our-services', label: 'Our Services', icon: ConciergeBell, description: 'Explore the services we offer.' }, 
-  { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
 ];
 
 // Data related to "Resources" page structure
@@ -263,8 +261,7 @@ const staticPageKeywords = {
   aboutOverview: ['about us', 'company overview', 'team', 'services offered', 'our process'],
   ourCompany: ['mission', 'vision', 'values', 'company philosophy', 'about maxwealth property services'],
   ourTeam: ['team members', 'experts', 'advisors', 'financial planners', 'buyers advocates', 'jay mitra'],
-  ourServices: ['services list', 'what we do', 'property buying services', 'investment services', 'commercial property help'],
-  ourProcess: ['how we work', 'client journey', '5-step process', 'buying process'],
+  processAndServices: ['services', 'process', 'how we work', 'what we offer', 'buyers agent process'],
   media: ['articles', 'vlogs', 'videos', 'reels', 'blog', 'news', 'updates', 'insights'],
   resourcesOverview: ['tools', 'guides', 'calculators', 'faq', 'home buying roadmap', 'ai tools'],
   aiTools: ['ai document analyzer', 'personalized financial plan ai', 'ai market trend summarizer', 'home readiness quiz', 'artificial intelligence'],
@@ -281,8 +278,7 @@ export const siteSearchableContent: SearchResultItem[] = [
   { id: 's-about', title: 'About MaxWealth Property Services', description: 'Discover MaxWealth Property Services: our company, dedicated team, comprehensive services, and proven process for client success.', href: '/about', type: 'Page', keywords: staticPageKeywords.aboutOverview, icon: Building },
   { id: 's-our-company', title: 'Our Company', description: 'Learn about the mission, vision, and core values that drive MaxWealth Property Services in helping clients achieve their property goals.', href: '/about/our-company', type: 'Page', keywords: staticPageKeywords.ourCompany, icon: DefaultBuildingIcon },
   { id: 's-our-team', title: 'Our Expert Team', description: 'Meet the experienced professionals and buyer\'s advocates at MaxWealth Property Services, led by CEO Jay Mitra.', href: '/about/our-team', type: 'Page', keywords: staticPageKeywords.ourTeam, icon: Users },
-  { id: 's-our-services', title: 'Our Comprehensive Services', description: 'Explore the range of property buying services offered by MaxWealth Property Services, including who we help and where we operate.', href: '/about/our-services', type: 'Page', keywords: staticPageKeywords.ourServices, icon: ConciergeBell },
-  { id: 's-our-process', title: 'Our Streamlined Process', description: 'Learn about MaxWealth Property Services\'s proven 5-step process designed to guide you through every step of the home buying journey.', href: '/about/our-process', type: 'Page', keywords: staticPageKeywords.ourProcess, icon: Workflow },
+  { id: 's-process-and-services', title: 'Our Process & Services', description: 'Explore the range of property buying services and our proven process offered by MaxWealth Property Services.', href: '/process-and-services', type: 'Page', keywords: staticPageKeywords.processAndServices, icon: ConciergeBell },
   { id: 's-media', title: 'Media & Insights', description: 'Browse our collection of articles, vlogs, videos, and market updates on home financing and property trends.', href: '/media', type: 'Page', keywords: staticPageKeywords.media, icon: Newspaper },
   { id: 's-resources', title: 'MaxWealth Property Services Resources', description: 'Access financial calculators, AI-powered tools, free guides, an interactive roadmap, and FAQs to empower your home buying decisions.', href: '/resources', type: 'Page', keywords: staticPageKeywords.resourcesOverview, icon: BookOpen },
   { id: 's-ai-tools', title: 'AI-Powered Financial Tools', description: 'Utilize AI for document analysis, basic financial planning, market trend summaries, and home buying readiness assessment.', href: '/resources/ai-tools', type: 'Page', keywords: staticPageKeywords.aiTools, icon: BrainCircuit },
@@ -343,14 +339,9 @@ export const siteSearchableContent: SearchResultItem[] = [
     keywords: ['faq', ...faq.question.toLowerCase().split(' ').slice(0,5)], 
     icon: HelpCircle
   }))
-];
+].filter(item => !['s-our-services', 's-our-process'].includes(item.id));
 // Ensure all icons are imported if used here.
 // For example, if a SearchResultItem has icon: Home, ensure Home from lucide-react is imported.
 // Make sure all icons used in siteSearchableContent are imported.
 // Example, Home is used for the homepage search result.
 // Make sure it and others (Building, Users, ConciergeBell, etc.) are in the lucide-react import line.
-
-
-
-
-

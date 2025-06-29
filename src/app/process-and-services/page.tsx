@@ -5,17 +5,18 @@ import * as React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import { ConciergeBell, ArrowRight, Loader2, HomeIcon } from 'lucide-react';
+import { ArrowRight, ConciergeBell, HomeIcon, Loader2, Workflow } from 'lucide-react';
 import AnimatedSection from '@/components/layout/animated-section';
-import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
 import Footer from '@/components/layout/footer';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { whoWeHelpData, type WhoWeHelpItem } from '@/lib/data';
-import { cn } from '@/lib/utils';
+import { whoWeHelpData } from '@/lib/data';
 import ComprehensivePropertyServices from '@/components/sections/comprehensive-property-services';
+import ProvenProcessSection from '@/components/sections/proven-process-section';
 import BackButton from '@/components/layout/back-button';
+import { cn } from '@/lib/utils';
 
-export interface ServiceLocationItem {
+// Define the type here instead of importing from a deleted file
+export interface FetchedServiceLocationItem {
   id: string;
   slug: string;
   name: string;
@@ -23,8 +24,8 @@ export interface ServiceLocationItem {
   dataAiHint: string;
 }
 
-export default function OurServicesPage() {
-  const [locations, setLocations] = React.useState<ServiceLocationItem[]>([]);
+export default function ProcessAndServicesPage() {
+  const [locations, setLocations] = React.useState<FetchedServiceLocationItem[]>([]);
   const [isLoadingLocations, setIsLoadingLocations] = React.useState(true);
   const [locationsError, setLocationsError] = React.useState<string | null>(null);
 
@@ -37,7 +38,7 @@ export default function OurServicesPage() {
         if (!response.ok) {
           throw new Error('Failed to fetch service locations');
         }
-        const data: ServiceLocationItem[] = await response.json();
+        const data: FetchedServiceLocationItem[] = await response.json();
         setLocations(data);
       } catch (err: any) {
         setLocationsError(err.message || 'Could not load service locations.');
@@ -67,12 +68,16 @@ export default function OurServicesPage() {
                   <ConciergeBell className="h-10 w-10 text-primary" />
               </div>
               <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
-                Our Comprehensive Services
+                Our Process & Services
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-body">
-                Discover the range of expert services MaxWealth PS offers to make your property journey seamless and successful.
+                Discover the range of expert services MaxWealth PS offers and our proven process to make your property journey seamless and successful.
               </p>
             </header>
+          </AnimatedSection>
+          
+          <AnimatedSection delay="delay-100">
+            <ProvenProcessSection />
           </AnimatedSection>
 
           <AnimatedSection delay="delay-50">
@@ -169,62 +174,6 @@ export default function OurServicesPage() {
                 )}
               </div>
             </section>
-          </AnimatedSection>
-
-          <AnimatedSection delay="delay-200">
-            <section className="py-16 md:py-24">
-              <div className="grid md:grid-cols-2 gap-8 items-stretch">
-                <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-primary text-primary-foreground p-6 md:p-10 rounded-lg flex flex-col justify-between items-center text-center relative overflow-hidden">
-                  <div className="absolute inset-0">
-                    <Image
-                      src="https://placehold.co/600x400.png"
-                      alt="Residential Property"
-                      fill style={{objectFit: 'cover'}}
-                      className="opacity-20"
-                      data-ai-hint="modern house family"
-                      sizes="(max-width: 768px) 100vw, 50vw" />
-                  </div>
-                  <div className="relative z-10 flex flex-col items-center h-full">
-                    <h3 className="font-headline text-2xl md:text-3xl font-bold mb-3">Looking for Residential Property?</h3>
-                    <p className="mb-6 text-primary-foreground/80 text-lg">
-                      Are you searching for Home or Investment property?
-                    </p>
-                    <Button size="lg" variant="default" className="mt-auto bg-accent text-accent-foreground hover:bg-accent/90 shadow-md w-full sm:w-auto" asChild>
-                      <Link href="/contact">
-                        Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                      </Link>
-                    </Button>
-                  </div>
-                </Card>
-
-                <Card className="shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-accent text-accent-foreground p-6 md:p-10 rounded-lg flex flex-col justify-between items-center text-center relative overflow-hidden">
-                   <div className="absolute inset-0">
-                    <Image
-                      src="https://placehold.co/600x400.png"
-                      alt="Commercial Property"
-                      fill style={{objectFit: 'cover'}}
-                      className="opacity-20"
-                      data-ai-hint="office building city"
-                      sizes="(max-width: 768px) 100vw, 50vw" />
-                  </div>
-                  <div className="relative z-10 flex flex-col items-center h-full">
-                    <h3 className="font-headline text-2xl md:text-3xl font-bold mb-3">Looking for Commercial Property?</h3>
-                    <p className="mb-6 text-accent-foreground/80 text-lg">
-                      Are you in search of the commercial property or Investment to grow your business.
-                    </p>
-                     <Button size="lg" variant="default" className="mt-auto bg-primary text-primary-foreground hover:bg-primary/90 shadow-md w-full sm:w-auto" asChild>
-                       <Link href="/contact">
-                        Get Started <ArrowRight className="ml-2 h-5 w-5" />
-                      </Link>
-                    </Button>
-                  </div>
-                </Card>
-              </div>
-            </section>
-          </AnimatedSection>
-
-          <AnimatedSection delay="delay-250">
-            <ServicesSectionHighlights />
           </AnimatedSection>
         </div>
       </main>
