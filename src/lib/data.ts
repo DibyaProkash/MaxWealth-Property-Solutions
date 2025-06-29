@@ -44,7 +44,7 @@ export const partnersData: Partner[] = [
 export const aboutUsSubItems = [
   { href: '/about/our-company', label: 'Our Company', icon: DefaultBuildingIcon, description: 'Learn about our mission, vision, and values.' },
   { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth PS.' },
-  { href: '/about/our-services', label: 'Our Services', icon: ConciergeBell, description: 'Explore the services we offer.' },
+  { href: '/about/our-services', label: 'Our Services', icon: ConciergeBell, description: 'Explore the services we offer.' }, 
   { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
 ];
 
@@ -349,5 +349,3 @@ export const siteSearchableContent: SearchResultItem[] = [
 // Make sure all icons used in siteSearchableContent are imported.
 // Example, Home is used for the homepage search result.
 // Make sure it and others (Building, Users, ConciergeBell, etc.) are in the lucide-react import line.
-
-
