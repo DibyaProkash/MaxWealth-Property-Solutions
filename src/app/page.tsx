@@ -15,7 +15,9 @@ import PartnersSection from '@/components/sections/partners-section';
 // import BookingSection from '@/components/sections/booking-section';
 import ContactSection from '@/components/sections/contact-section';
 import AnimatedSection from '@/components/layout/animated-section';
-import { articlesData, partnersData, testimonialsData } from '@/lib/data';
+import { partnersData } from '@/lib/data';
+import { articlesData } from '@/lib/data/articles';
+import { testimonialsData } from '@/lib/data/testimonials';
 
 export default function HomePage() {
   return (

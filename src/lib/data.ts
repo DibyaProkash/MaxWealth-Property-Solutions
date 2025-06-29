@@ -146,84 +146,6 @@ export const maxWealthDifferenceData: DifferencePoint[] = [
   { id: 'diff6', title: 'Advanced Research & AI Tools', description: 'Utilizing our proprietary "Suburb Selector™", AI insights, and live data for the latest property intelligence.', icon: SearchCode, },
 ];
 
-// Data for "Comprehensive Property Buyer Services" (Homepage, Our Services Page)
-export interface ComprehensiveServiceItem { id: string; icon: LucideIcon; title: string; description: string; }
-export const comprehensiveServicesData: ComprehensiveServiceItem[] = [
-  {
-    id: 'cs1',
-    icon: Target,
-    title: 'Assess Financial Goals and Strategies',
-    description: 'We help you define clear financial goals and craft tailored strategies to achieve your property ambitions.',
-  },
-  {
-    id: 'cs2',
-    icon: CalculatorIcon,
-    title: 'Evaluation of the Borrowing Capacity',
-    description: 'Gain a clear understanding of your borrowing power with our thorough capacity evaluation and pre-qualification.',
-  },
-  {
-    id: 'cs3',
-    icon: CheckCircleIcon,
-    title: 'Mortgage and Loan Approvals',
-    description: 'Navigating the loan approval process seamlessly to secure the best mortgage options for your purchase.',
-  },
-  {
-    id: 'cs4',
-    icon: SearchCode,
-    title: 'Property Search & Selection',
-    description: 'Access to off-market properties and comprehensive market analysis across all major Australian cities.',
-  },
-  {
-    id: 'cs5',
-    icon: FileSearch,
-    title: 'Due Diligence & Inspections',
-    description: 'Thorough property evaluations, building inspections, and legal compliance checks.',
-  },
-  {
-    id: 'cs6',
-    icon: Handshake,
-    title: 'Negotiation & Purchase',
-    description: 'Expert negotiation to secure the best price and terms for your property purchase.',
-  },
-   {
-    id: 'cs7',
-    icon: Briefcase,
-    title: 'Settlement Support',
-    description: 'Complete settlement coordination and post-purchase support services.',
-  },
-  {
-    id: 'cs8',
-    icon: Award,
-    title: 'Auction Bidding',
-    description: 'Professional auction representation to secure your dream property at competitive prices.',
-  },
-  {
-    id: 'cs9',
-    icon: Home,
-    title: 'Property Management',
-    description: 'Comprehensive property management services to maximize your investment returns and minimize hassle.',
-  },
-  {
-    id: 'cs10',
-    icon: Settings,
-    title: 'Property Renovation and improvement',
-    description: 'Advising on value-adding renovations and improvements to enhance your property\'s worth and appeal.',
-  },
-  {
-    id: 'cs11',
-    icon: BarChart2,
-    title: 'Portfolio Assessment and Valuation',
-    description: 'Regular portfolio assessment and professional valuation to track performance and identify opportunities.',
-  },
-  {
-    id: 'cs12',
-    icon: TrendingUp,
-    title: 'Investment and Portfolio Analysis',
-    description: 'In-depth analysis of your existing portfolio and new investment opportunities to ensure optimal growth.',
-  },
-];
-
-
 // Data for "Proven 5-Step Process" (Homepage)
 export interface ProcessStepItem { id: string; stepNumber: string; title: string; description: string; }
 export const provenProcessStepsData: ProcessStepItem[] = [
@@ -349,3 +271,7 @@ export const siteSearchableContent: SearchResultItem[] = [
 // Make sure all icons used in siteSearchableContent are imported.
 // Example, Home is used for the homepage search result.
 // Make sure it and others (Building, Users, ConciergeBell, etc.) are in the lucide-react import line.
+
+
+
+
