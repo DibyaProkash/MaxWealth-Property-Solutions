@@ -20,9 +20,9 @@ import type { TeamMemberDetailed } from '@/lib/data/team';
 import FeeStructureSection from '@/components/sections/fee-structure-section';
 
 const founderData = {
-  name: 'Jyoti Poul Mitra',
+  name: 'Jay Mitra',
   title: 'Founder & Buyers Advocate',
-  bio: "Jyoti Poul Mitra, the visionary Founder of MaxWealth PS, brings extensive experience as a Buyers Advocate. With a deep understanding of property markets, Jyoti is dedicated to helping clients navigate the complexities of real estate investment and home buying, focusing on delivering tailored strategies and exceptional outcomes. Jyoti's expertise spans across residential and investment properties, ensuring clients achieve their property aspirations.",
+  bio: "Jay Mitra, the visionary Founder of MaxWealth Property Services, brings extensive experience as a Buyers Advocate. With a deep understanding of property markets, Jay is dedicated to helping clients navigate the complexities of real estate investment and home buying, focusing on delivering tailored strategies and exceptional outcomes. Jay's expertise spans across residential and investment properties, ensuring clients achieve their property aspirations.",
   image: '/founder-jyoti-poul-mitra.jpg',
   dataAiHint: 'man professional casual',
 };
@@ -107,7 +107,7 @@ export default function OurTeamPage() {
                   <Users className="h-10 w-10 text-primary" />
               </div>
               <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
-                Our Expert Team at MaxWealth PS
+                Our Expert Team at MaxWealth Property Services
               </h1>
             </header>
           </AnimatedSection>
@@ -115,7 +115,7 @@ export default function OurTeamPage() {
           <AnimatedSection delay="delay-50">
             <div className="mb-12 md:mb-16 text-lg text-muted-foreground font-body space-y-4 max-w-4xl mx-auto">
                 <p>
-                  MaxWealth PS is a leading Australian Buyers Agency. Spearheaded by Jyoti Poul Mitra, an award-winning property professional, we’re the go-to agency for discerning buyers seeking premium real estate in major cities and desirable regional hubs.
+                  MaxWealth Property Services is a leading Australian Buyers Agency. Spearheaded by Jay Mitra, an award-winning property professional, we’re the go-to agency for discerning buyers seeking premium real estate in major cities and desirable regional hubs.
                 </p>
                 <p className="font-headline text-xl text-primary">
                   But here’s what really separates us from the rest…
@@ -127,7 +127,7 @@ export default function OurTeamPage() {
                   Determined to shake things up, we set out to advocate exclusively for buyers, giving them the upper hand in real estate transactions. It’s our job (and pleasure) to step in, hunt and negotiate for buyers just like you who are strapped for time, dread ‘the chase’ and are anxious about paying too much.
                 </p>
                 <p>
-                  Our A-team will strive to find and skillfully secure your next property, on time and within budget. With MaxWealth PS on your side, property buying can be simple, stress-free and enjoyable.
+                  Our A-team will strive to find and skillfully secure your next property, on time and within budget. With MaxWealth Property Services on your side, property buying can be simple, stress-free and enjoyable.
                 </p>
             </div>
           </AnimatedSection>
@@ -374,5 +374,3 @@ export default function OurTeamPage() {
     </div>
   );
 }
-
-    

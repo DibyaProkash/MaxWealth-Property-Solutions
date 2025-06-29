@@ -25,7 +25,7 @@ export default function ServicesSectionHighlights() {
                     <CardTitle className="font-headline text-xl text-primary">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-grow">
-                    <p className="text-sm text-muted-foreground mb-4 text-center font-body">{service.intro}</p>
+                    <p className="text-sm text-muted-foreground mb-4 text-center font-body">{service.intro.replace('MaxWealth PS', 'MaxWealth Property Services')}</p>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                     {service.features.map((feature) => (
                         <li key={feature} className="flex items-start">

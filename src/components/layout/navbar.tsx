@@ -37,7 +37,7 @@ interface NavLinkItem {
 // Data for About Us sub-menu
 const aboutUsSubItems: NavLinkItem[] = [
   { href: '/about/our-company', label: 'Our Company', icon: Building, description: 'Learn about our mission, vision, and values.' },
-  { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth PS.' },
+  { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth Property Services.' },
   { href: '/about/our-services', label: 'Our Services', icon: MessageSquare, description: 'Explore the services we offer.' }, 
   { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
 ];
