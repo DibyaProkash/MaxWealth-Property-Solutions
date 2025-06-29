@@ -1,13 +1,7 @@
+
 "use client";
 
 import { comprehensiveServicesData } from "@/lib/data";
-import { Card } from '@/components/ui/card';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
 export default function ComprehensivePropertyServices() {
   if (!comprehensiveServicesData || comprehensiveServicesData.length === 0) {
@@ -31,22 +25,30 @@ export default function ComprehensivePropertyServices() {
           {comprehensiveServicesData.map((service) => {
             const Icon = service.icon;
             return (
-              <Card key={service.id} className="text-center shadow-lg hover:shadow-xl transition-shadow bg-card flex flex-col p-6">
-                <div className="mx-auto mb-4 inline-block p-3 bg-primary/10 rounded-full">
-                  <Icon className="h-8 w-8 text-primary" />
-                </div>
-                
-                <Accordion type="single" collapsible className="w-full">
-                  <AccordionItem value={service.id} className="border-b-0">
-                    <AccordionTrigger className="font-headline text-lg leading-tight text-primary hover:no-underline justify-center p-0">
+              <div key={service.id} className="group h-64 [perspective:1000px]">
+                {/* The flipping element */}
+                <div className="relative h-full w-full rounded-lg shadow-xl transition-all duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                  {/* Front of the card */}
+                  <div className="absolute inset-0 rounded-lg bg-card p-6 text-center flex flex-col items-center justify-center [backface-visibility:hidden]">
+                    <div className="mx-auto mb-4 inline-block p-3 bg-primary/10 rounded-full">
+                      <Icon className="h-8 w-8 text-primary" />
+                    </div>
+                    <h3 className="font-headline text-lg leading-tight text-primary">
                       {service.title}
-                    </AccordionTrigger>
-                    <AccordionContent className="pt-4">
-                      <p className="text-sm text-muted-foreground font-body">{service.description}</p>
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              </Card>
+                    </h3>
+                  </div>
+                  
+                  {/* Back of the card */}
+                  <div className="absolute inset-0 rounded-lg bg-primary text-primary-foreground p-6 text-center flex flex-col items-center justify-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                    <h4 className="font-headline text-lg font-semibold mb-2">
+                      {service.title}
+                    </h4>
+                    <p className="text-sm text-primary-foreground/80 font-body">
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
             );
           })}
         </div>
