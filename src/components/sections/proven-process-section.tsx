@@ -1,4 +1,3 @@
-
 "use client";
 
 import { provenProcessStepsData, type ProcessStepItem } from '@/lib/data';
@@ -17,7 +16,7 @@ export default function ProvenProcessSection() {
             <Workflow className="h-10 w-10 text-primary" />
           </div>
           <h2 className="font-headline text-3xl md:text-4xl font-bold text-primary mb-3">
-            Our Proven 5-Step Process
+            Our Proven 5-Step Property Purchase Process
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             A streamlined approach that takes you from initial consultation to keys in hand.
