@@ -10,8 +10,6 @@ import { ArrowLeft, HomeIcon, Users, Linkedin, Mail, X as TwitterIcon, Instagram
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 import ServicesSectionHighlights from '@/components/sections/services-section-highlights';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import Autoplay from "embla-carousel-autoplay";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -28,11 +26,6 @@ const founderData = {
 };
 
 export default function OurTeamPage() {
-    const autoplayPlugin = React.useRef(
-        Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true })
-    );
-
-    const [itemsPerView, setItemsPerView] = React.useState(3);
     const [selectedMember, setSelectedMember] = React.useState<TeamMemberDetailed | null>(null);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
 
@@ -60,28 +53,10 @@ export default function OurTeamPage() {
         fetchTeamMembers();
     }, []);
 
-
-    React.useEffect(() => {
-        const updateItemsPerView = () => {
-        if (window.innerWidth < 768) {
-            setItemsPerView(1);
-        } else if (window.innerWidth < 1024) {
-            setItemsPerView(2);
-        } else {
-            setItemsPerView(3);
-        }
-        };
-        window.addEventListener('resize', updateItemsPerView);
-        updateItemsPerView();
-        return () => window.removeEventListener('resize', updateItemsPerView);
-    }, []);
-
     const handleMemberClick = (member: TeamMemberDetailed) => {
         setSelectedMember(member);
         setIsModalOpen(true);
     };
-
-    const canAutoplay = teamMembers.length > itemsPerView;
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -183,20 +158,9 @@ export default function OurTeamPage() {
             {error && <p className="text-center text-destructive mb-12 md:mb-16">Error: {error}</p>}
 
             {!isLoading && !error && teamMembers.length > 0 && (
-              <Carousel
-                opts={{
-                align: "start",
-                loop: canAutoplay,
-                }}
-                plugins={canAutoplay ? (autoplayPlugin.current ? [autoplayPlugin.current] : []) : []}
-                onMouseEnter={() => { if (canAutoplay && autoplayPlugin.current) autoplayPlugin.current.stop(); }}
-                onMouseLeave={() => { if (canAutoplay && autoplayPlugin.current) autoplayPlugin.current.play(); }}
-                className="w-full max-w-xs sm:max-w-xl md:max-w-3xl lg:max-w-5xl xl:max-w-6xl mx-auto mb-12 md:mb-16"
-              >
-                <CarouselContent className="-ml-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12 md:mb-16">
                 {teamMembers.map((member) => (
-                    <CarouselItem key={member.id} className="pl-4 basis-full md:basis-1/2 lg:basis-1/3">
-                    <div className="p-1 h-full">
+                    <div key={member.id} className="h-full">
                         <Card className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-card h-full flex flex-col text-left">
                           <CardContent className="p-5 flex flex-col flex-grow">
                             <Avatar className="w-20 h-20 mx-auto mb-4 border-2 border-primary/10 shadow-md">
@@ -263,12 +227,8 @@ export default function OurTeamPage() {
                           </CardContent>
                         </Card>
                     </div>
-                    </CarouselItem>
                 ))}
-                </CarouselContent>
-                {canAutoplay && <CarouselPrevious className="hidden sm:flex -left-4 md:-left-8 text-primary bg-background/70 hover:bg-background" />}
-                {canAutoplay && <CarouselNext className="hidden sm:flex -right-4 md:-right-8 text-primary bg-background/70 hover:bg-background" />}
-              </Carousel>
+              </div>
             )}
             {!isLoading && !error && teamMembers.length === 0 && (
               <p className="text-center text-muted-foreground mb-12 md:mb-16">Team information coming soon.</p>
@@ -374,3 +334,4 @@ export default function OurTeamPage() {
     </div>
   );
 }
+
