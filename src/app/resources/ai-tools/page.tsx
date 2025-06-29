@@ -3,6 +3,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input as ShadcnInput } from "@/components/ui/input"; 
@@ -15,7 +16,7 @@ import { generateFinancialPlan, type PersonalizedFinancialPlanInput, type Person
 import { summarizeMarketTrends, type MarketTrendSummarizerInput, type MarketTrendSummarizerOutput } from "@/ai/flows/market-trend-summarizer-flow";
 import QuizSection from '@/components/sections/quiz-section';
 import AnimatedSection from '@/components/layout/animated-section';
-import { FileText, BrainCircuit, TrendingUp, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, AlertTriangle, Image as ImageIcon } from "lucide-react";
+import { FileText, BrainCircuit, TrendingUp, Loader2, Wand2, UserCheck, BarChart3, UploadCloud, XCircle, AlertTriangle, Image as ImageIcon, HomeIcon } from "lucide-react";
 import type { PDFDocumentProxy } from 'pdfjs-dist';
 import Footer from '@/components/layout/footer';
 import BackButton from '@/components/layout/back-button';
@@ -197,8 +198,14 @@ export default function AiToolsPage() {
         <div className="container mx-auto px-6">
           <AnimatedSection>
             <div className="mb-12">
-              <div className="mb-6">
+              <div className="mb-6 flex flex-wrap gap-4">
                 <BackButton />
+                <Button variant="outline" asChild>
+                    <Link href="/">
+                        <HomeIcon className="mr-2 h-4 w-4" />
+                        Back to Home
+                    </Link>
+                </Button>
               </div>
               <div className="text-center">
                   <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">

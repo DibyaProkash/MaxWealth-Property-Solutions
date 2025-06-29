@@ -21,12 +21,14 @@ import {
   Lightbulb,
   Save,
   type LucideIcon,
+  HomeIcon,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 import BackButton from '@/components/layout/back-button';
+import Link from 'next/link';
 
 interface RoadmapStep {
   id: string;
@@ -179,8 +181,14 @@ export default function RoadmapPage() {
         <div className="container mx-auto px-6">
           <AnimatedSection>
               <div className="mb-12">
-                  <div className="mb-6">
+                  <div className="mb-6 flex flex-wrap gap-4">
                     <BackButton />
+                    <Button variant="outline" asChild>
+                        <Link href="/">
+                            <HomeIcon className="mr-2 h-4 w-4" />
+                            Back to Home
+                        </Link>
+                    </Button>
                   </div>
                   <div className="text-center">
                       <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">

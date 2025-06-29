@@ -3,9 +3,10 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound, useParams } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
-import { CalendarDays, UserCircle, Tag, MessageSquare, Type, Loader2, AlertTriangle } from 'lucide-react';
+import { CalendarDays, UserCircle, Tag, MessageSquare, Type, Loader2, AlertTriangle, HomeIcon } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -87,7 +88,15 @@ export default function InsightPage() {
         <AlertTriangle className="h-12 w-12 text-destructive mb-4" />
         <h1 className="text-2xl font-bold text-destructive mb-2">Error Loading Insight</h1>
         <p className="text-muted-foreground mb-4">{error}</p>
-        <BackButton />
+        <div className="flex flex-wrap gap-4">
+            <BackButton />
+            <Button variant="outline" asChild>
+              <Link href="/">
+                  <HomeIcon className="mr-2 h-4 w-4" />
+                  Back to Home
+              </Link>
+            </Button>
+        </div>
       </div>
     );
   }
@@ -104,8 +113,14 @@ export default function InsightPage() {
   return (
     <div className="container mx-auto px-6 py-8 md:py-16 max-w-4xl bg-background">
       <div className="mb-8">
-        <div className="mb-6">
+        <div className="mb-6 flex flex-wrap gap-4">
           <BackButton />
+          <Button variant="outline" asChild>
+            <Link href="/">
+                <HomeIcon className="mr-2 h-4 w-4" />
+                Back to Home
+            </Link>
+          </Button>
         </div>
         <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
           {article.title}

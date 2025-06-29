@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Newspaper, ListFilter, ArrowDownUp, Eye, CalendarDays, User, Search as SearchIcon, Clock, Loader2 } from 'lucide-react';
+import { ArrowRight, Newspaper, ListFilter, ArrowDownUp, Eye, CalendarDays, User, Search as SearchIcon, Clock, Loader2, HomeIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Input } from '@/components/ui/input';
@@ -187,8 +187,14 @@ export default function AllMediaPage() {
       <main className="flex-grow bg-muted">
         <div className="container mx-auto px-6 py-8 md:py-12">
           <AnimatedSection>
-            <div className="mb-8">
+            <div className="mb-8 flex flex-wrap gap-4">
               <BackButton />
+              <Button variant="outline" asChild>
+                <Link href="/">
+                    <HomeIcon className="mr-2 h-4 w-4" />
+                    Back to Home
+                </Link>
+              </Button>
             </div>
           </AnimatedSection>
 

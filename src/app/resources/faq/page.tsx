@@ -4,9 +4,11 @@
 import * as React from 'react';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import AnimatedSection from '@/components/layout/animated-section';
-import { HelpCircle, Loader2 } from "lucide-react";
+import { HelpCircle, Loader2, HomeIcon } from "lucide-react";
 import Footer from '@/components/layout/footer';
 import BackButton from '@/components/layout/back-button';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 // Define FaqItem type for this page
 export interface FaqItem {
@@ -84,8 +86,14 @@ export default function FaqPage() {
         <div className="container mx-auto px-6">
           <AnimatedSection>
             <div className="mb-12">
-              <div className="mb-6">
+              <div className="mb-6 flex flex-wrap gap-4">
                 <BackButton />
+                <Button variant="outline" asChild>
+                    <Link href="/">
+                        <HomeIcon className="mr-2 h-4 w-4" />
+                        Back to Home
+                    </Link>
+                </Button>
               </div>
               <div className="text-center">
                 <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">

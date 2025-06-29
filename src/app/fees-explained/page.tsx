@@ -20,7 +20,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Briefcase, Info, Loader2 } from "lucide-react";
+import { BadgeCheck, DollarSign, Mail, Phone, UserCheck, Percent, Briefcase, Info, Loader2, HomeIcon } from "lucide-react";
 import AnimatedSection from '@/components/layout/animated-section';
 import Footer from '@/components/layout/footer';
 import { memberLogos } from '@/lib/data';
@@ -65,8 +65,14 @@ export default function FeesExplainedPage() {
       <main className="flex-grow">
         <div className="container mx-auto px-6 py-8 md:py-16">
           <AnimatedSection>
-            <div className="mb-8">
+            <div className="mb-8 flex flex-wrap gap-4">
               <BackButton />
+              <Button variant="outline" asChild>
+                <Link href="/">
+                    <HomeIcon className="mr-2 h-4 w-4" />
+                    Back to Home
+                </Link>
+              </Button>
             </div>
           </AnimatedSection>
 

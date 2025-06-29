@@ -15,8 +15,14 @@ export default function OurProcessPage() {
       <main className="flex-grow bg-background text-foreground">
         <div className="container mx-auto px-6 py-8 md:py-16">
           <AnimatedSection>
-              <div className="mb-8">
+              <div className="mb-8 flex flex-wrap gap-4">
                 <BackButton />
+                <Button variant="outline" asChild>
+                    <Link href="/">
+                        <HomeIcon className="mr-2 h-4 w-4" />
+                        Back to Home
+                    </Link>
+                </Button>
               </div>
             <header className="text-center mb-12 md:mb-16">
               <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">

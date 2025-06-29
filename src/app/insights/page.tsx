@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Newspaper, Search as SearchIcon, ListFilter, ArrowDownUp, Loader2 } from 'lucide-react';
+import { ArrowRight, Newspaper, Search as SearchIcon, ListFilter, ArrowDownUp, Loader2, HomeIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import AnimatedSection from '@/components/layout/animated-section';
 import { Input } from '@/components/ui/input';
@@ -130,8 +130,14 @@ export default function AllInsightsPage() {
     <div className="container mx-auto px-6 py-8 md:py-16 bg-background">
       <AnimatedSection>
         <div className="mb-12">
-          <div className="mb-6">
+          <div className="mb-6 flex flex-wrap gap-4">
             <BackButton />
+            <Button variant="outline" asChild>
+                <Link href="/">
+                    <HomeIcon className="mr-2 h-4 w-4" />
+                    Back to Home
+                </Link>
+            </Button>
           </div>
           <div className="text-center">
             <div className="inline-block p-3 bg-primary/10 rounded-full mb-4">
