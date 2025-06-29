@@ -48,7 +48,7 @@ const localResourceSubItems: NavLinkItem[] = [
   { href: '/resources/free-guides', label: 'Free Guides & E-Books', icon: Download, description: 'Access valuable downloadable resources.' },
   { href: '/resources/calculators', label: 'Financial Calculators', icon: CalculatorIcon, description: 'Estimate payments and affordability.' },
   { href: '/resources/roadmap', label: 'Home Buying Roadmap', icon: ListChecks, description: 'Navigate your path to homeownership.' },
-  { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, description: 'Find answers to common questions.' },
+  // { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, description: 'Find answers to common questions.' },
 ];
 
 const navLinksData: NavLinkItem[] = [
@@ -62,14 +62,15 @@ const navLinksData: NavLinkItem[] = [
     description: "Learn more about our company, team, and services."
   },
   { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
-  {
+  /* {
     href: '/resources', 
     label: 'Resources',
     icon: BookOpen,
     id: 'resourcesPage', 
     subItems: localResourceSubItems,
     description: "Access tools, guides, and FAQs."
-  },
+  }, */
+  { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, id: 'faqPage' },
   { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
   { href: '/contact', label: 'Contact', icon: MessageSquare },
 ];
