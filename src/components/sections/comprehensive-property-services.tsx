@@ -2,7 +2,7 @@
 "use client";
 
 import { comprehensiveServicesData } from "@/lib/data";
-import { ArrowRight } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ComprehensivePropertyServices() {
   if (!comprehensiveServicesData || comprehensiveServicesData.length === 0) {
@@ -22,23 +22,21 @@ export default function ComprehensivePropertyServices() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
-          {comprehensiveServicesData.map((service, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {comprehensiveServicesData.map((service) => {
+            const Icon = service.icon;
             return (
-              <div key={service.id} className="flex items-start space-x-4">
-                <div className="flex-shrink-0 flex items-center space-x-3 text-accent pt-1">
-                   <span className="text-xl font-bold font-headline">
-                        {String(index + 1).padStart(2, '0')}
-                    </span>
-                   <ArrowRight className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-headline text-lg font-semibold text-primary mb-1">{service.title}</h3>
-                  <p className="text-sm text-muted-foreground font-body">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
+              <Card key={service.id} className="text-center shadow-lg hover:shadow-xl transition-shadow bg-card flex flex-col p-4">
+                <CardHeader className="items-center pb-2">
+                   <div className="mx-auto mb-4 inline-block p-3 bg-primary/10 rounded-full">
+                     <Icon className="h-8 w-8 text-primary" />
+                   </div>
+                   <CardTitle className="font-headline text-lg leading-tight text-primary">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow pt-2">
+                   <p className="text-sm text-muted-foreground font-body">{service.description}</p>
+                </CardContent>
+              </Card>
             );
           })}
         </div>
