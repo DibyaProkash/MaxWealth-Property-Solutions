@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image'; // Added Image import
@@ -85,7 +84,8 @@ export default function ContactUsPage() {
             </Card>
           </AnimatedSection>
 
-          {/* MaxWealth PS Advantage Section */}
+          {/* MaxWealth PS Advantage Section - Temporarily Hidden */}
+          {/*
           <AnimatedSection delay="delay-200">
             <section className="py-16 md:py-24">
               <div className="text-center mb-12 md:mb-16">
@@ -112,6 +112,7 @@ export default function ContactUsPage() {
               </div>
             </section>
           </AnimatedSection>
+          */}
 
         </div>
       </main>
