@@ -42,15 +42,6 @@ const aboutUsSubItems: NavLinkItem[] = [
   { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
 ];
 
-// Data for Resources sub-menu
-const localResourceSubItems: NavLinkItem[] = [
-  { href: '/resources/ai-tools', label: 'AI-Powered Tools', icon: BrainCircuit, description: 'Leverage intelligent financial tools.' },
-  { href: '/resources/free-guides', label: 'Free Guides & E-Books', icon: Download, description: 'Access valuable downloadable resources.' },
-  { href: '/resources/calculators', label: 'Financial Calculators', icon: CalculatorIcon, description: 'Estimate payments and affordability.' },
-  { href: '/resources/roadmap', label: 'Home Buying Roadmap', icon: ListChecks, description: 'Navigate your path to homeownership.' },
-  // { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, description: 'Find answers to common questions.' },
-];
-
 const navLinksData: NavLinkItem[] = [
   { href: '#hero', label: 'Home', icon: Home, id: 'hero' },
   {
@@ -62,16 +53,8 @@ const navLinksData: NavLinkItem[] = [
     description: "Learn more about our company, team, and services."
   },
   { href: '/media', label: 'Media', icon: NewspaperIcon, id: 'mediaPage' },
-  /* {
-    href: '/resources', 
-    label: 'Resources',
-    icon: BookOpen,
-    id: 'resourcesPage', 
-    subItems: localResourceSubItems,
-    description: "Access tools, guides, and FAQs."
-  }, */
-  { href: '/resources/faq', label: 'FAQ', icon: HelpCircle, id: 'faqPage' },
-  { href: '#testimonials', label: 'Testimonials', icon: Star, id: 'testimonials' },
+  { href: '/testimonials', label: 'Testimonials', icon: Star, id: 'testimonialsPage' },
+  { href: '/faq', label: 'FAQ', icon: HelpCircle, id: 'faqPage' },
   { href: '/contact', label: 'Contact', icon: MessageSquare },
 ];
 
