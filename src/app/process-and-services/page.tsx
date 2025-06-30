@@ -130,7 +130,7 @@ export default function ProcessAndServicesPage() {
           </AnimatedSection> */}
 
           <AnimatedSection delay="delay-150">
-            <section id="where-we-service" className="py-16 md:py-24 bg-secondary rounded-lg">
+            <section id="where-we-service" className="py-16 md:py-24">
               <div className="container mx-auto px-6">
                 <div className="text-center mb-12 md:mb-16">
                   <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-4">Where We Service</h2>
@@ -147,25 +147,25 @@ export default function ProcessAndServicesPage() {
                 {!isLoadingLocations && !locationsError && locations.length > 0 && (
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
                     {locations.map((location) => (
-                      <Link key={location.id} href={`/locations/${location.slug}`} passHref className="group block">
+                      <div key={location.id} className="block">
                         <Card className="shadow-lg hover:shadow-2xl transition-shadow duration-300 bg-card border border-border/30 overflow-hidden relative aspect-[4/3] rounded-lg">
                           <Image
                             src={location.image}
                             alt={location.name}
                             fill
                             style={{objectFit: 'cover'}}
-                            className="group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                            className="scale-105 transition-transform duration-500 ease-in-out"
                             data-ai-hint={location.dataAiHint}
                             sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent group-hover:from-black/90 transition-all duration-300"></div>
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent from-black/90 transition-all duration-300"></div>
                           <CardContent className="absolute bottom-0 left-0 right-0 p-4 text-center">
-                            <h3 className="font-headline text-xl md:text-2xl font-semibold text-white group-hover:text-accent transition-colors duration-300">
+                            <h3 className="font-headline text-xl md:text-2xl font-semibold text-white text-accent transition-colors duration-300">
                               {location.name}
                             </h3>
                           </CardContent>
                         </Card>
-                      </Link>
+                      </div>
                     ))}
                   </div>
                 )}
