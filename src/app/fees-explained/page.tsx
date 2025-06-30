@@ -89,24 +89,6 @@ export default function FeesExplainedPage() {
             </header>
           </AnimatedSection>
 
-          <AnimatedSection delay="delay-100">
-            <Card className="max-w-3xl mx-auto shadow-lg bg-card mb-12 md:mb-16">
-              <CardContent className="p-6 md:p-10 space-y-4">
-                <p className="text-muted-foreground font-body">
-                  We charge an initial engagement fee of <strong className="text-primary">$2,000 (plus GST)</strong> when you appoint us as your buyer’s agent. This secures our dedicated services to begin your property search and strategic planning.
-                </p>
-                <p className="text-muted-foreground font-body">
-                  Upon successful acquisition of your property, when everything is done and dusted, we charge a success fee. This is calculated as <strong className="text-primary">1.82% (plus GST)</strong> of the property purchase price, minus your initial engagement fee.
-                </p>
-                <div className="p-4 bg-primary/5 border border-primary/20 rounded-md">
-                  <p className="text-sm text-primary font-semibold font-body">
-                    *Please Note: Our fee structure may vary after our initial consultation. Depending on your specific needs, property search complexity, and budget, we may mutually agree to a fixed price fee or a capped price fee, particularly if your budget exceeds $2 million. We’ll always strive to reach a fee structure that provides our clients with exceptional value and transparency.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </AnimatedSection>
-
           <AnimatedSection delay="delay-150" id="feesContactFormContainer">
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-5 gap-8 lg:gap-12 items-start mb-12 md:mb-16">
