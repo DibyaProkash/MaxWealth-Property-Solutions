@@ -8,8 +8,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import DetailedContactForm from "@/components/forms/detailed-contact-form";
 import Footer from "@/components/layout/footer";
 import AnimatedSection from "@/components/layout/animated-section";
-import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Youtube, X as TwitterIcon } from "lucide-react";
+import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Youtube, X as TwitterIcon, HomeIcon } from "lucide-react";
 import { maxWealthDifferenceData, type DifferencePoint } from '@/lib/data';
+import BackButton from '@/components/layout/back-button';
 
 export default function ContactUsPage() {
   return (
@@ -17,6 +18,15 @@ export default function ContactUsPage() {
       <main className="flex-grow bg-background text-foreground">
         <div className="container mx-auto px-6 py-12 md:py-16">
           <AnimatedSection>
+            <div className="mb-8 flex flex-wrap gap-4">
+              <BackButton />
+              <Button variant="outline" asChild>
+                <Link href="/">
+                    <HomeIcon className="mr-2 h-4 w-4" />
+                    Back to Home
+                </Link>
+              </Button>
+            </div>
             <div className="text-center mb-10 md:mb-12">
               <h1 className="font-headline text-4xl md:text-5xl lg:text-6xl font-bold text-primary">
                 CONTACT <span className="text-accent">US</span>
