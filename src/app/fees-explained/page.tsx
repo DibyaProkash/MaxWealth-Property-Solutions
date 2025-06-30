@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image';
@@ -269,31 +268,6 @@ export default function FeesExplainedPage() {
                       </Form>
                     </CardContent>
                   </Card>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-          
-
-          <AnimatedSection delay="delay-300">
-            <div className="mt-12 md:mt-20 text-center">
-              <h3 className="font-headline text-2xl font-semibold text-primary mb-6">Here's What Our Clients Say About Us...</h3>
-              <Button variant="outline" asChild>
-                  <Link href="/#testimonials">View Client Testimonials</Link>
-              </Button>
-            </div>
-
-            <div className="mt-12 md:mt-16">
-              <div className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-6 md:gap-8">
-                <h4 className="font-headline text-xl text-primary flex-shrink-0 md:mb-0">
-                  We’re Proud Members Of:
-                </h4>
-                <div className="flex flex-wrap justify-center md:justify-start items-center gap-x-8 gap-y-4">
-                  {memberLogos.map(logo => (
-                      <div key={logo.id} className="opacity-80 hover:opacity-100 transition-opacity">
-                          <Image src={`https://placehold.co/120x50.png`} alt="Member logo placeholder" width={120} height={50} data-ai-hint={logo.hint} style={{objectFit: 'contain'}} />
-                      </div>
-                  ))}
                 </div>
               </div>
             </div>
