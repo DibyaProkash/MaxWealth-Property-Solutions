@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from 'next/image'; // Added Image import
@@ -55,7 +54,7 @@ export default function ContactUsPage() {
 
                 {/* Right Column: Office Info & Map */}
                 <div className="lg:col-span-2">
-                  <h3 className="font-headline text-2xl md:text-3xl mb-6 text-primary">NATIONAL HEAD OFFICE</h3>
+                  <h3 className="font-headline text-2xl md:text-3xl mb-6 text-primary">HEAD OFFICE</h3>
                   <div className="space-y-3 text-md text-muted-foreground font-body mb-6">
                     <p><strong className="text-foreground">LOCATION:</strong> Brisbane, Australia</p>
                     <p><strong className="text-foreground">EMAIL:</strong> <a href="mailto:info@maxwealthps.com" className="hover:text-accent">info@maxwealthps.com</a></p>
