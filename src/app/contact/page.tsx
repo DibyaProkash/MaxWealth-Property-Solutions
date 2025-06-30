@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image'; // Added Image import
@@ -8,6 +9,7 @@ import DetailedContactForm from "@/components/forms/detailed-contact-form";
 import Footer from "@/components/layout/footer";
 import AnimatedSection from "@/components/layout/animated-section";
 import { Mail, Phone, MapPin, Linkedin, Facebook, Instagram, Youtube, X as TwitterIcon, HomeIcon } from "lucide-react";
+import { MediumIcon } from '@/components/icons/custom-icons';
 import { maxWealthDifferenceData, type DifferencePoint } from '@/lib/data';
 import BackButton from '@/components/layout/back-button';
 
@@ -64,6 +66,7 @@ export default function ContactUsPage() {
                     {[
                       { href: "#", icon: Linkedin, label: "LinkedIn" },
                       { href: "https://www.facebook.com/profile.php?id=61563877876803&mibextid=ZbWKwL", icon: Facebook, label: "Facebook" },
+                      { href: "https://medium.com/@info_48299", icon: MediumIcon, label: "Medium" },
                       { href: "#", icon: Instagram, label: "Instagram" },
                       { href: "#", icon: Youtube, label: "YouTube" },
                       { href: "#", icon: TwitterIcon, label: "Twitter/X" },

@@ -1,6 +1,7 @@
 
 import Image from 'next/image';
 import { Facebook, Linkedin, Youtube, Instagram } from 'lucide-react';
+import { MediumIcon } from '@/components/icons/custom-icons';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -31,6 +32,7 @@ export default function Footer() {
             <div className="flex space-x-4">
               <a href="https://www.facebook.com/profile.php?id=61563877876803&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Facebook size={24} /></a>
               <a href="#" aria-label="LinkedIn" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Linkedin size={24} /></a>
+              <a href="https://medium.com/@info_48299" target="_blank" rel="noopener noreferrer" aria-label="Medium" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><MediumIcon className="h-6 w-6" /></a>
               <a href="#" aria-label="YouTube" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Youtube size={24} /></a>
               <a href="#" aria-label="Instagram" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Instagram size={24} /></a>
             </div>
