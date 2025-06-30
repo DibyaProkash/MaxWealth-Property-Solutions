@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image';
@@ -81,10 +82,10 @@ export default function FeesExplainedPage() {
                 <DollarSign className="h-10 w-10 text-primary" />
               </div>
               <h1 className="font-headline text-3xl md:text-4xl lg:text-5xl font-bold text-primary mb-4">
-                Our Fee's Explained
+                Consult with us for your dream come true
               </h1>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-body">
-                Ready to discuss finding and buying your next property with the help of an experienced buyers agent? Below is a break down of our fee structure.
+                Your property journey is unique. Our consultation is the first step towards achieving your real estate goals. Let's discuss how we can help you find and secure your dream property.
               </p>
             </header>
           </AnimatedSection>
