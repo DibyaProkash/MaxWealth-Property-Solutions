@@ -133,7 +133,7 @@ export default function AchievementsSection() {
                     className="pl-2 md:pl-4 basis-1/2 sm:basis-1/3 md:basis-1/3 lg:basis-1/4"
                   >
                     <div className="p-1 h-full">
-                      <Link href={`/locations/${city.slug}`} passHref className="block h-full group">
+                      <div className="block h-full group">
                         <div className="bg-card shadow-md h-32 flex flex-col text-center rounded-lg transition-transform duration-300 group-hover:scale-105 overflow-hidden group-hover:shadow-xl">
                           {city.image && ( // Check if image path exists
                             <div className="relative w-full h-20">
@@ -156,7 +156,7 @@ export default function AchievementsSection() {
                             </p>
                           </div>
                         </div>
-                      </Link>
+                      </div>
                     </div>
                   </CarouselItem>
                 ))}
@@ -173,5 +173,4 @@ export default function AchievementsSection() {
     </section>
   );
 }
-
     
