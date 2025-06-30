@@ -114,24 +114,24 @@ export default function FeesExplainedPage() {
                 <div className="md:col-span-2 space-y-8">
                   <div className="text-center md:text-left">
                     <Image
-                      src="https://placehold.co/200x200.png"
-                      alt="Jacqueline Dwyer"
+                      src="/founder-jyoti-poul-mitra.jpg"
+                      alt="Jay Mitra, Founder of MaxWealth PS"
                       width={160}
                       height={160}
                       className="rounded-full mx-auto md:mx-0 mb-6 shadow-lg"
-                      data-ai-hint="professional woman portrait"
+                      data-ai-hint="man professional portrait"
                     />
                     <h2 className="font-headline text-2xl text-primary mb-3">Your Next Step…</h2>
                     <p className="font-body text-muted-foreground mb-4">
-                      For more details on how I can help you find, negotiate and secure your next property… Please complete the form on this page to book a free (no obligation) <strong className="text-primary">30-minute chat with myself. Jac x</strong>
+                      For more details on how we can help you find, negotiate and secure your next property… Please complete the form on this page to book a free (no obligation) <strong className="text-primary">30-minute chat with our founder, Jay Mitra.</strong>
                     </p>
                   </div>
 
                   <div>
                     <h3 className="font-headline text-xl text-primary mb-3 flex items-center">
-                      <BadgeCheck className="mr-2 h-6 w-6 text-green-500" /> Work with a Highly Qualified Buyers Agent
+                      <BadgeCheck className="mr-2 h-6 w-6 text-green-500" /> Our Founder's Licenses & Accreditations
                     </h3>
-                    <p className="text-muted-foreground font-body mb-2">My Licenses & national accreditations:</p>
+                    <p className="text-muted-foreground font-body mb-2">Jay Mitra's licenses & national accreditations:</p>
                     <ul className="space-y-1.5 text-sm text-muted-foreground">
                       {[
                         'QLD Real Estate Licence 4284240',
