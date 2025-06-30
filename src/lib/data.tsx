@@ -44,8 +44,8 @@ export const partnersData: Partner[] = [
 export const aboutUsSubItems = [
   { href: '/about/our-company', label: 'Our Company', icon: DefaultBuildingIcon, description: 'Learn about our mission, vision, and values.' },
   { href: '/about/our-team', label: 'Our Team', icon: Users, description: 'Meet the professionals behind MaxWealth Property Services.' },
-  { href: '/about/our-services', label: 'Our Services', icon: ConciergeBell, description: 'Explore the services we offer.' }, 
-  { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
+  // { href: '/about/our-services', label: 'Our Services', icon: ConciergeBell, description: 'Explore the services we offer.' }, 
+  // { href: '/about/our-process', label: 'Our Process', icon: Workflow, description: 'Discover how we help you succeed.' },
 ];
 
 // Data related to "Resources" page structure

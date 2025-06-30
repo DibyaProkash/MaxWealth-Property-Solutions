@@ -84,7 +84,7 @@ export default function ProcessAndServicesPage() {
             <ComprehensivePropertyServices />
           </AnimatedSection>
 
-          <AnimatedSection delay="delay-100">
+          {/* <AnimatedSection delay="delay-100">
             <section className="py-16 md:py-24">
               <div className="text-center mb-12 md:mb-16">
                 <h2 className="font-headline text-2xl md:text-3xl font-bold text-primary mb-4">Who We Help</h2>
@@ -127,7 +127,7 @@ export default function ProcessAndServicesPage() {
                 ))}
               </div>
             </section>
-          </AnimatedSection>
+          </AnimatedSection> */}
 
           <AnimatedSection delay="delay-150">
             <section id="where-we-service" className="py-16 md:py-24 bg-secondary rounded-lg">
