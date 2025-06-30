@@ -29,7 +29,7 @@ export default function Footer() {
           <div>
             <h3 className="font-headline text-lg font-semibold mb-3 text-primary-foreground">Connect With Us</h3> 
             <div className="flex space-x-4">
-              <a href="#" aria-label="Facebook" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Facebook size={24} /></a>
+              <a href="https://www.facebook.com/profile.php?id=61563877876803&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Facebook size={24} /></a>
               <a href="#" aria-label="LinkedIn" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Linkedin size={24} /></a>
               <a href="#" aria-label="YouTube" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Youtube size={24} /></a>
               <a href="#" aria-label="Instagram" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"><Instagram size={24} /></a>

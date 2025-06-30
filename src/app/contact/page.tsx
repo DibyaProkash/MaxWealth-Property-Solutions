@@ -63,7 +63,7 @@ export default function ContactUsPage() {
                   <div className="flex space-x-4 mb-8">
                     {[
                       { href: "#", icon: Linkedin, label: "LinkedIn" },
-                      { href: "#", icon: Facebook, label: "Facebook" },
+                      { href: "https://www.facebook.com/profile.php?id=61563877876803&mibextid=ZbWKwL", icon: Facebook, label: "Facebook" },
                       { href: "#", icon: Instagram, label: "Instagram" },
                       { href: "#", icon: Youtube, label: "YouTube" },
                       { href: "#", icon: TwitterIcon, label: "Twitter/X" },
