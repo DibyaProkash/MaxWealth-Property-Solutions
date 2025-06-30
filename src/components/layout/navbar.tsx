@@ -102,16 +102,7 @@ export default function Navbar() {
                         {link.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
-                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                          {/* <ListItem
-                            key={`${link.label}-overview`}
-                            title={`Explore ${link.label}`}
-                            href={link.href} 
-                            icon={link.icon}
-                            className={isMounted && pathname === link.href ? "bg-accent/10 text-accent" : ""}
-                          >
-                            {link.description || `Visit the main ${link.label} page.`}
-                          </ListItem> */}
+                        <ul className="grid w-[300px] gap-3 p-4">
                           {link.subItems.map((subItem) => (
                              <ListItem
                               key={subItem.label}
