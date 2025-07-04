@@ -33,6 +33,7 @@ const formSchemaCityPage = z.object({
 
 export default function ContactFormCityPage({ cityName }: ContactFormCityPageProps) {
   const { toast } = useToast();
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const form = useForm<z.infer<typeof formSchemaCityPage>>({
     resolver: zodResolver(formSchemaCityPage),
     defaultValues: {
@@ -122,10 +123,11 @@ export default function ContactFormCityPage({ cityName }: ContactFormCityPagePro
           )}
         />
         <div className="flex justify-center py-2">
-            <ReCAPTCHA
-            sitekey="6LefOXcrAAAAAALMrYKSf9_u-rMSSTbqP3makSPG"
-            onChange={() => {}}
-            />
+            {siteKey ? (
+              <ReCAPTCHA sitekey={siteKey} onChange={() => {}} />
+            ) : (
+              <p className="text-destructive text-xs">reCAPTCHA Site Key not configured.</p>
+            )}
         </div>
         <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-md" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting ? (

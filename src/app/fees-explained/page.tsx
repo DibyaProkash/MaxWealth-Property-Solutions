@@ -39,6 +39,7 @@ const formSchema = z.object({
 
 export default function FeesExplainedPage() {
   const { toast } = useToast();
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -238,10 +239,11 @@ export default function FeesExplainedPage() {
                             )}
                           />
                           <div className="flex justify-center py-2">
-                             <ReCAPTCHA
-                                sitekey="6LefOXcrAAAAAALMrYKSf9_u-rMSSTbqP3makSPG"
-                                onChange={() => {}}
-                              />
+                            {siteKey ? (
+                              <ReCAPTCHA sitekey={siteKey} onChange={() => {}} />
+                            ) : (
+                              <p className="text-destructive text-xs">reCAPTCHA Site Key not configured.</p>
+                            )}
                           </div>
                           <Button type="submit" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" disabled={form.formState.isSubmitting}>
                             {form.formState.isSubmitting ? ( <> <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Booking... </>) : "Yes, Book My Chat with MaxWealth PS Now"}

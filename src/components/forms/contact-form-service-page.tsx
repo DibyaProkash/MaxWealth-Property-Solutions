@@ -46,6 +46,7 @@ const formSchemaServicePage = z.object({
 
 export default function ContactFormServicePage({ serviceName }: ContactFormServicePageProps) {
   const { toast } = useToast();
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const form = useForm<z.infer<typeof formSchemaServicePage>>({
     resolver: zodResolver(formSchemaServicePage),
     defaultValues: {
@@ -193,10 +194,11 @@ export default function ContactFormServicePage({ serviceName }: ContactFormServi
             We find our clients the ideal property on average within 30 to 60 days of engagement.
         </div>
         <div className="flex justify-center py-2">
-            <ReCAPTCHA
-            sitekey="6LefOXcrAAAAAALMrYKSf9_u-rMSSTbqP3makSPG"
-            onChange={() => {}}
-            />
+            {siteKey ? (
+              <ReCAPTCHA sitekey={siteKey} onChange={() => {}} />
+            ) : (
+              <p className="text-destructive text-xs">reCAPTCHA Site Key not configured.</p>
+            )}
         </div>
         <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-md" disabled={form.formState.isSubmitting}>
           {form.formState.isSubmitting ? (
