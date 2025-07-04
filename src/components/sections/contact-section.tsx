@@ -127,7 +127,7 @@ export default function ContactSection() {
                       {siteKey ? (
                         <ReCAPTCHA sitekey={siteKey} onChange={() => {}} />
                       ) : (
-                        <p className="text-destructive text-xs">reCAPTCHA Site Key not configured.</p>
+                        <p className="text-destructive text-xs">reCAPTCHA key not loaded. Please restart the dev server.</p>
                       )}
                   </div>
                   <Button type="submit" size="lg" className="w-full shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90" disabled={form.formState.isSubmitting}>

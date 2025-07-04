@@ -242,7 +242,7 @@ export default function FeesExplainedPage() {
                             {siteKey ? (
                               <ReCAPTCHA sitekey={siteKey} onChange={() => {}} />
                             ) : (
-                              <p className="text-destructive text-xs">reCAPTCHA Site Key not configured.</p>
+                              <p className="text-destructive text-xs">reCAPTCHA key not loaded. Please restart the dev server.</p>
                             )}
                           </div>
                           <Button type="submit" size="lg" className="w-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-md" disabled={form.formState.isSubmitting}>
