@@ -1,3 +1,4 @@
+
 "use client";
 
 import Image from 'next/image'; // Added Image import
@@ -18,6 +19,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -120,14 +122,12 @@ export default function ContactSection() {
                       </FormItem>
                     )}
                   />
-                  <div className="text-sm text-muted-foreground p-3 border rounded-md bg-background flex items-center justify-between">
-                    <span>I'm not a robot</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-10 h-10 text-gray-400">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"></path>
-                      <text x="50%" y="60%" dominantBaseline="middle" textAnchor="middle" fontSize="3" fill="white">reCAPTCHA</text>
-                    </svg>
+                  <div className="flex justify-center py-2">
+                      <ReCAPTCHA
+                      sitekey="6LefOXcrAAAAAALMrYKSf9_u-rMSSTbqP3makSPG"
+                      onChange={() => {}}
+                      />
                   </div>
-                  <p className="text-xs text-muted-foreground text-center">This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.</p>
                   <Button type="submit" size="lg" className="w-full shadow-md hover:shadow-lg transition-shadow bg-accent text-accent-foreground hover:bg-accent/90" disabled={form.formState.isSubmitting}>
                     {form.formState.isSubmitting ? ( <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Sending...</> ) : "Send Message"}
                   </Button>
